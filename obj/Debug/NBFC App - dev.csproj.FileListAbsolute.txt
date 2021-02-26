@@ -55,4 +55,3 @@ E:\Visual Studio\NBFC App - dev\bin\Microsoft.CodeDom.Providers.DotNetCompilerPl
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.csproj.CopyComplete
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.dll
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.pdb
-E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
