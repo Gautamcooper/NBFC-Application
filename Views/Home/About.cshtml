@@ -1,0 +1,31 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "About";
+}
+@{
+    var data = ViewBag.Message;
+}
+<div>
+    <div><h2>Personal Information</h2></div>
+    <br />
+    <div class="container-fluid">
+        <form>
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input id="mobile" class="form-input" placeholder="Full Name" value="@data.Fullname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id="email" class="form-input" placeholder="Email" value="@data.Email" readonly="readonly">
+                    </div>
+                    <div class="col-md-4">
+                        <input id="mobile" class="form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
+                    </div>                    
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
