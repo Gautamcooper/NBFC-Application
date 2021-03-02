@@ -16,7 +16,9 @@ namespace NBFC_App___dev.Models
         public string middlename { get; set; }
         public string lastname { get; set; }
         public string gender { get; set; }
-
-        
+        public string aadharnumber { get; set; }
+        public string pannumber { get; set; }
+        public string maritalstatus { get; set; }
+        public string employmenttype { get; set; }
     }
 }

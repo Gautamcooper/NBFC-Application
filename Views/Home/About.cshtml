@@ -38,17 +38,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <select id="gender_select" class="form-input">
                             <option value="-1">Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Others">Others</option>
                         </select>
-                        <input hidden id="gender" class="form-input" placeholder="gender" value="@data.gender" />
+                        <input hidden id="gender" class="form-input" placeholder="Gender" name="gender" value="@data.gender" />
+                    </div>
+                    <div class="col-md-6">
+                        <select id="marital_select" class="form-input">
+                            <option value="-1">Marital Status</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input hidden id="maritalstatus" class="form-input" placeholder="MaritalStatus" name="maritalstatus" value="@data.maritalstatus" />
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id="aadhar" class="form-input" placeholder="Aadhaar Number" name="aadharnumber" value="@data.aadharnumber" />
+                    </div>
+                    <div class="col-md-4">
+                        <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>                
             </div>
         </form>
     </div>
