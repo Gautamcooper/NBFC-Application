@@ -1,6 +1,4 @@
 ﻿var err = 0;
-// Hello Gautam
-// Hello Akshit
 $(document).ready(function () {
 
     var current_fs, next_fs, previous_fs;
