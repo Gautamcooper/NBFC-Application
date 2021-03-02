@@ -90,7 +90,6 @@ namespace NBFC_App___dev
                     username = c.Value.ToString();
                 }
             }
-
             var client2 = new RestClient("http://localhost:92/0/odata/UsrApplicationGate");
             client2.Timeout = -1;
             client2.MaxRedirects = 10;

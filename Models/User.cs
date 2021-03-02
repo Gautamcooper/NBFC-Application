@@ -12,6 +12,11 @@ namespace NBFC_App___dev.Models
         public string Mobile { get; set; }
 
         public string Fullname { get; set; }
+        public string firstname { get; set; }
+        public string middlename { get; set; }
+        public string lastname { get; set; }
+        public string gender { get; set; }
+
         
     }
 }

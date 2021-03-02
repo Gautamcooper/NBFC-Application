@@ -6,26 +6,51 @@
     var data = ViewBag.Message;
 }
 <div>
-    <div><h2>Personal Information</h2></div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">Personal Information</h2>
+    </div>
     <br />
     <div class="container-fluid">
-        <form>
+        <form method="post" action="/Home/On_Save">
             <div class="form-card">
                 <div class="row">
-                    <div class="col-md-8">
-                        <input id="mobile" class="form-input" placeholder="Full Name" value="@data.Fullname">
+                    <div class="col-md-12">
+                        <input id="Fullname" class="form-input" placeholder="Full Name" name="Fullname" value="@data.Fullname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="email" class="form-input" placeholder="Email" value="@data.Email" readonly="readonly">
+                    </div>
+                    <div class="col-md-6">
+                        <input id="mobile" class="form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="email" class="form-input" placeholder="Email" value="@data.Email" readonly="readonly">
+                        <input id="firstname" class="form-input" placeholder="First Name" name="firstname" value="@data.firstname" />
                     </div>
                     <div class="col-md-4">
-                        <input id="mobile" class="form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
-                    </div>                    
+                        <input id="middlename" class="form-input" placeholder="Middle Name" name="middlename" value="@data.middlename" />
+                    </div>
+                    <div class="col-md-4">
+                        <input id="lastname" class="form-input" placeholder="Last Name" name="lastname" value="@data.lastname" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <select id="gender_select" class="form-input">
+                            <option value="-1">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input hidden id="gender" class="form-input" placeholder="gender" value="@data.gender" />
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
 </div>
+@Scripts.Render("~/Scripts/about.js")
