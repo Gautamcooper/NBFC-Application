@@ -23,5 +23,28 @@ namespace NBFC_App___dev.Models
         public string fathername { get; set; }
         public string spousename { get; set; }
 
+        public string currentstreet { get; set; }
+
+        public string currentlandmark { get; set; }
+
+        public string currentbuilding { get; set; }
+
+        public string currentcity { get; set; }
+
+        public string currentstate { get; set; }
+
+        public string currentpin { get; set; }
+
+        public string currentcountry { get; set; }
+
+        public string panfirstname { get; set; }
+
+        public string panmiddlename { get; set; }
+
+        public string panlastname { get; set; }
+
+        public string panfathername { get; set; }
+
+        public string panbirthdate { get; set; }
     }
 }

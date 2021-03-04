@@ -88,6 +88,83 @@
                         <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input id="currentstreet" class="form-input" placeholder="Current Street" name="currentstreet" value="@data.currentstreet" />
+                    </div>
+                    <div class="col-md-3">
+                        <input id="currentlandmark" class="form-input" placeholder="Current Landmark" name="currentlandmark" value="@data.currentlandmark" />
+                    </div>
+                    <div class="col-md-3">
+                        <input id="currentbuilding" class="form-input" placeholder="Current Building" name="currentbuilding" value="@data.currentbuilding" />
+                    </div>
+                    <div class="col-md-3">
+                        <input id="currentpin" class="form-input" placeholder="Current PIN" name="currentpin" value="@data.currentpin" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="currentcity_select" class="form-input">
+                            <option value="-1">Current City</option>
+                            <option value="95509285-bc31-412a-bb66-0023f6611124">Jodhpur</option>
+                            <option value="8124ed90-ae1d-4def-9db2-00aad8e2ca6d">Panihati</option>
+                            <option value="74f1350d-3025-48d2-b986-03fcc9fa85ee">Kochi</option>
+                            <option value="4156595e-d80b-4701-a45e-07a802e5f40f">Mumbai</option>
+                            <option value="36b15a28-53c0-4133-a26a-0c95cbee4aef">Hyderabad</option>
+                            <option value="89850c4d-a398-47dc-a3f8-22291c97e6c6">New Delhi</option>
+                            <option value="06c30704-7251-4eb6-a6ec-2b93e7afed3c">Lucknow</option>
+                            <option value="5ad6fbf1-894c-4a50-a5b6-40efe36f6e63">Kolkata</option>
+                        </select>
+                        <input hidden id="currentcity" class="form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
+                    </div>
+                    <div class="col-md-4">
+                        <select id="currentstate_select" class="form-input">
+                            <option value="-1">Current State</option>
+                            <option value="a4551e89-8069-452e-a0a9-123711940cfa">Bihar</option>
+                            <option value="2c384df9-fa5c-4021-af84-14b99db61448">Punjab</option>
+                            <option value="9235ddbc-68a5-4f71-8eef-c0aed13f589e">Uttar pradesh</option>
+                            <option value="054946a4-da5a-4f25-bfa2-ca7fa727c29b">Andhra Pradesh</option>
+                            <option value="fe04c08d-953a-429c-ad8d-cd0e99bd9038">Rajasthan</option>
+                            <option value="ef01648b-8891-4c96-b59a-ff2056ea0aa6">Tamil Nadu</option>
+                        </select>
+                        <input hidden id="currentstate" class="form-input" placeholder="Current State" name="currentstate" value="@data.currentstate" />
+                    </div>
+                    <div class="col-md-4">
+                        <select id="currentcountry_select" class="form-input">
+                            <option value="-1">Current Country</option>
+                            <option value="d427eb5d-ecd2-4049-9275-420038a42bea">India</option>
+                        </select>
+                        <input hidden id="currentcountry" class="form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="pancard" type="file" class="form-input" name="pancard" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id="panfirstname" class="form-input" placeholder="First Name on PAN" name="panfirstname" value="@data.panfirstname">
+                    </div>
+                    <div class="col-md-4">
+                        <input id="panmiddlename" class="form-input" placeholder="Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
+                    </div>
+                    <div class="col-md-4">
+                        <input id="panlastname" class="form-input" placeholder="Last Name on PAN" name="panlastname" value="@data.panlastname">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="panfathername" class="form-input" placeholder="Father's Name on PAN" name="panfathername" value="@data.panfathername">
+                    </div>
+                    <div class="col-md-6">
+                        <input id="panbirthdate" class="form-input" placeholder="DOB on PAN" name="panbirthdate" value="@data.panbirthdate">
+                    </div>
+                   
+
+                </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>

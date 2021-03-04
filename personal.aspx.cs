@@ -21,7 +21,8 @@ namespace NBFC_App___dev
             else
             {
                 TextBox3.Text = "16000";
-                string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+                //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+                string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
                 SqlConnection sqlCnctn = new SqlConnection(connectionString);
                 sqlCnctn.Open();
 
@@ -36,6 +37,7 @@ namespace NBFC_App___dev
                     TextBox1.Text = dt.Rows[0]["mobile"].ToString();
                     TextBox2.Text = dt.Rows[0]["email"].ToString();
                     FullName.Text = dt.Rows[0]["fullname"].ToString();
+                    Pan_number.Text = dt.Rows[0]["pannumber"].ToString();
                 }
                 else
                 {
@@ -101,7 +103,7 @@ namespace NBFC_App___dev
             request2.AddCookie("BPMLOADER", bpmloader);
             request2.AddCookie("UserName", username);
             request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-            request2.AddParameter("application/json", "{\r\n    \"UsrTSAction\": \"1\", \r\n    \"UsrTSLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrTSLoanTermRequested\":\"" + loanterm + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrTSMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrTSEmail\":\"" + email + "\",\r\n    \"UsrTSMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrTSIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
+            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrLoanTermRequested\":\"" + loanterm + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrTSMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrTSEmail\":\"" + email + "\",\r\n    \"UsrTSMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrTSIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
             IRestResponse response2 = client2.Execute(request2);
             Response.Redirect("~/Home/About");
         }

@@ -56,3 +56,59 @@ E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.csproj.CopyComplete
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.dll
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.pdb
 E:\Visual Studio\NBFC App - dev\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
+D:\NBFC\NBFC-Application\bin\NBFC App - dev.dll.config
+D:\NBFC\NBFC-Application\bin\NBFC App - dev.dll
+D:\NBFC\NBFC-Application\bin\NBFC App - dev.pdb
+D:\NBFC\NBFC-Application\bin\roslyn\csc.exe
+D:\NBFC\NBFC-Application\bin\roslyn\csc.exe.config
+D:\NBFC\NBFC-Application\bin\roslyn\csc.rsp
+D:\NBFC\NBFC-Application\bin\roslyn\csi.exe
+D:\NBFC\NBFC-Application\bin\roslyn\csi.rsp
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\NBFC\NBFC-Application\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\NBFC\NBFC-Application\bin\roslyn\System.AppContext.dll
+D:\NBFC\NBFC-Application\bin\roslyn\System.Collections.Immutable.dll
+D:\NBFC\NBFC-Application\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\NBFC\NBFC-Application\bin\roslyn\System.IO.FileSystem.dll
+D:\NBFC\NBFC-Application\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\NBFC\NBFC-Application\bin\roslyn\System.Reflection.Metadata.dll
+D:\NBFC\NBFC-Application\bin\roslyn\vbc.exe
+D:\NBFC\NBFC-Application\bin\roslyn\vbc.exe.config
+D:\NBFC\NBFC-Application\bin\roslyn\vbc.rsp
+D:\NBFC\NBFC-Application\bin\roslyn\VBCSCompiler.exe
+D:\NBFC\NBFC-Application\bin\roslyn\VBCSCompiler.exe.config
+D:\NBFC\NBFC-Application\bin\Antlr3.Runtime.dll
+D:\NBFC\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\NBFC\NBFC-Application\bin\Microsoft.Web.Infrastructure.dll
+D:\NBFC\NBFC-Application\bin\Newtonsoft.Json.dll
+D:\NBFC\NBFC-Application\bin\RestSharp.dll
+D:\NBFC\NBFC-Application\bin\System.Web.Helpers.dll
+D:\NBFC\NBFC-Application\bin\System.Web.Mvc.dll
+D:\NBFC\NBFC-Application\bin\System.Web.Optimization.dll
+D:\NBFC\NBFC-Application\bin\System.Web.Razor.dll
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.Deployment.dll
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.dll
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.Razor.dll
+D:\NBFC\NBFC-Application\bin\WebGrease.dll
+D:\NBFC\NBFC-Application\bin\RestSharp.xml
+D:\NBFC\NBFC-Application\bin\System.Web.Helpers.xml
+D:\NBFC\NBFC-Application\bin\System.Web.Mvc.xml
+D:\NBFC\NBFC-Application\bin\System.Web.Optimization.xml
+D:\NBFC\NBFC-Application\bin\System.Web.Razor.xml
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.xml
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.Deployment.xml
+D:\NBFC\NBFC-Application\bin\System.Web.WebPages.Razor.xml
+D:\NBFC\NBFC-Application\bin\Newtonsoft.Json.xml
+D:\NBFC\NBFC-Application\bin\Antlr3.Runtime.pdb
+D:\NBFC\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
+D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.dll
+D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.pdb
