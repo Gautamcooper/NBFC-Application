@@ -19,8 +19,8 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult About()
         {
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
@@ -57,7 +57,6 @@ namespace NBFC_App___dev.Controllers
                     panlastname = row["panlastname"].ToString(),
                     panfathername = row["panfathername"].ToString(),
                     panbirthdate = row["panbirthdate"].ToString()
-
                 };
                 ViewData["Message"] = p;
                 return View();
@@ -87,69 +86,83 @@ namespace NBFC_App___dev.Controllers
             Response.Redirect("~/personal.aspx");
             return null;
         }
-        [HttpPost]       
-        public ActionResult On_Save(User p, HttpPostedFileBase File)
-        {
-                
-            //Access the File using the Name of HTML INPUT File.
-           
-
-            //Check if File is available.
-            if (File.ContentLength > 0)
-            {
-                string _FileName = Path.GetFileName(File.FileName);
-                string _path = "D:\\uploads\\"+ _FileName;
-                File.SaveAs(_path);
-            }
-
-            return null;
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+        [HttpPost]         
+        public ActionResult On_Save(User p, HttpPostedFileBase pan)
+        {          
+            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
-            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            //sqlCnctn.Open();
-            //string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            //SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            //DataTable dt = new DataTable();
-            //sda.Fill(dt);
-            //string firstname = p.firstname;
-            //string middlename = p.middlename;
-            //string lastname = p.lastname;
-            //string gender = p.gender;
-            //string aadharnumber = p.aadharnumber;
-            //string pannumber = p.pannumber;
-            //string maritalstatus = p.maritalstatus;
-            //string employmenttype = p.employmenttype;
-            //string spousename = p.spousename;
-            //string fathername = p.fathername;
-            //string currentstreet = p.currentstreet;
-            //string currentlandmark = p.currentlandmark;
-            //string currentbuilding = p.currentbuilding;
-            //string currentcity = p.currentcity;
-            //string currentstate = p.currentstate;
-            //string currentpin = p.currentpin;
-            //string currentcountry = p.currentcountry;
-            //string panfirstname = p.panfirstname;
-            //string panmiddlename = p.panmiddlename;
-            //string panlastname = p.panlastname;
-            //string panfathername = p.panfathername;
-            //string panbirthdate = p.panbirthdate;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            string firstname = p.firstname;
+            string middlename = p.middlename;
+            string lastname = p.lastname;
+            string gender = p.gender;
+            string aadharnumber = p.aadharnumber;
+            string pannumber = p.pannumber;
+            string maritalstatus = p.maritalstatus;
+            string employmenttype = p.employmenttype;
+            string spousename = p.spousename;
+            string fathername = p.fathername;
+            string currentstreet = p.currentstreet;
+            string currentlandmark = p.currentlandmark;
+            string currentbuilding = p.currentbuilding;
+            string currentcity = p.currentcity;
+            string currentstate = p.currentstate;
+            string currentpin = p.currentpin;
+            string currentcountry = p.currentcountry;
+            string panfirstname = p.panfirstname;
+            string panmiddlename = p.panmiddlename;
+            string panlastname = p.panlastname;
+            string panfathername = p.panfathername;
+            string panbirthdate = p.panbirthdate;
+            if (dt.Rows.Count > 0)
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand cmd;
+                string sql = "Update UserInfo set firstname = '" + firstname + "',panbirthdate = '" + panbirthdate + "',panfathername = '" + panfathername + "',panlastname = '" + panlastname + "',panmiddlename = '" + panmiddlename + "',panfirstname = '" + panfirstname + "',currentcountry = '" + currentcountry + "',currentpin = '" + currentpin + "',currentstate = '" + currentstate + "',currentcity = '" + currentcity + "',currentbuilding = '" + currentbuilding + "',currentlandmark = '" + currentlandmark + "',currentstreet = '" + currentstreet + "',lastname = '" + lastname + "',middlename = '" + middlename + "',gender = '" + gender + "',aadharnumber = '" + aadharnumber + "',pannumber = '" + pannumber + "',maritalstatus = '" + maritalstatus + "',employmenttype = '" + employmenttype + "',fathername = '" + fathername + "',spousename = '" + spousename + "' where session = '" + Session["Name"].ToString() + "'";
+                cmd = new SqlCommand(sql, sqlCnctn);
+                adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                adapter.UpdateCommand.ExecuteNonQuery();
+                cmd.Dispose();
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+            return RedirectToAction("About");
+        }
+        public ActionResult Upload()
+        {
+            return View();
+        }
 
-            //if (dt.Rows.Count > 0)
-            //{
-            //    SqlDataAdapter adapter = new SqlDataAdapter();
-            //    SqlCommand cmd;
-            //    string sql = "Update UserInfo set firstname = '"+ firstname + "',panbirthdate = '" + panbirthdate + "',panfathername = '" + panfathername + "',panlastname = '" + panlastname + "',panmiddlename = '" + panmiddlename + "',panfirstname = '" + panfirstname + "',currentcountry = '" + currentcountry + "',currentpin = '" + currentpin + "',currentstate = '" + currentstate + "',currentcity = '" + currentcity + "',currentbuilding = '" + currentbuilding + "',currentlandmark = '" + currentlandmark + "',currentstreet = '" + currentstreet + "',lastname = '" + lastname + "',middlename = '" + middlename + "',gender = '" + gender + "',aadharnumber = '" + aadharnumber + "',pannumber = '" + pannumber + "',maritalstatus = '" + maritalstatus + "',employmenttype = '" + employmenttype + "',fathername = '" + fathername + "',spousename = '" + spousename + "' where session = '" + Session["Name"].ToString() + "'";
-            //    cmd = new SqlCommand(sql, sqlCnctn);
-            //    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-            //    adapter.UpdateCommand.ExecuteNonQuery();
-            //    cmd.Dispose();
-            //}
-            //else
-            //{
-            //    Response.Redirect("~/index.aspx");
-            //    return null;
-            //}
-            //return RedirectToAction("About");                     
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
+        {
+            // Verify that the user selected a file
+            if (files != null && files.ContentLength > 0)
+            {
+                // extract only the filename
+                var fileName = Path.GetFileName(files.FileName);
+                // store the file inside ~/App_Data/uploads folder
+                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                files.SaveAs(path);
+            }
+            if (files2 != null && files2.ContentLength > 0)
+            {
+                // extract only the filename
+                var fileName = Path.GetFileName(files2.FileName);
+                // store the file inside ~/App_Data/uploads folder
+                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                files2.SaveAs(path);
+            }
+            // redirect back to the index action to show the form once again
+            return RedirectToAction("About");
         }
     }
 }

@@ -138,12 +138,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <input id="pancard" type="file" class="form-input" name="pancard" />
-                    </div>
-
-                </div>
-                <div class="row">
                     <div class="col-md-4">
                         <input id="panfirstname" class="form-input" placeholder="First Name on PAN" name="panfirstname" value="@data.panfirstname">
                     </div>
@@ -162,12 +156,11 @@
                     <div class="col-md-6">
                         <input id="panbirthdate" class="form-input" placeholder="DOB on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
-                   
-
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
+                @*<input type="button" class="btn btn-primary" title="Upload" value="Upload Documents" onclick="location.href='@Url.Action("Upload", "Home")'" />*@
             </div>
-        </form>
+        </form>     
     </div>
 </div>
 @Scripts.Render("~/Scripts/about.js")

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">Upload Documents</h2>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+           @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+             <div class="form-card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="file" class="form-input" name="files" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="file" class="form-input" name="files2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <input class="btn btn-primary" type="submit" value="Upload" />
+                </div>
+            </div>
+             }
+        </div>
+    </div>
+</div>
+

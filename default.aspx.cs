@@ -139,8 +139,8 @@ namespace NBFC_App___dev
         }
         protected void Button3_Click(object sender, EventArgs e)
         {
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             if (OTP.Text.ToString() == "1234" && temp_data.Text == "login")
