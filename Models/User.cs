@@ -20,5 +20,8 @@ namespace NBFC_App___dev.Models
         public string pannumber { get; set; }
         public string maritalstatus { get; set; }
         public string employmenttype { get; set; }
+        public string fathername { get; set; }
+        public string spousename { get; set; }
+
     }
 }

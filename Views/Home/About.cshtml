@@ -38,35 +38,57 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <select id="gender_select" class="form-input">
                             <option value="-1">Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Others">Others</option>
+                            <option value="eeac42ee-65b6-df11-831a-001d60e938c6">Male</option>
+                            <option value="fc2483f8-65b6-df11-831a-001d60e938c6">Female</option>
+                            <option value="a0ed5db4-de27-442e-bee7-dd97a723e11d">Others</option>
                         </select>
                         <input hidden id="gender" class="form-input" placeholder="Gender" name="gender" value="@data.gender" />
                     </div>
                     <div class="col-md-6">
                         <select id="marital_select" class="form-input">
                             <option value="-1">Marital Status</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Others">Others</option>
+                            <option value="c8a659bc-5539-4a95-bd94-ac9fba2afa4c">Single</option>
+                            <option value="a4115632-310a-47c8-b68f-88c635fa3906">Married</option>
+                            <option value="332b97f3-9b78-4a1d-8a37-526f98ecd832">Separated</option>
+                            <option value="e050c2d8-34ba-4f49-a9e8-c40b48402c81">Default</option>
+                            <option value="5689b458-fa2a-4c0c-ac67-c4e4be483304">Widow</option>
+                            <option value="deeb6357-355e-4f29-bc4c-ddb7a8e62b51">Divorced</option>
                         </select>
                         <input hidden id="maritalstatus" class="form-input" placeholder="MaritalStatus" name="maritalstatus" value="@data.maritalstatus" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <select id="employment_select" class="form-input">
+                            <option value="-1">Employment Type</option>
+                            <option value="9d23b181-c6c9-4acf-9b63-781c25fb598d">Default</option>
+                            <option value="b3c99f10-eea6-4f33-b41e-70a74b3712bf">Salaried</option>
+                            <option value="9260cab0-c7c1-4e17-92de-7d7db752546a">Self-Employed Businessman</option>
+                            <option value="c1637f70-b829-4357-b9da-b91dc022e265">Self-Employed Professional</option>
+                        </select>
+                        <input hidden id="employmenttype" class="form-input" placeholder="Employment" name="employmenttype" value="@data.employmenttype" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="fathername" class="form-input" placeholder="Father's Name" name="fathername" value="@data.fathername" />
+                    </div>
+                    <div class="col-md-6">
+                        <input id="spousename" class="form-input" placeholder="Spouse Name" name="spousename" value="@data.spousename" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
                         <input id="aadhar" class="form-input" placeholder="Aadhaar Number" name="aadharnumber" value="@data.aadharnumber" />
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
                     </div>
-
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>                
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </form>
     </div>

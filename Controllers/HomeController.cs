@@ -40,7 +40,9 @@ namespace NBFC_App___dev.Controllers
                     gender = row["gender"].ToString(),
                     aadharnumber = row["aadharnumber"].ToString(),
                     maritalstatus = row["maritalstatus"].ToString(),
-                    employmenttype = row["employmenttype"].ToString()
+                    employmenttype = row["employmenttype"].ToString(),
+                    fathername = row["fathername"].ToString(),
+                    spousename = row["spousename"].ToString()
                 };
                 ViewData["Message"] = p;
                 return View();
@@ -88,11 +90,14 @@ namespace NBFC_App___dev.Controllers
             string aadharnumber = p.aadharnumber;
             string pannumber = p.pannumber;
             string maritalstatus = p.maritalstatus;
+            string employmenttype = p.employmenttype;
+            string spousename = p.spousename;
+            string fathername = p.fathername;
             if (dt.Rows.Count > 0)
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand cmd;
-                string sql = "Update UserInfo set firstname = '"+ firstname + "',lastname = '" + lastname + "',middlename = '" + middlename + "',gender = '" + gender + "',aadharnumber = '" + aadharnumber + "',pannumber = '" + pannumber + "',maritalstatus = '" + maritalstatus + "' where session = '" + Session["Name"].ToString() + "'";
+                string sql = "Update UserInfo set firstname = '"+ firstname + "',lastname = '" + lastname + "',middlename = '" + middlename + "',gender = '" + gender + "',aadharnumber = '" + aadharnumber + "',pannumber = '" + pannumber + "',maritalstatus = '" + maritalstatus + "',employmenttype = '" + employmenttype + "',fathername = '" + fathername + "',spousename = '" + spousename + "' where session = '" + Session["Name"].ToString() + "'";
                 cmd = new SqlCommand(sql, sqlCnctn);
                 adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                 adapter.UpdateCommand.ExecuteNonQuery();
