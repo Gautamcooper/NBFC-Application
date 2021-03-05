@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace NBFC_App___dev
 {
@@ -53,6 +54,16 @@ namespace NBFC_App___dev
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            string shorttermloan = "0";
+            string longtermloan = "0";
+            if (Loan_type.SelectedValue == "short")
+            {
+                shorttermloan = shortterm.SelectedValue.ToString();
+            }
+            else if (Loan_type.SelectedValue == "long")
+            {
+                longtermloan = longterm.SelectedValue.ToString();
+            }
             string mobile = TextBox1.Text.ToString();
             string email = TextBox2.Text.ToString();
             string pan_number = Pan_number.Text.ToString();
@@ -65,7 +76,7 @@ namespace NBFC_App___dev
             string bpmloader = "";
             string aspxauth = "";
             string username = "";
-            string loanterm = "";
+            //string loanterm = "";
 
 
             var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
@@ -106,20 +117,22 @@ namespace NBFC_App___dev
             request2.AddCookie("BPMLOADER", bpmloader);
             request2.AddCookie("UserName", username);
             request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrLoanTermRequested\":\"" + loanterm + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrTSMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrTSEmail\":\"" + email + "\",\r\n    \"UsrTSMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrTSIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
+            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
             IRestResponse response2 = client2.Execute(request2);
+            var createdRecordId = JObject.Parse(response2.Content);
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             SqlDataAdapter adapter = new SqlDataAdapter();
             SqlCommand cmd;
-            string sql = "Update UserInfo set step1 = 'true'  where session = '" + Session["Name"].ToString() + "'";
+            string sql = "Update UserInfo set step1 = 'true', applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
             cmd = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand.ExecuteNonQuery();
             cmd.Dispose();
             Response.Redirect("~/Home/About");
+
 
         }
     }
