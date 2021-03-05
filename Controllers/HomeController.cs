@@ -7,12 +7,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NBFC_App___dev.Models;
-//using IronOcr;
-//using tessnet2;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-//using Aspose.OCR;
 using System.Configuration;
 
 namespace NBFC_App___dev.Controllers
@@ -66,7 +63,8 @@ namespace NBFC_App___dev.Controllers
                     panlastname = row["panlastname"].ToString(),
                     panfathername = row["panfathername"].ToString(),
                     panbirthdate = row["panbirthdate"].ToString(),
-                    uploadedvalue = row["uploadedvalue"].ToString()
+                    uploadedvalue = row["uploadedvalue"].ToString(),
+                    step1 = row["step1"].ToString()
                 };
                 ViewData["Message"] = p;
                 return View();
@@ -149,14 +147,6 @@ namespace NBFC_App___dev.Controllers
             return RedirectToAction("About");
         }
 
-        // OCR Mechanism
-        //public string OCRMechanism(string filepath) 
-        //{
-        //    var Result = new IronTesseract().Read(filepath);
-        //    return Result.Text;
-        //}
-
-
     [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
         {
@@ -197,9 +187,6 @@ namespace NBFC_App___dev.Controllers
             }
             sqlCnctn.Close();
 
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
-            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
             sda = new SqlDataAdapter(strQry, sqlCnctn);
@@ -226,6 +213,64 @@ namespace NBFC_App___dev.Controllers
                 return null;
             }                        
             return RedirectToAction("About");
+        }
+
+        [HttpPost]
+        public ActionResult Apply(FormCollection data)
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                string numberofdependents = data["numberofdependents"];
+                string coapplicantname = data["coapplicantname"];
+                string coapplicantrelationship = data["coapplicantrelationship"];
+                string bankifsccode = data["bankifsccode"];
+                string bankaccountnumber = data["bankaccountnumber"];
+                string bankname = data["bankname"];
+
+                DataRow row = dt.Rows[0];
+                string Email = row["email"].ToString();
+                string Mobile = row["mobile"].ToString();
+                string Fullname = row["fullname"].ToString();
+                string firstname = row["firstname"].ToString();
+                string middlename = row["middlename"].ToString();
+                string lastname = row["lastname"].ToString();
+                string gender = row["gender"].ToString();
+                string aadharnumber = row["aadharnumber"].ToString();
+                string maritalstatus = row["maritalstatus"].ToString();
+                string employmenttype = row["employmenttype"].ToString();
+                string fathername = row["fathername"].ToString();
+                string spousename = row["spousename"].ToString();
+                string pannumber = row["pannumber"].ToString();
+                string currentstreet = row["currentstreet"].ToString();
+                string currentlandmark = row["currentlandmark"].ToString();
+                string currentbuilding = row["currentbuilding"].ToString();
+                string currentcity = row["currentcity"].ToString();
+                string currentstate = row["currentstate"].ToString();
+                string currentpin = row["currentpin"].ToString();
+                string currentcountry = row["currentcountry"].ToString();
+                string panfirstname = row["panfirstname"].ToString();
+                string panmiddlename = row["panmiddlename"].ToString();
+                string panlastname = row["panlastname"].ToString();
+                string panfathername = row["panfathername"].ToString();
+                string panbirthdate = row["panbirthdate"].ToString();
+                string uploadedvalue = row["uploadedvalue"].ToString();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+            
         }
 
 

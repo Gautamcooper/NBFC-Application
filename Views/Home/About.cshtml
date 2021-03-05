@@ -157,11 +157,13 @@
                         <input id="panbirthdate" class="form-input" placeholder="DOB on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
                 </div>
+                <input hidden id="step1" class="form-input" placeholder="Step1" name="step1" value="@data.step1" />
                 <input disabled type="checkbox" id="uploaded" name="uploaded" value="uploaded">
                 <label for="uploaded">Documents Uploaded</label><br>
                 <input hidden id="uploadedvalue" name="uploadedvalue" value="@data.uploadedvalue" />
                 <button type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
+                <button style="display: none;" id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
                 @*<input type="button" class="btn btn-primary" title="Upload" value="Upload Documents" onclick="location.href='@Url.Action("Upload", "Home")'" />*@
             </div>
         </form>
@@ -198,9 +200,94 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <input class="btn btn-primary" type="submit" value="Upload" />
-                                                </div>                                                
+                                                </div>
                                             </div>
                                         </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="step2-modal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Step - 2</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div style="position: relative;">
+                                <h4 style="text-align: center;">Please fill in the details and press submit to apply for loan</h4>
+                            </div>
+                            <br />
+                            <div class="container-fluid">
+                                <div class="row">
+                                   @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                       <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input id="numberofdependants" class="form-input" name="numberofdependents" placeholder="Number Of Dependents" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input id="coapplicantname" class="form-input" name="coapplicantname" placeholder="Co Applicant Name" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <select id="coapplicantrelationship_select" class="form-input">
+                                                    <option value="-1">Co Applicant Relationship</option>
+                                                    <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
+                                                    <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
+                                                    <option value="3b266768-345c-48c8-8feb-c267f4d90b80">Spouse</option>
+                                                    <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
+                                                    <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
+                                                    <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
+                                                    <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>                                                   
+                                                </select>
+                                                <input hidden id="coapplicantrelationship" class="form-input" placeholder="" name="coapplicantrelationship" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input id="bankifsccode" class="form-input" name="bankifsccode" placeholder="Bank IFSC Code" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input id="bankaccountnumber" class="form-input" name="bankaccountnumber" placeholder="Bank Account Number" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <select id="bankname_select" class="form-input">
+                                                    <option value="-1">Bank Name</option>
+                                                    <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
+                                                    <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
+                                                    <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
+                                                    <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>                                                   
+                                                </select>
+                                                <input hidden id="bankname" class="form-input" placeholder="" name="bankname" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input class="btn btn-primary" type="submit" value="Apply" />
+                                            </div>
+                                        </div>
+                                    </div>
                                     }
                                 </div>
                             </div>

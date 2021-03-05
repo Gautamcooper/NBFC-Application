@@ -104,3 +104,15 @@ if (uploadedval == "true") {
 else {
     $('#uploaded').prop('checked', false);
 }
+$("#bankname_select").change(function () {
+    var bankname = $("#bankname_select").val();
+    $("#bankname").attr("value", bankbame);
+});
+$("#coapplicantrelationship_select").change(function () {
+    var coapplicantrelation = $("#coapplicantrelationship_select").val();
+    $("#coapplicantrelationship").attr("value", coapplicantrelation);
+});
+var step1 = $("#step1").val();
+if (step1 == "true") {
+    $("#continue").show();
+}

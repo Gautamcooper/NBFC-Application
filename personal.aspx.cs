@@ -108,7 +108,19 @@ namespace NBFC_App___dev
             request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
             request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrLoanTermRequested\":\"" + loanterm + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrTSMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrTSEmail\":\"" + email + "\",\r\n    \"UsrTSMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrTSIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
             IRestResponse response2 = client2.Execute(request2);
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            SqlCommand cmd;
+            string sql = "Update UserInfo set step1 = 'true'  where session = '" + Session["Name"].ToString() + "'";
+            cmd = new SqlCommand(sql, sqlCnctn);
+            adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+            adapter.UpdateCommand.ExecuteNonQuery();
+            cmd.Dispose();
             Response.Redirect("~/Home/About");
+
         }
     }
 }
