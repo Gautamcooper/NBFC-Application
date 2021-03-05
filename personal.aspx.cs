@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace NBFC_App___dev
 {
@@ -22,7 +23,9 @@ namespace NBFC_App___dev
             {
                 TextBox3.Text = "16000";
                 //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-                string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+                //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+                string dbconn = ConfigurationManager.AppSettings["dbconn"];
+                string connectionString = dbconn;
                 SqlConnection sqlCnctn = new SqlConnection(connectionString);
                 sqlCnctn.Open();
 

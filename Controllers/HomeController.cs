@@ -7,6 +7,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NBFC_App___dev.Models;
+//using IronOcr;
+//using tessnet2;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+//using Aspose.OCR;
+using System.Configuration;
 
 namespace NBFC_App___dev.Controllers
 {
@@ -19,7 +26,9 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult About()
         {
-            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
@@ -89,8 +98,10 @@ namespace NBFC_App___dev.Controllers
         }
         [HttpPost]         
         public ActionResult On_Save(User p)
-        {          
-            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
@@ -136,34 +147,63 @@ namespace NBFC_App___dev.Controllers
                 return null;
             }
             return RedirectToAction("About");
-        }        
+        }
 
-        [HttpPost]
+        // OCR Mechanism
+        //public string OCRMechanism(string filepath) 
+        //{
+        //    var Result = new IronTesseract().Read(filepath);
+        //    return Result.Text;
+        //}
+
+
+    [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
         {
             int f1 = 0;
-            int f2 = 0;           
-            if (files != null && files.ContentLength > 0)
-            {                
-                var fileName = Path.GetFileName(files.FileName);
-                var path = "D:/Uploads/" + fileName;
-                files.SaveAs(path);
-                f1 = 1;
-            }
-            if (files2 != null && files2.ContentLength > 0)
-            {                
-                var fileName = Path.GetFileName(files2.FileName);               
-                var path = "D:/Uploads/" + fileName;
-                files2.SaveAs(path);
-                f2 = 1;
-            }
-            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            int f2 = 0;
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
             SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
             DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string email = row["email"].ToString();
+                
+                if (files != null && files.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(files.FileName);
+                    var extension = Path.GetExtension(files.FileName);
+                    var path = "D:/Uploads/" + email + "." + extension; 
+                    files.SaveAs(path);
+                    f1 = 1;
+                }
+                if (files2 != null && files2.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(files2.FileName);
+                    var extension = Path.GetExtension(files.FileName);
+                    var path = "D:/Uploads/" + email + "." + extension;
+                    
+                    files2.SaveAs(path);
+                    f2 = 1;
+                }
+
+            }
+            sqlCnctn.Close();
+
+            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            sda = new SqlDataAdapter(strQry, sqlCnctn);
+            dt = new DataTable();
             sda.Fill(dt);           
             if (dt.Rows.Count > 0)
             {
@@ -187,5 +227,7 @@ namespace NBFC_App___dev.Controllers
             }                        
             return RedirectToAction("About");
         }
+
+
     }
 }
