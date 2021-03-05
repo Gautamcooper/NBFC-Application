@@ -97,3 +97,10 @@ $("#pan").change(function () {
         $("#pan").focus();
     }
 });
+var uploadedval = $("#uploadedvalue").val();
+if (uploadedval == "true") {
+    $('#uploaded').prop('checked',true);
+}
+else {
+    $('#uploaded').prop('checked', false);
+}

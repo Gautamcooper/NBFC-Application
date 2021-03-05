@@ -46,5 +46,6 @@ namespace NBFC_App___dev.Models
         public string panfathername { get; set; }
 
         public string panbirthdate { get; set; }
+        public string uploadedvalue { get; set; }
     }
 }

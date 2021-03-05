@@ -56,7 +56,8 @@ namespace NBFC_App___dev.Controllers
                     panmiddlename = row["panmiddlename"].ToString(),
                     panlastname = row["panlastname"].ToString(),
                     panfathername = row["panfathername"].ToString(),
-                    panbirthdate = row["panbirthdate"].ToString()
+                    panbirthdate = row["panbirthdate"].ToString(),
+                    uploadedvalue = row["uploadedvalue"].ToString()
                 };
                 ViewData["Message"] = p;
                 return View();
@@ -87,7 +88,7 @@ namespace NBFC_App___dev.Controllers
             return null;
         }
         [HttpPost]         
-        public ActionResult On_Save(User p, HttpPostedFileBase pan)
+        public ActionResult On_Save(User p)
         {          
             string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
@@ -118,7 +119,7 @@ namespace NBFC_App___dev.Controllers
             string panmiddlename = p.panmiddlename;
             string panlastname = p.panlastname;
             string panfathername = p.panfathername;
-            string panbirthdate = p.panbirthdate;
+            string panbirthdate = p.panbirthdate;            
             if (dt.Rows.Count > 0)
             {
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -135,33 +136,55 @@ namespace NBFC_App___dev.Controllers
                 return null;
             }
             return RedirectToAction("About");
-        }
-        public ActionResult Upload()
-        {
-            return View();
-        }
+        }        
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
         {
-            // Verify that the user selected a file
+            int f1 = 0;
+            int f2 = 0;           
             if (files != null && files.ContentLength > 0)
-            {
-                // extract only the filename
+            {                
                 var fileName = Path.GetFileName(files.FileName);
-                // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                var path = "D:/Uploads/" + fileName;
                 files.SaveAs(path);
+                f1 = 1;
             }
             if (files2 != null && files2.ContentLength > 0)
-            {
-                // extract only the filename
-                var fileName = Path.GetFileName(files2.FileName);
-                // store the file inside ~/App_Data/uploads folder
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+            {                
+                var fileName = Path.GetFileName(files2.FileName);               
+                var path = "D:/Uploads/" + fileName;
                 files2.SaveAs(path);
+                f2 = 1;
             }
-            // redirect back to the index action to show the form once again
+            string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);           
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string uploadedval = row["uploadedvalue"].ToString();
+                if(uploadedval == "false" && f1 == 1 && f2 == 1)
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand cmd;
+                    string sql = "Update UserInfo set uploadedvalue = 'true' where session = '" + Session["Name"].ToString() + "'";
+                    cmd = new SqlCommand(sql, sqlCnctn);
+                    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                    adapter.UpdateCommand.ExecuteNonQuery();
+                    cmd.Dispose();
+                }                
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }                        
             return RedirectToAction("About");
         }
     }
