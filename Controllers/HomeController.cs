@@ -12,6 +12,9 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Configuration;
 using RestSharp;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace NBFC_App___dev.Controllers
 {
@@ -72,6 +75,7 @@ namespace NBFC_App___dev.Controllers
                     aadharaddress = row["aadharaddress"].ToString(),
                     aadharbirthdate = row["aadharbirthdate"].ToString(),
                     birthdate = row["birthdate"].ToString()
+
 
                 };
                 ViewData["Message"] = p;
@@ -161,9 +165,123 @@ namespace NBFC_App___dev.Controllers
             return RedirectToAction("About");
         }
 
-    [HttpPost]
+        public string OCR_Mechanism(string path)
+        {
+            var client = new RestClient("https://api.ocr.space/parse/image");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("apikey", "helloworld");
+            request.AddHeader("isTable", "true");
+            request.AddParameter("language", "eng");
+            request.AddParameter("isOverlayRequired", "false");
+            request.AddParameter("url", "http://dl.a9t9.com/ocrbenchmark/eng.png");
+            request.AddParameter("iscreatesearchablepdf", "false");
+            request.AddParameter("issearchablepdfhidetextlayer", "false");
+
+            request.AddFile("filetype", path);
+            IRestResponse response = client.Execute(request);
+
+            var details = JObject.Parse(response.Content);
+
+            JArray jarray = JArray.Parse(details["ParsedResults"].ToString());
+            string responseResult = jarray[0]["ParsedText"].ToString();
+
+            return responseResult;
+        }
+
+        public string OCR_PAN(string path)
+        {
+            
+
+                string responseResult = OCR_Mechanism(path);
+
+                string PANNumber_Regex = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
+
+                string DateOfBirth_Regex = "[0-3]{1}[0-9]{1}/[0-9]{2}/[0-9]{4}";
+
+                List<string> list = new List<string>();
+                String[] strArray = responseResult.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < strArray.Length; i++)
+                {
+                    if (strArray[i].Contains("Name"))
+                    {
+                        list.Add(strArray[i + 1]);
+                    }
+                }
+
+                List<string> OutputList_PAN = new List<string>();
+                OutputList_PAN.Add(list.ToArray()[0].ToString());  // Name
+                OutputList_PAN.Add(list.ToArray()[1].ToString());   // Father's Name
+                OutputList_PAN.Add((Regex.Matches(responseResult, PANNumber_Regex)[0]).ToString()); // PAN Number
+                OutputList_PAN.Add((Regex.Matches(responseResult, DateOfBirth_Regex)[0]).ToString());  // Date of Birth
+
+            return (String.Join(";", OutputList_PAN));
+            
+        }
+
+        public string OCR_AadharFront(string path)
+        {
+            
+
+                string responseResult = OCR_Mechanism(path);
+
+                string AaadharNumber_Regex = "[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}";
+
+                string DateOfBirth_Regex = "[0-3]{1}[0-9]{1}/[0-9]{2}/[0-9]{4}";
+
+                String[] strArray = responseResult.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                List<string> OutputList_Aadhar= new List<string>();
+            OutputList_Aadhar.Add(strArray[1]); // Aadhar Name 
+            OutputList_Aadhar.Add(Regex.Matches(responseResult, DateOfBirth_Regex)[0].ToString()); // Aadhar DOB
+            //OutputList_Aadhar.Add(((responseResult.Contains("Male") && !responseResult.Contains("Female")) ? "Male" : "Female"));  // Aaddhar Gender
+            OutputList_Aadhar.Add(Regex.Matches(responseResult, AaadharNumber_Regex)[0].ToString()); // Aadhar Number
+
+            return (String.Join(";", OutputList_Aadhar));
+
+        }
+
+        //public void OCR_AadharBack(string path)
+        //{
+        //    if (!string.IsNullOrEmpty(path))
+        //    {
+
+        //        var client = new RestClient("https://accurascan.com/api/v4/ocr");
+        //        client.Timeout = -1;
+        //        var request = new RestRequest(Method.POST);
+        //        request.AddHeader("Api-Key", "1615142527yNEfcvD5u3BTj5IsM8Gk6W4xZ1i9kdMhuSHHMgFv");
+        //        request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
+        //        request.AddFile("scan_image", path);
+        //        request.AddParameter("country_code", "IND");
+        //        request.AddParameter("card_code", "ADHB");
+        //        IRestResponse response = client.Execute(request);
+
+        //        var details = JObject.Parse(response.Content);
+
+        //        //Console.WriteLine("Aaadhar Address : " + details["data"]["OCRdata"]["Address"]);
+        //    }
+        //}
+        [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
         {
+            var  pannumber = "";
+            var  panfirstname = "";
+            var  panmiddlename = "";
+            var  panlastname = "";
+            var  panfathername = "";
+            var  panbirthdate = "";
+             
+            var  aadharfirstname = "";
+            var  aadharlastname = "";
+            var  aadharmiddlename = "";
+            //var aadharaddress = "";
+            var aadharbirthdate = "";
+            var aadharnumber = "";
+
+
+            var path_PAN = "";
+            var path_AadharFront = "";
+            //var path_AadharBack = "";
             int f1 = 0;
             int f2 = 0;
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
@@ -184,22 +302,84 @@ namespace NBFC_App___dev.Controllers
                 {
                     var fileName = Path.GetFileName(files.FileName);
                     var extension = Path.GetExtension(files.FileName);
-                    var path = "D:/Uploads/" + email + "." + extension; 
-                    files.SaveAs(path);
+                    path_PAN = "D:\\Uploads\\PAN\\" + email + extension; 
+                    files.SaveAs(path_PAN);
                     f1 = 1;
                 }
                 if (files2 != null && files2.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(files2.FileName);
                     var extension = Path.GetExtension(files.FileName);
-                    var path = "D:/Uploads/" + email + "." + extension;
+                    path_AadharFront = "D:\\Uploads\\AadharFront\\" + email + extension;
                     
-                    files2.SaveAs(path);
+                    files2.SaveAs(path_AadharFront);
                     f2 = 1;
                 }
 
             }
             sqlCnctn.Close();
+            
+            string pan_details = OCR_PAN(path_PAN);
+            String[] strArray_PAN = pan_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            String[] strArray_PAN_nameSplit = strArray_PAN[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+            pannumber = strArray_PAN[2];
+
+            if (strArray_PAN_nameSplit.Length == 1)
+            {
+                panfirstname = strArray_PAN_nameSplit[0];
+                panmiddlename = "";
+                panlastname = "";
+            }
+            else if (strArray_PAN_nameSplit.Length == 2)
+            {
+                panfirstname = strArray_PAN_nameSplit[0];
+                panmiddlename = "";
+                panlastname = strArray_PAN_nameSplit[1];
+            }
+            else {
+                panfirstname = strArray_PAN_nameSplit[0];
+                panmiddlename = strArray_PAN_nameSplit[1];
+                panlastname = strArray_PAN_nameSplit[2];
+            };
+            
+            panfathername = strArray_PAN[1];
+            var pan_birthdate = Convert.ToDateTime(strArray_PAN[3], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+
+            panbirthdate = pan_birthdate.ToString("yyyy-MM-dd");
+
+
+            string AadharFront_details = OCR_AadharFront(path_AadharFront);
+            String[] strArray_Aadhar = AadharFront_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+            String[] strArray_Aadhar_name_split = strArray_Aadhar[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+
+            if (strArray_Aadhar_name_split.Length == 1)
+            {
+                aadharfirstname = strArray_Aadhar_name_split[0];
+                aadharmiddlename = "";
+                aadharlastname = "";
+            }
+            else if (strArray_Aadhar_name_split.Length == 2)
+            {
+                aadharfirstname = strArray_Aadhar_name_split[0];
+                aadharmiddlename = "";
+                aadharlastname = strArray_Aadhar_name_split[1];
+            }
+            else
+            {
+                aadharfirstname = strArray_Aadhar_name_split[0];
+                aadharmiddlename = strArray_Aadhar_name_split[1];
+                aadharlastname = strArray_Aadhar_name_split[2];
+            };
+
+            aadharnumber = strArray_Aadhar[2];
+
+            var Aadhar_birthdate = Convert.ToDateTime(strArray_Aadhar[1], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+            aadharbirthdate = Aadhar_birthdate.ToString("yyyy-MM-dd");
+
+
+
 
             sqlCnctn.Open();
             strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
@@ -214,9 +394,10 @@ namespace NBFC_App___dev.Controllers
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     SqlCommand cmd;
-                    string sql = "Update UserInfo set uploadedvalue = 'true' where session = '" + Session["Name"].ToString() + "'";
+                    string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                     cmd = new SqlCommand(sql, sqlCnctn);
                     adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+
                     adapter.UpdateCommand.ExecuteNonQuery();
                     cmd.Dispose();
                 }                
