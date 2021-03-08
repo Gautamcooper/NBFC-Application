@@ -209,17 +209,17 @@ namespace NBFC_App___dev
 
         protected void Go_to_dashboard_Click(object sender, EventArgs e)
         {
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand cmd;
-            string sql = "Update UserInfo set step1 = 'false'  where session = '" + Session["Name"].ToString() + "'";
-            cmd = new SqlCommand(sql, sqlCnctn);
-            adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-            adapter.UpdateCommand.ExecuteNonQuery();
-            cmd.Dispose();
+            //string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            //string connectionString = dbconn;
+            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            //sqlCnctn.Open();
+            //SqlDataAdapter adapter = new SqlDataAdapter();
+            //SqlCommand cmd;
+            //string sql = "Update UserInfo set step1 = 'false'  where session = '" + Session["Name"].ToString() + "'";
+            //cmd = new SqlCommand(sql, sqlCnctn);
+            //adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+            //adapter.UpdateCommand.ExecuteNonQuery();
+            //cmd.Dispose();
             Response.Redirect("~/Home/About");
         }
     }

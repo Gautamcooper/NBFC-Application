@@ -106,13 +106,14 @@ else {
 }
 $("#bankname_select").change(function () {
     var bankname = $("#bankname_select").val();
-    $("#bankname").attr("value", bankbame);
+    $("#bankname").attr("value", bankname);
 });
 $("#coapplicantrelationship_select").change(function () {
     var coapplicantrelation = $("#coapplicantrelationship_select").val();
     $("#coapplicantrelationship").attr("value", coapplicantrelation);
 });
 var step1 = $("#step1").val();
-if (step1 == "true") {
+var uploadedvalue = $("#uploadedvalue").val();
+if (step1 == "true" && uploadedvalue == "true") {
     $("#continue").show();
 }
