@@ -48,5 +48,15 @@ namespace NBFC_App___dev.Models
         public string panbirthdate { get; set; }
         public string uploadedvalue { get; set; }
         public string step1 { get; set; }
+
+        public string aadharfirstname { get; set; }
+
+        public string aadharlastname { get; set; }
+        public string aadharmiddlename { get; set; }
+        public string aadharaddress { get; set; }
+
+        public string aadharbirthdate { get; set; }
+
+        public string birthdate { get; set; }
     }
 }

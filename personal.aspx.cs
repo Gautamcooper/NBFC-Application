@@ -16,39 +16,43 @@ namespace NBFC_App___dev
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Name"] == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("~/index.aspx");
-            }
-            else
-            {
-                TextBox3.Text = "16000";
-                //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-                //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
-                string dbconn = ConfigurationManager.AppSettings["dbconn"];
-                string connectionString = dbconn;
-                SqlConnection sqlCnctn = new SqlConnection(connectionString);
-                sqlCnctn.Open();
-
-                //Session["Name"] = Guid.NewGuid().ToString();
-                //SqlDataAdapter adapter = new SqlDataAdapter();
-                string strQry = "Select * from Userinfo where session='" + Session["Name"] + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+                if (Session["Name"] == null)
                 {
-                    TextBox1.Text = dt.Rows[0]["mobile"].ToString();
-                    TextBox2.Text = dt.Rows[0]["email"].ToString();
-                    FullName.Text = dt.Rows[0]["fullname"].ToString();
-                    Pan_number.Text = dt.Rows[0]["pannumber"].ToString();
+                    Response.Redirect("~/index.aspx");
                 }
                 else
                 {
+                    TextBox3.Text = "16000";
+                    //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
+                    //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+                    string dbconn = ConfigurationManager.AppSettings["dbconn"];
+                    string connectionString = dbconn;
+                    SqlConnection sqlCnctn = new SqlConnection(connectionString);
+                    sqlCnctn.Open();
 
+                    //Session["Name"] = Guid.NewGuid().ToString();
+                    //SqlDataAdapter adapter = new SqlDataAdapter();
+                    string strQry = "Select * from Userinfo where session='" + Session["Name"] + "'";
+                    SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        TextBox1.Text = dt.Rows[0]["mobile"].ToString();
+                        TextBox2.Text = dt.Rows[0]["email"].ToString();
+                        FullName.Text = dt.Rows[0]["fullname"].ToString();
+                        PAN.Text = dt.Rows[0]["pannumber"].ToString();
+                    }
+                    else
+                    {
+
+                    }
+                    sqlCnctn.Close();
                 }
-                sqlCnctn.Close();
             }
+            
             
         }
 
@@ -66,7 +70,7 @@ namespace NBFC_App___dev
             }
             string mobile = TextBox1.Text.ToString();
             string email = TextBox2.Text.ToString();
-            string pan_number = Pan_number.Text.ToString();
+            string pan_number = PAN.Text.ToString();
             string loanamount = TextBox3.Text.ToString();
             string monthly_income = Monthly_income.Text.ToString();
             string product_val = Product.SelectedValue.ToString();

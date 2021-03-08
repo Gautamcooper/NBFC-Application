@@ -96,7 +96,7 @@
                                         <asp:ListItem Text="23" Value="23"></asp:ListItem>
                                         <asp:ListItem Text="24" Value="24"></asp:ListItem>                                       
                                     </asp:DropDownList>
-                                    <asp:TextBox ID="Pan_number" placeholder="Pan Number" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="PAN" placeholder="PAN number" runat="server"></asp:TextBox>
                                     <asp:TextBox ID="Monthly_income" placeholder="Monthly Income" runat="server"></asp:TextBox>
                                     <asp:DropDownList ID="Product" class="dropdowncls" runat="server">
                                         <asp:ListItem Enabled="true" Text="Product" Value="-1"></asp:ListItem>

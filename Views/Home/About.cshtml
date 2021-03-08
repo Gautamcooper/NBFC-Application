@@ -82,7 +82,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="aadhar" class="form-input" placeholder="Aadhaar Number" name="aadharnumber" value="@data.aadharnumber" />
+                        <input id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
                     </div>
                     <div class="col-md-6">
                         <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
@@ -139,23 +139,49 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="panfirstname" class="form-input" placeholder="First Name on PAN" name="panfirstname" value="@data.panfirstname">
+                        <input id="panfirstname" class="form-input" placeholder="Your First Name on PAN" name="panfirstname" value="@data.panfirstname">
                     </div>
                     <div class="col-md-4">
-                        <input id="panmiddlename" class="form-input" placeholder="Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
+                        <input id="panmiddlename" class="form-input" placeholder="Your Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
                     </div>
                     <div class="col-md-4">
-                        <input id="panlastname" class="form-input" placeholder="Last Name on PAN" name="panlastname" value="@data.panlastname">
+                        <input id="panlastname" class="form-input" placeholder="Your Last Name on PAN" name="panlastname" value="@data.panlastname">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="panfathername" class="form-input" placeholder="Father's Name on PAN" name="panfathername" value="@data.panfathername">
+                        <input id="panfathername" class="form-input" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                     </div>
                     <div class="col-md-6">
-                        <input id="panbirthdate" class="form-input" placeholder="DOB on PAN" name="panbirthdate" value="@data.panbirthdate">
+                        <input id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input id="aadharfirstname" class="form-input" placeholder="Your First Name on Aadhar" name="aadharfirstname" value="@data.aadharfirstname">
+                    </div>
+                    <div class="col-md-4">
+                        <input id="aadharmiddlename" class="form-input" placeholder="Your Middle Name on Aadhar" name="aadharmiddlename" value="@data.aadharmiddlename">
+                    </div>
+                    <div class="col-md-4">
+                        <input id="aadharlastname" class="form-input" placeholder="Your Last Name on Aadhar" name="aadharlastname" value="@data.aadharlastname">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="aadharnumber" class="form-input" placeholder="Your Aadhar Number" name="aadharnumber" value="@data.aadharnumber">
+                    </div>
+                    <div class="col-md-6">
+                        <input id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="aadharaddress" class="form-input" placeholder="Your Aadhar Address" name="aadharaddress" value="@data.aadharaddress">
+                    </div>
+                 
                 </div>
                 <input hidden id="step1" class="form-input" placeholder="Step1" name="step1" value="@data.step1" />
                 <input disabled type="checkbox" id="uploaded" name="uploaded" value="uploaded">
@@ -234,7 +260,7 @@
                                 <div class="row">
                                    @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                     {
-                                       <div class="form-card">
+                                    <div class="form-card">
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <input id="numberofdependants" class="form-input" name="numberofdependents" placeholder="Number Of Dependents" />
@@ -255,9 +281,14 @@
                                                     <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
                                                     <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
                                                     <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
-                                                    <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>                                                   
+                                                    <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
                                                 </select>
                                                 <input hidden id="coapplicantrelationship" class="form-input" placeholder="" name="coapplicantrelationship" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input id="coapplicantmobilephone" class="form-input" name="coapplicantmobilephone" placeholder="Co Applicant Mobile Phone" />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -277,7 +308,7 @@
                                                     <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
                                                     <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
                                                     <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
-                                                    <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>                                                   
+                                                    <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
                                                 </select>
                                                 <input hidden id="bankname" class="form-input" placeholder="" name="bankname" />
                                             </div>
