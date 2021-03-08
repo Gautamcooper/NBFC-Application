@@ -90,7 +90,7 @@ namespace NBFC_App___dev
             request.AddHeader("Content-Type", "application/json");
             request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
-            Console.WriteLine(response.Content);
+            //Console.WriteLine(response.Content);
             foreach (var c in response.Cookies)
             {
                 if (c.Name.ToString() == "BPMCSRF")
@@ -130,7 +130,7 @@ namespace NBFC_App___dev
             sqlCnctn.Open();
             SqlDataAdapter adapter = new SqlDataAdapter();
             SqlCommand cmd;
-            string sql = "Update UserInfo set step1 = 'true', applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
+            string sql = "Update UserInfo set step1 = 'true', pannumber = '"+ pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
             cmd = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand.ExecuteNonQuery();

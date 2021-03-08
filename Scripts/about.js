@@ -116,4 +116,20 @@ var step1 = $("#step1").val();
 var uploadedvalue = $("#uploadedvalue").val();
 if (step1 == "true" && uploadedvalue == "true") {
     $("#continue").show();
-}
+};
+
+$("#save").click(function () {
+    if ($('#gender_select').val() == '-1' || $('#marital_select').val() == '-1' || $('#employment_select').val() == '-1' || $('#currentcity_select').val() == '-1' || $('#currentstate_select').val() == '-1' || $('#currentcountry_select').val() == '-1') {
+        alert("Please fill in all the Drop down columns!");
+        return false;
+    }
+
+});
+
+$("#apply").click(function () {
+    if ($('#coapplicantrelationship_select').val() == '-1' || $('#bankname_select').val() == '-1' ) {
+        alert("Please fill in all the Drop down columns!");
+        return false;
+    }
+
+})

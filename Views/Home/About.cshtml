@@ -28,18 +28,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="firstname" class="form-input" placeholder="First Name" name="firstname" value="@data.firstname" />
+                        <input id="firstname" class="form-input" placeholder="First Name" name="firstname" value="@data.firstname" required/>
                     </div>
                     <div class="col-md-4">
-                        <input id="middlename" class="form-input" placeholder="Middle Name" name="middlename" value="@data.middlename" />
+                        <input id="middlename" class="form-input" placeholder="Middle Name" name="middlename" value="@data.middlename" required/>
                     </div>
                     <div class="col-md-4">
-                        <input id="lastname" class="form-input" placeholder="Last Name" name="lastname" value="@data.lastname" />
+                        <input id="lastname" class="form-input" placeholder="Last Name" name="lastname" value="@data.lastname" required/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <select id="gender_select" class="form-input">
+                        <select id="gender_select" class="form-input" required>
                             <option value="-1">Gender</option>
                             <option value="eeac42ee-65b6-df11-831a-001d60e938c6">Male</option>
                             <option value="fc2483f8-65b6-df11-831a-001d60e938c6">Female</option>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
+                        <input type ="date" id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
                     </div>
                     <div class="col-md-6">
                         <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
@@ -154,7 +154,7 @@
                         <input id="panfathername" class="form-input" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                     </div>
                     <div class="col-md-6">
-                        <input id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
+                        <input type ="date" id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
                 </div>
                 <div class="row">
@@ -174,7 +174,7 @@
                         <input id="aadharnumber" class="form-input" placeholder="Your Aadhar Number" name="aadharnumber" value="@data.aadharnumber">
                     </div>
                     <div class="col-md-6">
-                        <input id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
+                        <input type ="date" id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
                     </div>
                 </div>
                 <div class="row">
@@ -187,7 +187,7 @@
                 <input disabled type="checkbox" id="uploaded" name="uploaded" value="uploaded">
                 <label for="uploaded">Documents Uploaded</label><br>
                 <input hidden id="uploadedvalue" name="uploadedvalue" value="@data.uploadedvalue" />
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button id="save" type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
                 <button style="display: none;" id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
                 @*<input type="button" class="btn btn-primary" title="Upload" value="Upload Documents" onclick="location.href='@Url.Action("Upload", "Home")'" />*@
@@ -263,12 +263,12 @@
                                     <div class="form-card">
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <input id="numberofdependants" class="form-input" name="numberofdependents" placeholder="Number Of Dependents" />
+                                                <input id="numberofdependants" class="form-input" name="numberofdependents" placeholder="Number Of Dependents" required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <input id="coapplicantname" class="form-input" name="coapplicantname" placeholder="Co Applicant Name" />
+                                                <input id="coapplicantname" class="form-input" name="coapplicantname" placeholder="Co Applicant Name" required />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -288,17 +288,17 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <input id="coapplicantmobilephone" class="form-input" name="coapplicantmobilephone" placeholder="Co Applicant Mobile Phone" />
+                                                <input id="coapplicantmobilephone" class="form-input" name="coapplicantmobilephone" placeholder="Co Applicant Mobile Phone" required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <input id="bankifsccode" class="form-input" name="bankifsccode" placeholder="Bank IFSC Code" />
+                                                <input id="bankifsccode" class="form-input" name="bankifsccode" placeholder="Bank IFSC Code" required/>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-8">
-                                                <input id="bankaccountnumber" class="form-input" name="bankaccountnumber" placeholder="Bank Account Number" />
+                                                <input id="bankaccountnumber" class="form-input" name="bankaccountnumber" placeholder="Bank Account Number" required />
                                             </div>
                                         </div>
                                         <div class="row">
@@ -315,7 +315,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <input class="btn btn-primary" type="submit" value="Apply" />
+                                                <input id="apply" class="btn btn-primary" type="submit" value="Apply" required/>
                                             </div>
                                         </div>
                                     </div>
