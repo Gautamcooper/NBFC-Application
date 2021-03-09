@@ -18,7 +18,7 @@ namespace NBFC_App___dev
         {
             HttpCookie UserCookie = new HttpCookie("User");
             UserCookie.Value = "signup";
-            UserCookie.Expires = DateTime.Now.AddMinutes(5);
+            UserCookie.Expires = DateTime.Now.AddMinutes(10);
             Response.Cookies.Add(UserCookie);
             Response.Redirect("~/default.aspx");
         }
@@ -26,7 +26,7 @@ namespace NBFC_App___dev
         {
             HttpCookie UserCookie = new HttpCookie("User");
             UserCookie.Value = "login";
-            UserCookie.Expires = DateTime.Now.AddMinutes(5);
+            UserCookie.Expires = DateTime.Now.AddMinutes(10);
             Response.Cookies.Add(UserCookie);
             Response.Redirect("~/default.aspx");
         }        

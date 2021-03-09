@@ -135,6 +135,17 @@ namespace NBFC_App___dev
             adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand.ExecuteNonQuery();
             cmd.Dispose();
+
+            string way = Request.Cookies["User"].Value;
+            if (way == "login")
+            {
+                System.Threading.Thread.Sleep(50000);
+
+
+            }
+            
+            
+
             Response.Redirect("~/Home/About");
 
 
