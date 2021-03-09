@@ -401,17 +401,73 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string uploadedval = row["uploadedvalue"].ToString();
-                if(uploadedval == "false" && f1 == 1 && f2 == 1 )
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    SqlCommand cmd;
-                    string sql = "Update UserInfo set uploadedvalue = 'true',filepathAadharFront = '" + path_AadharFront + "',filepathPAN = '" + path_PAN + "',aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
-                    cmd = new SqlCommand(sql, sqlCnctn);
-                    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                //if(uploadedval == "false" && f1 == 1 && f2 == 1 )
+                //{
+                //    SqlDataAdapter adapter = new SqlDataAdapter();
+                //    SqlCommand cmd;
+                //    string sql = "Update UserInfo set uploadedvalue = 'true',filepathAadharFront = '" + path_AadharFront + "',filepathPAN = '" + path_PAN + "',aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                //    cmd = new SqlCommand(sql, sqlCnctn);
+                //    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
 
-                    adapter.UpdateCommand.ExecuteNonQuery();
-                    cmd.Dispose();
-                }                
+                //    adapter.UpdateCommand.ExecuteNonQuery();
+                //    cmd.Dispose();
+                //}                
+                if (uploadedval == "false")
+                {
+                    if (f1 == 1 && f2 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                    else if (f1 == 1 && f2 == 0)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'false',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                    else if (f1 == 0 && f2 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'false', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                }
+                else
+                {
+                    if (f1 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'true',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                    if (f2 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                }
             }
             else
             {
