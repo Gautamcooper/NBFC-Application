@@ -241,16 +241,17 @@ namespace NBFC_App___dev.Controllers
 
         }
 
-        //public void OCR_AadharBack(string path)
+        //public string OCR_AadharBack(string path)
         //{
-        //    if (!string.IsNullOrEmpty(path))
-        //    {
+            
+            
 
         //        var client = new RestClient("https://accurascan.com/api/v4/ocr");
         //        client.Timeout = -1;
         //        var request = new RestRequest(Method.POST);
         //        request.AddHeader("Api-Key", "1615142527yNEfcvD5u3BTj5IsM8Gk6W4xZ1i9kdMhuSHHMgFv");
-        //        request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
+        //    //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
+        //        request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
         //        request.AddFile("scan_image", path);
         //        request.AddParameter("country_code", "IND");
         //        request.AddParameter("card_code", "ADHB");
@@ -258,11 +259,11 @@ namespace NBFC_App___dev.Controllers
 
         //        var details = JObject.Parse(response.Content);
 
-        //        //Console.WriteLine("Aaadhar Address : " + details["data"]["OCRdata"]["Address"]);
-        //    }
+        //        return details["data"]["OCRdata"]["Address"].ToString();
+            
         //}
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2)
+        public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2 , HttpPostedFileBase files3)
         {
             var  pannumber = "";
             var  panfirstname = "";
@@ -274,7 +275,7 @@ namespace NBFC_App___dev.Controllers
             var  aadharfirstname = "";
             var  aadharlastname = "";
             var  aadharmiddlename = "";
-            //var aadharaddress = "";
+           // var aadharaddress = "";
             var aadharbirthdate = "";
             var aadharnumber = "";
 
@@ -284,6 +285,7 @@ namespace NBFC_App___dev.Controllers
             //var path_AadharBack = "";
             int f1 = 0;
             int f2 = 0;
+            //int f3 = 0;
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -309,12 +311,21 @@ namespace NBFC_App___dev.Controllers
                 if (files2 != null && files2.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(files2.FileName);
-                    var extension = Path.GetExtension(files.FileName);
+                    var extension = Path.GetExtension(files2.FileName);
                     path_AadharFront = "D:\\Uploads\\AadharFront\\" + email + extension;
                     
                     files2.SaveAs(path_AadharFront);
                     f2 = 1;
                 }
+                //if (files3 != null && files3.ContentLength > 0)
+                //{
+                //    var fileName = Path.GetFileName(files3.FileName);
+                //    var extension = Path.GetExtension(files3.FileName);
+                //    path_AadharBack = "D:\\Uploads\\AadharBack\\" + email + extension;
+
+                //    files3.SaveAs(path_AadharBack);
+                //    f3 = 1;
+                //}
 
             }
             sqlCnctn.Close();
@@ -378,7 +389,7 @@ namespace NBFC_App___dev.Controllers
             var Aadhar_birthdate = Convert.ToDateTime(strArray_Aadhar[1], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
             aadharbirthdate = Aadhar_birthdate.ToString("yyyy-MM-dd");
 
-
+            //aadharaddress = OCR_AadharBack(path_AadharBack);
 
 
             sqlCnctn.Open();
@@ -390,11 +401,11 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string uploadedval = row["uploadedvalue"].ToString();
-                if(uploadedval == "false" && f1 == 1 && f2 == 1)
+                if(uploadedval == "false" && f1 == 1 && f2 == 1 )
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     SqlCommand cmd;
-                    string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                    string sql = "Update UserInfo set uploadedvalue = 'true',filepathAadharFront = '" + path_AadharFront + "',filepathPAN = '" + path_PAN + "',aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                     cmd = new SqlCommand(sql, sqlCnctn);
                     adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
 
@@ -465,7 +476,10 @@ namespace NBFC_App___dev.Controllers
                 string aadharaddress = row["aadharaddress"].ToString();
                 string aadharbirthdate = row["aadharbirthdate"].ToString();
                 string birthdate = row["birthdate"].ToString();
-
+                string filepathPAN = row["filepathPAN"].ToString();
+                string filepathAadharFront = row["filepathAadharFront"].ToString();
+                string CorrectfilepathPAN = filepathPAN.Replace(@"\", @"\\");
+                string CorrectfilepathAadharFront = filepathAadharFront.Replace(@"\", @"\\");
                 // Api hit for step-2 s
 
                 string bpmcsrf = "";
@@ -511,7 +525,7 @@ namespace NBFC_App___dev.Controllers
                 request2.AddCookie("UserName", username);
                 request2.AddHeader("Content-Type", "application/json");
                // request2.AddHeader("Cookie", "BPMSESSIONID=51ldz41mtbuqxz1jjg3p4vwp; .ASPXAUTH=3E394F2748EFE7521FBE7F573EEC4CF7F4A8628E003960313141E2E503827EAB43C274FE658DF00F4734F66C5FC02B898EC7AA673C8E35C11BC37314EB02857CE3F09B65FECCB55F49DAC2F653BC7074E5FB2920831755CAFD58AEA3724B490D9FA19FE53419DAC6B4F9CC7ACCCC8D2F0C2446E9B50E3341EA01F28E9EDA821F758641FAA2AE4F1BFD5EB622C86837705B738802BA58A6326A1C02C14D94BBCB795085A1594FA0F8BD09997D5A6E28354F19E5A2D4F70EEB177C87656ADAB50CEE061F3C747DB70E9887C6899F63C98885FCAA990C9600E21A8A9C5217E227CCF95380B098CA43B690F126CE7DC266B6D036ECB6557418135B19F2AED8991589A7A15C49046D6C4C946D1C7718DA2144AC4F82246ED68E047D445D90C0AFA5DB62D8E6989B4FEC2FBA361992D29C665507E5A8DAF5E0A3C86B65A216AA32B7CF391D8B99AE5ED52A9632AF5E80924E5F0022396DE5AF7A27ECFDD2A3CF887613B6CDC919; BPMCSRF=RlMlsgX2n8C9JRjK1owIOu; BPMLOADER=zby4bc3aw2qebkrpakmcpunu; UserName=83|117|112|101|114|118|105|115|111|114");
-                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);
+                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadharFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);
                 IRestResponse response2 = client2.Execute(request2);
                 
 

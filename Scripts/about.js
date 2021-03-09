@@ -127,9 +127,16 @@ $("#save").click(function () {
 });
 
 $("#apply").click(function () {
-    if ($('#coapplicantrelationship_select').val() == '-1' || $('#bankname_select').val() == '-1' ) {
+    if ($('#coapplicantrelationship_select').val() == '-1' || $('#bankname_select').val() == '-1') {
         alert("Please fill in all the Drop down columns!");
         return false;
     }
 
-})
+});
+
+//$("#continue").click(function () {
+//    $("#save").click();
+//    return true;
+
+//})
+
