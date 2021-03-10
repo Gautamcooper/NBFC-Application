@@ -140,10 +140,7 @@ namespace NBFC_App___dev
             if (way == "login")
             {
                 System.Threading.Thread.Sleep(50000);
-
-
-            }
-            
+            }            
             
 
             Response.Redirect("~/Home/About");

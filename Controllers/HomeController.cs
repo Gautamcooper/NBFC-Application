@@ -22,8 +22,38 @@ namespace NBFC_App___dev.Controllers
     {
         public ActionResult Index()
         {
+            List<Loan> l = new List<Loan>
+            {
+                new Loan()
+                {
+                    sno = "1",
+                    loantype = "Type 1",
+                    producttype = "Product 1",
+                    amount = "20000",
+                    status = "Approved"
+                },
+                new Loan()
+                {
+                    sno = "2",
+                    loantype = "Type 2",
+                    producttype = "Product 2",
+                    amount = "250000",
+                    status = "Rejected"
+                },
+                new Loan()
+                {
+                    sno = "3",
+                    loantype = "Type 3",
+                    producttype = "Product 3",
+                    amount = "150000",
+                    status = "Processing"
+                }
+            };
+
+            ViewData["LoanData"] = l;
+
             return View();
-        }
+        }  
 
         public ActionResult About()
         {
