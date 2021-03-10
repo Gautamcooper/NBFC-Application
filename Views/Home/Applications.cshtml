@@ -1,0 +1,42 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "Applications";
+}
+@{
+    var data = ViewBag.Message;
+}
+
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">My Applications</h2>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr style="background: powderblue;">
+                    <th scope="col">S.no</th>
+                    <th scope="col">Agreement Number</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Agreement Status</th>
+                    <th scope="col">Loan Type</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var loan in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                {
+                    <tr class="table_row">
+                        <td>@loan.sno</td>
+                        <td>@loan.loantype</td>
+                        <td>@loan.producttype</td>
+                        <td>@loan.amount</td>
+                        <td>@loan.status</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

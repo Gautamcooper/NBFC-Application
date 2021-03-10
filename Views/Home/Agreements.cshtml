@@ -1,13 +1,13 @@
 ﻿@using NBFC_App___dev.Models;
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Agreements";
 }
 @{
     var data = ViewBag.Message;
 }
 <div>
     <div style="position: relative;">
-        <h2 style="text-align: center;">My Loans</h2>
+        <h2 style="text-align: center;">My Agreements</h2>
     </div>
     <br />
     <div class="container-fluid">
@@ -15,16 +15,18 @@
             <thead>
                 <tr style="background: powderblue;">
                     <th scope="col">S.no</th>
-                    <th scope="col">Loan Type</th>
+                    <th scope="col">Agreement Number</th>
                     <th scope="col">Product Type</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Agreement Status</th>
+                    <th scope="col">Loan Type</th>
+                 
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var loan in (IEnumerable<Loan>)ViewData["LoanData"])
-                  {
+                 @foreach (var loan in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                 {
                      <tr class="table_row">
+                         <td>@loan.sno</td>
                          <td>@loan.loantype</td>
                          <td>@loan.producttype</td>
                          <td>@loan.amount</td>

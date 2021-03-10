@@ -15,16 +15,17 @@ using RestSharp;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Net;
 
 namespace NBFC_App___dev.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Agreements()
         {
-            List<Loan> l = new List<Loan>
+            List<Agreements> l = new List<Agreements>
             {
-                new Loan()
+                new Agreements()
                 {
                     sno = "1",
                     loantype = "Type 1",
@@ -32,7 +33,7 @@ namespace NBFC_App___dev.Controllers
                     amount = "20000",
                     status = "Approved"
                 },
-                new Loan()
+                new Agreements()
                 {
                     sno = "2",
                     loantype = "Type 2",
@@ -40,7 +41,7 @@ namespace NBFC_App___dev.Controllers
                     amount = "250000",
                     status = "Rejected"
                 },
-                new Loan()
+                new Agreements()
                 {
                     sno = "3",
                     loantype = "Type 3",
@@ -50,10 +51,45 @@ namespace NBFC_App___dev.Controllers
                 }
             };
 
-            ViewData["LoanData"] = l;
+            ViewData["AgreementData"] = l;
 
             return View();
-        }  
+        }
+
+        public ActionResult Applications()
+        {
+            List<Applications> l = new List<Applications>
+            {
+                new Applications()
+                {
+                    sno = "1",
+                    loantype = "Type 1",
+                    producttype = "Product 1",
+                    amount = "20000",
+                    status = "Approved"
+                },
+                new Applications()
+                {
+                    sno = "2",
+                    loantype = "Type 2",
+                    producttype = "Product 2",
+                    amount = "250000",
+                    status = "Rejected"
+                },
+                new Applications()
+                {
+                    sno = "3",
+                    loantype = "Type 3",
+                    producttype = "Product 3",
+                    amount = "150000",
+                    status = "Processing"
+                }
+            };
+
+            ViewData["ApplicationData"] = l;
+
+            return View();
+        }
 
         public ActionResult About()
         {
@@ -271,27 +307,29 @@ namespace NBFC_App___dev.Controllers
 
         }
 
-        //public string OCR_AadharBack(string path)
-        //{
-            
-            
+        public string OCR_AadharBack(string path)
+        {
 
-        //        var client = new RestClient("https://accurascan.com/api/v4/ocr");
-        //        client.Timeout = -1;
-        //        var request = new RestRequest(Method.POST);
-        //        request.AddHeader("Api-Key", "1615142527yNEfcvD5u3BTj5IsM8Gk6W4xZ1i9kdMhuSHHMgFv");
-        //    //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
-        //        request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
-        //        request.AddFile("scan_image", path);
-        //        request.AddParameter("country_code", "IND");
-        //        request.AddParameter("card_code", "ADHB");
-        //        IRestResponse response = client.Execute(request);
 
-        //        var details = JObject.Parse(response.Content);
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-        //        return details["data"]["OCRdata"]["Address"].ToString();
-            
-        //}
+            var client = new RestClient("https://accurascan.com/api/v4/ocr");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Api-Key", "1615142527yNEfcvD5u3BTj5IsM8Gk6W4xZ1i9kdMhuSHHMgFv");
+            //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
+            request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
+            request.AddFile("scan_image", path);
+            request.AddParameter("country_code", "IND");
+            request.AddParameter("card_code", "ADHB");
+            IRestResponse response = client.Execute(request);
+
+            var details = JObject.Parse(response.Content);
+
+            return details["data"]["OCRdata"]["Address"].ToString();
+
+        }
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2 , HttpPostedFileBase files3)
         {
@@ -305,17 +343,17 @@ namespace NBFC_App___dev.Controllers
             var  aadharfirstname = "";
             var  aadharlastname = "";
             var  aadharmiddlename = "";
-           // var aadharaddress = "";
+            var aadharaddress = "";
             var aadharbirthdate = "";
             var aadharnumber = "";
 
 
             var path_PAN = "";
             var path_AadharFront = "";
-            //var path_AadharBack = "";
+            var path_AadharBack = "";
             int f1 = 0;
             int f2 = 0;
-            //int f3 = 0;
+            int f3 = 0;
             //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -347,80 +385,89 @@ namespace NBFC_App___dev.Controllers
                     files2.SaveAs(path_AadharFront);
                     f2 = 1;
                 }
-                //if (files3 != null && files3.ContentLength > 0)
-                //{
-                //    var fileName = Path.GetFileName(files3.FileName);
-                //    var extension = Path.GetExtension(files3.FileName);
-                //    path_AadharBack = "D:\\Uploads\\AadharBack\\" + email + extension;
+                if (files3 != null && files3.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(files3.FileName);
+                    var extension = Path.GetExtension(files3.FileName);
+                    path_AadharBack = "D:\\Uploads\\AadharBack\\" + email + extension;
 
-                //    files3.SaveAs(path_AadharBack);
-                //    f3 = 1;
-                //}
+                    files3.SaveAs(path_AadharBack);
+                    f3 = 1;
+                }
 
             }
             sqlCnctn.Close();
-            
-            string pan_details = OCR_PAN(path_PAN);
-            String[] strArray_PAN = pan_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-            String[] strArray_PAN_nameSplit = strArray_PAN[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
 
-            pannumber = strArray_PAN[2];
-
-            if (strArray_PAN_nameSplit.Length == 1)
+            if (files != null && files.ContentLength > 0)
             {
-                panfirstname = strArray_PAN_nameSplit[0];
-                panmiddlename = "";
-                panlastname = "";
+                string pan_details = OCR_PAN(path_PAN);
+                String[] strArray_PAN = pan_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+                String[] strArray_PAN_nameSplit = strArray_PAN[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+                pannumber = strArray_PAN[2];
+
+                if (strArray_PAN_nameSplit.Length == 1)
+                {
+                    panfirstname = strArray_PAN_nameSplit[0];
+                    panmiddlename = "";
+                    panlastname = "";
+                }
+                else if (strArray_PAN_nameSplit.Length == 2)
+                {
+                    panfirstname = strArray_PAN_nameSplit[0];
+                    panmiddlename = "";
+                    panlastname = strArray_PAN_nameSplit[1];
+                }
+                else
+                {
+                    panfirstname = strArray_PAN_nameSplit[0];
+                    panmiddlename = strArray_PAN_nameSplit[1];
+                    panlastname = strArray_PAN_nameSplit[2];
+                };
+
+                panfathername = strArray_PAN[1];
+                var pan_birthdate = Convert.ToDateTime(strArray_PAN[3], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+
+                panbirthdate = pan_birthdate.ToString("yyyy-MM-dd");
+
             }
-            else if (strArray_PAN_nameSplit.Length == 2)
+
+            if (files2 != null && files2.ContentLength > 0)
             {
-                panfirstname = strArray_PAN_nameSplit[0];
-                panmiddlename = "";
-                panlastname = strArray_PAN_nameSplit[1];
+                string AadharFront_details = OCR_AadharFront(path_AadharFront);
+                String[] strArray_Aadhar = AadharFront_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+                String[] strArray_Aadhar_name_split = strArray_Aadhar[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+
+
+                if (strArray_Aadhar_name_split.Length == 1)
+                {
+                    aadharfirstname = strArray_Aadhar_name_split[0];
+                    aadharmiddlename = "";
+                    aadharlastname = "";
+                }
+                else if (strArray_Aadhar_name_split.Length == 2)
+                {
+                    aadharfirstname = strArray_Aadhar_name_split[0];
+                    aadharmiddlename = "";
+                    aadharlastname = strArray_Aadhar_name_split[1];
+                }
+                else
+                {
+                    aadharfirstname = strArray_Aadhar_name_split[0];
+                    aadharmiddlename = strArray_Aadhar_name_split[1];
+                    aadharlastname = strArray_Aadhar_name_split[2];
+                };
+
+                aadharnumber = strArray_Aadhar[2];
+
+                var Aadhar_birthdate = Convert.ToDateTime(strArray_Aadhar[1], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
+                aadharbirthdate = Aadhar_birthdate.ToString("yyyy-MM-dd");
             }
-            else {
-                panfirstname = strArray_PAN_nameSplit[0];
-                panmiddlename = strArray_PAN_nameSplit[1];
-                panlastname = strArray_PAN_nameSplit[2];
-            };
-            
-            panfathername = strArray_PAN[1];
-            var pan_birthdate = Convert.ToDateTime(strArray_PAN[3], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
 
-            panbirthdate = pan_birthdate.ToString("yyyy-MM-dd");
-
-
-            string AadharFront_details = OCR_AadharFront(path_AadharFront);
-            String[] strArray_Aadhar = AadharFront_details.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-            String[] strArray_Aadhar_name_split = strArray_Aadhar[0].Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-
-
-            if (strArray_Aadhar_name_split.Length == 1)
+            if (files3 != null && files3.ContentLength > 0)
             {
-                aadharfirstname = strArray_Aadhar_name_split[0];
-                aadharmiddlename = "";
-                aadharlastname = "";
+                aadharaddress = OCR_AadharBack(path_AadharBack);
             }
-            else if (strArray_Aadhar_name_split.Length == 2)
-            {
-                aadharfirstname = strArray_Aadhar_name_split[0];
-                aadharmiddlename = "";
-                aadharlastname = strArray_Aadhar_name_split[1];
-            }
-            else
-            {
-                aadharfirstname = strArray_Aadhar_name_split[0];
-                aadharmiddlename = strArray_Aadhar_name_split[1];
-                aadharlastname = strArray_Aadhar_name_split[2];
-            };
-
-            aadharnumber = strArray_Aadhar[2];
-
-            var Aadhar_birthdate = Convert.ToDateTime(strArray_Aadhar[1], System.Globalization.CultureInfo.GetCultureInfo("hi-IN").DateTimeFormat);
-            aadharbirthdate = Aadhar_birthdate.ToString("yyyy-MM-dd");
-
-            //aadharaddress = OCR_AadharBack(path_AadharBack);
-
 
             sqlCnctn.Open();
             strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
@@ -444,17 +491,17 @@ namespace NBFC_App___dev.Controllers
                 //}                
                 if (uploadedval == "false")
                 {
-                    if (f1 == 1 && f2 == 1)
+                    if (f1 == 1 && f2 == 1 && f3 == 1)
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'true',aadharaddress = '" + aadharaddress + "', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
                         cmd.Dispose();
                     }
-                    else if (f1 == 1 && f2 == 0)
+                    else if (f1 == 1 && f2 == 0 && f3 == 0)
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
@@ -464,11 +511,21 @@ namespace NBFC_App___dev.Controllers
                         adapter.UpdateCommand.ExecuteNonQuery();
                         cmd.Dispose();
                     }
-                    else if (f1 == 0 && f2 == 1)
+                    else if (f1 == 0 && f2 == 1 && f3 == 0)
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
                         string sql = "Update UserInfo set uploadedvalue = 'false', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                    else if (f1 == 0 && f2 == 0 && f3 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'false', aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -492,6 +549,16 @@ namespace NBFC_App___dev.Controllers
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
                         string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        cmd = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                        adapter.UpdateCommand.ExecuteNonQuery();
+                        cmd.Dispose();
+                    }
+                    if (f3 == 1)
+                    {
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand cmd;
+                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -615,7 +682,7 @@ namespace NBFC_App___dev.Controllers
                 IRestResponse response2 = client2.Execute(request2);
                 
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Agreements");
             }
             else
             {

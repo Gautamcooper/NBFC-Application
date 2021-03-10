@@ -20,12 +20,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("NBFC MVP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("About", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Products", "About", "Home")</li>
+                    <li>@Html.ActionLink("Applications", "About", "Home")</li>
+                    <li>@Html.ActionLink("Agreements", "About", "Home")</li>
+                    <li>@Html.ActionLink("Self-Service", "About", "Home")</li>
+                    <li>@Html.ActionLink("Make Payment", "About", "Home")</li>
+                    <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @*<li>@Html.ActionLink("Apply new Loan", "New_Loan","Home")</li>*@
                     <li>@Html.ActionLink("Logout", "Logout", "Home")</li>

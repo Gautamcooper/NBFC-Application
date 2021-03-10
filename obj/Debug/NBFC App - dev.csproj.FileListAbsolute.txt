@@ -111,3 +111,4 @@ D:\NBFC\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.
 D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
 D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.dll
 D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.pdb
+D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
