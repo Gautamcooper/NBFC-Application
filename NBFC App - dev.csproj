@@ -199,6 +199,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Agreements.cshtml" />
     <Content Include="Views\Home\Applications.cshtml" />
+    <Content Include="Views\Home\AgreementInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

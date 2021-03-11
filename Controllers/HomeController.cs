@@ -23,39 +23,104 @@ namespace NBFC_App___dev.Controllers
     {
         public ActionResult Agreements()
         {
-            List<Agreements> l = new List<Agreements>
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
             {
-                new Agreements()
+                DataRow row = dt.Rows[0];
+                string pannumber = row["pannumber"].ToString();
+
+                string bpmcsrf = "";
+                string bpmloader = "";
+                string aspxauth = "";
+                string username = "";
+
+
+
+                var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                //Console.WriteLine(response.Content);
+                foreach (var c in response.Cookies)
                 {
-                    sno = "1",
-                    loantype = "Type 1",
-                    producttype = "Product 1",
-                    amount = "20000",
-                    status = "Approved"
-                },
-                new Agreements()
-                {
-                    sno = "2",
-                    loantype = "Type 2",
-                    producttype = "Product 2",
-                    amount = "250000",
-                    status = "Rejected"
-                },
-                new Agreements()
-                {
-                    sno = "3",
-                    loantype = "Type 3",
-                    producttype = "Product 3",
-                    amount = "150000",
-                    status = "Processing"
+                    if (c.Name.ToString() == "BPMCSRF")
+                    {
+                        bpmcsrf = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == "BPMLOADER")
+                    {
+                        bpmloader = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == ".ASPXAUTH")
+                    {
+                        aspxauth = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == "UserName")
+                    {
+                        username = c.Value.ToString();
+                    }
                 }
-            };
 
-            ViewData["AgreementData"] = l;
+                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
 
-            return View();
+                var client2 = new RestClient(url);
+                client2.Timeout = -1;
+                var request2 = new RestRequest(Method.GET);
+                request2.AddCookie(".ASPXAUTH", aspxauth);
+                request2.AddCookie("BPMCSRF", bpmcsrf);
+                request2.AddCookie("BPMLOADER", bpmloader);
+                request2.AddCookie("UserName", username);
+                //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+                IRestResponse response2 = client2.Execute(request2);
+                var ParsedResponse = JObject.Parse(response2.Content);
+
+                List<Agreements> list = new List<Agreements>();
+
+
+                foreach (var v in ParsedResponse["value"])
+                {
+                    Agreements agr = new Agreements()
+                    {
+                        id = v["Id"].ToString(),
+                        status = v["UsrAgreementStatus"]["Name"].ToString(),
+                        number = v["UsrName"].ToString(),
+                        startedon = v["UsrTSValidFrom"].ToString(),
+                        expiredon = v["UsrTSExpiresOn"].ToString(),
+                        product = v["UsrProducts"]["Name"].ToString(),
+                        tenure = v["UsrApprovedTenureInMonths"].ToString() == "0" ? v["UsrApprovedTenureInDays"].ToString() + " Days" : v["UsrApprovedTenureInMonths"].ToString() + " Months"
+                    };
+
+                    list.Add(agr);
+                }
+
+                ViewData["AgreementData"] = list;
+                return View();
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+
+
+
         }
 
+        public ActionResult AgreementInfo(string Id)
+        {
+            return View();
+        
+        }
         public ActionResult Applications()
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];

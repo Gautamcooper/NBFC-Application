@@ -14,24 +14,28 @@
         <table class="table">
             <thead>
                 <tr style="background: powderblue;">
-                    <th scope="col">S.no</th>
                     <th scope="col">Agreement Number</th>
-                    <th scope="col">Product Type</th>
-                    <th scope="col">Agreement Status</th>
-                    <th scope="col">Loan Type</th>
-                 
+                    <th scope="col">Product</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Tenure</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Expiration Date</th>
+                    
+
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var loan in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                 @foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
                  {
-                     <tr class="table_row">
-                         <td>@loan.sno</td>
-                         <td>@loan.loantype</td>
-                         <td>@loan.producttype</td>
-                         <td>@loan.amount</td>
-                         <td>@loan.status</td>
-                     </tr>                    
+                <tr class="table_row">
+                    <td>@Html.ActionLink(@agr.number,"AgreementInfo",new {Id=@agr.id})</td>
+                    <td>@Html.ActionLink(@agr.product, "AgreementInfo", new { Id = @agr.id })</td>
+                    <td>@agr.status</td>
+                    <td>@agr.tenure</td>
+                    <td>@agr.startedon</td>
+                    <td>@agr.expiredon</td>
+
+                </tr>                    
                   }
             </tbody>
         </table>
