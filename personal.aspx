@@ -194,9 +194,34 @@
                                         <asp:ListItem Text="2 Wheeler Purchase" Value = "8e7942d6-4909-48fe-8eb8-6e9ccfa7f48a"></asp:ListItem>
                                     </asp:DropDownList>                                    
                                 </div>                                                                                                                        
-                                <asp:Button ID="Button1" class="next action-button" runat="server" Text="Submit" OnClick="Button1_Click" />
+                                <asp:Button ID="Button1" class="next action-button" runat="server" data-toggle="modal" data-target="#myModal" Text="Submit" OnClick="Button1_Click" />
                             </fieldset>                           
                         </form>
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">               
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Registering...</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div>
+                                        <div style="position: relative;">
+                                            <h4 style="text-align: center;">Please wait while we fetch your details register for the loan</h4>
+                                        </div>
+                                        <br />
+                                        <div class="container-fluid">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="spinner-border" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                   </div>
+                                   </div>                                
+                                </div>
+
+                          </div>
+                    </div>
                     </div>
                 </div>
             </div>
