@@ -8,10 +8,14 @@ namespace NBFC_App___dev.Models
     public class Applications
     {
 
-        public string sno { get; set; }
-        public string loantype { get; set; }
-        public string producttype { get; set; }
-        public string amount { get; set; }
+        public string id { get; set; }
         public string status { get; set; }
+        public string number { get; set; }
+        public string createdOn { get; set; }
+        public string requestedterm { get; set; }
+
+        public string requestedamount { get; set; }
+
+        public string product { get; set; }
     }
 }

@@ -58,37 +58,97 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult Applications()
         {
-            List<Applications> l = new List<Applications>
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
             {
-                new Applications()
+                DataRow row = dt.Rows[0];
+                string pannumber = row["pannumber"].ToString();
+
+                string bpmcsrf = "";
+                string bpmloader = "";
+                string aspxauth = "";
+                string username = "";
+
+
+
+                var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Accept", "application/json");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                //Console.WriteLine(response.Content);
+                foreach (var c in response.Cookies)
                 {
-                    sno = "1",
-                    loantype = "Type 1",
-                    producttype = "Product 1",
-                    amount = "20000",
-                    status = "Approved"
-                },
-                new Applications()
-                {
-                    sno = "2",
-                    loantype = "Type 2",
-                    producttype = "Product 2",
-                    amount = "250000",
-                    status = "Rejected"
-                },
-                new Applications()
-                {
-                    sno = "3",
-                    loantype = "Type 3",
-                    producttype = "Product 3",
-                    amount = "150000",
-                    status = "Processing"
+                    if (c.Name.ToString() == "BPMCSRF")
+                    {
+                        bpmcsrf = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == "BPMLOADER")
+                    {
+                        bpmloader = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == ".ASPXAUTH")
+                    {
+                        aspxauth = c.Value.ToString();
+                    }
+                    else if (c.Name.ToString() == "UserName")
+                    {
+                        username = c.Value.ToString();
+                    }
                 }
-            };
 
-            ViewData["ApplicationData"] = l;
+                string url = string.Format("http://localhost:92/0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name)", pannumber);
 
-            return View();
+                var client2 = new RestClient(url);
+                client2.Timeout = -1;
+                var request2 = new RestRequest(Method.GET);
+                request2.AddCookie(".ASPXAUTH",aspxauth);
+                request2.AddCookie("BPMCSRF", bpmcsrf);
+                request2.AddCookie("BPMLOADER", bpmloader);
+                request2.AddCookie("UserName", username);
+                //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+                IRestResponse response2 = client2.Execute(request2);
+                var ParsedResponse = JObject.Parse(response2.Content);
+
+                List<Applications> list = new List<Applications> () ;
+                
+                
+                foreach (var v in ParsedResponse["value"])
+                {
+                    Applications app = new Applications()
+                    {
+                        id = v["Id"].ToString(),
+                        status = v["UsrApplicationStatus"]["Name"].ToString(),
+                        number = v["UsrName"].ToString(),
+                        createdOn = v["CreatedOn"].ToString(),
+                        requestedamount = v["UsrRequestedAmount"].ToString(),
+                        product = v["UsrRequestedProduct"]["Name"].ToString(),
+                        requestedterm = v["UsrRequestedTermInMonths"].ToString() == "0" ? v["UsrRequestedTermInDays"].ToString()+" Days": v["UsrRequestedTermInMonths"].ToString()+" Months"
+                    };
+
+                    list.Add(app);
+                }
+
+                ViewData["ApplicationData"] = list;
+                return View();
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+            
+
+           
         }
 
         public ActionResult About()

@@ -80,7 +80,7 @@ namespace NBFC_App___dev
             string bpmloader = "";
             string aspxauth = "";
             string username = "";
-            string loanterm = "";
+            
 
 
             var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
@@ -130,8 +130,7 @@ namespace NBFC_App___dev
             sqlCnctn.Open();
             SqlDataAdapter adapter = new SqlDataAdapter();
             SqlCommand cmd;
-            //string sql = "Update UserInfo set step1 = 'true', pannumber = '"+ pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
-            string sql = "Update UserInfo set step1 = 'true', pannumber = '" + pan_number + "' where session = '" + Session["Name"].ToString() + "'";
+            string sql = "Update UserInfo set step1 = 'true', pannumber = '"+ pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
             cmd = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand.ExecuteNonQuery();
@@ -140,11 +139,55 @@ namespace NBFC_App___dev
             string way = Request.Cookies["User"].Value;
             if (way == "login")
             {
-                System.Threading.Thread.Sleep(50000);
-            }            
+                System.Threading.Thread.Sleep(5000);
+                
+               
+                string FetchProcessingResult = String.Format("http://localhost:92/0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", createdRecordId["Id"]);
+                var client3 = new RestClient(FetchProcessingResult);
+                client3.Timeout = -1;
+                var request3 = new RestRequest(Method.GET);
+                request3.AddHeader("Content-Type", "application/json");
+               // request3.AddHeader("BPMCSRF", bpmcsrf);
+                request3.AddCookie(".ASPXAUTH", aspxauth);
+                request3.AddCookie("BPMCSRF", bpmcsrf);
+                request3.AddCookie("BPMLOADER", bpmloader);
+                request3.AddCookie("UserName", username);
+                //request3.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+                IRestResponse response3 = client2.Execute(request3);
+
+
+                var ParsedResponse = JObject.Parse(response3.Content);
+
+
+                if (ParsedResponse["UsrProcessingResultId"].ToString() == "00000000-0000-0000-0000-000000000000")
+                {
+                    
+                    Response.Redirect("~/Home/About");
+                }
+                else
+                {
+
+                    if (ParsedResponse["UsrActiveApplicationId"].ToString() != "00000000-0000-0000-0000-000000000000")
+                    {
+                        //Console.WriteLine(ParsedResponse["UsrProcessingResult"]["Name"]);
+                        //Console.WriteLine(ParsedResponse["UsrActiveApplication"]["UsrName"]);
+                        Response.Redirect("~/Home/Applications");
+                    }
+                    else
+                    {
+                        //Console.WriteLine(ParsedResponse["UsrProcessingResult"]["Name"]);
+                        //Console.WriteLine(ParsedResponse["UsrActiveAgreement"]["UsrName"]);
+                        Response.Redirect("~/Home/Agreements");
+                    }
+                }
+
+            }
+            else {
+                Response.Redirect("~/Home/About");
+            }
             
 
-            Response.Redirect("~/Home/About");
+            
 
 
         }

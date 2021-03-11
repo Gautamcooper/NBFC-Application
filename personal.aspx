@@ -205,12 +205,12 @@
                             <div class="modal-dialog">               
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Registering...</h4>
+                                        <h4 class="modal-title">Loan Registration...</h4>
                                     </div>
                                     <div class="modal-body">
                                     <div>
                                         <div style="position: relative;">
-                                            <h4 style="text-align: center;">Please wait while we fetch your details register for the loan</h4>
+                                            <h4 style="text-align: center;">Hey! Please wait while we are checking your Active Agreements Or Applications on the selected product</h4>
                                         </div>
                                         <br />
                                         <div class="container-fluid">
