@@ -30,9 +30,13 @@
                                 <div class="form-card">                                    
                                     <div><h3 class="title fs-title" id="header">Loan Amount</h3></div>
                                     <div><asp:TextBox ID="TextBox3" class="loanamount" runat="server"></asp:TextBox></div>                                    
-                                        <div class="range">
-                                            <input id="myRange" type="range" class="form-range slider-range" min="2000" max="30000" runat="server" />
-                                        </div>                                    
+                                    <div id="cont">
+                                        <div id="left"><label>2000</label></div>                                        
+                                        <div id="right"><label>30000</label></div>
+                                    </div>    
+                                    <div class="range">
+                                        <input id="myRange" type="range" class="form-range slider-range" min="2000" max="30000" runat="server" />
+                                    </div>                                    
                                     <asp:TextBox ID="TextBox1" placeholder="Mobile No." runat="server" ReadOnly="true"></asp:TextBox>
                                     <asp:TextBox ID="TextBox2" placeholder="Email ID" runat="server" ReadOnly="true"></asp:TextBox> 
                                     <asp:TextBox ID="FullName" placeholder="Full Name" runat="server" ReadOnly="true"></asp:TextBox>

@@ -314,3 +314,13 @@ select.list-dt {
 .dropdowncls:focus {
     outline: none;
 }
+
+#cont{
+    width: 100%;
+}
+#left{
+    float:left;
+}
+#right{
+    float:right;
+}
