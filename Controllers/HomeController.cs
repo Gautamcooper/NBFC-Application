@@ -156,6 +156,59 @@ namespace NBFC_App___dev.Controllers
                 application = ParsedResponse["UsrTSApplication"]["UsrName"].ToString()
             };
 
+            //Displaying Operations on Aggreements
+            string operationurl = string.Format("http://localhost:92/0/odata/UsrOperations?$select=UsrAmount&$filter=UsrAgreement/Id eq {0}&$expand=UsrType($select=Name),UsrCategory($select=Name)", Id);
+            JObject OperationResponse = GET_Object(operationurl);
+
+            List<Operations> Oprlist = new List<Operations>();
+
+
+            foreach (var v in OperationResponse["value"])
+            {
+                Operations oprn = new Operations()
+                {
+                    amount = v["UsrAmount"].ToString(),
+                    type = v["UsrType"]["Name"].ToString(),
+                    category = v["UsrCategory"]["Name"].ToString()
+                };
+
+                Oprlist.Add(oprn);
+            }
+
+            ViewData["OperationMessage"] = Oprlist;
+
+            //Displaying EMI Records on Aggreements
+
+            if (ParsedResponse["UsrLoanType"]["Name"].ToString() == "Long Term Loan")
+            {
+                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
+                JObject emiResponse = GET_Object(emiurl);
+
+                List<EMI_Records> emi_list = new List<EMI_Records>();
+
+
+                foreach (var v in emiResponse["value"])
+                {
+                    EMI_Records emir = new EMI_Records()
+                    {
+                        amount = v["UsrAmount"].ToString(),
+                        duedate= v["UsrDueDate"].ToString(),
+                        startdate = v["UsrStartDate"].ToString(),
+                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "false" ? " " : v["UsrIsLatePaymentFeeApplied"].ToString(),
+                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "false" ? " ": v["UsrIsExtensionFeeApplied"].ToString(),
+                        extensionduedate = v["UsrExtensionDueDate"].ToString(),
+                        emitype = v["UsrEMIType"]["Name"].ToString(),
+                        paymentrecord = v["UsrPaymentGate"]["UsrName"].ToString(),
+                        oldamount = v["UsrOldAmount"].ToString()
+
+                    };
+
+                    emi_list.Add(emir);
+                }
+
+                ViewData["EMIRecordsMessage"] = emi_list;
+
+            }
 
 
             ViewData["Message"] = agrInfo;

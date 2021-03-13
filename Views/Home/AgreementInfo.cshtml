@@ -157,6 +157,66 @@
                         </div>
                     }
                 }
+
+                <details>
+                    <summary>Operations</summary>
+
+                    <table class="table">
+                        <thead>
+                            <tr style="background: powderblue;">
+                                <th scope="col">Amount</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var oprn in (IEnumerable<Operations>)ViewData["OperationMessage"])
+                            {
+                                <tr class="table_row">
+                                    <td>@oprn.amount</td>
+                                    <td>@oprn.type</td>
+                                    <td>@oprn.category</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </details>
+                 @if (@data.loantype == "Long Term Loan")
+                 {
+                    <details>
+                        <summary>EMI Records</summary>
+
+                        <table class="table">
+                            <thead>
+                                <tr style="background: powderblue;">
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Due Date</th>
+                                    <th scope="col">Is Late Payment Applied</th>
+                                    <th scope="col">Is Extension Charge Applied</th>
+                                    <th scope="col">Old Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecordsMessage"])
+                                {
+                                <tr class="table_row">
+                                    <td>@emr.emitype</td>
+                                    <td>@emr.amount</td>
+                                    <td>@emr.startdate</td>
+                                    <td>@emr.duedate</td>
+                                    <td>@emr.islatepaymentfeeapplied</td>
+                                    <td>@emr.isextensionfeeapplied</td>
+                                    <td>@emr.oldamount</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </details>
+                 }
             </div>
         </div>
     </div>
