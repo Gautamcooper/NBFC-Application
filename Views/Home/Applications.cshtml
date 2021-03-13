@@ -28,8 +28,8 @@
                 @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
                 {
                 <tr class="table_row">
-                    <td>@application.number</td>
-                    <td>@application.product</td>
+                    <td>@Html.ActionLink(@application.number,"ApplicationInfo",new {Id=@application.id})</td>
+                    <td>@Html.ActionLink(@application.product, "ApplicationInfo", new { Id = @application.id })</td>
                     <td>@application.status</td>
                     <td>@application.requestedamount</td>
                     <td>@application.requestedterm</td>

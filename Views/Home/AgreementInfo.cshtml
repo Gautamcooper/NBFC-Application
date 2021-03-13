@@ -1,7 +1,163 @@
-﻿
+﻿@using NBFC_App___dev.Models;
 @{
     ViewBag.Title = "AgreementInfo";
 }
 
-<h2>AgreementInfo</h2>
+@{
+    var data = ViewBag.Message;
+}
+
+    <div>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">@data.number</h2>
+        </div>
+        <br />
+        <div class="container-fluid">
+
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Applicant Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="contact" class="form-input" placeholder="First Name" name="contact" value="@data.contact" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Application</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="application" class="form-input" placeholder="First Name" name="application" value="@data.application" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="status" class="form-input" placeholder="Full Name" name="status" value="@data.status" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Loan Type</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="loantype" class="form-input" placeholder="First Name" name="loantype" value="@data.loantype" readonly="readonly" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Started On</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="startedon" class="form-input" placeholder="Email" value="@data.startedon" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Expiration On</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="expiredon" class="form-input" placeholder="Mobile" value="@data.expiredon" readonly="readonly">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Tenure</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="tenure" class="form-input" placeholder="First Name" name="tenure" value="@data.tenure" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Product</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="product" class="form-input" placeholder="First Name" name="CreatedOn" value="@data.product" readonly="readonly" />
+                    </div>
+                </div>
+
+                @if (@data.loantype == "Short Term Loan")
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Debt Amount</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="debtamount" class="form-input" placeholder="First Name" name="debtamount" value="@data.debtamount" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Balance Debt Amount</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Overpayment Amount</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="overpaymentamount" class="form-input" placeholder="First Name" name="contact" value="@data.overpaymentamount" readonly="readonly" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Balance Debt Amount</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
+                        </div>
+                    </div>
+                    if (@data.islatepaymentfeeapplied == "true")
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Is Late Payment Fee Applied</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="islatepaymentfeeapplied" class="form-input" placeholder="First Name" name="islatepaymentfeeapplied" value="@data.islatepaymentfeeapplied" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Old Debt Amount</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="olddebtamount" class="form-input" placeholder="First Name" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
+                            </div>
+                        </div>
+                    }
+                    if (@data.isextensionapplied == "true")
+                    {
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Is Extension Fee Applied</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="isextensionapplied" class="form-input" placeholder="First Name" name="isextensionapplied" value="@data.isextensionapplied" readonly="readonly" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Old Debt Amount</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="olddebtamount" class="form-input" placeholder="First Name" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 

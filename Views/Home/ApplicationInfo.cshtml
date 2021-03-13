@@ -1,0 +1,136 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "ApplicationInfo";
+}
+@{
+    var data = ViewBag.Message;
+    
+}
+
+    <div>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">@data.number</h2>
+        </div>
+        <br />
+        <div class="container-fluid">
+            
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Status</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="Status" class="form-input" placeholder="Full Name" name="Status" value="@data.status" readonly="readonly">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Created On</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="createdOn" class="form-input" placeholder="Email" value="@data.createdOn" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Tenure</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="requestedterm" class="form-input" placeholder="Mobile" value="@data.requestedterm" readonly="readonly">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Requested Amount</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="requestedamount" class="form-input" placeholder="First Name" name="CreatedOn" value="@data.requestedamount" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Product</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="product" class="form-input" placeholder="First Name" name="CreatedOn" value="@data.product" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Co-Applicant</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="coapplicantname" class="form-input" placeholder="First Name" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Approved Term</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="approvedterm" class="form-input" placeholder="First Name" name="approvedterm" value="@data.approvedterm" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Approved Amount</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="approvedamount" class="form-input" placeholder="First Name" name="approvedamount" value="@data.approvedamount" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="contact" class="form-input" placeholder="First Name" name="contact" value="@data.contact" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Occupation</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="occupation" class="form-input" placeholder="First Name" name="occupation" value="@data.occupation" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Occupation</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="reasonforloan" class="form-input" placeholder="First Name" name="reasonforloan" value="@data.reasonforloan" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Bank</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="bankname" class="form-input" placeholder="First Name" name="bankname" value="@data.bankname" readonly="readonly" />
+                    </div>
+                </div>
+
+
+               <details>
+                    @if(@data.status == "Rejected")
+                    {
+                    
+                    <summary>Rejection Reasons</summary>
+                    foreach (var rejectedreason in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
+                    {
+                        <p>@rejectedreason.name</p>
+                     }
+                    
+                    }
+                </details>
+            </div>
+            
+            
+
+               
+        </div>
+    </div>
+

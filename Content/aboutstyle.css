@@ -1,4 +1,5 @@
 ﻿.form-input {
+    background: transparent;
     padding: 0px 8px 4px 8px;
     border: none;
     border-bottom: 1px solid #ccc;
@@ -8,7 +9,7 @@
     width: 100%;
     box-sizing: border-box;
     /*font-family: montserrat;*/
-    color: #2C3E50;
+    color: black;
     font-size: 16px;
     letter-spacing: 1px
 }
@@ -22,3 +23,4 @@
         border-bottom: 2px solid skyblue;
         outline-width: 0
     }
+

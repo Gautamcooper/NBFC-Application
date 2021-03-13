@@ -21,6 +21,64 @@ namespace NBFC_App___dev.Controllers
 {
     public class HomeController : Controller
     {
+        public List<string> Authentication()
+        {
+            string bpmcsrf = "";
+            string bpmloader = "";
+            string aspxauth = "";
+            string username = "";
+            var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            //Console.WriteLine(response.Content);
+            foreach (var c in response.Cookies)
+            {
+                if (c.Name.ToString() == "BPMCSRF")
+                {
+                    bpmcsrf = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == "BPMLOADER")
+                {
+                    bpmloader = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == ".ASPXAUTH")
+                {
+                    aspxauth = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == "UserName")
+                {
+                    username = c.Value.ToString();
+                }
+            }
+
+            List<string> Cookies = new List<string>();
+            Cookies.Add(bpmcsrf);
+            Cookies.Add(bpmloader);
+            Cookies.Add(aspxauth);
+            Cookies.Add(username);
+
+            return Cookies;
+        }
+
+        public JObject GET_Object(string url)
+        {
+            List<string> GetCookies = Authentication();
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddCookie(".ASPXAUTH", GetCookies[2]);
+            request.AddCookie("BPMCSRF", GetCookies[0]);
+            request.AddCookie("BPMLOADER", GetCookies[1]);
+            request.AddCookie("UserName", GetCookies[3]);
+            //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+            IRestResponse response = client.Execute(request);
+            JObject ParsedObject = JObject.Parse(response.Content);
+            return ParsedObject;
+        }
         public ActionResult Agreements()
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
@@ -35,57 +93,14 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
-
-                string bpmcsrf = "";
-                string bpmloader = "";
-                string aspxauth = "";
-                string username = "";
-
-
-
-                var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                //Console.WriteLine(response.Content);
-                foreach (var c in response.Cookies)
-                {
-                    if (c.Name.ToString() == "BPMCSRF")
-                    {
-                        bpmcsrf = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "BPMLOADER")
-                    {
-                        bpmloader = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == ".ASPXAUTH")
-                    {
-                        aspxauth = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "UserName")
-                    {
-                        username = c.Value.ToString();
-                    }
-                }
+                List<string> GetCookies = Authentication();
 
                 string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
 
-                var client2 = new RestClient(url);
-                client2.Timeout = -1;
-                var request2 = new RestRequest(Method.GET);
-                request2.AddCookie(".ASPXAUTH", aspxauth);
-                request2.AddCookie("BPMCSRF", bpmcsrf);
-                request2.AddCookie("BPMLOADER", bpmloader);
-                request2.AddCookie("UserName", username);
-                //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-                IRestResponse response2 = client2.Execute(request2);
-                var ParsedResponse = JObject.Parse(response2.Content);
+                JObject ParsedResponse = GET_Object(url);
 
                 List<Agreements> list = new List<Agreements>();
-
+                
 
                 foreach (var v in ParsedResponse["value"])
                 {
@@ -118,9 +133,38 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult AgreementInfo(string Id)
         {
+            string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=Id,UsrName,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount,UsrIsLatePaymentFeeApplied,UsrOldDebtAmount,UsrIsExtensionApplied&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrTSApplication($select=UsrName),UsrContact($select=Name),UsrLoanType($select=Name)", Id);
+
+            JObject ParsedResponse = GET_Object(url);
+            AgreementInfo agrInfo = new AgreementInfo()
+            {
+                id = ParsedResponse["Id"].ToString(),
+                status = ParsedResponse["UsrAgreementStatus"]["Name"].ToString(),
+                number = ParsedResponse["UsrName"].ToString(),
+                startedon = ParsedResponse["UsrTSValidFrom"].ToString(),
+                expiredon = ParsedResponse["UsrTSExpiresOn"].ToString(),
+                product = ParsedResponse["UsrProducts"]["Name"].ToString(),
+                tenure = ParsedResponse["UsrApprovedTenureInMonths"].ToString() == "0" ? ParsedResponse["UsrApprovedTenureInDays"].ToString() + " Days" : ParsedResponse["UsrApprovedTenureInMonths"].ToString() + " Months",
+                contact = ParsedResponse["UsrContact"]["Name"].ToString(),
+                debtamount = ParsedResponse["UsrTotalDebtAmount"].ToString(),
+                loantype = ParsedResponse["UsrLoanType"]["Name"].ToString(),
+                balanceddebtamount = ParsedResponse["UsrBalancedDebtAmount"].ToString(),
+                overpaymentamount = ParsedResponse["UsrOverpaymentDebtAmount"].ToString(),
+                isextensionapplied = ParsedResponse["UsrIsExtensionApplied"].ToString(),
+                islatepaymentfeeapplied = ParsedResponse["UsrIsLatePaymentFeeApplied"].ToString(),
+                olddebtamount = ParsedResponse["UsrOldDebtAmount"].ToString(),
+                application = ParsedResponse["UsrTSApplication"]["UsrName"].ToString()
+            };
+
+
+
+            ViewData["Message"] = agrInfo;
             return View();
+
+            
         
         }
+
         public ActionResult Applications()
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
@@ -135,54 +179,12 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
-
-                string bpmcsrf = "";
-                string bpmloader = "";
-                string aspxauth = "";
-                string username = "";
-
-
-
-                var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                //Console.WriteLine(response.Content);
-                foreach (var c in response.Cookies)
-                {
-                    if (c.Name.ToString() == "BPMCSRF")
-                    {
-                        bpmcsrf = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "BPMLOADER")
-                    {
-                        bpmloader = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == ".ASPXAUTH")
-                    {
-                        aspxauth = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "UserName")
-                    {
-                        username = c.Value.ToString();
-                    }
-                }
+                List<string> GetCookies = Authentication();
 
                 string url = string.Format("http://localhost:92/0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name)", pannumber);
 
-                var client2 = new RestClient(url);
-                client2.Timeout = -1;
-                var request2 = new RestRequest(Method.GET);
-                request2.AddCookie(".ASPXAUTH",aspxauth);
-                request2.AddCookie("BPMCSRF", bpmcsrf);
-                request2.AddCookie("BPMLOADER", bpmloader);
-                request2.AddCookie("UserName", username);
-                //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-                IRestResponse response2 = client2.Execute(request2);
-                var ParsedResponse = JObject.Parse(response2.Content);
+                JObject ParsedResponse = GET_Object(url);
+               
 
                 List<Applications> list = new List<Applications> () ;
                 
@@ -214,6 +216,62 @@ namespace NBFC_App___dev.Controllers
             
 
            
+        }
+        public ActionResult ApplicationInfo(string Id)
+        {
+
+            List<string> GetCookies = new List<string>();
+            string url = string.Format("http://localhost:92/0/odata/UsrApplications({0})?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths,UsrCoApplicantName,UsrApprovedTermInMonths,UsrApprovedTermInDays,UsrApprovedAmount,UsrAccountNumber&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrContact($select=Name),UsrIndustryType($select=Name),UsrReasonForLoan($select=Name),UsrBankName($select=Name)",Id);
+
+            JObject ParsedResponse = GET_Object(url);
+
+
+
+            ApplicationInfo appInfo = new ApplicationInfo()
+            {
+                id = ParsedResponse["Id"].ToString(),
+                status = ParsedResponse["UsrApplicationStatus"]["Name"].ToString(),
+                number = ParsedResponse["UsrName"].ToString(),
+                createdOn = ParsedResponse["CreatedOn"].ToString(),
+                requestedamount = ParsedResponse["UsrRequestedAmount"].ToString(),
+                approvedamount = ParsedResponse["UsrApprovedAmount"].ToString(),
+                accountnumber = ParsedResponse["UsrAccountNumber"].ToString(),
+                contact = ParsedResponse["UsrContact"]["Name"].ToString(),
+                occupation = ParsedResponse["UsrIndustryType"]["Name"].ToString(),
+                product = ParsedResponse["UsrRequestedProduct"]["Name"].ToString(),
+                reasonforloan = ParsedResponse["UsrReasonForLoan"]["Name"].ToString(),
+                bankname = ParsedResponse["UsrBankName"]["Name"].ToString(),
+                coapplicantname = ParsedResponse["UsrCoApplicantName"].ToString(),
+                approvedterm = ParsedResponse["UsrApprovedTermInMonths"].ToString() == "0" ? ParsedResponse["UsrApprovedTermInDays"].ToString() + " Days" : ParsedResponse["UsrApprovedTermInMonths"].ToString() + " Months",
+                requestedterm = ParsedResponse["UsrRequestedTermInMonths"].ToString() == "0" ? ParsedResponse["UsrRequestedTermInDays"].ToString() + " Days" : ParsedResponse["UsrRequestedTermInMonths"].ToString() + " Months",
+            };
+
+
+            if (ParsedResponse["UsrApplicationStatus"]["Name"].ToString() == "Rejected")
+            {
+                string rejectionreasonurl = string.Format("http://localhost:92/0/odata/UsrApplicationRejectionReasonRecords?$select=UsrRejectionReasonId&$filter=UsrApplication/Id eq {0}&$expand=UsrRejectionReason($select=Name)", Id);
+                JObject RejectionResponse = GET_Object(rejectionreasonurl);
+
+                List<RejectionReasonsDetail> list = new List<RejectionReasonsDetail>();
+
+
+                foreach (var v in RejectionResponse["value"])
+                {
+                    RejectionReasonsDetail rrdetail = new RejectionReasonsDetail()
+                    {
+                        id = v["UsrRejectionReasonId"].ToString(),
+                        name = v["UsrRejectionReason"]["Name"].ToString(),
+                    };
+
+                    list.Add(rrdetail);
+                }
+
+                ViewData["RejectionMessage"] = list;
+            }
+
+            ViewData["Message"] = appInfo;
+            return View();
+
         }
 
         public ActionResult About()
@@ -302,8 +360,6 @@ namespace NBFC_App___dev.Controllers
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
@@ -603,17 +659,6 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string uploadedval = row["uploadedvalue"].ToString();
-                //if(uploadedval == "false" && f1 == 1 && f2 == 1 )
-                //{
-                //    SqlDataAdapter adapter = new SqlDataAdapter();
-                //    SqlCommand cmd;
-                //    string sql = "Update UserInfo set uploadedvalue = 'true',filepathAadharFront = '" + path_AadharFront + "',filepathPAN = '" + path_PAN + "',aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
-                //    cmd = new SqlCommand(sql, sqlCnctn);
-                //    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-
-                //    adapter.UpdateCommand.ExecuteNonQuery();
-                //    cmd.Dispose();
-                //}                
                 if (uploadedval == "false")
                 {
                     if (f1 == 1 && f2 == 1 && f3 == 1)
@@ -760,47 +805,16 @@ namespace NBFC_App___dev.Controllers
                 string CorrectfilepathAadharFront = filepathAadharFront.Replace(@"\", @"\\");
                 // Api hit for step-2 s
 
-                string bpmcsrf = "";
-                string bpmloader = "";
-                string aspxauth = "";
-                string username = "";
-                var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                
-                foreach (var c in response.Cookies)
-                {
-                    if (c.Name.ToString() == "BPMCSRF")
-                    {
-                        bpmcsrf = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "BPMLOADER")
-                    {
-                        bpmloader = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == ".ASPXAUTH")
-                    {
-                        aspxauth = c.Value.ToString();
-                    }
-                    else if (c.Name.ToString() == "UserName")
-                    {
-                        username = c.Value.ToString();
-                    }
-                }
+                List<string> GetCookies = new List<string>(); 
 
                 string url = string.Format("http://localhost:92/0/odata/UsrApplicationGate({0})", applicationgateId);
                 var client2 = new RestClient(url);
                 client2.Timeout = -1;
                 var request2 = new RestRequest(Method.PATCH);
-                request2.AddHeader("BPMCSRF", bpmcsrf);
-                request2.AddCookie(".ASPXAUTH", aspxauth);
-                request2.AddCookie("BPMCSRF", bpmcsrf);
-                request2.AddCookie("BPMLOADER", bpmloader);
-                request2.AddCookie("UserName", username);
+                request2.AddCookie(".ASPXAUTH", GetCookies[2]);
+                request2.AddCookie("BPMCSRF", GetCookies[0]);
+                request2.AddCookie("BPMLOADER", GetCookies[1]);
+                request2.AddCookie("UserName", GetCookies[3]);
                 request2.AddHeader("Content-Type", "application/json");
                // request2.AddHeader("Cookie", "BPMSESSIONID=51ldz41mtbuqxz1jjg3p4vwp; .ASPXAUTH=3E394F2748EFE7521FBE7F573EEC4CF7F4A8628E003960313141E2E503827EAB43C274FE658DF00F4734F66C5FC02B898EC7AA673C8E35C11BC37314EB02857CE3F09B65FECCB55F49DAC2F653BC7074E5FB2920831755CAFD58AEA3724B490D9FA19FE53419DAC6B4F9CC7ACCCC8D2F0C2446E9B50E3341EA01F28E9EDA821F758641FAA2AE4F1BFD5EB622C86837705B738802BA58A6326A1C02C14D94BBCB795085A1594FA0F8BD09997D5A6E28354F19E5A2D4F70EEB177C87656ADAB50CEE061F3C747DB70E9887C6899F63C98885FCAA990C9600E21A8A9C5217E227CCF95380B098CA43B690F126CE7DC266B6D036ECB6557418135B19F2AED8991589A7A15C49046D6C4C946D1C7718DA2144AC4F82246ED68E047D445D90C0AFA5DB62D8E6989B4FEC2FBA361992D29C665507E5A8DAF5E0A3C86B65A216AA32B7CF391D8B99AE5ED52A9632AF5E80924E5F0022396DE5AF7A27ECFDD2A3CF887613B6CDC919; BPMCSRF=RlMlsgX2n8C9JRjK1owIOu; BPMLOADER=zby4bc3aw2qebkrpakmcpunu; UserName=83|117|112|101|114|118|105|115|111|114");
                 request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadharFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);

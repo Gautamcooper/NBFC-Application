@@ -7,10 +7,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/aboutstyle.css" rel="stylesheet" />
-    <link href="~/Content/index.css" rel="stylesheet" />
+    
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
-<body>
+<body class="bodyclass">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -40,7 +40,7 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        
         <!----<footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>-->
