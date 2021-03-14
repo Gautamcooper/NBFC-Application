@@ -1,0 +1,39 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "ProductsInfo";
+}
+
+@{
+    var data = ViewBag.Message;
+}
+
+   <div>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">Product Parameters</h2>
+        </div>
+        <br />
+        <div class="container-fluid">
+            <table class="table">
+                <thead>
+                    <tr style="background: powderblue;">
+                        <th scope="col">Paramter</th>
+                        <th scope="col">Rate (%)</th>
+                        <th scope="col">Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prdinfo in (IEnumerable<ProductsInfo>)ViewData["ProductsInfoData"])
+                    {
+                    <tr class="table_row">
+                        <td>@prdinfo.parameter</td>
+                        <td>@prdinfo.rate</td>
+                        <td>@prdinfo.days</td>
+
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+

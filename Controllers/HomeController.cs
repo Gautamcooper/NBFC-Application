@@ -74,10 +74,54 @@ namespace NBFC_App___dev.Controllers
             request.AddCookie("BPMCSRF", GetCookies[0]);
             request.AddCookie("BPMLOADER", GetCookies[1]);
             request.AddCookie("UserName", GetCookies[3]);
-            //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+
             IRestResponse response = client.Execute(request);
             JObject ParsedObject = JObject.Parse(response.Content);
             return ParsedObject;
+        }
+
+        public ActionResult Products()
+        {
+            string url = "http://localhost:92/0/odata/UsrProducts?$select=Id,Name,UsrNotes&$expand=UsrProductType($select=Name)";
+
+            JObject ParsedResponse = GET_Object(url);
+            List<Products> product_list = new List<Products>();
+            foreach (var v in ParsedResponse["value"])
+            {
+                Products prd = new Products()
+                {
+                    id = v["Id"].ToString(),
+                    name = v["Name"].ToString(),
+                    type = v["UsrProductType"]["Name"].ToString()
+                };
+
+                product_list.Add(prd);
+            }
+
+            ViewData["ProductsData"] = product_list;
+            return View();
+        }
+
+        public ActionResult ProductsInfo(string Id)
+        {
+            string url = string.Format("http://localhost:92/0/odata/UsrSpecificationOfProducts?$select=UsrValueDecimal,UsrValueInteger&$expand=UsrParameter($select=Name)&$filter=UsrProducts/Id eq {0}",Id);
+
+            JObject ParsedResponse = GET_Object(url);
+            List<ProductsInfo> productinfo_list = new List<ProductsInfo>();
+            foreach (var v in ParsedResponse["value"])
+            {
+                ProductsInfo prdinfo = new ProductsInfo()
+                {
+                    parameter= v["UsrParameter"]["Name"].ToString(),
+                    rate = v["UsrValueDecimal"].ToString(),
+                    days = v["UsrValueInteger"].ToString()
+                };
+
+                productinfo_list.Add(prdinfo);
+            }
+
+            ViewData["ProductsInfoData"] = productinfo_list;
+            return View();
         }
         public ActionResult Agreements()
         {
