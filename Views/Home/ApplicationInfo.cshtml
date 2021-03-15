@@ -114,18 +114,30 @@
                 </div>
 
 
-               <details>
-                    @if(@data.status == "Rejected")
-                    {
-                    
-                    <summary>Rejection Reasons</summary>
-                    foreach (var rejectedreason in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
-                    {
-                        <p>@rejectedreason.name</p>
-                     }
-                    
-                    }
-                </details>
+                @if (@data.status == "Rejected")
+                {
+                    <details>
+                        <summary>Rejection Reasons</summary>
+
+                        <table class="table">
+                            <thead>
+                                <tr style="background: powderblue;">
+                                    <th scope="col">Name</th>
+                                     </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var rejrsn in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
+                                {
+                                    <tr class="table_row">
+                                        <td>@rejrsn.name</td>
+                                        
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </details>
+                }
             </div>
             
             

@@ -210,7 +210,7 @@
                                     <div class="modal-body">
                                     <div>
                                         <div style="position: relative;">
-                                            <h4 style="text-align: center;">Hey! Please wait while we are checking your Active Agreements Or Applications on the selected product</h4>
+                                            <h4 style="text-align: center;">Hey! Please wait while we are Processing your request</h4>
                                         </div>
                                         <br />
                                         <div class="container-fluid">
