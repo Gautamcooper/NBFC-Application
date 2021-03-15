@@ -224,10 +224,10 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                            <div class="col-md-6">
-                                                <input type="file" class="form-input" name="files3" />
+                                                <div class="col-md-6">
+                                                    <input type="file" class="form-input" name="files3" />
+                                                </div>
                                             </div>
-                                        </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <input class="btn btn-primary" type="submit" value="Upload" />
@@ -245,7 +245,7 @@
                 </div>
 
             </div>
-        </div>        
+        </div>
         <div class="modal fade" id="step2-modal" role="dialog">
             <div class="modal-dialog">
 
@@ -320,7 +320,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <input id="apply" class="btn btn-primary" type="submit" value="Apply" required />
+                                                    <input id="apply" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#waitModal" value="Apply" />
                                                 </div>
                                             </div>
                                         </div>
@@ -331,6 +331,31 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="waitModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Registering...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div style="position: relative;">
+                                <h4 style="text-align: center;">Hey! Please wait, we are registering your final step</h4>
+                            </div>
+                            <br />
+                            <div class="container-fluid">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

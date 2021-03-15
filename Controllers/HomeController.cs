@@ -762,7 +762,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'true',aadharaddress = '" + aadharaddress + "', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'true',aadharaddress = '" + aadharaddress + "', filepathAadharBack = '" + path_AadharBack + "',filepathAadharFront = '" + path_AadharFront + "',filepathPAN = '" + path_PAN + "', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -772,7 +772,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'false',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'false',pannumber = '" + pannumber + "',filepathPAN = '" + path_PAN + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -782,7 +782,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'false', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'false', aadharnumber = '" + aadharnumber + "',filepathAadharFront = '" + path_AadharFront + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -792,7 +792,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'false', aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'false', filepathAadharBack = '" + path_AadharBack + "',aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -805,7 +805,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'true',pannumber = '" + pannumber + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'true',pannumber = '" + pannumber + "',filepathPAN = '" + path_PAN + "', panbirthdate = '" + panbirthdate + "', panfathername = '" + panfathername + "', panlastname = '" + panlastname + "', panmiddlename = '" + panmiddlename + "', panfirstname = '" + panfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -815,7 +815,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharnumber = '" + aadharnumber + "',filepathAadharFront = '" + path_AadharFront + "',aadharbirthdate = '" + aadharbirthdate + "',aadharmiddlename = '" + aadharmiddlename + "',aadharlastname = '" + aadharlastname + "',aadharfirstname = '" + aadharfirstname + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -825,7 +825,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         SqlDataAdapter adapter = new SqlDataAdapter();
                         SqlCommand cmd;
-                        string sql = "Update UserInfo set uploadedvalue = 'true', aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
+                        string sql = "Update UserInfo set uploadedvalue = 'true', filepathAadharBack = '" + path_AadharBack + "',aadharaddress = '" + aadharaddress + "' where session = '" + Session["Name"].ToString() + "'";
                         cmd = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                         adapter.UpdateCommand.ExecuteNonQuery();
@@ -898,11 +898,13 @@ namespace NBFC_App___dev.Controllers
                 string birthdate = row["birthdate"].ToString();
                 string filepathPAN = row["filepathPAN"].ToString();
                 string filepathAadharFront = row["filepathAadharFront"].ToString();
+                string filepathAadharBack = row["filepathAadharBack"].ToString();
                 string CorrectfilepathPAN = filepathPAN.Replace(@"\", @"\\");
                 string CorrectfilepathAadharFront = filepathAadharFront.Replace(@"\", @"\\");
+                string CorrectfilepathAadharBack = filepathAadharBack.Replace(@"\", @"\\");
                 // Api hit for step-2 s
 
-                List<string> GetCookies = new List<string>(); 
+                List<string> GetCookies = Authentication();
 
                 string url = string.Format("http://localhost:92/0/odata/UsrApplicationGate({0})", applicationgateId);
                 var client2 = new RestClient(url);
@@ -913,10 +915,12 @@ namespace NBFC_App___dev.Controllers
                 request2.AddCookie("BPMLOADER", GetCookies[1]);
                 request2.AddCookie("UserName", GetCookies[3]);
                 request2.AddHeader("Content-Type", "application/json");
-               // request2.AddHeader("Cookie", "BPMSESSIONID=51ldz41mtbuqxz1jjg3p4vwp; .ASPXAUTH=3E394F2748EFE7521FBE7F573EEC4CF7F4A8628E003960313141E2E503827EAB43C274FE658DF00F4734F66C5FC02B898EC7AA673C8E35C11BC37314EB02857CE3F09B65FECCB55F49DAC2F653BC7074E5FB2920831755CAFD58AEA3724B490D9FA19FE53419DAC6B4F9CC7ACCCC8D2F0C2446E9B50E3341EA01F28E9EDA821F758641FAA2AE4F1BFD5EB622C86837705B738802BA58A6326A1C02C14D94BBCB795085A1594FA0F8BD09997D5A6E28354F19E5A2D4F70EEB177C87656ADAB50CEE061F3C747DB70E9887C6899F63C98885FCAA990C9600E21A8A9C5217E227CCF95380B098CA43B690F126CE7DC266B6D036ECB6557418135B19F2AED8991589A7A15C49046D6C4C946D1C7718DA2144AC4F82246ED68E047D445D90C0AFA5DB62D8E6989B4FEC2FBA361992D29C665507E5A8DAF5E0A3C86B65A216AA32B7CF391D8B99AE5ED52A9632AF5E80924E5F0022396DE5AF7A27ECFDD2A3CF887613B6CDC919; BPMCSRF=RlMlsgX2n8C9JRjK1owIOu; BPMLOADER=zby4bc3aw2qebkrpakmcpunu; UserName=83|117|112|101|114|118|105|115|111|114");
-                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadharFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);
+                request2.AddHeader("BPMCSRF", GetCookies[0]);
+                // request2.AddHeader("Cookie", "BPMSESSIONID=51ldz41mtbuqxz1jjg3p4vwp; .ASPXAUTH=3E394F2748EFE7521FBE7F573EEC4CF7F4A8628E003960313141E2E503827EAB43C274FE658DF00F4734F66C5FC02B898EC7AA673C8E35C11BC37314EB02857CE3F09B65FECCB55F49DAC2F653BC7074E5FB2920831755CAFD58AEA3724B490D9FA19FE53419DAC6B4F9CC7ACCCC8D2F0C2446E9B50E3341EA01F28E9EDA821F758641FAA2AE4F1BFD5EB622C86837705B738802BA58A6326A1C02C14D94BBCB795085A1594FA0F8BD09997D5A6E28354F19E5A2D4F70EEB177C87656ADAB50CEE061F3C747DB70E9887C6899F63C98885FCAA990C9600E21A8A9C5217E227CCF95380B098CA43B690F126CE7DC266B6D036ECB6557418135B19F2AED8991589A7A15C49046D6C4C946D1C7718DA2144AC4F82246ED68E047D445D90C0AFA5DB62D8E6989B4FEC2FBA361992D29C665507E5A8DAF5E0A3C86B65A216AA32B7CF391D8B99AE5ED52A9632AF5E80924E5F0022396DE5AF7A27ECFDD2A3CF887613B6CDC919; BPMCSRF=RlMlsgX2n8C9JRjK1owIOu; BPMLOADER=zby4bc3aw2qebkrpakmcpunu; UserName=83|117|112|101|114|118|105|115|111|114");
+                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadharBack\": \"" + CorrectfilepathAadharBack + "\",\r\n    \"UsrFilePathForAadharFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);
                 IRestResponse response2 = client2.Execute(request2);
-                
+
+                System.Threading.Thread.Sleep(5000);
 
                 return RedirectToAction("Agreements");
             }
