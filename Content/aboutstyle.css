@@ -24,3 +24,30 @@
         outline-width: 0
     }
 
+.card_detail {
+    background-color: powderblue;
+    background-color: powderblue;
+    padding-left: 5%;
+    padding-bottom: 5%;
+    margin-bottom: 3%;
+    border-radius: 8px;
+    padding-top: 1.5%;
+    width: 140%;
+}
+@media screen and (min-width: 0px) and (max-width: 500px) {
+    .card_view {
+        display: block;
+    }
+    .table_view{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 501px){
+    .table_view {
+        display: block;
+    }
+    .card_view {
+        display: none;
+    }
+}

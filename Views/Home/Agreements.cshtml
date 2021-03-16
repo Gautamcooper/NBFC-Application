@@ -10,7 +10,7 @@
         <h2 style="text-align: center;">My Agreements</h2>
     </div>
     <br />
-    <div class="container-fluid">
+    <div class="container-fluid table_view">
         <table class="table">
             <thead>
                 <tr style="background: powderblue;">
@@ -39,5 +39,33 @@
                   }
             </tbody>
         </table>
+    </div>
+    <div class="card_view container-fluid">
+        @foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+        {
+            <div class="card card_detail">
+                <div class="card-header"><h3>@agr.number</h3></div><br />
+                <div class="card-body">
+                    <h4 class="card-title"><b>Status: </b>@agr.status</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><b>Tenure: </b>@agr.tenure</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text"><b>Start Date: </b>@agr.startedon</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><b>Product: </b>@agr.product</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text"><b>Expiration Date: </b>@agr.expiredon</p>
+                        </div>
+                    </div>
+                    @Html.ActionLink("Select", "ApplicationInfo", new { Id = @agr.id }, new { @class = "btn btn-primary" });
+                </div>
+            </div>
+        }
     </div>
 </div>

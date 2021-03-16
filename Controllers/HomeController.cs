@@ -70,6 +70,7 @@ namespace NBFC_App___dev.Controllers
             var client = new RestClient(url);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
+            request.AddHeader("BPMCSRF", GetCookies[0]);
             request.AddCookie(".ASPXAUTH", GetCookies[2]);
             request.AddCookie("BPMCSRF", GetCookies[0]);
             request.AddCookie("BPMLOADER", GetCookies[1]);
