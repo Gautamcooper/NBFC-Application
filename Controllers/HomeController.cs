@@ -958,8 +958,7 @@ namespace NBFC_App___dev.Controllers
                     };
 
                     list.Add(agr);
-                }
-
+                }                
                 ViewData["AgreementData"] = list;
                 return View();
             }
@@ -973,8 +972,17 @@ namespace NBFC_App___dev.Controllers
         [HttpPost]
         public ActionResult Fetch(Payment p)
         {
-            string agrnumber = p.agrnumber;
-            //string agrloantype = p.loantype;
+            string agrid = p.id;
+            string agrloantype = p.agrloantype;
+            
+            if(agrloantype == "Long Term Loan")
+            {
+                Console.WriteLine("Long Term Loan");
+            }
+            else if(agrloantype == "Short Term Loan")
+            {
+                Console.WriteLine("Short Term Loan");
+            }           
             return View();
         }
 

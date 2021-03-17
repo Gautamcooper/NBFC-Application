@@ -14,14 +14,16 @@
                     <div class="col-md-6">
                         <select id="agreement_select" class="form-input" required>
                             <option value="-1">Select Your Agreement </option>
-                            @foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                            @if (ViewData["AgreementData"] != null)
                             {
-                                <option value="@agr.id,@agr.loantype">@agr.number</option>
+                                foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                                {
+                                    <option value="@agr.id,@agr.loantype">@agr.number</option>
+                                }
                             }
-                            
                         </select>
-                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="agrnumber" />
-                        <input  id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
+                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id"/>
+                        <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
                     </div>
                     
                 </div>                    

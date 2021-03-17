@@ -134,9 +134,19 @@ $("#apply").click(function () {
 
 });
 // Agreement Number dropdown
-
+var agrm = $("#agreement").attr("value");
+$("#agreement_select").val(agrm);
+var agrm_ = $("#agreement_select").val();
+if (agrm_ == null || agrm_ == "") {
+    $("#agreement_select").val("-1");
+}
 $("#agreement_select").change(function () {
     var agr = $("#agreement_select").val();
-    $("#loantype").attr("value", agr);
+    var loantype = agr.split(",");
+    $("#loantype").attr("value", loantype[1]);
+    $("#agreement").attr("value", loantype[0]);
+});
+$("#agreement_select").focus(function () {
+    $("#agreement_select option[value='-1']").attr('disabled', 'disabled');
 });
 

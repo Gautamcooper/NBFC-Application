@@ -7,8 +7,9 @@ namespace NBFC_App___dev.Models
 {
     public class Payment
     {
-        public string agrnumber { get; set; }
+        public string id { get; set; }
         public string months { get; set; }
+        public string agrloantype { get; set; }
 
     }
 }
