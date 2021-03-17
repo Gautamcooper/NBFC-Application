@@ -1,0 +1,32 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "MakePayment";
+}
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">Payments</h2>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <form method="post" action="/Home/Pay">
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <select id="agreement_select" class="form-input" required>
+                            @foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                            {
+                                <option value=@agr.id>@agr.number</option>
+                            }
+                        </select>
+                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="agrnumber" />
+                    </div>
+                    <div class="col-md-6">                       
+                        <input id="months" class="form-input" placeholder="Months" name="months" />
+                    </div>
+                </div>                    
+                <button id="save" type="submit" class="btn btn-primary">Pay</button>              
+            </div>
+        </form>        
+    </div>
+</div>
+@Scripts.Render("~/Scripts/about.js")

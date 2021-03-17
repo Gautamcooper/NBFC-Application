@@ -137,16 +137,12 @@ namespace NBFC_App___dev.Controllers
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                string pannumber = row["pannumber"].ToString();
-                List<string> GetCookies = Authentication();
-
+                string pannumber = row["pannumber"].ToString();                
                 string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
 
                 JObject ParsedResponse = GET_Object(url);
-
                 List<Agreements> list = new List<Agreements>();
                 
-
                 foreach (var v in ParsedResponse["value"])
                 {
                     Agreements agr = new Agreements()
@@ -931,6 +927,54 @@ namespace NBFC_App___dev.Controllers
                 return null;
             }
             
+        }
+        public ActionResult MakePayment()
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string pannumber = row["pannumber"].ToString();
+                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
+                JObject ParsedResponse = GET_Object(url);
+
+                List<Agreements> list = new List<Agreements>();
+
+
+                foreach (var v in ParsedResponse["value"])
+                {
+                    Agreements agr = new Agreements()
+                    {
+                        id = v["Id"].ToString(),
+                        number = v["UsrName"].ToString()
+                    };
+
+                    list.Add(agr);
+                }
+
+                ViewData["AgreementData"] = list;
+                return View();
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+             
+        }
+        [HttpPost]
+        public ActionResult Pay(Payment p)
+        {
+            string agrnumber = p.agrnumber;
+            string months = p.months;
+            return View();
         }
 
 

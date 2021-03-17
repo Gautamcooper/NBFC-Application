@@ -324,3 +324,6 @@ select.list-dt {
 #right{
     float:right;
 }
+#progressbar{
+    padding-left: 0rem !important;
+}

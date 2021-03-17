@@ -133,10 +133,10 @@ $("#apply").click(function () {
     }
 
 });
-
-//$("#continue").click(function () {
-//    $("#save").click();
-//    return true;
-
-//})
+// Agreement Number dropdown
+var states = $("#currentstate").attr("value");
+$("#agreement_select").change(function () {
+    var agr = $("#agreement_select").val();
+    $("#agreement").attr("value", agr);
+});
 
