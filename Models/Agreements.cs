@@ -19,6 +19,8 @@ namespace NBFC_App___dev.Models
 
         public string product { get; set; }
 
+        public string loantype { get; set; }
+
 
 
     }

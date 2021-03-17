@@ -942,7 +942,7 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
-                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
+                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active'&$expand=UsrLoanType($select=Name)", pannumber);
                 JObject ParsedResponse = GET_Object(url);
 
                 List<Agreements> list = new List<Agreements>();
@@ -953,7 +953,8 @@ namespace NBFC_App___dev.Controllers
                     Agreements agr = new Agreements()
                     {
                         id = v["Id"].ToString(),
-                        number = v["UsrName"].ToString()
+                        number = v["UsrName"].ToString(),
+                        loantype = v["UsrLoanType"]["Name"].ToString()
                     };
 
                     list.Add(agr);
@@ -970,10 +971,10 @@ namespace NBFC_App___dev.Controllers
              
         }
         [HttpPost]
-        public ActionResult Pay(Payment p)
+        public ActionResult Fetch(Payment p)
         {
             string agrnumber = p.agrnumber;
-            string months = p.months;
+            //string agrloantype = p.loantype;
             return View();
         }
 

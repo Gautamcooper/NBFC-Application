@@ -134,9 +134,9 @@ $("#apply").click(function () {
 
 });
 // Agreement Number dropdown
-var states = $("#currentstate").attr("value");
+
 $("#agreement_select").change(function () {
     var agr = $("#agreement_select").val();
-    $("#agreement").attr("value", agr);
+    $("#loantype").attr("value", agr);
 });
 
