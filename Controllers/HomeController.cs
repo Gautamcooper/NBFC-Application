@@ -979,16 +979,17 @@ namespace NBFC_App___dev.Controllers
             
             if(agrloantype == "Long Term Loan")
             {
-                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", agrid);
+                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
                 JObject emiResponse = GET_Object(emiurl);
 
                 List<EMI_Records> emi_list = new List<EMI_Records>();
-
+                string agrname = null;
 
                 foreach (var v in emiResponse["value"])
                 {
+                    agrname = v["UsrAgreement"]["UsrName"].ToString();
                     EMI_Records emir = new EMI_Records()
-                    {
+                    {   
                         amount = v["UsrAmount"].ToString(),
                         duedate = v["UsrDueDate"].ToString(),
                         startdate = v["UsrStartDate"].ToString(),
@@ -998,6 +999,7 @@ namespace NBFC_App___dev.Controllers
                         emitype = v["UsrEMIType"]["Name"].ToString(),
                         paymentrecord = v["UsrPaymentGate"]["UsrName"].ToString(),
                         oldamount = v["UsrOldAmount"].ToString()
+                        
 
                     };
 
@@ -1006,6 +1008,8 @@ namespace NBFC_App___dev.Controllers
 
                 ViewData["EMIRecords"] = emi_list;
                 ViewData["LoanType"] = agrloantype;
+                ViewData["AgreementName"] = agrname;
+                
             }
             else if(agrloantype == "Short Term Loan")
             {
