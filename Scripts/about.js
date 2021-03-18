@@ -151,9 +151,15 @@ $("#agreement_select").focus(function () {
 });
 var total_amnt = 0;
 $(".table_checkbox").change(function () {
-    if () {
-
+    var check_id = this.getAttribute("id");
+    var id = check_id.split("_");           
+    var amount = parseInt($("#" + id[0] + "_amount").text());
+    if (this.checked == true) {
+        total_amnt += amount;
     }
-    
+    else {
+        total_amnt -= amount;
+    }
+    $("#total_amount").text(total_amnt);
 })
 
