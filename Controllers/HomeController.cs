@@ -917,9 +917,9 @@ namespace NBFC_App___dev.Controllers
                 request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadharBack\": \"" + CorrectfilepathAadharBack + "\",\r\n    \"UsrFilePathForAadharFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrSpouseName\":\"" + spousename + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\"     \r\n}\r\n\r\n", ParameterType.RequestBody);
                 IRestResponse response2 = client2.Execute(request2);
 
-                System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(15000);
 
-                return RedirectToAction("Agreements");
+                return RedirectToAction("Applications");
             }
             else
             {
@@ -960,6 +960,8 @@ namespace NBFC_App___dev.Controllers
                     list.Add(agr);
                 }                
                 ViewData["AgreementData"] = list;
+                ViewData["EMIRecords"] = null;
+                ViewData["LoanType"] = null;
                 return View();
             }
             else
@@ -977,13 +979,61 @@ namespace NBFC_App___dev.Controllers
             
             if(agrloantype == "Long Term Loan")
             {
-                Console.WriteLine("Long Term Loan");
+                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", agrid);
+                JObject emiResponse = GET_Object(emiurl);
+
+                List<EMI_Records> emi_list = new List<EMI_Records>();
+
+
+                foreach (var v in emiResponse["value"])
+                {
+                    EMI_Records emir = new EMI_Records()
+                    {
+                        amount = v["UsrAmount"].ToString(),
+                        duedate = v["UsrDueDate"].ToString(),
+                        startdate = v["UsrStartDate"].ToString(),
+                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "false" ? " " : v["UsrIsLatePaymentFeeApplied"].ToString(),
+                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "false" ? " " : v["UsrIsExtensionFeeApplied"].ToString(),
+                        extensionduedate = v["UsrExtensionDueDate"].ToString(),
+                        emitype = v["UsrEMIType"]["Name"].ToString(),
+                        paymentrecord = v["UsrPaymentGate"]["UsrName"].ToString(),
+                        oldamount = v["UsrOldAmount"].ToString()
+
+                    };
+
+                    emi_list.Add(emir);
+                }
+
+                ViewData["EMIRecords"] = emi_list;
+                ViewData["LoanType"] = agrloantype;
             }
             else if(agrloantype == "Short Term Loan")
             {
-                Console.WriteLine("Short Term Loan");
-            }           
-            return View();
+                //string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount,UsrIsLatePaymentFeeApplied,UsrOldDebtAmount,UsrIsExtensionApplied&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrTSApplication($select=UsrName),UsrContact($select=Name),UsrLoanType($select=Name)", Id);
+
+                //JObject ParsedResponse = GET_Object(url);
+                //AgreementInfo agrInfo = new AgreementInfo()
+                //{
+                //    id = ParsedResponse["Id"].ToString(),
+                //    status = ParsedResponse["UsrAgreementStatus"]["Name"].ToString(),
+                //    number = ParsedResponse["UsrName"].ToString(),
+                //    startedon = ParsedResponse["UsrTSValidFrom"].ToString(),
+                //    expiredon = ParsedResponse["UsrTSExpiresOn"].ToString(),
+                //    product = ParsedResponse["UsrProducts"]["Name"].ToString(),
+                //    tenure = ParsedResponse["UsrApprovedTenureInMonths"].ToString() == "0" ? ParsedResponse["UsrApprovedTenureInDays"].ToString() + " Days" : ParsedResponse["UsrApprovedTenureInMonths"].ToString() + " Months",
+                //    contact = ParsedResponse["UsrContact"]["Name"].ToString(),
+                //    debtamount = ParsedResponse["UsrTotalDebtAmount"].ToString(),
+                //    loantype = ParsedResponse["UsrLoanType"]["Name"].ToString(),
+                //    balanceddebtamount = ParsedResponse["UsrBalancedDebtAmount"].ToString(),
+                //    overpaymentamount = ParsedResponse["UsrOverpaymentDebtAmount"].ToString(),
+                //    isextensionapplied = ParsedResponse["UsrIsExtensionApplied"].ToString(),
+                //    islatepaymentfeeapplied = ParsedResponse["UsrIsLatePaymentFeeApplied"].ToString(),
+                //    olddebtamount = ParsedResponse["UsrOldDebtAmount"].ToString(),
+                //    application = ParsedResponse["UsrTSApplication"]["UsrName"].ToString()
+                //};
+            }
+            ViewData["AgreementData"] = null;
+            return View("MakePayment");
         }
 
 

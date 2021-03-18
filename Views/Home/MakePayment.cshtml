@@ -22,14 +22,70 @@
                                 }
                             }
                         </select>
-                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id"/>
+                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" />
                         <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
                     </div>
-                    
-                </div>                    
-                <button id="save" type="submit" class="btn btn-primary">Fetch Details</button>              
+
+                </div>
+                <button id="save" type="submit" class="btn btn-primary">Fetch Details</button>
             </div>
-        </form>        
+        </form>
+        <br />
+        <br />
+        @if (ViewData["LoanType"] != null)
+        {
+            if (ViewData["LoanType"].ToString() == "Long Term Loan")
+            {
+                <details open>
+                    <summary>Active EMI's</summary>
+
+                    <table class="table">
+                        <thead>
+                            <tr style="background: powderblue;">
+                                <th scope="col">Select</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Is Late Payment Applied</th>
+                                <th scope="col">Is Extension Charge Applied</th>
+                                <th scope="col">Old Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 0; }
+                            @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecords"])
+                            {
+                                var amount_id = i + "_amount";
+                                var checkbox_id = i + "_checkbox";
+                                <tr class="table_row">
+                                    <td><input class="table_checkbox"  type="checkbox" id="@checkbox_id"></td>
+                                    <td>@emr.emitype</td>
+                                    <td id="@amount_id">@emr.amount</td>
+                                    <td>@emr.startdate</td>
+                                    <td>@emr.duedate</td>
+                                    <td>@emr.islatepaymentfeeapplied</td>
+                                    <td>@emr.isextensionfeeapplied</td>
+                                    <td>@emr.oldamount</td>
+                                </tr>
+
+                                i++;
+                            }
+                            <tr class="table_row">
+                                <td>Total Amount</td>
+                                <td> </td>
+                                <td id="total_amount"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </details>
+                <button id="save" type="submit" class="btn btn-primary">Pay</button>
+            }
+        }
+
+
     </div>
 </div>
 @Scripts.Render("~/Scripts/about.js")

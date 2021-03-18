@@ -149,4 +149,11 @@ $("#agreement_select").change(function () {
 $("#agreement_select").focus(function () {
     $("#agreement_select option[value='-1']").attr('disabled', 'disabled');
 });
+var total_amnt = 0;
+$(".table_checkbox").change(function () {
+    if () {
+
+    }
+    
+})
 
