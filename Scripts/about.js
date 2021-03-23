@@ -150,16 +150,25 @@ $("#agreement_select").focus(function () {
     $("#agreement_select option[value='-1']").attr('disabled', 'disabled');
 });
 var total_amnt = 0;
+var count = 0;
 $(".table_checkbox").change(function () {
     var check_id = this.getAttribute("id");
     var id = check_id.split("_");           
     var amount = parseInt($("#" + id[0] + "_amount").text());
     if (this.checked == true) {
         total_amnt += amount;
+        count += 1;
     }
     else {
         total_amnt -= amount;
+        count -= 1;
     }
     $("#total_amount").text(total_amnt);
+    $("#count").attr("value", count);
+    $("#amount").attr("value", total_amnt);
+
+
 })
+
+
 

@@ -1,0 +1,40 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "Payment_Records";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var data = ViewBag.Message;
+}
+
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">Payments</h2>
+    </div>
+
+</div>
+<br />
+<div class="container-fluid table_view">
+    <table class="table">
+        <thead>
+            <tr style="background: powderblue;">
+                <th scope="col">Agreement</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Loan Type</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
+            {
+                <tr class="table_row">
+                    <td>@payrecords.agreement</td>
+                    <td>@payrecords.amount</td>
+                    <td>@payrecords.loantype</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("Make Payment", "MakePayment", "Home", new { @class = "btn btn-primary" })
+
+</div>

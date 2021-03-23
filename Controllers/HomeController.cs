@@ -222,7 +222,7 @@ namespace NBFC_App___dev.Controllers
 
             if (ParsedResponse["UsrLoanType"]["Name"].ToString() == "Long Term Loan")
             {
-                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
+                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
                 JObject emiResponse = GET_Object(emiurl);
 
                 List<EMI_Records> emi_list = new List<EMI_Records>();
@@ -232,14 +232,14 @@ namespace NBFC_App___dev.Controllers
                 {
                     EMI_Records emir = new EMI_Records()
                     {
+
+                        repaid = v["UsrIsRepaid"].ToString() == "False" ? "No" : "Yes",
                         amount = v["UsrAmount"].ToString(),
                         duedate= v["UsrDueDate"].ToString(),
                         startdate = v["UsrStartDate"].ToString(),
-                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "false" ? " " : v["UsrIsLatePaymentFeeApplied"].ToString(),
-                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "false" ? " ": v["UsrIsExtensionFeeApplied"].ToString(),
-                        extensionduedate = v["UsrExtensionDueDate"].ToString(),
+                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "False" ? "No" : "Yes",
+                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "False" ? "No": "Yes",
                         emitype = v["UsrEMIType"]["Name"].ToString(),
-                        paymentrecord = v["UsrPaymentGate"]["UsrName"].ToString(),
                         oldamount = v["UsrOldAmount"].ToString()
 
                     };
@@ -979,7 +979,7 @@ namespace NBFC_App___dev.Controllers
             
             if(agrloantype == "Long Term Loan")
             {
-                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
+                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
                 JObject emiResponse = GET_Object(emiurl);
 
                 List<EMI_Records> emi_list = new List<EMI_Records>();
@@ -989,15 +989,15 @@ namespace NBFC_App___dev.Controllers
                 {
                     agrname = v["UsrAgreement"]["UsrName"].ToString();
                     EMI_Records emir = new EMI_Records()
-                    {   
+                    {
+                        repaid = v["UsrIsRepaid"].ToString() == "False" ? "No" : "Yes",
                         amount = v["UsrAmount"].ToString(),
-                        duedate = v["UsrDueDate"].ToString(),
-                        startdate = v["UsrStartDate"].ToString(),
-                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "false" ? " " : v["UsrIsLatePaymentFeeApplied"].ToString(),
-                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "false" ? " " : v["UsrIsExtensionFeeApplied"].ToString(),
+                        duedate = (v["UsrDueDate"].ToString()).Split(' ')[0],
+                        startdate = (v["UsrStartDate"].ToString()).Split(' ')[0],
+                        islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "False" ? "No" : "Yes",
+                        isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "False" ? "No" : "Yes",
                         extensionduedate = v["UsrExtensionDueDate"].ToString(),
                         emitype = v["UsrEMIType"]["Name"].ToString(),
-                        paymentrecord = v["UsrPaymentGate"]["UsrName"].ToString(),
                         oldamount = v["UsrOldAmount"].ToString()
                         
 
@@ -1009,6 +1009,7 @@ namespace NBFC_App___dev.Controllers
                 ViewData["EMIRecords"] = emi_list;
                 ViewData["LoanType"] = agrloantype;
                 ViewData["AgreementName"] = agrname;
+                ViewData["AgreementId"] = agrid;
                 
             }
             else if(agrloantype == "Short Term Loan")
@@ -1040,6 +1041,95 @@ namespace NBFC_App___dev.Controllers
             return View("MakePayment");
         }
 
+        public ActionResult Payments()
+        {
+            return View();
+        }
+
+        
+
+        [HttpPost]
+        public ActionResult On_Pay(Pay p)
+        {
+            string agrid = p.agrid;
+            float amount = float.Parse(p.amount.ToString());
+            string count = p.count;
+            string amountindecimal = string.Format("{0:0.000}", amount);
+            List<string> GetCookies = Authentication();
+            
+            
+
+            var client = new RestClient("http://localhost:92/0/odata/UsrPaymentGate");
+            
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("BPMCSRF", GetCookies[0]);
+            request.AddCookie(".ASPXAUTH", GetCookies[2]);
+            request.AddCookie("BPMCSRF", GetCookies[0]);
+            request.AddCookie("BPMLOADER", GetCookies[1]);
+            request.AddCookie("UserName", GetCookies[3]);
+            request.AddParameter("application/json", "{\r\n\r\n    \"UsrAgreementId\": \"" + agrid + "\",\r\n    \"UsrNumberOfMonthsCustomerWantsToPay\": \"" + count + "\",\r\n    \"UsrAmountPaid\":" + amountindecimal + " \r\n \r\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+
+            System.Threading.Thread.Sleep(10000);
+
+            Response.Redirect("~/Home/Payment_Records");
+            return View();
+        }
+
+
+        public ActionResult Payment_Records()
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string pannumber = row["pannumber"].ToString();
+                List<string> GetCookies = Authentication();
+
+                string url = string.Format("http://localhost:92/0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
+
+                JObject ParsedResponse = GET_Object(url);
+
+
+                List<Payment_Records> payrecords_list = new List<Payment_Records>();
+                //List<string> test = new List<string>();
+ 
+                foreach (dynamic v in ParsedResponse["value"])
+                {
+                    Payment_Records payrecord = new Payment_Records()
+                    {
+                        id = v["Id"].ToString(),
+                        agreement = v["UsrAgreement"]["UsrName"].ToString(),
+                        amount = v["UsrAmountPaid"].ToString(),
+                        loantype = v["UsrLoanType"]["Name"].ToString(),
+
+                    };
+                    payrecords_list.Add(payrecord);
+                }
+
+                ViewData["PaymentRecords"] = payrecords_list;
+                return View();
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+
+
+            
+        }
 
     }
 }

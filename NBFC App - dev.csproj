@@ -148,7 +148,9 @@
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\EMI_Records.cs" />
     <Compile Include="Models\Operations.cs" />
+    <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Payment_Records.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductsInfo.cs" />
     <Compile Include="Models\RejectionReasonsDetail.cs" />
@@ -212,6 +214,8 @@
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Home\ProductsInfo.cshtml" />
     <Content Include="Views\Home\MakePayment.cshtml" />
+    <Content Include="Views\Home\Payments.cshtml" />
+    <Content Include="Views\Home\Payment_Records.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

@@ -7,6 +7,7 @@ namespace NBFC_App___dev.Models
 {
     public class EMI_Records
     {
+        public string repaid { get; set; }
         public string duedate { get; set; }
         public string startdate { get; set; }
 
