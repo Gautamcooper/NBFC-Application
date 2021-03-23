@@ -1014,28 +1014,18 @@ namespace NBFC_App___dev.Controllers
             }
             else if(agrloantype == "Short Term Loan")
             {
-                //string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount,UsrIsLatePaymentFeeApplied,UsrOldDebtAmount,UsrIsExtensionApplied&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrTSApplication($select=UsrName),UsrContact($select=Name),UsrLoanType($select=Name)", Id);
+                string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
 
-                //JObject ParsedResponse = GET_Object(url);
-                //AgreementInfo agrInfo = new AgreementInfo()
-                //{
-                //    id = ParsedResponse["Id"].ToString(),
-                //    status = ParsedResponse["UsrAgreementStatus"]["Name"].ToString(),
-                //    number = ParsedResponse["UsrName"].ToString(),
-                //    startedon = ParsedResponse["UsrTSValidFrom"].ToString(),
-                //    expiredon = ParsedResponse["UsrTSExpiresOn"].ToString(),
-                //    product = ParsedResponse["UsrProducts"]["Name"].ToString(),
-                //    tenure = ParsedResponse["UsrApprovedTenureInMonths"].ToString() == "0" ? ParsedResponse["UsrApprovedTenureInDays"].ToString() + " Days" : ParsedResponse["UsrApprovedTenureInMonths"].ToString() + " Months",
-                //    contact = ParsedResponse["UsrContact"]["Name"].ToString(),
-                //    debtamount = ParsedResponse["UsrTotalDebtAmount"].ToString(),
-                //    loantype = ParsedResponse["UsrLoanType"]["Name"].ToString(),
-                //    balanceddebtamount = ParsedResponse["UsrBalancedDebtAmount"].ToString(),
-                //    overpaymentamount = ParsedResponse["UsrOverpaymentDebtAmount"].ToString(),
-                //    isextensionapplied = ParsedResponse["UsrIsExtensionApplied"].ToString(),
-                //    islatepaymentfeeapplied = ParsedResponse["UsrIsLatePaymentFeeApplied"].ToString(),
-                //    olddebtamount = ParsedResponse["UsrOldDebtAmount"].ToString(),
-                //    application = ParsedResponse["UsrTSApplication"]["UsrName"].ToString()
-                //};
+                JObject ParsedResponse = GET_Object(url);
+
+
+
+                ViewData["EMIRecords"] = null;
+                ViewData["LoanType"] = agrloantype;
+                ViewData["AgreementId"] = agrid;
+                ViewData["AgreementName"] = ParsedResponse["UsrName"].ToString();
+                ViewData["BalanceAmount"] = ParsedResponse["UsrBalancedDebtAmount"].ToString();
+                ViewData["DebtAmount"] = ParsedResponse["UsrTotalDebtAmount"].ToString();
             }
             ViewData["AgreementData"] = null;
             return View("MakePayment");
