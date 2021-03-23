@@ -6,7 +6,6 @@
 @{
     var data = ViewBag.Message;
 }
-
     <div>
         <div style="position: relative;">
             <h2 style="text-align: center;">@data.number</h2>
@@ -158,7 +157,7 @@
                     }
                 }
 
-                <details>
+                <details open>
                     <summary>Operations</summary>
 
                     <table class="table">
@@ -184,7 +183,7 @@
                 </details>
                  @if (@data.loantype == "Long Term Loan")
                  {
-                    <details>
+                    <details open>
                         <summary>EMI Records</summary>
 
                         <table class="table">
@@ -219,6 +218,11 @@
 
                     </details>
                  }
+            <form method="post" action="/Home/Fetch">
+                <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" value="@data.id" />
+                <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
+                <button id="save" type="submit" class="btn btn-primary">Pay</button>
+            </form>
             </div>
         </div>
     </div>
