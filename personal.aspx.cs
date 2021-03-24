@@ -80,10 +80,11 @@ namespace NBFC_App___dev
             string bpmloader = "";
             string aspxauth = "";
             string username = "";
-            
 
 
-            var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string temp = apiurl + "ServiceModel/AuthService.svc/Login";
+            var client = new RestClient(temp);
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json");
@@ -110,7 +111,9 @@ namespace NBFC_App___dev
                     username = c.Value.ToString();
                 }
             }
-            var client2 = new RestClient("http://localhost:92/0/odata/UsrApplicationGate");
+            
+            string url = apiurl + "0/odata/UsrApplicationGate";
+            var client2 = new RestClient(url);
             client2.Timeout = -1;
             client2.MaxRedirects = 10;
             var request2 = new RestRequest(Method.POST);
@@ -142,7 +145,8 @@ namespace NBFC_App___dev
                 System.Threading.Thread.Sleep(5000);
                 
                
-                string FetchProcessingResult = String.Format("http://localhost:92/0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", createdRecordId["Id"]);
+                string temp_FetchProcessingResult = String.Format("0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", createdRecordId["Id"]);
+                string FetchProcessingResult = apiurl + temp_FetchProcessingResult;
                 var client3 = new RestClient(FetchProcessingResult);
                 client3.Timeout = -1;
                 var request3 = new RestRequest(Method.GET);

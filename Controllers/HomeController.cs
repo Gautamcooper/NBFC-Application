@@ -27,7 +27,9 @@ namespace NBFC_App___dev.Controllers
             string bpmloader = "";
             string aspxauth = "";
             string username = "";
-            var client = new RestClient("http://localhost:92/ServiceModel/AuthService.svc/Login");
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string url = apiurl + "ServiceModel/AuthService.svc/Login";
+            var client = new RestClient(url);
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Accept", "application/json");
@@ -83,7 +85,8 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult Products()
         {
-            string url = "http://localhost:92/0/odata/UsrProducts?$select=Id,Name,UsrNotes&$expand=UsrProductType($select=Name)";
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];           
+            string url = apiurl + "0/odata/UsrProducts?$select=Id,Name,UsrNotes&$expand=UsrProductType($select=Name)";
 
             JObject ParsedResponse = GET_Object(url);
             List<Products> product_list = new List<Products>();
@@ -105,8 +108,9 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult ProductsInfo(string Id)
         {
-            string url = string.Format("http://localhost:92/0/odata/UsrSpecificationOfProducts?$select=UsrValueDecimal,UsrValueInteger&$expand=UsrParameter($select=Name)&$filter=UsrProducts/Id eq {0}",Id);
-
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];            
+            string temp_url = string.Format("0/odata/UsrSpecificationOfProducts?$select=UsrValueDecimal,UsrValueInteger&$expand=UsrParameter($select=Name)&$filter=UsrProducts/Id eq {0}",Id);            
+            string url = apiurl + temp_url;
             JObject ParsedResponse = GET_Object(url);
             List<ProductsInfo> productinfo_list = new List<ProductsInfo>();
             foreach (var v in ParsedResponse["value"])
@@ -137,9 +141,10 @@ namespace NBFC_App___dev.Controllers
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                string pannumber = row["pannumber"].ToString();                
-                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);
-
+                string pannumber = row["pannumber"].ToString();
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];                
+                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName,UsrTSSignedOn,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);                
+                string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                 List<Agreements> list = new List<Agreements>();
                 
@@ -174,7 +179,9 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult AgreementInfo(string Id)
         {
-            string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=Id,UsrName,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount,UsrIsLatePaymentFeeApplied,UsrOldDebtAmount,UsrIsExtensionApplied&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrTSApplication($select=UsrName),UsrContact($select=Name),UsrLoanType($select=Name)", Id);
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];            
+            string temp_url = string.Format("0/odata/UsrAgreements({0})?$select=Id,UsrName,UsrTSValidFrom,UsrTSExpiresOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount,UsrIsLatePaymentFeeApplied,UsrOldDebtAmount,UsrIsExtensionApplied&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrTSApplication($select=UsrName),UsrContact($select=Name),UsrLoanType($select=Name)", Id);            
+            string url = apiurl + temp_url;
             JObject ParsedResponse = GET_Object(url);
             AgreementInfo agrInfo = new AgreementInfo()
             {
@@ -196,8 +203,9 @@ namespace NBFC_App___dev.Controllers
                 application = ParsedResponse["UsrTSApplication"]["UsrName"].ToString()
             };
 
-            //Displaying Operations on Aggreements
-            string operationurl = string.Format("http://localhost:92/0/odata/UsrOperations?$select=UsrAmount&$filter=UsrAgreement/Id eq {0}&$expand=UsrType($select=Name),UsrCategory($select=Name)", Id);
+            //Displaying Operations on Aggreements                  
+            string temp_operationurl = string.Format("0/odata/UsrOperations?$select=UsrAmount&$filter=UsrAgreement/Id eq {0}&$expand=UsrType($select=Name),UsrCategory($select=Name)", Id);
+            string operationurl = apiurl + temp_operationurl;
             JObject OperationResponse = GET_Object(operationurl);
 
             List<Operations> Oprlist = new List<Operations>();
@@ -220,8 +228,9 @@ namespace NBFC_App___dev.Controllers
             //Displaying EMI Records on Aggreements
 
             if (ParsedResponse["UsrLoanType"]["Name"].ToString() == "Long Term Loan")
-            {
-                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
+            {                                
+                string temp_emiurl = string.Format("0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
+                string emiurl = apiurl + temp_emiurl;
                 JObject emiResponse = GET_Object(emiurl);
 
                 List<EMI_Records> emi_list = new List<EMI_Records>();
@@ -273,9 +282,9 @@ namespace NBFC_App___dev.Controllers
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
                 List<string> GetCookies = Authentication();
-
-                string url = string.Format("http://localhost:92/0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name)", pannumber);
-
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];                
+                string temp_url = string.Format("0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name)", pannumber);                
+                string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                
 
@@ -314,7 +323,9 @@ namespace NBFC_App___dev.Controllers
         {
 
             List<string> GetCookies = new List<string>();
-            string url = string.Format("http://localhost:92/0/odata/UsrApplications({0})?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths,UsrCoApplicantName,UsrApprovedTermInMonths,UsrApprovedTermInDays,UsrApprovedAmount,UsrAccountNumber&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrContact($select=Name),UsrIndustryType($select=Name),UsrReasonForLoan($select=Name),UsrBankName($select=Name)",Id);
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];            
+            string temp_url = string.Format("0/odata/UsrApplications({0})?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths,UsrCoApplicantName,UsrApprovedTermInMonths,UsrApprovedTermInDays,UsrApprovedAmount,UsrAccountNumber&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrContact($select=Name),UsrIndustryType($select=Name),UsrReasonForLoan($select=Name),UsrBankName($select=Name)",Id);            
+            string url = apiurl + temp_url;
 
             JObject ParsedResponse = GET_Object(url);
 
@@ -341,8 +352,9 @@ namespace NBFC_App___dev.Controllers
 
 
             if (ParsedResponse["UsrApplicationStatus"]["Name"].ToString() == "Rejected")
-            {
-                string rejectionreasonurl = string.Format("http://localhost:92/0/odata/UsrApplicationRejectionReasonRecords?$select=UsrRejectionReasonId&$filter=UsrApplication/Id eq {0}&$expand=UsrRejectionReason($select=Name)", Id);
+            {                
+                string temp_rejectionreasonurl = string.Format("0/odata/UsrApplicationRejectionReasonRecords?$select=UsrRejectionReasonId&$filter=UsrApplication/Id eq {0}&$expand=UsrRejectionReason($select=Name)", Id);
+                string rejectionreasonurl = apiurl + temp_rejectionreasonurl;
                 JObject RejectionResponse = GET_Object(rejectionreasonurl);
 
                 List<RejectionReasonsDetail> list = new List<RejectionReasonsDetail>();
@@ -370,9 +382,7 @@ namespace NBFC_App___dev.Controllers
         public ActionResult About()
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+            string connectionString = dbconn;            
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
             string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
@@ -573,8 +583,7 @@ namespace NBFC_App___dev.Controllers
 
                 List<string> OutputList_Aadhar= new List<string>();
             OutputList_Aadhar.Add(strArray[1]); // Aadhar Name 
-            OutputList_Aadhar.Add(Regex.Matches(responseResult, DateOfBirth_Regex)[0].ToString()); // Aadhar DOB
-            //OutputList_Aadhar.Add(((responseResult.Contains("Male") && !responseResult.Contains("Female")) ? "Male" : "Female"));  // Aaddhar Gender
+            OutputList_Aadhar.Add(Regex.Matches(responseResult, DateOfBirth_Regex)[0].ToString()); // Aadhar DOB            
             OutputList_Aadhar.Add(Regex.Matches(responseResult, AaadharNumber_Regex)[0].ToString()); // Aadhar Number
 
             return (String.Join(";", OutputList_Aadhar));
@@ -628,7 +637,7 @@ namespace NBFC_App___dev.Controllers
             int f1 = 0;
             int f2 = 0;
             int f3 = 0;
-            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+           
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
@@ -902,7 +911,10 @@ namespace NBFC_App___dev.Controllers
                 sqlCnctn.Close();
                 List<string> GetCookies = Authentication();
 
-                string url = string.Format("http://localhost:92/0/odata/UsrApplicationGate({0})", applicationgateId);
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                
+                string temp_url = string.Format("0/odata/UsrApplicationGate({0})", applicationgateId);
+                string url = apiurl + temp_url;
                 var client2 = new RestClient(url);
                 client2.Timeout = -1;
                 var request2 = new RestRequest(Method.PATCH);
@@ -948,7 +960,9 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
-                string url = string.Format("http://localhost:92/0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active'&$expand=UsrLoanType($select=Name)", pannumber);
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];                
+                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active'&$expand=UsrLoanType($select=Name)", pannumber);
+                string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
 
                 List<Agreements> list = new List<Agreements>();
@@ -985,7 +999,9 @@ namespace NBFC_App___dev.Controllers
             
             if(agrloantype == "Long Term Loan")
             {
-                string emiurl = string.Format("http://localhost:92/0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];                
+                string temp_emiurl = string.Format("0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
+                string emiurl = apiurl + temp_emiurl;
                 JObject emiResponse = GET_Object(emiurl);
 
                 List<EMI_Records> emi_list = new List<EMI_Records>();
@@ -1020,11 +1036,10 @@ namespace NBFC_App___dev.Controllers
             }
             else if(agrloantype == "Short Term Loan")
             {
-                string url = string.Format("http://localhost:92/0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
-
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                string temp_url = string.Format("0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
+                string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
-
-
 
                 ViewData["EMIRecords"] = null;
                 ViewData["LoanType"] = agrloantype;
@@ -1052,10 +1067,11 @@ namespace NBFC_App___dev.Controllers
             string count = p.count;
             string amountindecimal = string.Format("{0:0.000}", amount);
             List<string> GetCookies = Authentication();
-            
-            
 
-            var client = new RestClient("http://localhost:92/0/odata/UsrPaymentGate");
+
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string url = apiurl + "0/odata/UsrPaymentGate";
+            var client = new RestClient(url);
             
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
@@ -1093,13 +1109,12 @@ namespace NBFC_App___dev.Controllers
                 string pannumber = row["pannumber"].ToString();
                 List<string> GetCookies = Authentication();
 
-                string url = string.Format("http://localhost:92/0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
-
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
+                string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
 
-
-                List<Payment_Records> payrecords_list = new List<Payment_Records>();
-                //List<string> test = new List<string>();
+                List<Payment_Records> payrecords_list = new List<Payment_Records>();                
  
                 foreach (dynamic v in ParsedResponse["value"])
                 {

@@ -122,25 +122,12 @@ namespace NBFC_App___dev
             //sqlCnctn.Close();
         }
         protected void Button2_Click(object sender, EventArgs e)
-        {           
-            //TextBox1.Attributes.Add("readonly", "readonly");
-            //TextBox2.Attributes.Add("readonly", "readonly");
+        {                       
             id_var = "Button2";
-            idvar.Text = id_var;
-            //string loan = TextBox3.Text.ToString();
-            //string mobile = mnumber.Text.ToString();
-            //string emailid = email.Text.ToString();
-            //TextBox1.Text = mobile.ToString();
-            //TextBox2.Text = emailid.ToString();
-            //mnumber.Text = mobile;
-            //email.Text = emailid;
-            //Loan_Amount.Text = loan;
-
+            idvar.Text = id_var;           
         }
         protected void Button3_Click(object sender, EventArgs e)
-        {
-            //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-            //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+        {          
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
@@ -210,18 +197,7 @@ namespace NBFC_App___dev
         }
 
         protected void Go_to_dashboard_Click(object sender, EventArgs e)
-        {
-            //string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            //string connectionString = dbconn;
-            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            //sqlCnctn.Open();
-            //SqlDataAdapter adapter = new SqlDataAdapter();
-            //SqlCommand cmd;
-            //string sql = "Update UserInfo set step1 = 'false'  where session = '" + Session["Name"].ToString() + "'";
-            //cmd = new SqlCommand(sql, sqlCnctn);
-            //adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-            //adapter.UpdateCommand.ExecuteNonQuery();
-            //cmd.Dispose();
+        {            
             Response.Redirect("~/Home/About");
         }
     }
