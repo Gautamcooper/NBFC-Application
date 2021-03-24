@@ -13,6 +13,11 @@
     </div>
     <br />
     <div class="container-fluid">
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Apply For Loan" onclick="location.href='@Url.Action("Apply_for_loan", "Home")'" />
+        </div>
+        <br />
+        <br />
         <table class="table">
             <thead>
                 <tr style="background: powderblue;">
@@ -23,11 +28,11 @@
             <tbody>
                 @foreach (var prd in (IEnumerable<Products>)ViewData["ProductsData"])
                 {
-                <tr class="table_row">
-                    <td>@Html.ActionLink(@prd.name, "ProductsInfo", new { Id = @prd.id })</td>
-                    <td>@prd.type</td>
+                    <tr class="table_row">
+                        <td>@Html.ActionLink(@prd.name, "ProductsInfo", new { Id = @prd.id })</td>
+                        <td>@prd.type</td>
 
-                </tr>
+                    </tr>
 
                 }
             </tbody>

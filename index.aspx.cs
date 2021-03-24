@@ -11,7 +11,10 @@ namespace NBFC_App___dev
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["Name"] != null)
+            {
+                Response.Redirect("~/Home/Products");
+            }
         }
 
         protected void Signup_Click(object sender, EventArgs e)

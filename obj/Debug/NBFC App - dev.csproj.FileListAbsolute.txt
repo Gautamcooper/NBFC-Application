@@ -169,4 +169,3 @@ E:\Visual Studio\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CoreCompileInp
 E:\Visual Studio\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
 E:\Visual Studio\NBFC-Application\obj\Debug\NBFC App - dev.dll
 E:\Visual Studio\NBFC-Application\obj\Debug\NBFC App - dev.pdb
-E:\Visual Studio\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache

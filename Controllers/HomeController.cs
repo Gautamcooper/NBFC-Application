@@ -1122,9 +1122,12 @@ namespace NBFC_App___dev.Controllers
                 Response.Redirect("~/index.aspx");
                 return null;
             }
-
-
-            
+           
+        }
+        public ActionResult Apply_for_loan()
+        {
+            Response.Redirect("~/personal.aspx");
+            return null;
         }
 
     }

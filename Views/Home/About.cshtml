@@ -15,31 +15,38 @@
             <div class="form-card">
                 <div class="row">
                     <div class="col-md-12">
-                        <input id="Fullname" class="form-input" placeholder="Full Name" name="Fullname" value="@data.Fullname">
+                        <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                        <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@data.Fullname">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        <label class="label_inp" for="email" id="label_email">Email ID</label>
                         <input id="email" class="form-input" placeholder="Email" value="@data.Email" readonly="readonly">
                     </div>
                     <div class="col-md-6">
+                        <label class="label_inp" for="mobile" id="label_mobile">Mobile</label>
                         <input id="mobile" class="form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="firstname" class="form-input" placeholder="First Name" name="firstname" value="@data.firstname" required />
+                        <label class="label_inp" for="firstname" id="label_firstname">First Name</label>
+                        <input id="firstname" class="form-input inp" placeholder="First Name" name="firstname" value="@data.firstname" required />
                     </div>
                     <div class="col-md-4">
-                        <input id="middlename" class="form-input" placeholder="Middle Name" name="middlename" value="@data.middlename" required />
+                        <label class="label_inp" for="middlename" id="label_middlename">Middle Name</label>
+                        <input id="middlename" class="form-input inp" placeholder="Middle Name" name="middlename" value="@data.middlename" required />
                     </div>
                     <div class="col-md-4">
-                        <input id="lastname" class="form-input" placeholder="Last Name" name="lastname" value="@data.lastname" required />
+                        <label class="label_inp" for="lastname" id="label_lastname">Last Name</label>
+                        <input id="lastname" class="form-input inp" placeholder="Last Name" name="lastname" value="@data.lastname" required />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <select id="gender_select" class="form-input" required>
+                        <label class="label_inp" for="gender_select" id="label_gender_select">Gender</label>
+                        <select id="gender_select" class="form-input inp_dropdown" required>
                             <option value="-1">Gender</option>
                             <option value="eeac42ee-65b6-df11-831a-001d60e938c6">Male</option>
                             <option value="fc2483f8-65b6-df11-831a-001d60e938c6">Female</option>
@@ -48,7 +55,8 @@
                         <input hidden id="gender" class="form-input" placeholder="Gender" name="gender" value="@data.gender" />
                     </div>
                     <div class="col-md-6">
-                        <select id="marital_select" class="form-input">
+                        <label class="label_inp" for="marital_select" id="label_marital_select">Marital Status</label>
+                        <select id="marital_select" class="form-input inp_dropdown">
                             <option value="-1">Marital Status</option>
                             <option value="c8a659bc-5539-4a95-bd94-ac9fba2afa4c">Single</option>
                             <option value="a4115632-310a-47c8-b68f-88c635fa3906">Married</option>
@@ -62,7 +70,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <select id="employment_select" class="form-input">
+                        <label class="label_inp" for="employment_select" id="label_employment_select">Employment Type</label>
+                        <select id="employment_select" class="form-input inp_dropdown">
                             <option value="-1">Employment Type</option>
                             <option value="9d23b181-c6c9-4acf-9b63-781c25fb598d">Default</option>
                             <option value="b3c99f10-eea6-4f33-b41e-70a74b3712bf">Salaried</option>
@@ -74,10 +83,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="fathername" class="form-input" placeholder="Father's Name" name="fathername" value="@data.fathername" />
+                        <label class="label_inp" for="fathername" id="label_fathername">Father's Name</label>
+                        <input id="fathername" class="form-input inp" placeholder="Father's Name" name="fathername" value="@data.fathername" />
                     </div>
                     <div class="col-md-6">
-                        <input id="spousename" class="form-input" placeholder="Spouse Name" name="spousename" value="@data.spousename" />
+                        <label class="label_inp" for="spousename" id="label_spousename">Spouse Name</label>
+                        <input id="spousename" class="form-input inp" placeholder="Spouse Name" name="spousename" value="@data.spousename" />
                     </div>
                 </div>
                 <div class="row">
@@ -85,26 +96,32 @@
                         <input type="date" id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
                     </div>
                     <div class="col-md-6">
-                        <input id="pan" class="form-input" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
+                        <label class="label_inp" for="pan" id="label_pan">Pan Number</label>
+                        <input id="pan" class="form-input inp" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <input id="currentstreet" class="form-input" placeholder="Current Street" name="currentstreet" value="@data.currentstreet" />
+                        <label class="label_inp" for="currentstreet" id="label_currentstreet">Current Street</label>
+                        <input id="currentstreet" class="form-input inp" placeholder="Current Street" name="currentstreet" value="@data.currentstreet" />
                     </div>
                     <div class="col-md-3">
-                        <input id="currentlandmark" class="form-input" placeholder="Current Landmark" name="currentlandmark" value="@data.currentlandmark" />
+                        <label class="label_inp" for="currentlandmark" id="label_currentlandmark">Current Landmark</label>
+                        <input id="currentlandmark" class="form-input inp" placeholder="Current Landmark" name="currentlandmark" value="@data.currentlandmark" />
                     </div>
                     <div class="col-md-3">
-                        <input id="currentbuilding" class="form-input" placeholder="Current Building" name="currentbuilding" value="@data.currentbuilding" />
+                        <label class="label_inp" for="pan" id="label_currentbuilding">Current Building</label>
+                        <input id="currentbuilding" class="form-input inp" placeholder="Current Building" name="currentbuilding" value="@data.currentbuilding" />
                     </div>
                     <div class="col-md-3">
-                        <input id="currentpin" class="form-input" placeholder="Current PIN" name="currentpin" value="@data.currentpin" />
+                        <label class="label_inp" for="pan" id="label_currentpin">Current PIN</label>
+                        <input id="currentpin" class="form-input inp" placeholder="Current PIN" name="currentpin" value="@data.currentpin" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <select id="currentcity_select" class="form-input">
+                        <label class="label_inp" for="currentcity_select" id="label_currentcity_select">Current City</label>
+                        <select id="currentcity_select" class="form-input inp_dropdown">
                             <option value="-1">Current City</option>
                             <option value="95509285-bc31-412a-bb66-0023f6611124">Jodhpur</option>
                             <option value="8124ed90-ae1d-4def-9db2-00aad8e2ca6d">Panihati</option>
@@ -118,7 +135,8 @@
                         <input hidden id="currentcity" class="form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
                     </div>
                     <div class="col-md-4">
-                        <select id="currentstate_select" class="form-input">
+                        <label class="label_inp" for="currentstate_select" id="label_currentstate_select">Current State</label>
+                        <select id="currentstate_select" class="form-input inp_dropdown">
                             <option value="-1">Current State</option>
                             <option value="a4551e89-8069-452e-a0a9-123711940cfa">Bihar</option>
                             <option value="2c384df9-fa5c-4021-af84-14b99db61448">Punjab</option>
@@ -130,7 +148,8 @@
                         <input hidden id="currentstate" class="form-input" placeholder="Current State" name="currentstate" value="@data.currentstate" />
                     </div>
                     <div class="col-md-4">
-                        <select id="currentcountry_select" class="form-input">
+                        <label class="label_inp" for="currentcountry_select" id="label_currentcountry_select">Current Country</label>
+                        <select id="currentcountry_select" class="form-input inp_dropdown">
                             <option value="-1">Current Country</option>
                             <option value="d427eb5d-ecd2-4049-9275-420038a42bea">India</option>
                         </select>
@@ -139,39 +158,46 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="panfirstname" class="form-input" placeholder="Your First Name on PAN" name="panfirstname" value="@data.panfirstname">
+                        <label class="label_inp" for="panfirstname" id="label_panfirstname">First Name on PAN</label>
+                        <input id="panfirstname" class="form-input inp" placeholder="Your First Name on PAN" name="panfirstname" value="@data.panfirstname">
                     </div>
                     <div class="col-md-4">
-                        <input id="panmiddlename" class="form-input" placeholder="Your Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
+                        <label class="label_inp" for="panmiddlename" id="label_panmiddlename">Middle Name on PAN</label>
+                        <input id="panmiddlename" class="form-input inp" placeholder="Your Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
                     </div>
                     <div class="col-md-4">
-                        <input id="panlastname" class="form-input" placeholder="Your Last Name on PAN" name="panlastname" value="@data.panlastname">
+                        <label class="label_inp" for="panlastname" id="label_panlastname">Last Name on PAN</label>
+                        <input id="panlastname" class="form-input inp" placeholder="Your Last Name on PAN" name="panlastname" value="@data.panlastname">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="panfathername" class="form-input" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
+                        <label class="label_inp" for="panfathername" id="label_panfathername">Last Name on PAN</label>
+                        <input id="panfathername" class="form-input inp" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6">                       
                         <input type="date" id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input id="aadharfirstname" class="form-input" placeholder="Your First Name on Aadhar" name="aadharfirstname" value="@data.aadharfirstname">
+                        <label class="label_inp" for="aadharfirstname" id="label_aadharfirstname">First Name on Aadhaar</label>
+                        <input id="aadharfirstname" class="form-input inp" placeholder="Your First Name on Aadhaar" name="aadharfirstname" value="@data.aadharfirstname">
                     </div>
                     <div class="col-md-4">
-                        <input id="aadharmiddlename" class="form-input" placeholder="Your Middle Name on Aadhar" name="aadharmiddlename" value="@data.aadharmiddlename">
+                        <label class="label_inp" for="aadharmiddlename" id="label_aadharmiddlename">Middle Name on Aadhaar</label>
+                        <input id="aadharmiddlename" class="form-input inp" placeholder="Your Middle Name on Aadhaar" name="aadharmiddlename" value="@data.aadharmiddlename">
                     </div>
                     <div class="col-md-4">
-                        <input id="aadharlastname" class="form-input" placeholder="Your Last Name on Aadhar" name="aadharlastname" value="@data.aadharlastname">
+                        <label class="label_inp" for="aadharlastname" id="label_aadharlastname">Last Name on Aadhaar</label>
+                        <input id="aadharlastname" class="form-input inp" placeholder="Your Last Name on Aadhaar" name="aadharlastname" value="@data.aadharlastname">
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="aadharnumber" class="form-input" placeholder="Your Aadhar Number" name="aadharnumber" value="@data.aadharnumber">
+                        <label class="label_inp" for="aadharnumber" id="label_aadharnumber">Aadhaar Number</label>
+                        <input id="aadharnumber" class="form-input inp" placeholder="Your Aadhaar Number" name="aadharnumber" value="@data.aadharnumber">
                     </div>
                     <div class="col-md-6">
                         <input type="date" id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
@@ -179,7 +205,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <input id="aadharaddress" class="form-input" placeholder="Your Aadhar Address" name="aadharaddress" value="@data.aadharaddress">
+                        <label class="label_inp" for="aadharaddress" id="label_aadharaddress">Aadhaar Address</label>
+                        <input id="aadharaddress" class="form-input inp" placeholder="Your Aadhaar Address" name="aadharaddress" value="@data.aadharaddress">
                     </div>
 
                 </div>
@@ -212,16 +239,25 @@
                                     {
                                         <div class="form-card">
                                             <div class="row">
+                                                <div class="col-md-3">
+                                                    <label for="pan_upload">Upload Pan Card</label>
+                                                </div>
                                                 <div class="col-md-6">
-                                                    <input type="file" class="form-input" name="files" />
+                                                    <input type="file" id="pan_upload" class="form-input" name="files" />                                                    
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-3">
+                                                    <label for="pan_upload">Upload Addhaar Front</label>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <input type="file" class="form-input" name="files2" />
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <div class="col-md-3">
+                                                    <label for="pan_upload">Upload Aadhaar Back</label>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <input type="file" class="form-input" name="files3" />
                                                 </div>

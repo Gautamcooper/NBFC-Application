@@ -153,7 +153,7 @@ var total_amnt = 0;
 var count = 0;
 $(".table_checkbox").change(function () {
     var check_id = this.getAttribute("id");
-    var id = check_id.split("_");           
+    var id = check_id.split("_");
     var amount = parseInt($("#" + id[0] + "_amount").text());
     if (this.checked == true) {
         total_amnt += amount;
@@ -166,9 +166,48 @@ $(".table_checkbox").change(function () {
     $("#total_amount").text(total_amnt);
     $("#count").attr("value", count);
     $("#amount").attr("value", total_amnt);
-
-
+});
+$(".inp").each(function () {
+    if (this.value != "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show();
+    }
+    else if (this.value == "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide();
+    }
 })
+$(".inp").change(function () {
+    if (this.value != "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show(250);
+    }
+    else if (this.value == "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide(250);
+    }
+})
+$(".inp_dropdown").each(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show();
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide();
+    }
+});
+$(".inp_dropdown").change(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show(250);
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide(250);
+    }
+})
+
 
 
 

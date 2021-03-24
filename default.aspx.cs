@@ -158,7 +158,7 @@ namespace NBFC_App___dev
                 if (dt.Rows.Count > 0)
                 {
                     Session["Name"] = Guid.NewGuid().ToString();
-                    id_var = "Button3";
+                    //id_var = "Button3";
                     idvar.Text = id_var;
                     Session["repeat"] = "true";
                     SqlCommand cmd;
@@ -167,6 +167,7 @@ namespace NBFC_App___dev
                     adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                     adapter.UpdateCommand.ExecuteNonQuery();
                     cmd.Dispose();
+                    Response.Redirect("~/Home/Products");
                 }
                 else
                 {
@@ -189,7 +190,7 @@ namespace NBFC_App___dev
                 }
                 else
                 {
-                    id_var = "Button3";
+                    //id_var = "Button3";
                     idvar.Text = id_var;
                     Session["Name"] = Guid.NewGuid().ToString();
                     Session["repeat"] = "false";
@@ -198,6 +199,7 @@ namespace NBFC_App___dev
                     adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
                     adapter.InsertCommand.ExecuteNonQuery();
                     command.Dispose();
+                    Response.Redirect("~/Home/Products");
                 }               
             }
             sqlCnctn.Close();            
