@@ -25,6 +25,7 @@
     }
 
 .card_detail {
+    max-width: 100%;
     background-color: powderblue;
     background-color: powderblue;
     padding-left: 5%;

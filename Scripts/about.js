@@ -180,11 +180,11 @@ $(".inp").each(function () {
 $(".inp").change(function () {
     if (this.value != "") {
         var id = this.getAttribute("id");
-        $("#label_" + id).show(250);
+        $("#label_" + id).show(500);
     }
     else if (this.value == "") {
         var id = this.getAttribute("id");
-        $("#label_" + id).hide(250);
+        $("#label_" + id).hide(500);
     }
 })
 $(".inp_dropdown").each(function () {
@@ -200,11 +200,11 @@ $(".inp_dropdown").each(function () {
 $(".inp_dropdown").change(function () {
     if (this.value != "-1") {
         var id = this.getAttribute("id");
-        $("#label_" + id).show(250);
+        $("#label_" + id).show(500);
     }
     else if (this.value == "-1") {
         var id = this.getAttribute("id");
-        $("#label_" + id).hide(250);
+        $("#label_" + id).hide(500);
     }
 })
 
