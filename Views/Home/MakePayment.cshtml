@@ -38,7 +38,7 @@
             {
 
                 <form method="post" action="/Home/On_Pay">
-                    <h3>@ViewData["AgreementName"].ToString()</h3>
+                    <div><h3>@ViewData["AgreementName"].ToString()</h3></div>                    
                     <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
                     <input hidden id="amount" name="amount" class="form-input" value="" />
                     <input hidden id="count" name="count" class="form-input" value="" />
