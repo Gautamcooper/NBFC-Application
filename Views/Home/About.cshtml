@@ -11,7 +11,7 @@
     </div>
     <br />
     <div class="container-fluid">
-        <form method="post" action="/Home/On_Save">
+        <form method="post" action="~/Home/On_Save">
             <div class="form-card">
                 <div class="row">
                     <div class="col-md-12">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="middlename" id="label_middlename">Middle Name</label>
-                        <input id="middlename" class="form-input inp" placeholder="Middle Name" name="middlename" value="@data.middlename" required />
+                        <input id="middlename" class="form-input inp" placeholder="Middle Name" name="middlename" value="@data.middlename" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="lastname" id="label_lastname">Last Name</label>
@@ -93,6 +93,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        <label class="label_inp" for="birthdate" id="label_birthdate">Date of Birth</label>
                         <input type="date" id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
                     </div>
                     <div class="col-md-6">
@@ -176,7 +177,8 @@
                         <label class="label_inp" for="panfathername" id="label_panfathername">Last Name on PAN</label>
                         <input id="panfathername" class="form-input inp" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                     </div>
-                    <div class="col-md-6">                       
+                    <div class="col-md-6">    
+                        <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on PAN</label>
                         <input type="date" id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
                 </div>
@@ -200,6 +202,7 @@
                         <input id="aadharnumber" class="form-input inp" placeholder="Your Aadhaar Number" name="aadharnumber" value="@data.aadharnumber">
                     </div>
                     <div class="col-md-6">
+                        <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on AAdhaar</label>
                         <input type="date" id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
                     </div>
                 </div>
