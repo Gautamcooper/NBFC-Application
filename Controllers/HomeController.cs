@@ -125,7 +125,11 @@ namespace NBFC_App___dev.Controllers
                 productinfo_list.Add(prdinfo);
             }
 
-            ViewData["ProductsInfoData"] = productinfo_list;
+            ViewData["ProductsInfoData"] = productinfo_list;            
+            System.Web.HttpCookie ProductCookie = new System.Web.HttpCookie("ProductId");
+            ProductCookie.Value = Id;
+            ProductCookie.Expires = DateTime.Now.AddMinutes(5);
+            Response.Cookies.Add(ProductCookie);
             return View();
         }
         public ActionResult Agreements()

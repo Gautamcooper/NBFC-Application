@@ -208,3 +208,43 @@ $("#Button1").click(function () {
         return false;
     }
 })
+$(".inp").each(function () {
+    if (this.value != "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show();
+    }
+    else if (this.value == "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide();
+    }
+})
+$(".inp").change(function () {
+    if (this.value != "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show(500);
+    }
+    else if (this.value == "") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide(500);
+    }
+})
+$(".inp-dropdown").each(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show();
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide();
+    }
+});
+$(".inp-dropdown").change(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show(500);
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide(500);
+    }
+})

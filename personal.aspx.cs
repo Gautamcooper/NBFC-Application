@@ -49,11 +49,13 @@ namespace NBFC_App___dev
                     {
 
                     }
+                    if(Request.Cookies["ProductId"] != null)
+                    {
+                        Product.SelectedValue = Request.Cookies["ProductId"].Value;
+                    }                   
                     sqlCnctn.Close();
                 }
-            }
-            
-            
+            }                       
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -123,7 +125,7 @@ namespace NBFC_App___dev
             request2.AddCookie("BPMCSRF", bpmcsrf);
             request2.AddCookie("BPMLOADER", bpmloader);
             request2.AddCookie("UserName", username);
-            request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
+            //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
             request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
             IRestResponse response2 = client2.Execute(request2);
             var createdRecordId = JObject.Parse(response2.Content);
@@ -151,7 +153,7 @@ namespace NBFC_App___dev
                 client3.Timeout = -1;
                 var request3 = new RestRequest(Method.GET);
                 request3.AddHeader("Content-Type", "application/json");
-               // request3.AddHeader("BPMCSRF", bpmcsrf);
+                request3.AddHeader("BPMCSRF", bpmcsrf);
                 request3.AddCookie(".ASPXAUTH", aspxauth);
                 request3.AddCookie("BPMCSRF", bpmcsrf);
                 request3.AddCookie("BPMLOADER", bpmloader);
@@ -159,9 +161,7 @@ namespace NBFC_App___dev
                 //request3.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
                 IRestResponse response3 = client2.Execute(request3);
 
-
                 var ParsedResponse = JObject.Parse(response3.Content);
-
 
                 if (ParsedResponse["UsrProcessingResultId"].ToString() == "00000000-0000-0000-0000-000000000000")
                 {
@@ -170,7 +170,6 @@ namespace NBFC_App___dev
                 }
                 else
                 {
-
                     if (ParsedResponse["UsrActiveApplicationId"].ToString() != "00000000-0000-0000-0000-000000000000")
                     {
                         //Console.WriteLine(ParsedResponse["UsrProcessingResult"]["Name"]);
@@ -184,16 +183,10 @@ namespace NBFC_App___dev
                         Response.Redirect("~/Home/Agreements");
                     }
                 }
-
             }
             else {
                 Response.Redirect("~/Home/About");
             }
-            
-
-            
-
-
         }
     }
 }

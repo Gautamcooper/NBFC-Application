@@ -11,5 +11,6 @@ namespace NBFC_App___dev.Models
         public string rate { get; set; }
 
         public string days { get; set; }
+        
     }
 }
