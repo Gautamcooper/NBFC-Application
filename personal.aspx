@@ -123,7 +123,7 @@
                                         <asp:TextBox ID="PAN" placeholder="PAN number" runat="server" CssClass="inp"></asp:TextBox>
                                     </div>
                                     <div class="row">
-                                        <label class="label_inp" for="Monthly_income" id="label_Monthly_income">Full Name</label>
+                                        <label class="label_inp" for="Monthly_income" id="label_Monthly_income">Monthly Income</label>
                                         <asp:TextBox ID="Monthly_income" placeholder="Monthly Income" runat="server" CssClass="inp"></asp:TextBox>
                                     </div>
                                     <div class="row">
@@ -152,7 +152,7 @@
                                         </asp:DropDownList>
                                     </div>
                                     <div class="row">
-                                        <label class="label_inp" for="Industry_type" id="label_Industry_type">Industry Type</label>
+                                        <label class="label_inp" for="Industry_type" id="label_Industry_type">Occupation</label>
                                         <asp:DropDownList ID="Industry_type" class="dropdowncls inp-dropdown" runat="server">
                                             <asp:ListItem Enabled="true" Text="Occupation" Value="-1"></asp:ListItem>
                                             <asp:ListItem Text="Agriculture/Farming" Value = "218d70ef-2236-48ec-9ced-f2a1d62d7818"></asp:ListItem>
