@@ -186,6 +186,60 @@ namespace NBFC_App___dev
                     adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
                     adapter.InsertCommand.ExecuteNonQuery();
                     command.Dispose();
+
+                    // Create a record in Lead
+                    // Authentication
+                    string bpmcsrf = "";
+                    string bpmloader = "";
+                    string aspxauth = "";
+                    string username = "";
+
+
+                    string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                    string temp = apiurl + "ServiceModel/AuthService.svc/Login";
+                    var client = new RestClient(temp);
+                    client.Timeout = -1;
+                    var request = new RestRequest(Method.POST);
+                    request.AddHeader("Accept", "application/json");
+                    request.AddHeader("Content-Type", "application/json");
+                    request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
+                    IRestResponse response = client.Execute(request);
+                    //Console.WriteLine(response.Content);
+                    foreach (var c in response.Cookies)
+                    {
+                        if (c.Name.ToString() == "BPMCSRF")
+                        {
+                            bpmcsrf = c.Value.ToString();
+                        }
+                        else if (c.Name.ToString() == "BPMLOADER")
+                        {
+                            bpmloader = c.Value.ToString();
+                        }
+                        else if (c.Name.ToString() == ".ASPXAUTH")
+                        {
+                            aspxauth = c.Value.ToString();
+                        }
+                        else if (c.Name.ToString() == "UserName")
+                        {
+                            username = c.Value.ToString();
+                        }
+                    }
+
+                    string url = apiurl + "0/odata/Lead";
+                    var client2 = new RestClient(url);
+                    client2.Timeout = -1;
+                    client2.MaxRedirects = 10;
+                    var request2 = new RestRequest(Method.POST);
+                    request2.AddHeader("BPMCSRF", bpmcsrf);
+                    request2.AddHeader("Content-Type", "application/json");
+                    request2.AddCookie(".ASPXAUTH", aspxauth);
+                    request2.AddCookie("BPMCSRF", bpmcsrf);
+                    request2.AddCookie("BPMLOADER", bpmloader);
+                    request2.AddCookie("UserName", username);
+                    request2.AddParameter("application/json", "{\r\n    \"Contact\": \"" + fulln + "\",\r\n    \"Email\": \"" + emailid + "\",\r\n    \"MobilePhone\":\"" + mobile + "\"\r\n\r\n}", ParameterType.RequestBody);
+                    client2.Execute(request2);
+
+
                     Response.Redirect("~/Home/Products");
                 }               
             }

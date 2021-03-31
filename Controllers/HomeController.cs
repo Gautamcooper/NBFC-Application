@@ -247,8 +247,8 @@ namespace NBFC_App___dev.Controllers
 
                         repaid = v["UsrIsRepaid"].ToString() == "False" ? "No" : "Yes",
                         amount = v["UsrAmount"].ToString(),
-                        duedate= v["UsrDueDate"].ToString(),
-                        startdate = v["UsrStartDate"].ToString(),
+                        duedate= (v["UsrDueDate"].ToString()).Split(' ')[0],
+                        startdate = (v["UsrStartDate"].ToString()).Split(' ')[0],
                         islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "False" ? "No" : "Yes",
                         isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "False" ? "No": "Yes",
                         emitype = v["UsrEMIType"]["Name"].ToString(),
@@ -1001,43 +1001,43 @@ namespace NBFC_App___dev.Controllers
             string agrid = p.id;
             string agrloantype = p.agrloantype;
 
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
+            //string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            //string connectionString = dbconn;
+            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            //sqlCnctn.Open();
 
-            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            DataRow row = dt.Rows[0];
-            string pannumber = row["pannumber"].ToString();
-            List<string> GetCookies = Authentication();
+            //string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            //SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            //DataTable dt = new DataTable();
+            //sda.Fill(dt);
+            //DataRow row = dt.Rows[0];
+            //string pannumber = row["pannumber"].ToString();
+            //List<string> GetCookies = Authentication();
 
-            string apiurl = ConfigurationManager.AppSettings["apiurl"];
-            string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
-            string url = apiurl + temp_url;
-            JObject ParsedResponse = GET_Object(url);
+            //string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            //string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
+            //string url = apiurl + temp_url;
+            //JObject ParsedResponse = GET_Object(url);
 
-            List<Payment_Records> payrecords_list = new List<Payment_Records>();
+            //List<Payment_Records> payrecords_list = new List<Payment_Records>();
 
-            foreach (dynamic v in ParsedResponse["value"])
-            {
-                Payment_Records payrecord = new Payment_Records()
-                {
-                    id = v["Id"].ToString(),
-                    agreement = v["UsrAgreement"]["UsrName"].ToString(),
-                    amount = v["UsrAmountPaid"].ToString(),
-                    loantype = v["UsrLoanType"]["Name"].ToString(),
+            //foreach (dynamic v in ParsedResponse["value"])
+            //{
+            //    Payment_Records payrecord = new Payment_Records()
+            //    {
+            //        id = v["Id"].ToString(),
+            //        agreement = v["UsrAgreement"]["UsrName"].ToString(),
+            //        amount = v["UsrAmountPaid"].ToString(),
+            //        loantype = v["UsrLoanType"]["Name"].ToString(),
 
-                };
-                payrecords_list.Add(payrecord);
-            }
+            //    };
+            //    payrecords_list.Add(payrecord);
+            //}
 
-            ViewData["PaymentRecords"] = payrecords_list;
+            //ViewData["PaymentRecords"] = payrecords_list;
             if (agrloantype == "Long Term Loan")
             {
-                //string apiurl = ConfigurationManager.AppSettings["apiurl"];                
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];                
                 string temp_emiurl = string.Format("0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0} and UsrIsRepaid eq false &$orderby=UsrStartDate asc &$expand=UsrEMIType($select = Name),UsrAgreement($select = UsrName), UsrPaymentGate($select = UsrName)", agrid);
                 string emiurl = apiurl + temp_emiurl;
                 JObject emiResponse = GET_Object(emiurl);
@@ -1074,17 +1074,18 @@ namespace NBFC_App___dev.Controllers
             }
             else if(agrloantype == "Short Term Loan")
             {
-                //string apiurl = ConfigurationManager.AppSettings["apiurl"];
-                temp_url = string.Format("0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
-                url = apiurl + temp_url;
-                ParsedResponse = GET_Object(url);
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                string temp_url = string.Format("0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
+                string url = apiurl + temp_url;
+                JObject ParsedResponse = GET_Object(url);
 
                 ViewData["EMIRecords"] = null;
                 ViewData["LoanType"] = agrloantype;
                 ViewData["AgreementId"] = agrid;
                 ViewData["AgreementName"] = ParsedResponse["UsrName"].ToString();
-                ViewData["BalanceAmount"] = ParsedResponse["UsrBalancedDebtAmount"].ToString();
-                ViewData["DebtAmount"] = ParsedResponse["UsrTotalDebtAmount"].ToString();
+                float balance = float.Parse(ParsedResponse["UsrBalancedDebtAmount"].ToString());
+                float debt = float.Parse(ParsedResponse["UsrTotalDebtAmount"].ToString());
+                ViewData["AmountToPay"] = (debt - (debt - balance)).ToString();
             }
             ViewData["AgreementData"] = null;
             return View("MakePayment");
