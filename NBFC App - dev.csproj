@@ -193,6 +193,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Service.js" />
     <Content Include="style.css" />
     <Content Include="Scripts\about.js" />
     <Content Include="Web.config" />
@@ -216,10 +217,10 @@
     <Content Include="Views\Home\MakePayment.cshtml" />
     <Content Include="Views\Home\Payments.cshtml" />
     <Content Include="Views\Home\Payment_Records.cshtml" />
+    <Content Include="Views\Service\ServiceCentre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
-    <Folder Include="Views\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

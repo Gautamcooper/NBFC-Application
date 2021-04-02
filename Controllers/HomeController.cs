@@ -1001,40 +1001,38 @@ namespace NBFC_App___dev.Controllers
             string agrid = p.id;
             string agrloantype = p.agrloantype;
 
-            //string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            //string connectionString = dbconn;
-            //SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            //sqlCnctn.Open();
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
 
-            //string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            //SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            //DataTable dt = new DataTable();
-            //sda.Fill(dt);
-            //DataRow row = dt.Rows[0];
-            //string pannumber = row["pannumber"].ToString();
-            //List<string> GetCookies = Authentication();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            DataRow row = dt.Rows[0];
+            string pannumber = row["pannumber"].ToString();
 
-            //string apiurl = ConfigurationManager.AppSettings["apiurl"];
-            //string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
-            //string url = apiurl + temp_url;
-            //JObject ParsedResponse = GET_Object(url);
+            string apiurl1 = ConfigurationManager.AppSettings["apiurl"];
+            string temp_url1 = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active' or UsrAgreementStatus/Name eq 'Partial Repayment'&$expand=UsrLoanType($select=Name)", pannumber);
+            string url1 = apiurl1 + temp_url1;
+            JObject ParsedResponse1 = GET_Object(url1);
 
-            //List<Payment_Records> payrecords_list = new List<Payment_Records>();
+            List<Agreements> list1 = new List<Agreements>();
 
-            //foreach (dynamic v in ParsedResponse["value"])
-            //{
-            //    Payment_Records payrecord = new Payment_Records()
-            //    {
-            //        id = v["Id"].ToString(),
-            //        agreement = v["UsrAgreement"]["UsrName"].ToString(),
-            //        amount = v["UsrAmountPaid"].ToString(),
-            //        loantype = v["UsrLoanType"]["Name"].ToString(),
 
-            //    };
-            //    payrecords_list.Add(payrecord);
-            //}
+            foreach (var v in ParsedResponse1["value"])
+            {
+                Agreements agr1 = new Agreements()
+                {
+                    id = v["Id"].ToString(),
+                    number = v["UsrName"].ToString(),
+                    loantype = v["UsrLoanType"]["Name"].ToString()
+                };
 
-            //ViewData["PaymentRecords"] = payrecords_list;
+                list1.Add(agr1);
+            }
+            ViewData["AgreementData"] = list1;
             if (agrloantype == "Long Term Loan")
             {
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];                
@@ -1087,7 +1085,7 @@ namespace NBFC_App___dev.Controllers
                 float debt = float.Parse(ParsedResponse["UsrTotalDebtAmount"].ToString());
                 ViewData["AmountToPay"] = (debt - (debt - balance)).ToString();
             }
-            ViewData["AgreementData"] = null;
+            
             return View("MakePayment");
         }
 

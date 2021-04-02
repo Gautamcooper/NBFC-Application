@@ -65,3 +65,39 @@ summary {
 .label_inp{
     padding: 0px 8px 4px;
 }
+.header-service-centre{
+    text-align:center;
+    font-size:30px;
+    margin-top: 15%;
+}
+@media screen and (min-width: 0px) and (max-width: 500px) {
+    .button_service{
+        width:55%;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .button_service {
+        width: 33%;
+    }
+}
+
+.button_service{
+    height: -webkit-fill-available;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: 19px;
+}
+.div_button {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    padding: 4px;
+}
+.button_service:focus{
+    border-color: white;
+}
+.header_text{
+    font-size: 30px;
+}

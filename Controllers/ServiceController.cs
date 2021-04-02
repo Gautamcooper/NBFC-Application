@@ -9,7 +9,7 @@ namespace NBFC_App___dev.Controllers
     public class ServiceController : Controller
     {
         // GET: Service
-        public ActionResult Index()
+        public ActionResult ServiceCentre()
         {
             return View();
         }

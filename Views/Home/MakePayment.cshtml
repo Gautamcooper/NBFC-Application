@@ -98,9 +98,10 @@
 
     <form method="post" action="~/Home/On_Pay">
         <h3>
-            @ViewData["AgreementName"].ToString()
+            @ViewData["AgreementName"].ToString()  </h3>          
                 <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
                 <input hidden id="count" name="count" class="form-input" value="0" />
+                <br />
                 <div class="row">
                     <div class="col-md-4">
                         <label>Amount to pay</label>
