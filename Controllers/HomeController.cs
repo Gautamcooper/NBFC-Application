@@ -85,25 +85,41 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult Products()
         {
-            string apiurl = ConfigurationManager.AppSettings["apiurl"];           
-            string url = apiurl + "0/odata/UsrProducts?$select=Id,Name,UsrNotes&$expand=UsrProductType($select=Name)";
-
-            JObject ParsedResponse = GET_Object(url);
-            List<Products> product_list = new List<Products>();
-            foreach (var v in ParsedResponse["value"])
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
             {
-                Products prd = new Products()
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                string url = apiurl + "0/odata/UsrProducts?$select=Id,Name,UsrNotes&$expand=UsrProductType($select=Name)";
+
+                JObject ParsedResponse = GET_Object(url);
+                List<Products> product_list = new List<Products>();
+                foreach (var v in ParsedResponse["value"])
                 {
-                    id = v["Id"].ToString(),
-                    name = v["Name"].ToString(),
-                    type = v["UsrProductType"]["Name"].ToString()
-                };
+                    Products prd = new Products()
+                    {
+                        id = v["Id"].ToString(),
+                        name = v["Name"].ToString(),
+                        type = v["UsrProductType"]["Name"].ToString()
+                    };
 
-                product_list.Add(prd);
+                    product_list.Add(prd);
+                }
+
+                ViewData["ProductsData"] = product_list;
+                return View();
             }
-
-            ViewData["ProductsData"] = product_list;
-            return View();
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
         }
 
         public ActionResult ProductsInfo(string Id)

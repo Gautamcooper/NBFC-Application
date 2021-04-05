@@ -1,53 +1,197 @@
-﻿
+﻿@using NBFC_App___dev.Models;
 @{
     ViewBag.Title = "ServiceCentre";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div>
-        <div style="position: relative;">
-            <h2 style="text-align: center;">Service Centre</h2>
-        </div>
-        <br />
-        <div id="header-service-centre" class="header-service-centre">
-            <div>How can we help you ?</div>
-            <br/>
-            <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
-            <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Application</button></div>
-            <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
-            <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Loan Types</button></div>            
-        </div>
-        <div id="header_button_general" style="display:none;">
-            <button id="check_button_general" type="button" class="btn btn-light back_button">Back</button>
-            <div class="header_text">General Queries</div>
-            <br />
-            <form method="post" action="~/Service/Submit_general">
-                <textarea cols="80" rows="7"></textarea>
-            </form>
-        </div>
-        <div id="header_button_application" style="display:none;">
-            <button id="check_button_application" type="button" class="btn btn-light back_button">Back</button>
-            <div class="header_text">Applications</div>
-            <br />
-            <form method="post" action="~/Service/Submit_application">
-                <textarea cols="80" rows="7"></textarea>
-            </form>
-        </div>
-        <div id="header_button_agreement" style="display:none;">
-            <button id="check_button_agreement" type="button" class="btn btn-light back_button">Back</button>
-            <div class="header_text">Agreements</div>
-            <br />
-            <form method="post" action="~/Service/Submit_agreement">
-                <textarea cols="80" rows="7"></textarea>
-            </form>
-        </div>
-        <div id="header_button_loantype" style="display:none;">
-            <button id="check_button_loantype" type="button" class="btn btn-light back_button">Back</button>
-            <div class="header_text">Loan Types</div>
-            <br />
-            <form method="post" action="~/Service/Submit_product">
-                <textarea cols="80" rows="7"></textarea>
-            </form>
-        </div>
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">Service Centre</h2>
     </div>
+    <br />
+    <div id="header-service-centre" class="header-service-centre">
+        <div>How can we help you ?</div>
+        <br />
+        <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
+        <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Application</button></div>
+        <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
+        <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Loan Types</button></div>
+    </div>
+    <div id="header_button_general" style="display:none;">
+        <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
+        <br />
+        <div class="header_text">General Queries</div>
+        <br />
+        <form method="post" action="~/Service/Submit_general">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Email" id="label_Email">Email</label>
+                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea cols="100" rows="7" name="general"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="header_button_application" style="display:none;">
+        <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
+        <div class="header_text">Applications</div>
+        <br />
+        <form method="post" action="~/Service/Submit_application">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Email" id="label_Email">Email</label>
+                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea cols="80" rows="7" name="application"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="header_button_agreement" style="display:none;">
+        <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
+        <div class="header_text">Agreements</div>
+        <br />
+        <form method="post" action="~/Service/Submit_agreement">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Email" id="label_Email">Email</label>
+                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <select id="agreement_select" class="form-input" required>
+                        <option value="-1">Select Your Agreement </option>
+                        @if (ViewData["AgreementData"] != null)
+                        {
+                            foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                            {
+                                <option value="@agr.id">@agr.number</option>
+                            }
+                        }
+                    </select>
+                    <input hidden id="agreement_num" class="form-input" placeholder="Agreement" name="agr_id" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea cols="80" rows="7" name="agreement"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="header_button_loantype" style="display:none;">
+        <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
+        <div class="header_text">Loan Types</div>
+        <br />
+        <form method="post" action="~/Service/Submit_product">
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Email" id="label_Email">Email</label>
+                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea cols="80" rows="7" name="product"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @Scripts.Render("~/Scripts/Service.js")
 

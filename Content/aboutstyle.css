@@ -101,3 +101,10 @@ summary {
 .header_text{
     font-size: 30px;
 }
+.back_button{
+    margin-bottom: 2%;
+    float: right;
+}
+textarea {
+    max-width: 95%;
+}
