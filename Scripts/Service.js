@@ -52,3 +52,11 @@ $("#agreement_select").change(function () {
     var value = $("#agreement_select").val();
     $("#agreement_num").val(value);
 });
+$("#application_select").change(function () {
+    var value = $("#application_select").val();
+    $("#application_num").val(value);
+});
+$("#product_select").change(function () {
+    var value = $("#product_select").val();
+    $("#product_name").val(value);
+});

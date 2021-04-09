@@ -153,6 +153,7 @@
     <Compile Include="Models\Payment_Records.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductsInfo.cs" />
+    <Compile Include="Models\Queries.cs" />
     <Compile Include="Models\RejectionReasonsDetail.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="personal.aspx.cs">
@@ -218,6 +219,8 @@
     <Content Include="Views\Home\Payments.cshtml" />
     <Content Include="Views\Home\Payment_Records.cshtml" />
     <Content Include="Views\Service\ServiceCentre.cshtml" />
+    <Content Include="Views\Service\Queries.cshtml" />
+    <Content Include="Views\Service\QueryInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

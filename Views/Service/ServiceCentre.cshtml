@@ -81,6 +81,21 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-6">
+                    <select id="application_select" class="form-input" required>
+                        <option value="-1">Select Application </option>
+                        @if (ViewData["ApplicationData"] != null)
+                        {
+                            foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                            {
+                                <option value="@apln.id">@apln.number</option>
+                            }
+                        }
+                    </select>
+                    <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
                 </div>
@@ -123,7 +138,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <select id="agreement_select" class="form-input" required>
-                        <option value="-1">Select Your Agreement </option>
+                        <option value="-1">Select Agreement </option>
                         @if (ViewData["AgreementData"] != null)
                         {
                             foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
@@ -173,6 +188,21 @@
                 <div class="col-md-12">
                     <label class="label_inp" for="Email" id="label_Email">Email</label>
                     <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+           <div class="row">
+                <div class="col-md-6">
+                    <select id="product_select" class="form-input" required>
+                        <option value="-1">Select Product </option>
+                        @if (ViewData["ProductsData"] != null)
+                        {
+                            foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                            {
+                                <option value="@prdct.id">@prdct.name</option>
+                            }
+                        }
+                    </select>
+                    <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
                 </div>
             </div>
             <div class="row">
