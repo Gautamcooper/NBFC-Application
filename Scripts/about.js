@@ -145,6 +145,7 @@ $("#agreement_select").change(function () {
     var loantype = agr.split(",");
     $("#loantype").attr("value", loantype[1]);
     $("#agreement").attr("value", loantype[0]);
+    $("#save").click();
 });
 $("#agreement_select").focus(function () {
     $("#agreement_select option[value='-1']").attr('disabled', 'disabled');
@@ -168,6 +169,12 @@ $(".table_checkbox").change(function () {
     $("#count").attr("value", count);
     $("#amount").attr("value", total_amnt);
 });
+if (($("#agrid").val() != null) && ($("#agrloantype").val() != null)) {
+    var agrid = $("#agrid").val();
+    var agrloantype = $("#agrloantype").val();
+    var value = agrid + "," + agrloantype;
+    $("#agreement_select").val(value);
+}
 $(".inp").each(function () {
     if (this.value != "") {
         var id = this.getAttribute("id");
@@ -208,6 +215,12 @@ $(".inp_dropdown").change(function () {
         $("#label_" + id).hide(500);
     }
 })
+$(".remove").click(function () {
+    var id = this.id;
+    var id_ = id.substring(7);
+    $("#" + id_).val(null);
+});
+
 
 
 

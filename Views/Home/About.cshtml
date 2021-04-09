@@ -231,50 +231,61 @@
                         <h4 class="modal-title">Document Uploads</h4>
                     </div>
                     <div class="modal-body">
-                        <div>
+                        
                             <div style="position: relative;">
                                 <h4 style="text-align: center;">Upload your Pan card and Aadhaar Card</h4>
                             </div>
                             <br />
-                            <div class="container-fluid">
-                                <div class="row">
+                            <div class="container-fluid">                                
                                     @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                    {
-                                        <div class="form-card">
+                                    {                                       
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <label for="pan_upload">Upload Pan Card</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-11">
                                                     <input type="file" id="pan_upload" class="form-input" name="files" />                                                    
+                                                </div>                                               
+                                                <div class="col-sm-1">
+                                                    <div id="remove_pan_upload" class="remove"><i class="far fa-trash-alt fa-2x"></i></div>
+                                                </div>                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="pan_upload">Upload Aadhaar Front</label>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <label for="pan_upload">Upload Addhaar Front</label>
+                                                <div class="col-sm-11">
+                                                    <input type="file" id="aadhaar_front" class="form-input" name="files2" />
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input type="file" class="form-input" name="files2" />
+                                                <div class="col-sm-1">
+                                                    <div id="remove_aadhaar_front" class="remove"><i class="far fa-trash-alt fa-2x"></i></div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <label for="pan_upload">Upload Aadhaar Back</label>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <input type="file" class="form-input" name="files3" />
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-11">
+                                                    <input type="file" id="aadhaar_back" class="form-input" name="files3" />
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <div id="remove_aadhaar_back" class="remove"><i class="far fa-trash-alt fa-2x"></i></div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <input class="btn btn-primary" type="submit" value="Upload" />
                                                 </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
+                                            </div>                                      
+                                    }                                
                             </div>
-                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

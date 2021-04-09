@@ -12,7 +12,8 @@
             <div class="form-card">
                 <div class="row">
                     <div class="col-md-6">
-                        <select id="agreement_select" class="form-input" required>
+                        <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Your Agreement</label>
+                        <select id="agreement_select" class="form-input inp_dropdown" required>
                             <option value="-1">Select Your Agreement </option>
                             @if (ViewData["AgreementData"] != null)
                             {
@@ -27,7 +28,7 @@
                     </div>
 
                 </div>
-                <button id="save" type="submit" class="btn btn-primary">Fetch Details</button>
+                <button id="save" type="submit" class="btn btn-primary fetch">Fetch Details</button>
             </div>
         </form>
         <br />
@@ -35,11 +36,11 @@
         @if (ViewData["LoanType"] != null)
         {
             if (ViewData["LoanType"].ToString() == "Long Term Loan")
-            {
-
+            {               
                 <form method="post" action="~/Home/On_Pay">
                     <div><h3>@ViewData["AgreementName"].ToString()</h3></div>                    
                     <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
+                    <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
                     <input hidden id="amount" name="amount" class="form-input" value="" />
                     <input hidden id="count" name="count" class="form-input" value="" />
                     <details open>
@@ -100,6 +101,7 @@
         <h3>
             @ViewData["AgreementName"].ToString()  </h3>          
                 <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
+                <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
                 <input hidden id="count" name="count" class="form-input" value="0" />
                 <br />
                 <div class="row">

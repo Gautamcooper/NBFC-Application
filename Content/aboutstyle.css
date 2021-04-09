@@ -108,3 +108,15 @@ summary {
 textarea {
     max-width: 95%;
 }
+.link {
+    background-color: #EFEFEF;
+    color: #333333;
+    padding: 12px;   
+}
+.fetch{
+    display:none;
+}
+.remove {
+    color:#b13838;
+    cursor:pointer;
+}
