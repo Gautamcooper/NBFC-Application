@@ -12,7 +12,7 @@
     <br />
     <div class="container-fluid">
         <form method="post" action="~/Home/On_Save">
-            <div class="form-card">
+            <div class="form-card">               
                 <div class="row">
                     <div class="col-md-12">
                         <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
@@ -156,7 +156,7 @@
                         </select>
                         <input hidden id="currentcountry" class="form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
                     </div>
-                </div>
+                </div>                
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="panfirstname" id="label_panfirstname">First Name on PAN</label>
@@ -177,11 +177,11 @@
                         <label class="label_inp" for="panfathername" id="label_panfathername">Father's Name on PAN</label>
                         <input id="panfathername" class="form-input inp" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                     </div>
-                    <div class="col-md-6">    
+                    <div class="col-md-6">
                         <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on PAN</label>
                         <input type="date" id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                     </div>
-                </div>
+                </div>                
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="aadharfirstname" id="label_aadharfirstname">First Name on Aadhaar</label>
@@ -219,7 +219,7 @@
                 <input hidden id="uploadedvalue" name="uploadedvalue" value="@data.uploadedvalue" />
                 <button id="save" type="submit" class="btn btn-primary">Save</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
-                <button style="display: none;" id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>                
+                <button style="display: none;" id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
             </div>
         </form>
         <div class="modal fade" id="myModal" role="dialog">

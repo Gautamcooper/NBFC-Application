@@ -4,51 +4,92 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/aboutstyle.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/850b87f5b0.js" crossorigin="anonymous"></script>
+
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 <body class="bodyclass">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">                
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Profile", "About", "Home")</li>
-                    <li>@Html.ActionLink("Products", "Products", "Home")</li>
-                    <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
-                    <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>                    
-                    <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>                   
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
-                    <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                </ul>
-            </div>
-            
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+        <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item first">
+                    @Html.ActionLink("Profile", "About", "Home", new { @class = "nav-link " })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Products", "Products", "Home", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Applications", "Applications", "Home", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Agreements", "Agreements", "Home", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Payments", "Payment_Records", "Home", new { @class = "nav-link" })
+                </li>
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item">
+                    @Html.ActionLink("Self-Service", "ServiceCentre", "Service", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("FAQ's", "About", "Home", new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link" })
+                </li>                
+            </ul>
         </div>
-    </div>
+    </nav>
+    @*<div class="navbar navbar-inverse navbar-fixed-top navbar-light bg-light">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">
+                    @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Profile", "About", "Home")</li>
+                        <li>@Html.ActionLink("Products", "Products", "Home")</li>
+                        <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
+                        <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>
+                        <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
+                        <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>*@
     <div class="container body-content">
         @RenderBody()
+
         
-        <!----<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>-->
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

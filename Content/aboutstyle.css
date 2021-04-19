@@ -120,3 +120,20 @@ textarea {
     color:#b13838;
     cursor:pointer;
 }
+.bodyclass {
+    background-color: #f1f1f1ad;
+    padding-top:0px !important;
+}
+.nav-item {
+    padding: 4px;    
+    font-size: 16px;
+}
+@media screen and (min-width: 501px) {
+    .first {
+        margin-left: 40px;
+    }
+}
+.btn-primary {
+    background-color: #7d60d6;
+    border-color: #7d60d6;
+}

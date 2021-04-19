@@ -3,35 +3,73 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>First Page</title>
-     <meta charset='utf-8'>
-     <meta name='viewport' content='width=device-width, initial-scale=1'>     
-     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
-     <link href="style.css" rel="stylesheet" />
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin='anonymous'>
-     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-     <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
-</head>
-<body class="bodyclass" runat='server'>
-    <div class="container-fluid">        
-         <div class="row justify-content-center marg">
-            <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
-                <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                    <h2><strong>Select an option</strong></h2>
-                    <p id="first">First time users select Signup.</p>
-                    <p id="second" style="display: none;">Select the choice</p>
-                    <form id="msform" runat="server">                                                        
-                        <fieldset>                           
-                               <div class="row" style="justify-content: center;"><asp:Button ID="Signup" name="next" class="action-button but-cls" runat="server" Text="Sign up" OnClick="Signup_Click"/></div>
-                               <div class="row" style="justify-content: center;"><asp:Button ID="Signin" name="next" class="action-button but-cls" Text="Log in" OnClick="Signin_Click" runat="server" /></div>                                        
-                        </fieldset>                       
-                    </form>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login / Signup</title>
+        <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="assets/images/fav.jpg">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    </head>
+
+    <body class="form-login-body"> 
+        <div class="container-fluid">
+            <form runat="server">
+                <div class="top-menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4 logo">
+                                <img src="assets/images/virtuos_flat.png" alt="">
+                            </div>                            
+                            <div class="col-sm-8 sup">
+                                <ul>
+                                    <li><button runat="server" id="login_button" onserverclick="login_button_click" class="btn btn-sm btn-outline-primary"><i class="fas fa-user-lock"></i>Login</button></li>
+                                    <li><button runat="server" id="signup_button" onserverclick="signup_button_click" class="btn btn-sm btn-outline-primary"><i class="fas fa-user-plus"></i>Signup</button></li>
+                             </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </div>
-         </div>
-     </div>
-</body>
-     <script src="script.js"></script>
+                <div class="login-body container-fluid">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="login-text">
+                                        <div id="main_page">
+                                        <h4 id="login_label">Log In</h4>
+                                        <h4 id="signup_label">Sign Up</h4>                                              
+                                            <asp:TextBox ID="fullname" placeholder="Full Name" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="mnumber"  placeholder="Mobile No." runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="email" placeholder="Email ID" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="next_clicked" runat="server" hidden="true"></asp:TextBox>
+                                            <asp:TextBox ID="temp_data" runat="server" hidden="true"></asp:TextBox>                                     
+                                        <asp:Button ID="Button1" runat="server" Text="Next" CssClass="btn btn-primary" OnClick="Button1_Click" />
+                                            </div>
+                                        <div id="otp_verify">
+                                            <h4 id="otp_label">Please Enter the OTP</h4>
+                                            <asp:TextBox ID="OTP" placeholder="OTP" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:Button ID="Button2" runat="server" Text="Verify" CssClass="btn btn-primary" OnClick="Button2_Click" />
+                                        </div>                                    
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="login-img">
+                                        <img src="assets/images/login.png" alt="">
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>    
+    <script src="assets/js/script.js"></script>   
 </html>
