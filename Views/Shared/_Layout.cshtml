@@ -18,34 +18,33 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item first">
-                    @Html.ActionLink("Profile", "About", "Home", new { @class = "nav-link " })
+                    <a class="nav-link" href="/Home/About">Profile</a>                   
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Products", "Products", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/Products">Products</a>                    
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Applications", "Applications", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/Applications">Applications</a>                   
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Agreements", "Agreements", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/Agreements">Agreements</a>                   
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Payments", "Payment_Records", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/Payment_Records">Payments</a>                   
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item">
-                    @Html.ActionLink("Self-Service", "ServiceCentre", "Service", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Service/ServiceCentre">Self-Service</a>                   
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("FAQ's", "About", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/About">FAQ's</a>                    
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Logout", "Logout", "Home", new { @class = "nav-link" })
+                    <a class="nav-link" href="/Home/Logout">Logout</a>                   
                 </li>                
             </ul>
         </div>

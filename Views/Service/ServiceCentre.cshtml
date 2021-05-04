@@ -1,7 +1,6 @@
 ﻿@using NBFC_App___dev.Models;
 @{
     ViewBag.Title = "ServiceCentre";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div>
     <div style="position: relative;">
@@ -12,7 +11,7 @@
     <div id="header-service-centre" class="header-service-centre">
         <div>How can we help you ?</div>
         <br />
-        <div class="div_button">@Html.ActionLink("My Queries", "Queries", "Service", new { @class = "btn btn-light button_service link" })</div>        
+        <div class="div_button">@Html.ActionLink("My Queries", "Queries", "Service", new { @class = "btn btn-light button_service" })</div>        
         <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
         <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Applications</button></div>
         <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
