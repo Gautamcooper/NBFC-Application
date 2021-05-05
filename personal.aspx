@@ -271,7 +271,7 @@
             </div>
             <div class="col-md-5">
                  <div class="login-img">
-                      <img src="assets/images/login.png" alt="" width="40%" height="35%">
+                      <img src="assets/images/login.png" alt="" width="85%" height="70%">
                  </div>
             </div>
        </div>
