@@ -13,82 +13,120 @@
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 <body class="bodyclass">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
-        <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item first">
-                    <a class="nav-link" href="/Home/About">Profile</a>                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Products">Products</a>                    
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Applications">Applications</a>                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Agreements">Agreements</a>                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Payment_Records">Payments</a>                   
-                </li>
-            </ul>
-            <ul class="navbar-nav navbar-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Service/ServiceCentre">Self-Service</a>                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/About">FAQ's</a>                    
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Logout">Logout</a>                   
-                </li>                
-            </ul>
-        </div>
-    </nav>
-    @*<div class="navbar navbar-inverse navbar-fixed-top navbar-light bg-light">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">
-                    @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Profile", "About", "Home")</li>
-                        <li>@Html.ActionLink("Products", "Products", "Home")</li>
-                        <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
-                        <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>
-                        <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
-                        <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                    </ul>
-                </div>
-
+    <div id="page-container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+            <img class="img_nav" src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left:5px;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item first">
+                        <a class="nav-link" href="/Home/About">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Applications">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Agreements">Agreements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Payment_Records">Payments</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Service/ServiceCentre">Self-Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/About">FAQ's</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                    </li>
+                </ul>
             </div>
-        </div>*@
-    <div class="container body-content">
-        @RenderBody()
+        </nav>
+        @*<div class="navbar navbar-inverse navbar-fixed-top navbar-light bg-light">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">
+                        @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Profile", "About", "Home")</li>
+                            <li>@Html.ActionLink("Products", "Products", "Home")</li>
+                            <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
+                            <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>
+                            <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
+                            <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                        </ul>
+                    </div>
 
-        
+                </div>
+            </div>*@
+        <div id="content-wrap" class="container body-content">
+            @RenderBody()
+
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                            <p>
+                                <img class="logo-footer" src="~/assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;">
+                            </p>
+                            <p>
+                                We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                            </p>
+                            <p><a href="#">Our Team</a></p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                            <h3>Contact</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> Emaar Digital Greens, Tower A, Sector-6, Gurugram</p>
+                            <p><i class="fas fa-phone"></i> Phone: (+91) 9988998899</p>
+                            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:hello@virtuos.com">hello@virtuos.com</a></p>
+                            <p><i class="fab fa-skype"></i> Skype: virtuos_help</p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                            <h3>Follow us</h3>
+                            <p>
+                                <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                                <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g fa-2x"></i></a>
+                                <a href="#"><i class="fab fa-pinterest fa-2x"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

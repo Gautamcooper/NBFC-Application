@@ -13,11 +13,12 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/all.min.css">
         <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />        
     </head>
 
-    <body class="form-login-body"> 
-        <div class="container-fluid">
+    <body class="form-login-body">
+        <div id="page-container">
+        <div id="content_wrap" class="container-fluid">
             <form runat="server">
                 <div class="top-menu">
                     <div class="container">
@@ -66,6 +67,41 @@
                 </div>
             </form>
         </div>
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                            <p>
+                                <img class="logo-footer" src="/assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;">
+                            </p>
+                            <p>
+                                We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                            </p>
+                            <br />
+                            <p><a style="color: #337ab7;" href="#">Our Team</a></p>
+                        </div>
+                        <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                            <h3 style="color: #aaa;">Contact</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> Emaar Digital Greens, Tower A, Sector-6, Gurugram</p>
+                            <p><i class="fas fa-phone"></i> Phone: (+91) 9988998899</p>
+                            <p><i class="fas fa-envelope"></i> Email: <a style="color: #337ab7;" href="mailto:hello@virtuos.com">hello@virtuos.com</a></p>
+                            <p><i class="fab fa-skype"></i> Skype: virtuos_help</p>
+                        </div>
+                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                            <h3 style="color: #aaa;">Follow us</h3>
+                            <p>
+                                <a style="color: #337ab7;" href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                                <a style="color: #337ab7;" href="#"><i class="fab fa-twitter fa-2x"></i></a>
+                                <a style="color: #337ab7;" href="#"><i class="fab fa-google-plus-g fa-2x"></i></a>
+                                <a style="color: #337ab7;" href="#"><i class="fab fa-pinterest fa-2x"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+            </div>
     </body>
 
     <script src="assets/js/jquery-3.2.1.min.js"></script>

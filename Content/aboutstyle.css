@@ -137,3 +137,42 @@ textarea {
     background-color: #7d60d6;
     border-color: #7d60d6;
 }
+@media (min-width: 992px) and (max-width: 1199px) {
+    .footer-top {
+        padding: 40px 0;
+    }
+} 
+
+.footer-top {
+    padding: 60px 0;
+    background: #333;
+    text-align: left;
+    color: #aaa;
+}
+.img_nav {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left:5px;
+}
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem; /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; /* Footer height */
+}
+html, body {
+    min-height: 100%;
+}
+
+body {
+    height: 100vh;
+}
