@@ -4,14 +4,19 @@
 }
 <div>
     <div style="position: relative;">
+        <div style="text-align: center;"><img style="text-align: center;" class="img_nav" src="~/assets/images/virtuos_logo.png" alt="" width="8%" height="30%"></div>
         <h2 style="text-align: center;">Service Centre</h2>
     </div>
     <br />
     
     <div id="header-service-centre" class="header-service-centre">
+        @*<div>
+            <img class="lft-bg" src="https://www.virtuos.com/img/svg/company-footer-lft-bg.svg" alt="">
+            <img class="rgt-bg" src="https://www.virtuos.com/img/svg/company-footer-rgt-bg.svg" alt="">
+        </div>*@
         <div>How can we help you ?</div>
         <br />
-        <div class="div_button">@Html.ActionLink("My Queries", "Queries", "Service", new { @class = "btn btn-light button_service" })</div>        
+        <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
         <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
         <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Applications</button></div>
         <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
@@ -192,19 +197,24 @@
                 </div>
             </div>
            <div class="row">
-                <div class="col-md-6">
-                    <select id="product_select" class="form-input" required>
-                        <option value="-1">Select Product </option>
-                        @if (ViewData["ProductsData"] != null)
-                        {
-                            foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
-                            {
-                                <option value="@prdct.id">@prdct.name</option>
-                            }
-                        }
-                    </select>
-                    <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
-                </div>
+               <div class="col-md-6">
+                   <select id="product_select" class="form-input" required>
+                       <option value="-1">Select Product </option>
+                       @if (ViewData["ProductsData"] != null)
+                       {
+                           foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                           {
+                               <option value="@prdct.id">@prdct.name</option>
+                           }
+                       }
+                   </select>
+                   <select id="type" class="form-input" required>
+                       <option value="">Issue</option>
+                       <option value="">Request</option>
+                   </select>
+                   <input hidden id="ser_type" class="form-input" placeholder="type" name="type_id" />
+                   <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
+               </div>
             </div>
             <div class="row">
                 <div class="col-md-12">

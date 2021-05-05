@@ -60,3 +60,7 @@ $("#product_select").change(function () {
     var value = $("#product_select").val();
     $("#product_name").val(value);
 });
+$("#type").change(function () {
+    var value = $("#type").val();
+    $("#ser_type").val(value);
+});

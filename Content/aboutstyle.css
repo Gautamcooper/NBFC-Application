@@ -82,11 +82,14 @@ summary {
     }
 }
 
-.button_service{
+.button_service {
     height: -webkit-fill-available;
     cursor: pointer;
     border-radius: 15px;
     font-size: 19px;
+    background-color: #7d60d6;
+    border-color: #7d60d6;
+    color: white;
 }
 .div_button {    
     display: flex;
@@ -175,4 +178,24 @@ html, body {
 
 body {
     height: 100vh;
+}
+.lft-bg {
+    width: 600px;
+    height: auto;
+    left: 0;
+    position:absolute;
+}
+.rgt-bg {
+    width: 500px;
+    height: auto;    
+    right: 0; 
+    position:absolute;
+}
+@media only screen and (max-width: 1920px) {
+    .lft-bg {
+        width: 450px;
+    }
+    .rgt-bg{
+        width: 450px;
+    }
 }

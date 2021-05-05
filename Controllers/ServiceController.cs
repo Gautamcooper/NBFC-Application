@@ -354,6 +354,7 @@ namespace NBFC_App___dev.Controllers
         {
             string query = data["product"].ToString();  
             string prdct_id = data["prdct_id"].ToString();
+            string ser_type = data["type_id"].ToString();
             List<string> GetCookies = Authentication();
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
