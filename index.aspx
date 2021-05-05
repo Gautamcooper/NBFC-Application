@@ -18,7 +18,7 @@
 
     <body class="form-login-body">
         <div id="page-container">
-        <div id="content_wrap" class="container-fluid">
+        <div id="content-wrap" class="container-fluid">
             <form runat="server">
                 <div class="top-menu">
                     <div class="container">

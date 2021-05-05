@@ -32,7 +32,7 @@ html {
     height: 100%
 }
 .bodycls {
-    background-color: #f5f7f9;
+    background-color: #f1f1f1ad !important;
     /*background-color: : #9C27B0;
     background-image: linear-gradient(120deg, #FF4081, #81D4FA)*/
 }
@@ -331,4 +331,41 @@ select.list-dt {
 }
 #progressbar{
     padding-left: 0rem !important;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .footer-top {
+        padding: 40px 0;
+    }
+}
+
+.footer-top {
+    padding: 60px 0;
+    background: #333;
+    text-align: left;
+    color: #aaa;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem; /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; /* Footer height */
+    font-size: 15px;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    height: 100vh;
 }
