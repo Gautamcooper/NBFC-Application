@@ -24,14 +24,35 @@
                 <tbody>
                     @foreach (var prdinfo in (IEnumerable<ProductsInfo>)ViewData["ProductsInfoData"])
                     {
-                    <tr class="table_row">
-                        <td>@prdinfo.parameter</td>
-                        <td>@prdinfo.rate</td>
-                        <td>@prdinfo.days</td>
-                    </tr>
+                        <tr class="table_row">
+                            <td>@prdinfo.parameter</td>
+                            <td>@prdinfo.rate</td>
+                            <td>@prdinfo.days</td>
+                        </tr>
                     }
                 </tbody>
             </table>
+            <details open>
+                <summary>Related Services</summary>
+
+                <table class="table">
+                    <thead>
+                        <tr style="background: powderblue;">
+                            <th scope="col">Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ps in (IEnumerable<ProductServices>)ViewData["ProductServices"])
+                        {
+                            <tr class="table_row">
+                                <td>@ps.name</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </details>
             <input type="button" class="btn btn-primary" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
         </div>
     </div>

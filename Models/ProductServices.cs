@@ -7,7 +7,6 @@ namespace NBFC_App___dev.Models
 {
     public class ProductServices
     {
-       
         public string name { get; set; }
     }
 }

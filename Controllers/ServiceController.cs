@@ -355,6 +355,10 @@ namespace NBFC_App___dev.Controllers
             string query = data["product"].ToString();  
             string prdct_id = data["prdct_id"].ToString();
             string ser_type = data["type_id"].ToString();
+            string service  = "379f0361-9628-47f9-9a50-0af58deb5067";
+            string source = "38a1b7ec-acdc-4d94-8c17-0601c8cee0bc";
+            string querycategory = "83b0dd07-82e6-4026-8e5d-b43cb4025670";
+
             List<string> GetCookies = Authentication();
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -385,7 +389,7 @@ namespace NBFC_App___dev.Controllers
                     request.AddHeader("BPMCSRF", GetCookies[0]);
                     request.AddHeader("Content-Type", "application/json");
                     //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrNotes\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
+                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
                     IRestResponse response = client.Execute(request);
 
                 }

@@ -141,6 +141,26 @@ namespace NBFC_App___dev.Controllers
                 productinfo_list.Add(prdinfo);
             }
 
+            string temp_productService = string.Format("0/odata/UsrProductServiceRecords?$select=UsrServices&$filter=UsrProduct/Id eq {0} &$expand=UsrServices($select=UsrName)", Id);
+            string productServiceUrl = apiurl + temp_productService;
+            JObject productservices = GET_Object(productServiceUrl);
+
+            List<ProductServices> productservicelist = new List<ProductServices>();
+
+
+            foreach (var v in productservices["value"])
+            {
+                ProductServices ps = new ProductServices()
+                {
+
+                    name = v["UsrServices"]["UsrName"].ToString(),
+                };
+
+                productservicelist.Add(ps);
+            }
+
+            ViewData["ProductServices"] = productservicelist;
+
             ViewData["ProductsInfoData"] = productinfo_list;            
             System.Web.HttpCookie ProductCookie = new System.Web.HttpCookie("ProductId");
             ProductCookie.Value = Id;

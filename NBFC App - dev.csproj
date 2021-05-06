@@ -145,6 +145,7 @@
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Payment_Records.cs" />
     <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\ProductServices.cs" />
     <Compile Include="Models\ProductsInfo.cs" />
     <Compile Include="Models\Queries.cs" />
     <Compile Include="Models\RejectionReasonsDetail.cs" />
