@@ -3,24 +3,23 @@
     ViewBag.Title = "ServiceCentre";
 }
 <div>
-    <div style="position: relative;">
+    @*<div style="position: relative;">
         <div style="text-align: center;"><img style="text-align: center;" class="img_nav" src="~/assets/images/virtuos_logo.png" alt="" width="8%" height="30%"></div>
         <h2 style="text-align: center;">Service Centre</h2>
     </div>
-    <br />
-    
+    <br />*@   
     <div id="header-service-centre" class="header-service-centre">
-        @*<div>
-            <img class="lft-bg" src="https://www.virtuos.com/img/svg/company-footer-lft-bg.svg" alt="">
-            <img class="rgt-bg" src="https://www.virtuos.com/img/svg/company-footer-rgt-bg.svg" alt="">
-        </div>*@
-        <div>How can we help you ?</div>
+        <img class="service-img" src="~/contactus-banner.jpg" />
+        <br />
+        <div class="help-text">How can we help you ?</div>
         <br />
         <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
         <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
         <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Applications</button></div>
         <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
         <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Loan Types</button></div>
+
+
     </div>
     <div id="header_button_general" style="display:none;">
         <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
