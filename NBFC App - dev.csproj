@@ -147,7 +147,9 @@
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductServices.cs" />
     <Compile Include="Models\ProductsInfo.cs" />
+    <Compile Include="Models\Product_Services.cs" />
     <Compile Include="Models\Queries.cs" />
+    <Compile Include="Models\QueriesInfo.cs" />
     <Compile Include="Models\RejectionReasonsDetail.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="personal.aspx.cs">

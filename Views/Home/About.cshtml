@@ -121,19 +121,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <label class="label_inp" for="currentcity_select" id="label_currentcity_select">Current City</label>
-                        <select id="currentcity_select" class="form-input inp_dropdown">
-                            <option value="-1">Current City</option>
-                            <option value="95509285-bc31-412a-bb66-0023f6611124">Jodhpur</option>
-                            <option value="8124ed90-ae1d-4def-9db2-00aad8e2ca6d">Panihati</option>
-                            <option value="74f1350d-3025-48d2-b986-03fcc9fa85ee">Kochi</option>
-                            <option value="4156595e-d80b-4701-a45e-07a802e5f40f">Mumbai</option>
-                            <option value="36b15a28-53c0-4133-a26a-0c95cbee4aef">Hyderabad</option>
-                            <option value="89850c4d-a398-47dc-a3f8-22291c97e6c6">New Delhi</option>
-                            <option value="06c30704-7251-4eb6-a6ec-2b93e7afed3c">Lucknow</option>
-                            <option value="5ad6fbf1-894c-4a50-a5b6-40efe36f6e63">Kolkata</option>
+                        <label class="label_inp" for="currentcountry_select" id="label_currentcountry_select">Current Country</label>
+                        <select id="currentcountry_select" class="form-input inp_dropdown">
+                            <option value="-1">Current Country</option>
+                            <option value="d427eb5d-ecd2-4049-9275-420038a42bea">India</option>
                         </select>
-                        <input hidden id="currentcity" class="form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
+                        <input hidden id="currentcountry" class="form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="currentstate_select" id="label_currentstate_select">Current State</label>
@@ -149,12 +142,19 @@
                         <input hidden id="currentstate" class="form-input" placeholder="Current State" name="currentstate" value="@data.currentstate" />
                     </div>
                     <div class="col-md-4">
-                        <label class="label_inp" for="currentcountry_select" id="label_currentcountry_select">Current Country</label>
-                        <select id="currentcountry_select" class="form-input inp_dropdown">
-                            <option value="-1">Current Country</option>
-                            <option value="d427eb5d-ecd2-4049-9275-420038a42bea">India</option>
+                        <label class="label_inp" for="currentcity_select" id="label_currentcity_select">Current City</label>
+                        <select id="currentcity_select" class="form-input inp_dropdown">
+                            <option value="-1">Current City</option>
+                            <option value="95509285-bc31-412a-bb66-0023f6611124">Jodhpur</option>
+                            <option value="8124ed90-ae1d-4def-9db2-00aad8e2ca6d">Panihati</option>
+                            <option value="74f1350d-3025-48d2-b986-03fcc9fa85ee">Kochi</option>
+                            <option value="4156595e-d80b-4701-a45e-07a802e5f40f">Mumbai</option>
+                            <option value="36b15a28-53c0-4133-a26a-0c95cbee4aef">Hyderabad</option>
+                            <option value="89850c4d-a398-47dc-a3f8-22291c97e6c6">New Delhi</option>
+                            <option value="06c30704-7251-4eb6-a6ec-2b93e7afed3c">Lucknow</option>
+                            <option value="5ad6fbf1-894c-4a50-a5b6-40efe36f6e63">Kolkata</option>
                         </select>
-                        <input hidden id="currentcountry" class="form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
+                        <input hidden id="currentcity" class="form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
                     </div>
                 </div>                
                 <div class="row">
@@ -228,7 +228,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Document Uploads</h4>
+                        <h4 class="modal-title"> </h4>
                     </div>
                     <div class="modal-body">
                         
@@ -241,7 +241,7 @@
                                     {                                       
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <label for="pan_upload">Upload Pan Card</label>
+                                                    <label  for="pan_upload">Pan Card</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -254,7 +254,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <label for="pan_upload">Upload Aadhaar Front</label>
+                                                    <label for="pan_upload">Aadhaar Front</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -267,7 +267,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <label for="pan_upload">Upload Aadhaar Back</label>
+                                                    <label for="pan_upload">Aadhaar Back</label>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -300,12 +300,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Step - 2</h4>
+                        <h4 class="modal-title"> </h4>
                     </div>
                     <div class="modal-body">
                         <div>
                             <div style="position: relative;">
-                                <h4 style="text-align: center;">Please fill in the details and press submit to apply for loan</h4>
+                                <h4 style="text-align: center;">Please fill in the details for final step</h4>
                             </div>
                             <br />
                             <div class="container-fluid">

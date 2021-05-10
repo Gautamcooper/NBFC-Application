@@ -3,62 +3,67 @@
     ViewBag.Title = "Queries";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var data = ViewBag.Message;
+}
+<div>
+    <div style="position: relative;">
+        <h2 style="text-align: center;">My Queries</h2>
+    </div>
 
-    <div>
-        <div style="position: relative;">
-            <h2 style="text-align: center;">My Queries</h2>
+    <br />
+    <div class="container-fluid table_view">
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Raise Query" onclick="location.href='@Url.Action("ServiceCentre", "Service")'" />
         </div>
-        
         <br />
-        <div class="container-fluid table_view">
-            <div style="float: right;">
-                <input type="button" class="btn btn-primary" value="Raise Query" onclick="location.href='@Url.Action("ServiceCentre", "Service")'" />
-            </div>
-            <br />
-            <table class="table">
-                <thead>
-                    <tr style="background: powderblue;">
-                        <th scope="col">Ticket Number</th>
-                        <th scope="col">Regarding</th>
-                        <th scope="col">Query</th>
-                        <th scope="col">Status</th>
+        <br />
+        <table class="table">
+            <thead>
+                <tr style="background: powderblue;">
+                    <th scope="col">Ticket Number</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Registered On</th>
+                    <th scope="col">Resolved By</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var qry in (IEnumerable<Queries>)ViewData["QueryData"])
+                {
+                    <tr class="table_row">
+                        <td>@Html.ActionLink(@qry.ticketnumber, "QueryInfo", new { Id = @qry.id })</td>
+                        <td>@qry.category</td>
+                        <td>@qry.status</td>
+                        <td>@qry.createdon</td>
+                        <td>@qry.resolutiontime</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var qry in (IEnumerable<Queries>)ViewData["QueryData"])
-                    {
-                        <tr class="table_row">
-                            <td>@Html.ActionLink(@qry.ticketnumber, "QueryInfo", new { Id = @qry.id })</td>
-                            <td>@qry.query</td>
-                            <td>@qry.regarding</td>
-                            <td>@qry.status</td>
-                        </tr>
 
-                    }
-                </tbody>
-            </table>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card_view container-fluid">
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Raise Query" onclick="location.href='@Url.Action("ServiceCentre", "Service")'" />
         </div>
-        <div class="card_view container-fluid">
-            <div style="float: right;">
-                <input type="button" class="btn btn-primary" value="Raise Query" onclick="location.href='@Url.Action("ServiceCentre", "Service")'" />
-            </div>
-            <br />
-            @foreach (var qry in (IEnumerable<Queries>)ViewData["QueryData"])
-            {
-                <div class="card card_detail">
-                    <div class="card-header"><h3>@qry.ticketnumber</h3></div><br />
-                    <div class="card-body">
-                        <h4 class="card-title"><b>Regarding: </b>@qry.regarding</h4>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <p class="card-text"><b>Query: </b>@qry.query</p>
-                            </div>
-
+        <br />
+        @foreach (var qry in (IEnumerable<Queries>)ViewData["QueryData"])
+        {
+            <div class="card card_detail">
+                <div class="card-header"><h3>@qry.ticketnumber</h3></div><br />
+                <div class="card-body">
+                    <h4 class="card-title"><b>Category: </b>@qry.category</h4>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p class="card-text"><b>Status: </b>@qry.status</p>
                         </div>
 
-                        @Html.ActionLink("Select", "QueryInfo", new { Id = @qry.id }, new { @class = "btn btn-primary" })
                     </div>
+
+                    @Html.ActionLink("Select", "QueryInfo", new { Id = @qry.id }, new { @class = "btn btn-primary" })
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
+</div>

@@ -17,5 +17,7 @@ namespace NBFC_App___dev.Models
         public string requestedamount { get; set; }
 
         public string product { get; set; }
+
+        public string productId { get; set; }
     }
 }

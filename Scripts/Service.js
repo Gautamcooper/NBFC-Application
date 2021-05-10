@@ -1,4 +1,7 @@
-﻿$(".button_service").click(function () {
+﻿$("#services").find('option').hide();
+$("#apln_services").find('option').hide();
+$("#agrm_services").find('option').hide();
+$(".button_service").click(function () {
     var id = this.getAttribute("id");
     if (id == "button_general") {
         var header_id = "header_" + id;        
@@ -64,3 +67,39 @@ $("#type").change(function () {
     var value = $("#type").val();
     $("#ser_type").val(value);
 });
+$("#services").change(function () {
+    var value = $("#services").val();
+    $("#prd_service").val(value);
+});
+$("#product_select").change(function () {
+    $("#services").find('option').hide();
+    var prdId = $("#product_select").val();
+    $("#services").find('option[alt="'+prdId+'"]').show();
+});
+$("#apln_services").change(function () {
+    var value = $("#apln_services").val();
+    $("#appl_ser").val(value);
+});
+$("#application_select").change(function () {
+    $("#apln_services").find('option').hide();
+    var prdId = $("#application_select option:selected").attr("alt");
+    $("#apln_services").find('option[alt="' + prdId + '"]').show();
+});
+$("#aplntype").change(function () {
+    var value = $("#aplntype").val();
+    $("#aplnser_type").val(value);
+});
+$("#agrm_type").change(function () {
+    var value = $("#agrm_type").val();
+    $("#agrmser_type").val(value);
+});
+$("#agrm_services").change(function () {
+    var value = $("#agrm_services").val();
+    $("#agrm_ser").val(value);
+});
+$("#agreement_select").change(function () {
+    $("#agrm_services").find('option').hide();
+    var prdId = $("#agreement_select option:selected").attr("alt");
+    $("#agrm_services").find('option[alt="' + prdId + '"]').show();
+});
+

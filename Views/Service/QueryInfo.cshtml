@@ -1,7 +1,74 @@
-﻿
+﻿@using NBFC_App___dev.Models;
 @{
     ViewBag.Title = "QueryInfo";
 }
+@{
+    var data = ViewBag.Message;
+}
 
-<h2>QueryInfo</h2>
+    <div>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">Responses</h2>
+        </div>
+    </div>
+    <div class="back_button"><a class="btn btn-light button_service_1" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+    <br />
+    <br />
+    <br />
+    <form method="post" action="~/Service/submitResponse">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Your Query</label>
+            </div>
+            <div class="col-md-6">
+                <input id="Query" class="form-input" placeholder="Your Query" name="Query" value="@ViewData["RelatedQuery"]" readonly="readonly">
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="container-fluid table_view">
+            <table class="table">
+                <thead>
+                    <tr style="background: powderblue;">
+                        <th scope="col">Response</th>
+                        <th scope="col">Responded On</th>
+                        <th scope="col">Response by </th>
+                        <th scope="col">Agent Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var qryInfo in (IEnumerable<QueriesInfo>)ViewData["QueryInfoData"])
+                    {
+                        <tr class="table_row">
+                            <td>@qryInfo.response</td>
+                            <td>@qryInfo.createdon</td>
+                            <td>@qryInfo.responsebycustomer</td>
+                            <td>@qryInfo.agent</td>
+                        </tr>
 
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <label class="label_inp" for="Fullname" id="label_Fullname">Response</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <textarea cols="80" rows="7" name="response"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+            </div>
+        </div>
+        <input hidden id="QueryId" class="form-input inp" placeholder="QueryId" name="QueryId" value="@ViewData["QueryId"]" readonly="readonly">
+            
+        
+    </form>

@@ -11,7 +11,7 @@
     <div id="header-service-centre" class="header-service-centre">
         <img class="service-img" src="~/contactus-banner.jpg" />
         <br />
-        <div class="help-text">How can we help you ?</div>
+        <div class="help-text">Need Help ?</div>
         <br />
         <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
         <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
@@ -93,10 +93,28 @@
                         {
                             foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
                             {
-                                <option value="@apln.id">@apln.number</option>
+                                <option alt="@apln.productId" value="@apln.id">@apln.number</option>
                             }
                         }
                     </select>
+                    <select id="aplntype" class="form-input" required>
+                        <option value="-1">Category</option>
+                        <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
+                        <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
+                    </select>
+                    <select id="apln_services" class="form-input" required>
+
+                        <option value="-1">Related Services</option>
+                        @if (ViewData["Product_Service"] != null)
+                        {
+                            foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                            {
+                                <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                            }
+                        }
+                    </select>
+                    <input hidden id="appl_ser" class="form-input" placeholder="Application" name="appl_ser" />
+                    <input hidden id="aplnser_type" class="form-input" placeholder="type" name="aplnser_type" />
                     <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
                 </div>
             </div>
@@ -148,10 +166,28 @@
                         {
                             foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
                             {
-                                <option value="@agr.id">@agr.number</option>
+                                <option alt="@agr.productId" value="@agr.id">@agr.number</option>
                             }
                         }
                     </select>
+                    <select id="agrm_type" class="form-input" required>
+                        <option value="-1">Category</option>
+                        <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
+                        <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
+                    </select>
+                    <select id="agrm_services" class="form-input" required>
+
+                        <option value="-1">Related Services</option>
+                        @if (ViewData["Product_Service"] != null)
+                        {
+                            foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                            {
+                                <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                            }
+                        }
+                    </select>
+                    <input hidden id="agrm_ser" class="form-input" placeholder="Aggreement" name="agrm_ser" />
+                    <input hidden id="agrmser_type" class="form-input" placeholder="type" name="agrmser_type" />
                     <input hidden id="agreement_num" class="form-input" placeholder="Agreement" name="agr_id" />
                 </div>
             </div>
@@ -212,6 +248,19 @@
                        <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
                        <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
                    </select>
+                   <select id="services" class="form-input" required>
+
+                       <option value="-1">Related Services</option>
+                       @if (ViewData["Product_Service"] != null)
+                       {
+                           foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                           {
+                               <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                           }
+                       }
+                   </select>
+
+                   <input hidden id="prd_service" class="form-input" placeholder="type" name="prd_service" />
                    <input hidden id="ser_type" class="form-input" placeholder="type" name="type_id" />
                    <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
                </div>

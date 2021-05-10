@@ -661,7 +661,7 @@ namespace NBFC_App___dev.Controllers
             var client = new RestClient("https://accurascan.com/api/v4/ocr");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Api-Key", "1617694064mCFWrobzFfmIH8fI48XKzmM5EVzHMjxWkBW2ze6X");
+            request.AddHeader("Api-Key", "1620638022FsDaqzUAh6l0jeOAVzxYSVuWYWiYMM8tO6SLNheA");
             //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddFile("scan_image", path);
@@ -1039,7 +1039,7 @@ namespace NBFC_App___dev.Controllers
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];                
-                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active' or UsrAgreementStatus/Name eq 'Partial Repayment'&$expand=UsrLoanType($select=Name)", pannumber);
+                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and (UsrAgreementStatus/Name eq 'Active' or UsrAgreementStatus/Name eq 'Partial Repayment')&$expand=UsrLoanType($select=Name)", pannumber);
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
 

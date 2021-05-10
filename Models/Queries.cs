@@ -10,10 +10,11 @@ namespace NBFC_App___dev.Models
         public string id { get; set; }
         public string ticketnumber { get; set; }
 
-        public string regarding { get; set; }
+        public string createdon { get; set; }
 
-        public string query { get; set; }
+        public string resolutiontime { get; set; }
 
+        public string category { get; set; }
         public string status { get; set; }
 
     }

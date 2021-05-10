@@ -101,22 +101,22 @@
                         </div>
                     </div>
                     <!---<div class="row">
-                        <div class="col-md-3">
-                            <label>Overpayment Amount</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="overpaymentamount" class="form-input" placeholder="First Name" name="contact" value="@data.overpaymentamount" readonly="readonly" />
-                        </div>
-                    </div>-->
+            <div class="col-md-3">
+                <label>Overpayment Amount</label>
+            </div>
+            <div class="col-md-6">
+                <input id="overpaymentamount" class="form-input" placeholder="First Name" name="contact" value="@data.overpaymentamount" readonly="readonly" />
+            </div>
+        </div>-->
 
                     <!--<div class="row">
-                        <div class="col-md-3">
-                            <label>Balance Debt Amount</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
-                        </div>
-                    </div>-->
+            <div class="col-md-3">
+                <label>Balance Debt Amount</label>
+            </div>
+            <div class="col-md-6">
+                <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
+            </div>
+        </div>-->
                     if (@data.islatepaymentfeeapplied == "true")
                     {
                         <div class="row">
@@ -157,32 +157,35 @@
                     }
                 }
 
-                <details open>
-                    <summary>Operations</summary>
+                @if (@data.status != "Cancelled")
+                {
+                    <details open>
+                        <summary>Operations</summary>
 
-                    <table class="table">
-                        <thead>
-                            <tr style="background: powderblue;">
-                                <th scope="col">Amount</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Category</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var oprn in (IEnumerable<Operations>)ViewData["OperationMessage"])
-                            {
-                                <tr class="table_row">
-                                    <td>@oprn.amount</td>
-                                    <td>@oprn.type</td>
-                                    <td>@oprn.category</td>
+                        <table class="table">
+                            <thead>
+                                <tr style="background: powderblue;">
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Category</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var oprn in (IEnumerable<Operations>)ViewData["OperationMessage"])
+                                {
+                                    <tr class="table_row">
+                                        <td>@oprn.amount</td>
+                                        <td>@oprn.type</td>
+                                        <td>@oprn.category</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
 
-                </details>
-                 @if (@data.loantype == "Long Term Loan")
-                 {
+                    </details>
+                }
+                @if (@data.loantype == "Long Term Loan" && @data.status == "Active")
+                {
                     <details open>
                         <summary>EMI Records</summary>
 
@@ -202,27 +205,31 @@
                             <tbody>
                                 @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecordsMessage"])
                                 {
-                                <tr class="table_row">
-                                    <td>@emr.emitype</td>
-                                    <td>@emr.amount</td>
-                                    <td>@emr.startdate</td>
-                                    <td>@emr.duedate</td>
-                                    <td>@emr.repaid</td>
-                                    <td>@emr.islatepaymentfeeapplied</td>
-                                    <td>@emr.isextensionfeeapplied</td>
-                                    <td>@emr.oldamount</td>
-                                </tr>
+                                    <tr class="table_row">
+                                        <td>@emr.emitype</td>
+                                        <td>@emr.amount</td>
+                                        <td>@emr.startdate</td>
+                                        <td>@emr.duedate</td>
+                                        <td>@emr.repaid</td>
+                                        <td>@emr.islatepaymentfeeapplied</td>
+                                        <td>@emr.isextensionfeeapplied</td>
+                                        <td>@emr.oldamount</td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
 
                     </details>
-                 }
-            <form method="post" action="~/Home/Fetch">
-                <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" value="@data.id" />
-                <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
-                <button id="save" type="submit" class="btn btn-primary">Pay</button>
-            </form>
+                }
+                <form method="post" action="~/Home/Fetch">
+                    <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" value="@data.id" />
+                    <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
+                    @if (@data.status == "Active")
+                    {
+                        <button id="save" type="submit" class="btn btn-primary">Pay</button>
+                    }
+
+                </form>
             </div>
         </div>
     </div>
