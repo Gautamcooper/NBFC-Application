@@ -357,6 +357,7 @@
     <Content Include="Views\Service\ServiceCentre.cshtml" />
     <Content Include="Views\Service\Queries.cshtml" />
     <Content Include="Views\Service\QueryInfo.cshtml" />
+    <Content Include="Views\Home\dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

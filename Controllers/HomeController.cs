@@ -82,7 +82,10 @@ namespace NBFC_App___dev.Controllers
             JObject ParsedObject = JObject.Parse(response.Content);
             return ParsedObject;
         }
-
+        public ActionResult dashboard()
+        {
+            return View();
+        }
         public ActionResult Products()
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
