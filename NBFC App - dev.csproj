@@ -181,6 +181,7 @@
     <Content Include="assets\webfonts\Simple-Line-Icons.svg" />
     <Content Include="assets\webfonts\Simple-Line-Iconsb26c.svg" />
     <Content Include="assets\webfonts\themify.svg" />
+    <Content Include="Card-images\card-image.jpg" />
     <Content Include="Content\aboutstyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -190,6 +191,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="homepage-banner.jpg" />
     <Content Include="index.aspx" />
     <Content Include="personal.aspx" />
     <Content Include="script.js" />
