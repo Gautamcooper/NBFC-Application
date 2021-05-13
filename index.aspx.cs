@@ -66,7 +66,7 @@ namespace NBFC_App___dev
                     adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                     adapter.UpdateCommand.ExecuteNonQuery();
                     cmd.Dispose();
-                    Response.Redirect("~/Home/Products");
+                    Response.Redirect("~/Home/Homepage");
                 }
                 else
                 {
@@ -152,7 +152,7 @@ namespace NBFC_App___dev
                     client2.Execute(request2);
 
 
-                    Response.Redirect("~/Home/Products");
+                    Response.Redirect("~/Home/Homepage");
                 }
             }
             sqlCnctn.Close();

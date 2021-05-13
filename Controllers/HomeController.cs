@@ -82,7 +82,7 @@ namespace NBFC_App___dev.Controllers
             JObject ParsedObject = JObject.Parse(response.Content);
             return ParsedObject;
         }
-        public ActionResult dashboard()
+        public ActionResult Homepage()
         {
             return View();
         }
