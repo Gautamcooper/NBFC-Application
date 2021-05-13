@@ -7,10 +7,16 @@
     var data = ViewBag.Message;
 }
 
-   <div class="container">
+    <div class="container">
         <div style="position: relative;">
             <h2 style="text-align: center;">Loan Parameters</h2>
         </div>
+        <br />
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Products", "Home")'" />
+        </div>
+        <br />
+        <br />
         <br />
         <div class="container-fluid">
             <table class="table">

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ServiceCentre";
 }
-<div>       
+<div class="container">       
     <div id="header-service-centre" class="header-service-centre">
         <img class="service-img" src="~/contactus-banner.jpg" />
         <br />
@@ -106,6 +106,7 @@
                             }
                         }
                     </select>
+
                     <input hidden id="appl_ser" class="form-input" placeholder="Application" name="appl_ser" />
                     <input hidden id="aplnser_type" class="form-input" placeholder="type" name="aplnser_type" />
                     <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
@@ -113,7 +114,13 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                    <label class="label_inp" for="Email" id="label_Email">Email</label>
+                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="label_inp" for="" id="label">Your Query</label>
                 </div>
             </div>
             <div class="row">

@@ -11,6 +11,12 @@
             <h2 style="text-align: center;">@data.number</h2>
         </div>
         <br />
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
+        </div>
+        <br />
+        <br />
+        <br />
         <div class="container-fluid">
 
             <div class="form-card">
@@ -101,22 +107,22 @@
                         </div>
                     </div>
                     <!---<div class="row">
-            <div class="col-md-3">
-                <label>Overpayment Amount</label>
-            </div>
-            <div class="col-md-6">
-                <input id="overpaymentamount" class="form-input" placeholder="First Name" name="contact" value="@data.overpaymentamount" readonly="readonly" />
-            </div>
-        </div>-->
+                    <div class="col-md-3">
+                        <label>Overpayment Amount</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="overpaymentamount" class="form-input" placeholder="First Name" name="contact" value="@data.overpaymentamount" readonly="readonly" />
+                    </div>
+                </div>-->
 
                     <!--<div class="row">
-            <div class="col-md-3">
-                <label>Balance Debt Amount</label>
-            </div>
-            <div class="col-md-6">
-                <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
-            </div>
-        </div>-->
+                    <div class="col-md-3">
+                        <label>Balance Debt Amount</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="balanceddebtamount" class="form-input" placeholder="First Name" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
+                    </div>
+                </div>-->
                     if (@data.islatepaymentfeeapplied == "true")
                     {
                         <div class="row">

@@ -278,6 +278,7 @@ body {
     transition: 0.3s;
     border-radius: 10px;
     text-align: center;
+    height: 582px;
 }
 .card-img {
     border-radius: 5px 5px 0 0;

@@ -1091,10 +1091,23 @@ namespace NBFC_App___dev.Controllers
                     };
 
                     list.Add(agr);
-                }                
+                }
+                
                 ViewData["AgreementData"] = list;
                 ViewData["EMIRecords"] = null;
                 ViewData["LoanType"] = null;
+                if(list.Count == 1)
+                {
+                    Agreements agr = new Agreements();
+                    agr = list[0];
+                    Payment p = new Payment()
+                    {
+                        id = agr.id,
+                        agrloantype = agr.loantype
+                    };
+                    Fetch(p);
+                    return null;
+                }
                 return View();
             }
             else
@@ -1256,7 +1269,7 @@ namespace NBFC_App___dev.Controllers
                 List<string> GetCookies = Authentication();
 
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];
-                string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
+                string temp_url = string.Format("0/odata/UsrPaymentGate?$select=Id,UsrAmountPaid,CreatedOn&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrLoanType($select=Name),UsrAgreement($select=UsrName)", pannumber);
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
 
@@ -1270,7 +1283,7 @@ namespace NBFC_App___dev.Controllers
                         agreement = v["UsrAgreement"]["UsrName"].ToString(),
                         amount = v["UsrAmountPaid"].ToString(),
                         loantype = v["UsrLoanType"]["Name"].ToString(),
-
+                        paymentdate = v["CreatedOn"].ToString()
                     };
                     payrecords_list.Add(payrecord);
                 }

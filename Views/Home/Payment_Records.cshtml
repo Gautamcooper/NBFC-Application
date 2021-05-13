@@ -22,17 +22,19 @@
                         <th scope="col">Agreement</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Loan Type</th>
+                        <th scope="col">Payment Date</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
                     {
-                        <tr class="table_row">
-                            <td>@payrecords.agreement</td>
-                            <td>@payrecords.amount</td>
-                            <td>@payrecords.loantype</td>
-                        </tr>
+                    <tr class="table_row">
+                        <td>@payrecords.agreement</td>
+                        <td>@payrecords.amount</td>
+                        <td>@payrecords.loantype</td>
+                        <td>@payrecords.paymentdate</td>
+                    </tr>
                     }
                 </tbody>
             </table>

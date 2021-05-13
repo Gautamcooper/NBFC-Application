@@ -183,6 +183,8 @@
     <Content Include="assets\webfonts\Simple-Line-Iconsb26c.svg" />
     <Content Include="assets\webfonts\themify.svg" />
     <Content Include="Card-images\card-image.jpg" />
+    <Content Include="Card-images\homeloanimage.jpg" />
+    <Content Include="Card-images\HomePage.JPG" />
     <Content Include="Content\aboutstyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

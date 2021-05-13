@@ -12,8 +12,13 @@
             <h2 style="text-align: center;">@data.number</h2>
         </div>
         <br />
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
+        </div>
+        <br />
+        <br />
+        <br />
         <div class="container-fluid">
-            
             <div class="form-card">
                 <div class="row">
                     <div class="col-md-3">
@@ -123,14 +128,14 @@
                             <thead>
                                 <tr style="background: powderblue;">
                                     <th scope="col">Name</th>
-                                     </tr>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach (var rejrsn in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
                                 {
                                     <tr class="table_row">
                                         <td>@rejrsn.name</td>
-                                        
+
                                     </tr>
                                 }
                             </tbody>
@@ -139,10 +144,10 @@
                     </details>
                 }
             </div>
-            
-            
 
-               
+
+
+
         </div>
     </div>
 
