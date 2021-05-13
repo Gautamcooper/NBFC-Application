@@ -84,6 +84,38 @@ namespace NBFC_App___dev.Controllers
         }
         public ActionResult Homepage()
         {
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string temp_url = "0/odata/UsrProducts?$top=6&$select=Id,UsrProductInfo,Name&$orderby=UsrNoOfAgreements desc";                
+            string url = apiurl + temp_url;
+            JObject ParsedResponse = GET_Object(url);
+            List<HomePage> topProductlist = new List<HomePage>();
+
+            ViewData["top1_prId"] = ParsedResponse["value"][0]["Id"].ToString();
+            ViewData["top1_prName"] = ParsedResponse["value"][0]["Name"].ToString() != "" ? ParsedResponse["value"][0]["Name"].ToString() : "Loan" ;
+            ViewData["top1_prInfo"] = ParsedResponse["value"][0]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][0]["UsrProductInfo"].ToString() : "1";
+
+            ViewData["top2_prId"] = ParsedResponse["value"][1]["Id"].ToString();
+            ViewData["top2_prName"] = ParsedResponse["value"][1]["Name"].ToString() != "" ? ParsedResponse["value"][1]["Name"].ToString() : "Loan";
+            ViewData["top2_prInfo"] = ParsedResponse["value"][1]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][1]["UsrProductInfo"].ToString() : "2";
+
+            ViewData["top3_prId"] = ParsedResponse["value"][2]["Id"].ToString();
+            ViewData["top3_prName"] = ParsedResponse["value"][2]["Name"].ToString() != "" ? ParsedResponse["value"][2]["Name"].ToString() : "Loan";
+            ViewData["top3_prInfo"] = ParsedResponse["value"][2]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][2]["UsrProductInfo"].ToString() : "3";
+
+            ViewData["top4_prId"] = ParsedResponse["value"][3]["Id"].ToString();
+            ViewData["top4_prName"] = ParsedResponse["value"][3]["Name"].ToString() != "" ? ParsedResponse["value"][3]["Name"].ToString() : "Loan";
+            ViewData["top4_prInfo"] = ParsedResponse["value"][3]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][3]["UsrProductInfo"].ToString() : "4";
+
+            ViewData["top5_prId"] = ParsedResponse["value"][4]["Id"].ToString();
+            ViewData["top5_prName"] = ParsedResponse["value"][4]["Name"].ToString() != "" ? ParsedResponse["value"][4]["Name"].ToString() : "Loan";
+            ViewData["top5_prInfo"] = ParsedResponse["value"][4]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][4]["UsrProductInfo"].ToString() : "5";
+
+            ViewData["top6_prId"] = ParsedResponse["value"][5]["Id"].ToString();
+            ViewData["top6_prName"] = ParsedResponse["value"][5]["Name"].ToString() != "" ? ParsedResponse["value"][5]["Name"].ToString() : "Loan";
+            ViewData["top6_prInfo"] = ParsedResponse["value"][5]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][5]["UsrProductInfo"].ToString() : "6";
+
+
+            
             return View();
         }
         public ActionResult Products()

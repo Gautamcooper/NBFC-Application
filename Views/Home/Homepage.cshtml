@@ -6,18 +6,26 @@
 
     <div>
         <div class="dashboard">
-            <img class="dashboard-img" src="~/homepage-banner.jpg" />           
-        </div>        
+            <img class="dashboard-img" src="~/homepage-banner.jpg" />
+            <div class="btn-img">
+                <h3 class="tag-text">Instant Loans at your Fingertips.</h3>
+                @*<p class="tag-text">We provide instant loans. Click on Apply now, fill up the details and check for your eligibility.</p>*@
+                <div><a class="btn btn-light go-button" href="~/personal.aspx" style="padding-top: 13px;">Apply for Loan</a></div>
+            </div>
+        </div>     
     </div>
     <div class="container home-body">
         <div class="card-row row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
+                        <h4><b>@ViewData["top1_prName"]</b></h4>
+                        <br />
                         <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                        
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top1_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top1_prId"]" style="padding-top: 13px;">Apply</a></div>
                     </div>
                 </div>
             </div>
@@ -25,10 +33,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
-                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">                        
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                        
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <h4><b>@ViewData["top2_prName"]</b></h4>
+                        <br />
+                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top2_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top2_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
             </div>
@@ -36,10 +48,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
-                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">                       
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <h4><b>@ViewData["top3_prName"]</b></h4>
+                        <br />
+                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top3_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top3_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
             </div>
@@ -48,30 +64,42 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
-                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">                        
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <h4><b>@ViewData["top4_prName"]</b></h4>
+                        <br />
+                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top4_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top4_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
-                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">                        
-                        <p class="card-text" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>                       
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <h4><b>@ViewData["top5_prName"]</b></h4>
+                        <br />
+                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top5_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top5_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-                        <h4><b>Home Loans</b></h4>
-                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">                        
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+                        <h4><b>@ViewData["top6_prName"]</b></h4>
+                        <br />
+                        <img class="card-img" src="~/Card-images/card-image.jpg" alt="" style="width:100%">
+                        <br />
+                        <br />
+                        <p class="card-text">@ViewData["top6_prInfo"]</p>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top6_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
             </div>
