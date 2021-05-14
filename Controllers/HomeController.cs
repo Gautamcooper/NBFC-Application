@@ -1092,22 +1092,20 @@ namespace NBFC_App___dev.Controllers
 
                     list.Add(agr);
                 }
-                
+                //if (list.Count == 1)
+                //{
+                //    Payment p = new Payment()
+                //    {
+                //        id = list[0].id,
+                //        agrloantype = list[0].loantype
+                //    };
+                //    Fetch(p);
+                //    return null;
+                //}
                 ViewData["AgreementData"] = list;
                 ViewData["EMIRecords"] = null;
                 ViewData["LoanType"] = null;
-                if(list.Count == 1)
-                {
-                    Agreements agr = new Agreements();
-                    agr = list[0];
-                    Payment p = new Payment()
-                    {
-                        id = agr.id,
-                        agrloantype = agr.loantype
-                    };
-                    Fetch(p);
-                    return null;
-                }
+                
                 return View();
             }
             else
@@ -1195,7 +1193,7 @@ namespace NBFC_App___dev.Controllers
             else if(agrloantype == "Short Term Loan")
             {
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];
-                string temp_url = string.Format("0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount", agrid);
+                string temp_url = string.Format("0/odata/UsrAgreements({0})?$select=UsrName,UsrTotalDebtAmount,UsrBalancedDebtAmount,UsrOverpaymentDebtAmount&$expand=UsrAgreementStatus($select=Name)", agrid);
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
 
@@ -1205,7 +1203,18 @@ namespace NBFC_App___dev.Controllers
                 ViewData["AgreementName"] = ParsedResponse["UsrName"].ToString();
                 float balance = float.Parse(ParsedResponse["UsrBalancedDebtAmount"].ToString());
                 float debt = float.Parse(ParsedResponse["UsrTotalDebtAmount"].ToString());
-                ViewData["AmountToPay"] = (debt - (debt - balance)).ToString();
+                float overpay = float.Parse(ParsedResponse["UsrOverpaymentDebtAmount"].ToString());
+                string status = ParsedResponse["UsrAgreementStatus"]["Name"].ToString();
+                if (balance == 0 && overpay == 0 && status != "Closed")
+                {
+                    ViewData["AmountToPay"] = (debt).ToString();
+                }
+                else if (balance > 0)
+                {
+                    ViewData["AmountToPay"] =  (balance).ToString();
+                }
+                
+                
             }
             
             return View("MakePayment");

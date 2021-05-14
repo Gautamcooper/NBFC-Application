@@ -2,140 +2,140 @@
 @{
     ViewBag.Title = "MakePayment";
 }
-<div class="container">
-    <div style="position: relative;">
-        <h2 style="text-align: center;">Payments</h2>
-    </div>
-    <br />
-    <div class="container-fluid">
-        <form method="post" action="~/Home/Fetch">
-            <div class="form-card">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Your Agreement</label>
-                        <select id="agreement_select" class="form-input inp_dropdown" required>
-                            <option value="-1">Select Your Agreement </option>
-                            @if (ViewData["AgreementData"] != null)
-                            {
-                                foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+    <div class="container">
+        <div style="position: relative;">
+            <h2 style="text-align: center;">Payments</h2>
+        </div>
+        <br />
+        <div style="float: right;">
+            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Payment_Records", "Home")'" />
+        </div>
+        <br />
+        <br />
+        <div class="container-fluid">
+            <form method="post" action="~/Home/Fetch">
+                <div class="form-card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Your Agreement</label>
+                            <select id="agreement_select" class="form-input inp_dropdown" required>
+                                <option value="-1">Select Your Agreement </option>
+                                @if (ViewData["AgreementData"] != null)
                                 {
-                                    <option value="@agr.id,@agr.loantype">@agr.number</option>
+                                    foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                                    {
+                                        <option value="@agr.id,@agr.loantype">@agr.number</option>
+                                    }
                                 }
-                            }
-                        </select>
-                        <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" />
-                        <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
-                    </div>
+                            </select>
+                            <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" />
+                            <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
+                        </div>
 
+                    </div>
+                    <button id="save" type="submit" class="btn btn-primary fetch">Fetch Details</button>
                 </div>
-                <button id="save" type="submit" class="btn btn-primary fetch">Fetch Details</button>
-            </div>
-        </form>
-        <br />
-        <br />
-        @if (ViewData["LoanType"] != null)
-        {
-            if (ViewData["LoanType"].ToString() == "Long Term Loan")
-            {               
+            </form>
+            <br />
+            <br />
+            @if (ViewData["LoanType"] != null)
+            {
+                if (ViewData["LoanType"].ToString() == "Long Term Loan")
+                {
+                    <form method="post" action="~/Home/On_Pay">
+                        <div><h3>@ViewData["AgreementName"].ToString()</h3></div>
+                        <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
+                        <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
+                        <input hidden id="amount" name="amount" class="form-input" value="" />
+                        <input hidden id="count" name="count" class="form-input" value="" />
+                        <details open>
+                            <summary>Active EMI's</summary>
+
+                            <table class="table">
+                                <thead>
+                                    <tr style="background: powderblue;">
+                                        <th scope="col">Select</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">Due Date</th>
+                                        <th scope="col">Repaid</th>
+                                        <th scope="col">Late Payment Charge</th>
+                                        <th scope="col">Extension Charge</th>
+                                        <th scope="col">Old Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{int i = 0; }
+                                    @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecords"])
+                                    {
+                                        var amount_id = i + "_amount";
+                                        var checkbox_id = i + "_checkbox";
+                                        <tr class="table_row">
+                                            <td><input class="table_checkbox" type="checkbox" id="@checkbox_id"></td>
+                                            <td>@emr.emitype</td>
+                                            <td id="@amount_id">@emr.amount</td>
+                                            <td>@emr.startdate</td>
+                                            <td>@emr.duedate</td>
+                                            <td>@emr.repaid</td>
+                                            <td>@emr.islatepaymentfeeapplied</td>
+                                            <td>@emr.isextensionfeeapplied</td>
+                                            <td>@emr.oldamount</td>
+                                        </tr>
+
+                                        i++;
+                                    }
+                                    <tr class="table_row">
+                                        <td>Total Amount</td>
+                                        <td> </td>
+                                        <td id="total_amount"></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </details>
+                        <button id="save" type="submit" class="btn btn-primary">Pay</button>
+                    </form>
+                }
+                if (ViewData["LoanType"].ToString() == "Short Term Loan")
+                {
+
+
                 <form method="post" action="~/Home/On_Pay">
-                    <div><h3>@ViewData["AgreementName"].ToString()</h3></div>                    
+                    <h3>
+                        @ViewData["AgreementName"].ToString()
+                    </h3>
                     <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
                     <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
-                    <input hidden id="amount" name="amount" class="form-input" value="" />
-                    <input hidden id="count" name="count" class="form-input" value="" />
-                    <details open>
-                        <summary>Active EMI's</summary>
+                    <input hidden id="count" name="count" class="form-input" value="0" />
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Amount to pay</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="debtamount" class="form-input" name="debtamount" value="@ViewData["AmountToPay"]" readonly="readonly">
+                        </div>
+                    </div>
 
-                        <table class="table">
-                            <thead>
-                                <tr style="background: powderblue;">
-                                    <th scope="col">Select</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Start Date</th>
-                                    <th scope="col">Due Date</th>
-                                    <th scope="col">Repaid</th>
-                                    <th scope="col">Late Payment Charge</th>
-                                    <th scope="col">Extension Charge</th>
-                                    <th scope="col">Old Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{int i = 0; }
-                                @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecords"])
-                                {
-                                    var amount_id = i + "_amount";
-                                    var checkbox_id = i + "_checkbox";
-                                    <tr class="table_row">
-                                        <td><input class="table_checkbox" type="checkbox" id="@checkbox_id"></td>
-                                        <td>@emr.emitype</td>
-                                        <td id="@amount_id">@emr.amount</td>
-                                        <td>@emr.startdate</td>
-                                        <td>@emr.duedate</td>
-                                        <td>@emr.repaid</td>
-                                        <td>@emr.islatepaymentfeeapplied</td>
-                                        <td>@emr.isextensionfeeapplied</td>
-                                        <td>@emr.oldamount</td>
-                                    </tr>
-
-                                    i++;
-                                }
-                                <tr class="table_row">
-                                    <td>Total Amount</td>
-                                    <td> </td>
-                                    <td id="total_amount"></td>
-                                </tr>
-                            </tbody>
-
-                        </table>
-
-                    </details>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Enter amount</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input id="amount" name="amount" class="form-input" placeholder="Fill amount to pay" />
+                        </div>
+                    </div>
                     <button id="save" type="submit" class="btn btn-primary">Pay</button>
+
                 </form>
-            }
-            if (ViewData["LoanType"].ToString() == "Short Term Loan")
-            {
-                
 
-    <form method="post" action="~/Home/On_Pay">
-        <h3>
-            @ViewData["AgreementName"].ToString()  </h3>          
-                <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
-                <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
-                <input hidden id="count" name="count" class="form-input" value="0" />
-                <br />
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Amount to pay</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input id="debtamount" class="form-input" name="debtamount" value="@ViewData["AmountToPay"]" readonly="readonly">
-                    </div>
-                </div>
-                <!---<div class="row">
-                    <div class="col-md-4">
-                        <label>Balance Amount to pay</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input id="balanceamuont" class="form-input" name="balanceamuont" value="@ViewData["BalanceAmount"]" readonly="readonly">
-                    </div>
-                </div>-->
-                <div class="row">
-                    <div class="col-md-4">
-                        <label>Enter amount</label>
-                    </div>
-                    <div class="col-md-8">
-                        <input id="amount" name="amount" class="form-input" placeholder="Fill amount to pay" />
-                    </div>
-                </div>
-                <button id="save" type="submit" class="btn btn-primary">Pay</button>
-</form>
-                
+                }
+
             }
 
-        }
 
-
+        </div>
     </div>
-</div>
 @Scripts.Render("~/Scripts/about.js")

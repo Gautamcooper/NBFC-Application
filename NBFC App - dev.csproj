@@ -182,9 +182,16 @@
     <Content Include="assets\webfonts\Simple-Line-Icons.svg" />
     <Content Include="assets\webfonts\Simple-Line-Iconsb26c.svg" />
     <Content Include="assets\webfonts\themify.svg" />
+    <Content Include="banner.jpg" />
+    <Content Include="bannerforloan.jpg" />
+    <Content Include="Card-images\businessVisaCardLoan.jpg" />
     <Content Include="Card-images\card-image.jpg" />
+    <Content Include="Card-images\classicarloan.jpg" />
     <Content Include="Card-images\homeloanimage.jpg" />
     <Content Include="Card-images\HomePage.JPG" />
+    <Content Include="Card-images\payrollCardImage.jpg" />
+    <Content Include="Card-images\personalLoan.jpg" />
+    <Content Include="Card-images\TravelCreditCardLoan.jpg" />
     <Content Include="Content\aboutstyle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
