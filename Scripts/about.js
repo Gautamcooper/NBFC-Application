@@ -1,4 +1,6 @@
-﻿// Gender dropdown
+﻿//Hide all cities at first
+$("#currentcity_select").find("option").hide();
+// Gender dropdown
 var gender1 = $("#gender").attr("value");
 $("#gender_select").val(gender1);
 var gender_ = $("#gender_select").val();
@@ -73,7 +75,13 @@ $("#currentstate_select").change(function () {
 $("#currentstate_select").focus(function () {
     $("#currentstate_select option[value='-1']").attr('disabled', 'disabled');
 });
-
+//Populate state and cities
+$("#currentstate_select").change(function () {
+    var state_val = $("#currentstate_select").val();
+    var state = $("#currentstate_select option[value='"+state_val+"']").text();
+    $("#currentcity_select").find("option").hide();
+    $("#currentcity_select").find("option[state='" + state + "']").show();
+})
 // Country Type dropdown
 var countries = $("#currentcountry").attr("value");
 $("#currentcountry_select").val(countries);
