@@ -1092,16 +1092,16 @@ namespace NBFC_App___dev.Controllers
 
                     list.Add(agr);
                 }
-                //if (list.Count == 1)
-                //{
-                //    Payment p = new Payment()
-                //    {
-                //        id = list[0].id,
-                //        agrloantype = list[0].loantype
-                //    };
-                //    Fetch(p);
-                //    return null;
-                //}
+                if (list.Count == 1)
+                {
+                    Payment p = new Payment()
+                    {
+                        id = list[0].id,
+                        agrloantype = list[0].loantype
+                    };
+                    Fetch(p);
+                    return View("MakePayment");
+                }
                 ViewData["AgreementData"] = list;
                 ViewData["EMIRecords"] = null;
                 ViewData["LoanType"] = null;

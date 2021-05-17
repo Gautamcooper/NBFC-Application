@@ -37,69 +37,37 @@ namespace NBFC_App___dev
         protected void Button1_Click(object sender, EventArgs e)
         {
             next_clicked.Text = "true";
-        }
-        protected void Button2_Click(object sender, EventArgs e)
-        {
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            Random otp_num_random = new Random();
+            string otp_num = otp_num_random.Next(100000, 999999).ToString();
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
-            if (OTP.Text.ToString() == "1234" && temp_data.Text == "login")
+            Session["Name"] = Guid.NewGuid().ToString();
+            string mobile = mnumber.Text.ToString();
+            string emailid = email.Text.ToString();
+            
+            //check if already exists or not
+            string strQry = "Select * from Userinfo where mobile='" + mobile + "' and email='" + emailid + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count == 0)
             {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string mobile = mnumber.Text.ToString();
-                string emailid = email.Text.ToString();
-                //string fulln = fullname.Text.ToString();
-                string strQry = "Select * from Userinfo where mobile='" + mobile + "' and email='" + emailid + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-                    Session["Name"] = Guid.NewGuid().ToString();
-                    //id_var = "Button3";
-                    //idvar.Text = id_var;
-                    Session["repeat"] = "true";
-                    SqlCommand cmd;
-                    string sql = "Update UserInfo set session='" + Session["Name"] + "' where mobile='" + mobile + "'and email = '" + emailid + "'";
-                    cmd = new SqlCommand(sql, sqlCnctn);
-                    adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-                    adapter.UpdateCommand.ExecuteNonQuery();
-                    cmd.Dispose();
-                    Response.Redirect("~/Home/Homepage");
-                }
-                else
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('We do not have any record with these details. kindly signup')", true);
-                }
-            }
-            else if (OTP.Text.ToString() == "1234" && temp_data.Text == "signup")
-            {
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                string mobile = mnumber.Text.ToString();
-                string emailid = email.Text.ToString();
                 string fulln = fullname.Text.ToString();
-                string strQry = "Select * from Userinfo where mobile='" + mobile + "' and email='" + emailid + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+                if (fulln == "")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('We already have a user with these details. kindly sign in')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We do not find any user with provided Info. Please Signup'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", , true);                    
                 }
                 else
                 {
-                    //id_var = "Button3";
-                    //idvar.Text = id_var;
-                    Session["Name"] = Guid.NewGuid().ToString();
-                    Session["repeat"] = "false";
-                    string query = "INSERT INTO UserInfo (email,mobile,session,fullname) values ('" + emailid + "','" + mobile + "','" + Session["Name"] + "','" + fulln + "')";
-                    SqlCommand command = new SqlCommand(query, sqlCnctn);
-                    adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
+                    string query_l = "INSERT INTO UserInfo (email,mobile,session,fullname,otp) values ('" + emailid + "','" + mobile + "','" + Session["Name"] + "','" + fulln + "','" + otp_num + "')";
+                    SqlCommand command = new SqlCommand(query_l, sqlCnctn);
+                    adapter.InsertCommand = new SqlCommand(query_l, sqlCnctn);
                     adapter.InsertCommand.ExecuteNonQuery();
                     command.Dispose();
-
-                    // Create a record in Lead
                     // Authentication
                     string bpmcsrf = "";
                     string bpmloader = "";
@@ -150,13 +118,45 @@ namespace NBFC_App___dev
                     request2.AddCookie("UserName", username);
                     request2.AddParameter("application/json", "{\r\n    \"Contact\": \"" + fulln + "\",\r\n    \"Email\": \"" + emailid + "\",\r\n    \"MobilePhone\":\"" + mobile + "\"\r\n\r\n}", ParameterType.RequestBody);
                     client2.Execute(request2);
-
-
+                }               
+            }
+            else
+            {
+                string query = "Update UserInfo set session='" + Session["Name"] + "',otp='" + otp_num + "' where mobile='" + mobile + "'and email = '" + emailid + "'";
+                adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
+                adapter.InsertCommand.ExecuteNonQuery();
+                adapter.Dispose();
+            }                       
+        }
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session='" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string otp = row["otp"].ToString();
+                if (otp == OTP.Text.ToString())
+                {
                     Response.Redirect("~/Home/Homepage");
                 }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please Enter the correct OTP')", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('We do not have any record with these details. kindly signup')", true);
             }
             sqlCnctn.Close();
-        }
+        }                   
         protected void login_button_click(object sender, EventArgs e)
         {
             System.Web.HttpCookie UserCookie = new System.Web.HttpCookie("User");
