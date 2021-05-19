@@ -341,3 +341,7 @@ body {
         max-width: 500px;
     }
 }
+.checkboxclass {
+    font-size: 17px;
+    margin-left: 7px;
+}

@@ -22,6 +22,13 @@ namespace NBFC_App___dev
                 {
                     way = Request.Cookies["User"].Value;
                 }
+                else
+                {
+                    System.Web.HttpCookie UserCookie = new System.Web.HttpCookie("User");
+                    UserCookie.Value = "login";
+                    UserCookie.Expires = DateTime.Now.AddMinutes(60);
+                    Response.Cookies.Add(UserCookie);
+                }
                 temp_data.Text = way;
                 if (way == "login")
                 {
@@ -53,12 +60,13 @@ namespace NBFC_App___dev
             SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-            if (dt.Rows.Count == 0)
+            string way = Request.Cookies["User"].Value;
+            if (way == "signup")
             {
                 string fulln = fullname.Text.ToString();
-                if (fulln == "")
+                if (dt.Rows.Count > 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We do not find any user with provided Info. Please Signup'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We already have a user with this Info. Please Login'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
                     //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", , true);                    
                 }
                 else
@@ -122,10 +130,19 @@ namespace NBFC_App___dev
             }
             else
             {
-                string query = "Update UserInfo set session='" + Session["Name"] + "',otp='" + otp_num + "' where mobile='" + mobile + "'and email = '" + emailid + "'";
-                adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
-                adapter.InsertCommand.ExecuteNonQuery();
-                adapter.Dispose();
+                if (dt.Rows.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We do not find any User with this Info. Please Signup'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
+                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", , true);                    
+                }
+                else
+                {
+                    string query = "Update UserInfo set session='" + Session["Name"] + "',otp='" + otp_num + "' where mobile='" + mobile + "'and email = '" + emailid + "'";
+                    adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
+                    adapter.InsertCommand.ExecuteNonQuery();
+                    adapter.Dispose();
+                }
+                
             }                       
         }
         protected void Button2_Click(object sender, EventArgs e)
@@ -161,7 +178,7 @@ namespace NBFC_App___dev
         {
             System.Web.HttpCookie UserCookie = new System.Web.HttpCookie("User");
             UserCookie.Value = "login";
-            UserCookie.Expires = DateTime.Now.AddMinutes(30);
+            UserCookie.Expires = DateTime.Now.AddMinutes(60);
             Response.Cookies.Add(UserCookie);
             Response.Redirect("~/index.aspx");
         }
@@ -169,7 +186,7 @@ namespace NBFC_App___dev
         {
             System.Web.HttpCookie UserCookie = new System.Web.HttpCookie("User");
             UserCookie.Value = "signup";
-            UserCookie.Expires = DateTime.Now.AddMinutes(30);
+            UserCookie.Expires = DateTime.Now.AddMinutes(60);
             Response.Cookies.Add(UserCookie);
             Response.Redirect("~/index.aspx");
         }

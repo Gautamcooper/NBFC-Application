@@ -44,7 +44,7 @@
                                         <h4 id="login_label">Log In</h4>
                                         <h4 id="signup_label">Sign Up</h4>                                              
                                             <asp:TextBox ID="fullname" placeholder="Full Name" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:TextBox ID="mnumber"  placeholder="Mobile No." runat="server" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox ID="mnumber" type="number"  placeholder="Mobile No." runat="server" CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="email" placeholder="Email ID" runat="server" CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="next_clicked" runat="server" hidden="true"></asp:TextBox>
                                             <asp:TextBox ID="temp_data" runat="server" hidden="true"></asp:TextBox>                                     

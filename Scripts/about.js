@@ -228,8 +228,15 @@ $(".remove").click(function () {
     var id_ = id.substring(7);
     $("#" + id_).val(null);
 });
-
-
+$("#checkaddr").change(function () {
+    var checked = $("#checkaddr").prop("checked");
+    if (checked == true) {
+        $("#address").hide();
+    }
+    else {
+        $("#address").show();
+    }
+})
 
 
 

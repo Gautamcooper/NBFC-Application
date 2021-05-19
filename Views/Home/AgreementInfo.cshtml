@@ -230,7 +230,7 @@
                 <form method="post" action="~/Home/Fetch">
                     <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" value="@data.id" />
                     <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
-                    @if (@data.status == "Active")
+                    @if (@data.status == "Active" || @data.status == "Partial Repayment")
                     {
                         <button id="save" type="submit" class="btn btn-primary">Pay</button>
                     }

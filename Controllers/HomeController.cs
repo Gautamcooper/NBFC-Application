@@ -1134,7 +1134,7 @@ namespace NBFC_App___dev.Controllers
             string pannumber = row["pannumber"].ToString();
 
             string apiurl1 = ConfigurationManager.AppSettings["apiurl"];
-            string temp_url1 = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and UsrAgreementStatus/Name eq 'Active' or UsrAgreementStatus/Name eq 'Partial Repayment'&$expand=UsrLoanType($select=Name)", pannumber);
+            string temp_url1 = string.Format("0/odata/UsrAgreements?$select=Id,UsrName&$filter=UsrContact/UsrPANNumber eq '{0}' and (UsrAgreementStatus/Name eq 'Active' or UsrAgreementStatus/Name eq 'Partial Repayment')&$expand=UsrLoanType($select=Name)", pannumber);
             string url1 = apiurl1 + temp_url1;
             JObject ParsedResponse1 = GET_Object(url1);
 
