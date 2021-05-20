@@ -345,3 +345,15 @@ body {
     font-size: 17px;
     margin-left: 7px;
 }
+
+.faqsummary {
+    cursor: pointer;
+    border-radius: 5px;
+    border-bottom: 1px solid;
+}
+    .faqsummary:hover {
+        background-color:cornflowerblue;
+    }
+.faqanswer {
+    background-color: #d1e1d5;
+}

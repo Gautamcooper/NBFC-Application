@@ -1307,6 +1307,32 @@ namespace NBFC_App___dev.Controllers
             }
            
         }
+
+        public ActionResult FAQ()
+        {
+
+            //API for Miscalleneous FAQ's
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string miscId = "eeae94af-d1f8-44a6-9502-6194d8a6502a";
+            string temp_url = string.Format("/0/odata/KnowledgeBase?$select=Name,NotHtmlNote&$filter=Type/Id eq {0}", miscId);
+            string url = apiurl + temp_url;
+            JObject ParsedResponse = GET_Object(url);
+
+            List<FAQ> faq_list = new List<FAQ>();
+
+            foreach (dynamic v in ParsedResponse["value"])
+            {
+                FAQ faq = new FAQ
+                {
+                    question = v["Name"].ToString(),
+                    answer = v["NotHtmlNote"].ToString(),
+                };
+                faq_list.Add(faq);
+            }
+
+            ViewData["miscFAQ"] = faq_list;
+            return View();
+        }
         public ActionResult Apply_for_loan()
         {
             Response.Redirect("~/personal.aspx");

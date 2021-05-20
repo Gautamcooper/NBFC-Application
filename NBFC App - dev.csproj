@@ -140,6 +140,7 @@
     <Compile Include="Models\ApplicationInfo.cs" />
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\EMI_Records.cs" />
+    <Compile Include="Models\FAQ.cs" />
     <Compile Include="Models\HomePage.cs" />
     <Compile Include="Models\Operations.cs" />
     <Compile Include="Models\Pay.cs" />
@@ -197,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\index.css" />
+    <Content Include="FAQ.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -369,6 +371,7 @@
     <Content Include="Views\Service\Queries.cshtml" />
     <Content Include="Views\Service\QueryInfo.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

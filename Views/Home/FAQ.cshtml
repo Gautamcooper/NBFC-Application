@@ -1,0 +1,27 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    p {
+        font-size:22px;
+        font-family:cursive;
+    }
+</style>
+
+<div class="container">
+    <div class="FAQ">
+        <img src="~/FAQ.jpg" style="width:100%;height:auto;" />
+    </div>
+    <br />
+    <br />
+    @foreach (var faq in (IEnumerable<FAQ>)ViewData["miscFAQ"])
+    {
+        <details>
+            <summary class="faqsummary">@faq.question</summary>
+            <p class="faqanswer">@faq.answer</p>
+        </details>
+    }
+</div>
