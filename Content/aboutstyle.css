@@ -357,3 +357,14 @@ body {
 .faqanswer {
     background-color: #d1e1d5;
 }
+
+@media screen and (min-width: 0px) and (max-width: 500px){
+    .sec_button {
+        margin-top: 2%;
+    }  
+}
+
+.congrats_class {
+    text-align: center;
+    font-family: cursive;
+}

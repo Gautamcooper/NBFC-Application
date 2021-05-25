@@ -7,6 +7,17 @@
     var data = ViewBag.Message;
 }
 
+    <style>
+        h2 {
+            font-size: 22px;
+            font-family: cursive;
+        }
+        p {
+            font-size: 22px;
+            font-family: cursive;
+        }
+    </style>
+
     <div class="container">
         <div style="position: relative;">
             <h2 style="text-align: center;">Loan Parameters</h2>
@@ -59,7 +70,27 @@
                 </table>
 
             </details>
-            <input type="button" class="btn btn-primary" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
+            <div class="row" style="text-align: center;">
+                <div class="col-md-6">
+                    <input type="button" class="btn btn-primary" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
+                </div>
+                <div class="col-md-6 sec_button">
+                    <input type="button" class="btn btn-primary" value="Check Eligiblity" onclick="location.href='@Url.Action("LoanEligibilityCheck", "Home",new { Id = ViewData["ProductId"].ToString()})'" />
+                </div>
+            </div>
+            <br />
+            <h2>FAQ's</h2>
+            <br />
+            @if (ViewData["productfaq"] != null)
+            {
+                foreach (var faq in (IEnumerable<FAQ>)ViewData["productfaq"])
+                {
+                    <details>
+                        <summary class="faqsummary">@faq.question</summary>
+                        <p class="faqanswer">@faq.answer</p>
+                    </details>
+                }
+            }
         </div>
     </div>
 

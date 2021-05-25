@@ -159,6 +159,7 @@ namespace NBFC_App___dev.Controllers
 
         public ActionResult ProductsInfo(string Id)
         {
+            //Get Product Parameters
             string apiurl = ConfigurationManager.AppSettings["apiurl"];            
             string temp_url = string.Format("0/odata/UsrSpecificationOfProducts?$select=UsrValueDecimal,UsrValueInteger&$expand=UsrParameter($select=Name)&$filter=UsrProducts/Id eq {0}",Id);            
             string url = apiurl + temp_url;
@@ -176,6 +177,7 @@ namespace NBFC_App___dev.Controllers
                 productinfo_list.Add(prdinfo);
             }
 
+            // Get Product Services
             string temp_productService = string.Format("0/odata/UsrProductServiceRecords?$select=UsrServices&$filter=UsrProduct/Id eq {0} &$expand=UsrServices($select=UsrName)", Id);
             string productServiceUrl = apiurl + temp_productService;
             JObject productservices = GET_Object(productServiceUrl);
@@ -194,8 +196,27 @@ namespace NBFC_App___dev.Controllers
                 productservicelist.Add(ps);
             }
 
-            ViewData["ProductServices"] = productservicelist;
+            //Get Product FAQ's
+            string prdfaq = string.Format("0/odata/KnowledgeBase?$select=Name,NotHtmlNote&$filter=UsrProduct/Id eq {0}", Id);
+            string prdfaqurl = apiurl + prdfaq;
+            JObject prdfaqresponse = GET_Object(prdfaqurl);
 
+            List<FAQ> prdfaqlist = new List<FAQ>();
+
+
+            foreach (var v in prdfaqresponse["value"])
+            {
+                FAQ faq = new FAQ
+                {
+                    question = v["Name"].ToString(),
+                    answer = v["NotHtmlNote"].ToString(),
+                };
+                prdfaqlist.Add(faq);
+            }
+
+            ViewData["productfaq"] = prdfaqlist;
+            ViewData["ProductServices"] = productservicelist;
+            ViewData["ProductId"] = Id;
             ViewData["ProductsInfoData"] = productinfo_list;            
             System.Web.HttpCookie ProductCookie = new System.Web.HttpCookie("ProductId");
             ProductCookie.Value = Id;
@@ -1339,5 +1360,143 @@ namespace NBFC_App___dev.Controllers
             return null;
         }
 
+        public ActionResult LoanEligibilityCheck(string Id)
+        {
+
+            // Fetching Products
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string temp_url_products = "0/odata/UsrProducts?$select=Id,Name";
+            string url_for_prdct = apiurl + temp_url_products;
+            JObject Response_for_prdct = GET_Object(url_for_prdct);
+            List<Products> prdcts_list = new List<Products>();
+
+            foreach (var v in Response_for_prdct["value"])
+            {
+                Products prdct = new Products()
+                {
+                    id = v["Id"].ToString(),
+                    name = v["Name"].ToString(),
+                };
+                prdcts_list.Add(prdct);
+            }
+
+            ViewData["ProductsData"] = prdcts_list;
+            ViewData["ProductId"] = Id;
+            return View();
+        }
+
+        
+        public ActionResult GetLoanEligibilityResult(FormCollection data) 
+        {
+            int loanAmount = Convert.ToInt32(data["loanAmount"]);
+            int monthlyIncome = Convert.ToInt32(data["monthlyIncome"]);
+            int Tenure = Convert.ToInt32(data["Tenure"]);
+            string productId = data["prdct_id"].ToString();
+            string typeofloan = data["loan"].ToString();
+            string birthdate = data["birthdate"].ToString();
+            ViewData["Result"] = null;
+            ViewData["Options"] = null;
+
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string temp_url_products = string.Format("0/odata/UsrProducts?$select=Name,UsrMinAge,UsrMaxAge,UsrMinLoanAmount,UsrMaxLoanAmount,UsrMinLoanTermInDays,UsrMaxLoanTermInDays,UsrMinLoanTermInMonths,UsrMaxLoanTermInMonths,UsrRequiredMonthlyIncome&$filter=Id eq {0}", productId);
+            string url_for_prdct = apiurl + temp_url_products;
+            JObject Response_for_prdct = GET_Object(url_for_prdct);
+
+            // get the params
+            ViewData["ProductName"] = Response_for_prdct["value"][0]["Name"];
+            int MinAge = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMinAge"]);
+            int MaxAge = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMaxAge"]);
+            int MinLoanAmount = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMinLoanAmount"]);
+            int MaxLoanAmount = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMaxLoanAmount"]);
+            int MinLoanTermInMonths = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMinLoanTermInMonths"]);
+            int MaxLoanTermInMonths = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMaxLoanTermInMonths"]);
+            int MinLoanTermInDays = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMinLoanTermInDays"]);
+            int MaxLoanTermInDays = Convert.ToInt32(Response_for_prdct["value"][0]["UsrMaxLoanTermInDays"]);
+            int RequiredMonthlyIncome = Convert.ToInt32(Response_for_prdct["value"][0]["UsrRequiredMonthlyIncome"]);
+
+            //calculate Age
+            DateTime dob = Convert.ToDateTime(birthdate);
+            int age = CalculateAge(dob);
+            //get product parameters from API Call
+            if (typeofloan == "Short Term Loan")
+            {
+                if (age > MinAge && age < MaxAge && loanAmount > MinLoanAmount && loanAmount < MaxLoanAmount && monthlyIncome > RequiredMonthlyIncome && Tenure > MinLoanTermInDays && Tenure < MaxLoanTermInDays)
+                {
+                    ViewData["Result"] = "true";
+                }
+            }
+            else
+            {
+                if (age > MinAge && age < MaxAge && loanAmount > MinLoanAmount && loanAmount < MaxLoanAmount && monthlyIncome > RequiredMonthlyIncome && Tenure > MinLoanTermInMonths && Tenure < MaxLoanTermInMonths)
+                {
+                    ViewData["Result"] = "true";
+                }
+            }
+            //compare parameters
+            if (ViewData["Result"] == null && typeofloan == "Short Term Loan")
+            {
+                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome gt {2} and UsrMinLoanTermInDays lt {3} and UsrMaxLoanTermInDays gt {3}", age,loanAmount,monthlyIncome,Tenure);
+                string optionsurl = apiurl + optionalprdurl;
+                JObject response_of_Optional_product = GET_Object(optionsurl);
+
+                List<Products> product_list = new List<Products>();
+                foreach (var v in response_of_Optional_product["value"])
+                {
+                    Products prd = new Products()
+                    {
+                        id = v["Id"].ToString(),
+                        name = v["Name"].ToString()
+                    };
+                    product_list.Add(prd);
+                }
+                ViewData["Options"] = product_list;
+            }
+            else if(ViewData["Result"] == null && typeofloan == "Long Term Loan")
+            {
+                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome gt {2} and UsrMinLoanTermInMonths lt {3} and UsrMaxLoanTermInMonths gt {3}", age, loanAmount, monthlyIncome, Tenure);
+                string optionsurl = apiurl + optionalprdurl;
+                JObject response_of_Optional_product = GET_Object(optionsurl);
+
+                List<Products> product_list = new List<Products>();
+                foreach (var v in response_of_Optional_product["value"])
+                {
+                    Products prd = new Products()
+                    {
+                        id = v["Id"].ToString(),
+                        name = v["Name"].ToString()
+                    };
+                    product_list.Add(prd);
+                }
+                ViewData["Options"] = product_list;
+            }
+
+            string temp_product = "0/odata/UsrProducts?$select=Id,Name";
+            string url_prdct = apiurl + temp_product;
+            JObject Response_prdct = GET_Object(url_prdct);
+            List<Products> prdcts_list = new List<Products>();
+
+            foreach (var v in Response_prdct["value"])
+            {
+                Products prdct = new Products()
+                {
+                    id = v["Id"].ToString(),
+                    name = v["Name"].ToString(),
+                };
+                prdcts_list.Add(prdct);
+            }
+
+            ViewData["ProductsData"] = prdcts_list;
+            return View("LoanEligibilityCheck");
+        }
+
+        public int CalculateAge(DateTime dob) 
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dob.Year;
+            if (DateTime.Now.DayOfYear < dob.DayOfYear)
+            { age = age - 1; }
+
+            return age;
+        }
     }
 }

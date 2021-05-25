@@ -237,6 +237,17 @@ $("#checkaddr").change(function () {
         $("#address").show();
     }
 })
+$("#sel_prd").change(function () {
+    var value = $("#sel_prd").val();
+    $("#product_name").val(value);
+});
+$("#loanType").change(function () {
+    var value = $("#loanType").val();
+    $("#typeofloan").val(value);
+});
+var productId = $("#productId").val();
+$("#sel_prd").val(productId);
+
 
 
 

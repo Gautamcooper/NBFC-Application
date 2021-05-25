@@ -372,6 +372,7 @@
     <Content Include="Views\Service\QueryInfo.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\LoanEligibilityCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

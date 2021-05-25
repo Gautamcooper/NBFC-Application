@@ -1,0 +1,95 @@
+﻿@using NBFC_App___dev.Models;
+@{
+    ViewBag.Title = "LoanEligibilityCheck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div style="position: relative center;">
+        <h2>Loan Eligibility Calculator</h2>
+    </div>
+    <br />
+    <br />
+    <br />
+    <form method="post" action="~/Home/GetLoanEligibilityResult">
+        <div class="row">
+            <div class="col-md-6">
+                <input id="LoanAmount" class="form-input inp" placeholder="Loan Amount" name="loanAmount">
+            </div>
+            <div class="col-md-6">
+                <input id="MonthlyIncome" class="form-input inp" placeholder="Net Monthly Income" name="monthlyIncome">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <select id="loanType" class="form-input" required>
+                    <option value="-1">Loan Type</option>
+                    <option value="Short Term Loan">Short Term Loan</option>
+                    <option value="Long Term Loan">Long Term Loan</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input id="LoanTenure" class="form-input inp" placeholder="Tenure" name="Tenure">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="date" id="birthdate" class="form-input inp" placeholder="Date of Birth" name="birthdate" />
+            </div>
+            <div class="col-md-6">
+                <select id="sel_prd" class="form-input" required>
+                    <option value="-1">Select Loan</option>
+                    @if (ViewData["ProductsData"] != null)
+                    {
+                        foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                        {
+                            <option value="@prdct.id">@prdct.name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+            </div>
+        </div>
+        <input hidden id="productId" class="form-input" placeholder="" value =@ViewData["ProductId"] name="auto_product_id" />
+        <input hidden id="product_name" class="form-input" placeholder="Loan" value="@ViewData["ProductId"]" name="prdct_id" />
+        <input hidden id="typeofloan" class="form-input" placeholder="Loan" name="loan" />
+    </form>
+    <br />
+    <br />
+    <div style="position: relative center;">
+        @if (ViewData["Result"] != null)
+        {
+            <h2 class="congrats_class">Congratulation! You are Eligible for @ViewData["ProductName"].ToString() Loan.</h2>
+        }
+        else if (ViewData["Options"] != null)
+        {
+            <h2>Sorry! You are Eligible for below loans but not this One.</h2>
+            <br />
+            <br />
+            <table class="table">
+                <thead>
+                    <tr style="background: powderblue;">
+                        <th scope="col">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prd in (IEnumerable<Products>)ViewData["Options"])
+                    {
+                        <tr class="table_row">
+                            <td>@Html.ActionLink(@prd.name, "ProductsInfo", new { Id = @prd.id })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/about.js")
+
