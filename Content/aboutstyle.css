@@ -280,7 +280,7 @@ body {
     border-radius: 10px;
     text-align: center;
     height: 580px;
-    max-width:350px;
+    max-width:400px;
 }
 .card-img {
     border-radius: 5px 5px 0 0;
@@ -360,8 +360,11 @@ body {
         margin-top: 2%;
     }  
 }
-@media screen and (min-width: 770px){
-    .q-links-body {        
+@media screen and (min-width: 501px){
+    .home-body{
+        margin-left:-15px;
+    }
+    .q-links-body {
         border-top: 2px solid black;
         margin-top: 5%;
         padding: 0;
