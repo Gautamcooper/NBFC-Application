@@ -6,20 +6,33 @@
 
     <div>
         <div class="dashboard">
-            <img class="dashboard-img" src="~/homepage-banner.jpg" />
+            <img class="dashboard-img" alt="homepage" src="~/homepage-banner.jpg" />
             <div class="btn-img">
                 <h3 class="tag-text">Instant Loans at your Fingertips.</h3>
+                <p class="tag-text">No Repeat Applications. One time approval needed.</p>
                 @*<p class="tag-text">We provide instant loans. Click on Apply now, fill up the details and check for your eligibility.</p>*@
                 <div><a class="btn btn-light go-button" href="~/personal.aspx" style="padding-top: 13px;">Apply for Loan</a></div>
             </div>
         </div>     
+    </div>    
+<div class="row dashboard-page">
+    <div class="col-md-2 q-links-body">
+        <h3>Quick Links</h3>
+        <div class="quick-links">
+            <ul>
+                <li class="link-text"><a href="~/personal.aspx">Apply for a loan</a></li>
+                <li class="link-text"><a href="~/Home/LoanEligibilityCheck">Check for Loan Eligibility</a></li>
+                <li class="link-text"><a href="~/Home/Products">Different Loan Types</a></li>
+                <li class="link-text"><a href="~/Home/FAQ">FAQs</a></li>                
+            </ul>
+        </div>
     </div>
-    <div class="container home-body">
+    <div class="col-lg-9 col-md-9 col-sm-9 container home-body">
         <div class="card-row row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="container-fluid">
-                       
+
                         <h4><b>@ViewData["top1_prName"]</b></h4>
                         <br />
                         <img class="card-img" src="~/Card-images/classicarloan.jpg" alt="" @*style="width:317px; height:211px;"*@>
@@ -30,10 +43,10 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="col-md-4">
+
+            <div class="col-md-3">
                 <div class="card">
-                    <div class="container-fluid">                 
+                    <div class="container-fluid">
                         <h4><b>@ViewData["top2_prName"]</b></h4>
                         <br />
                         <img class="card-img" src="~/Card-images/payrollCardImage.jpg" alt="" @*style="width:317px; height:211px;"*@>
@@ -41,11 +54,11 @@
                         <br />
                         <p class="card-text">@ViewData["top2_prInfo"]</p>
                         <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top2_prId"]" style="padding-top: 13px;">Apply</a></div>
-                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="container-fluid">
                         <h4><b>@ViewData["top3_prName"]</b></h4>
@@ -61,7 +74,7 @@
             </div>
         </div>
         <div class="card-row row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="container-fluid">
                         <h4><b>@ViewData["top4_prName"]</b></h4>
@@ -75,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="container-fluid">
                         <h4><b>@ViewData["top5_prName"]</b></h4>
@@ -89,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card">
                     <div class="container-fluid">
                         <h4><b>@ViewData["top6_prName"]</b></h4>
@@ -99,10 +112,13 @@
                         <br />
                         <p class="card-text">@ViewData["top6_prInfo"]</p>
                         <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top6_prId"]" style="padding-top: 13px;">Apply</a></div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+</div>
+        
+
 
