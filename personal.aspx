@@ -133,7 +133,7 @@
                                                     <label class="label_inp" for="Product" id="label_Product">Loan Type</label>
                                                     <asp:DropDownList ID="Product" class="dropdowncls inp-dropdown" runat="server">
                                                         <asp:ListItem Enabled="true" Text="Product" Value="-1"></asp:ListItem>
-                                                        <asp:ListItem Text="Payroll card programs" Value="7ed09da4-16cd-4682-9256-06ec7de429ad"></asp:ListItem>
+                                                        <asp:ListItem Text="Auto Loan" Value="7ed09da4-16cd-4682-9256-06ec7de429ad"></asp:ListItem>
                                                         <asp:ListItem Text="Fixed Rate Mortgage, 30 Year Term" Value="3e38e0a5-00ac-4870-922f-08c8662ad943"></asp:ListItem>
                                                         <asp:ListItem Text="Simple Auto Coverage" Value="2e1e9729-54b6-4f43-819c-10ffbbf977de"></asp:ListItem>
                                                         <asp:ListItem Text="Classic Auto Loan" Value="a23812d9-875a-4729-b42b-1cdf167bb446"></asp:ListItem>

@@ -1435,7 +1435,7 @@ namespace NBFC_App___dev.Controllers
             //compare parameters
             if (ViewData["Result"] == null && typeofloan == "Short Term Loan")
             {
-                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome gt {2} and UsrMinLoanTermInDays lt {3} and UsrMaxLoanTermInDays gt {3}", age,loanAmount,monthlyIncome,Tenure);
+                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome lt {2} and UsrMinLoanTermInDays lt {3} and UsrMaxLoanTermInDays gt {3}", age,loanAmount,monthlyIncome,Tenure);
                 string optionsurl = apiurl + optionalprdurl;
                 JObject response_of_Optional_product = GET_Object(optionsurl);
 
@@ -1453,7 +1453,7 @@ namespace NBFC_App___dev.Controllers
             }
             else if(ViewData["Result"] == null && typeofloan == "Long Term Loan")
             {
-                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome gt {2} and UsrMinLoanTermInMonths lt {3} and UsrMaxLoanTermInMonths gt {3}", age, loanAmount, monthlyIncome, Tenure);
+                string optionalprdurl = string.Format("/0/odata/UsrProducts?$select=Id,Name&$filter=UsrMinAge lt {0} and UsrMaxAge gt {0} and UsrMinLoanAmount lt {1} and UsrMaxLoanAmount gt {1} and UsrRequiredMonthlyIncome lt {2} and UsrMinLoanTermInMonths lt {3} and UsrMaxLoanTermInMonths gt {3}", age, loanAmount, monthlyIncome, Tenure);
                 string optionsurl = apiurl + optionalprdurl;
                 JObject response_of_Optional_product = GET_Object(optionsurl);
 
