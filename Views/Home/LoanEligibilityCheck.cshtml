@@ -95,11 +95,14 @@
         <div style="position: relative center;">
             @if (ViewData["Result"] != null)
             {
-                <h2 class="congrats_class">Congratulation! You are Eligible for @ViewData["ProductName"].ToString()</h2>
+                <h2 class="congrats_class">Congratulations! You are Eligible for @ViewData["ProductName"].ToString()</h2>
+                <div class="row" style="text-align: center;">
+                    <input type="button" class="btn btn-primary" style="position: relative center;" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
+                </div>
             }
             else if (ViewData["Options"] != null)
             {
-             <h2>Sorry! You are Eligible for below loans but not for @ViewData["ProductName"].ToString()</h2>
+                <h2>Sorry! You are Eligible for below loans but not for @ViewData["ProductName"].ToString()</h2>
                 <br />
                 <br />
                 <table class="table">
