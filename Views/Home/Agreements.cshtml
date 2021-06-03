@@ -17,10 +17,11 @@
                     <th scope="col">Agreement Number</th>
                     <th scope="col">Product</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Application</th>
                     <th scope="col">Tenure</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">Close Date</th>
-                    
+
 
                 </tr>
             </thead>
@@ -28,9 +29,10 @@
                  @foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
                  {
                 <tr class="table_row">
-                    <td>@Html.ActionLink(@agr.number,"AgreementInfo",new {Id=@agr.id})</td>
-                    <td>@Html.ActionLink(@agr.product, "AgreementInfo", new { Id = @agr.id })</td>
+                    <td>@Html.ActionLink(@agr.number, "AgreementInfo", new { Id = @agr.id })</td>
+                    <td>@Html.ActionLink(@agr.product, "ProductsInfo", new { Id = @agr.productId })</td>
                     <td>@agr.status</td>
+                    <td>@Html.ActionLink(@agr.application, "ApplicationInfo", new { Id = @agr.applicationId })</td>
                     <td>@agr.tenure</td>
                     <td>@agr.startedon</td>
                     <td>@agr.expiredon</td>

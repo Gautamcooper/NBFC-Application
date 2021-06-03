@@ -77,6 +77,7 @@ namespace NBFC_App___dev
             string loanamount = TextBox3.Text.ToString();
             string monthly_income = Monthly_income.Text.ToString();
             string product_val = Product.SelectedValue.ToString();
+            string productname = Product.SelectedItem.ToString();
             string industry_type = Industry_type.SelectedValue.ToString();
             string reason = Reason.SelectedValue.ToString();
             string bpmcsrf = "";
@@ -131,6 +132,7 @@ namespace NBFC_App___dev
             IRestResponse response2 = client2.Execute(request2);
             var createdRecordId = JObject.Parse(response2.Content);
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string date = createdRecordId["CreatedOn"].ToString();
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
             sqlCnctn.Open();
@@ -141,6 +143,21 @@ namespace NBFC_App___dev
             adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
             adapter.UpdateCommand.ExecuteNonQuery();
             cmd.Dispose();
+            string loanterm = "";
+            if (shorttermloan != "0")
+            {
+                loanterm = shorttermloan;
+            }
+            else { loanterm = longtermloan; }
+            SqlConnection sqlCnctn2 = new SqlConnection(connectionString);
+            sqlCnctn2.Open();
+            SqlDataAdapter adapter2 = new SqlDataAdapter();
+            SqlCommand cmd2;
+            string sqlcmd2 = "Insert Into UserSTEP1Info (step1Id,processed,loantype,loanterm,date,loanname,email,mobile,loanamount) values('" + createdRecordId["Id"].ToString()+"','false','"+ Loan_type.SelectedItem.ToString()+ "','"+ longtermloan + "','"+ date + "','"+ productname + "','"+email+"','"+mobile+"','"+loanamount+"')";
+            cmd2 = new SqlCommand(sqlcmd2, sqlCnctn2);
+            adapter2.UpdateCommand = new SqlCommand(sqlcmd2, sqlCnctn2);
+            adapter2.UpdateCommand.ExecuteNonQuery();
+            cmd2.Dispose();
 
             string way = Request.Cookies["User"].Value;
             if (way == "login")

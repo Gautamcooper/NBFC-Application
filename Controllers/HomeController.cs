@@ -239,7 +239,7 @@ namespace NBFC_App___dev.Controllers
                 DataRow row = dt.Rows[0];
                 string pannumber = row["pannumber"].ToString();
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];                
-                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName,UsrSignedOn,UsrValidFrom,UsrClosedOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name)", pannumber);                
+                string temp_url = string.Format("0/odata/UsrAgreements?$select=Id,UsrName,UsrSignedOn,UsrValidFrom,UsrApplicationid,UsrProductsId,UsrClosedOn,UsrApprovedTenureInMonths,UsrApprovedTenureInDays&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrAgreementStatus($select=Name),UsrProducts($select=Name),UsrApplication($select=UsrName)", pannumber);                
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                 List<Agreements> list = new List<Agreements>();
@@ -254,7 +254,11 @@ namespace NBFC_App___dev.Controllers
                         startedon = v["UsrValidFrom"].ToString().Substring(0, v["UsrValidFrom"].ToString().LastIndexOf(" ") + 1),
                         expiredon = v["UsrClosedOn"].ToString().Substring(0, v["UsrClosedOn"].ToString().LastIndexOf(" ") + 1),
                         product = v["UsrProducts"]["Name"].ToString(),
-                        tenure = v["UsrApprovedTenureInMonths"].ToString() == "0" ? v["UsrApprovedTenureInDays"].ToString() + " Days" : v["UsrApprovedTenureInMonths"].ToString() + " Months"
+                        tenure = v["UsrApprovedTenureInMonths"].ToString() == "0" ? v["UsrApprovedTenureInDays"].ToString() + " Days" : v["UsrApprovedTenureInMonths"].ToString() + " Months",
+                        application = v["UsrApplication"]["UsrName"].ToString(),
+                        applicationId = v["UsrApplicationId"].ToString(),
+                        productId = v["UsrProductsId"].ToString()
+
                     };
 
                     list.Add(agr);
@@ -379,7 +383,7 @@ namespace NBFC_App___dev.Controllers
                 string pannumber = row["pannumber"].ToString();
                 List<string> GetCookies = Authentication();
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];                
-                string temp_url = string.Format("0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name)", pannumber);                
+                string temp_url = string.Format("0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrAgreementId,UsrRequestedProductId,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrAgreement($select=UsrName)", pannumber);                
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                
@@ -397,7 +401,10 @@ namespace NBFC_App___dev.Controllers
                         createdOn = v["CreatedOn"].ToString(),
                         requestedamount = v["UsrRequestedAmount"].ToString(),
                         product = v["UsrRequestedProduct"]["Name"].ToString(),
-                        requestedterm = v["UsrRequestedTermInMonths"].ToString() == "0" ? v["UsrRequestedTermInDays"].ToString()+" Days": v["UsrRequestedTermInMonths"].ToString()+" Months"
+                        requestedterm = v["UsrRequestedTermInMonths"].ToString() == "0" ? v["UsrRequestedTermInDays"].ToString()+" Days": v["UsrRequestedTermInMonths"].ToString()+" Months",
+                        agreement = v["UsrAgreement"]["UsrName"].ToString(),
+                        agreementId = v["UsrAgreementId"].ToString(),
+                        productId = v["UsrRequestedProductId"].ToString()
                     };
 
                     list.Add(app);
@@ -1385,7 +1392,54 @@ namespace NBFC_App___dev.Controllers
             return View();
         }
 
-        
+        public ActionResult PendingSteps()
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                string mobile = row["mobile"].ToString();
+                string email = row["email"].ToString();
+                SqlConnection sqlCnctn2 = new SqlConnection(connectionString);
+                sqlCnctn2.Open();
+                SqlDataAdapter adapter2 = new SqlDataAdapter();
+                SqlCommand cmd2;
+                string strQry2 = "Select * from UserSTEP1Info where email = '" + email + "' and mobile = '"+ mobile +"'";
+                SqlDataAdapter sda2 = new SqlDataAdapter(strQry2, sqlCnctn2);
+                DataTable dt2 = new DataTable();
+                sda2.Fill(dt2);
+
+                List<PendingSteps> pendingstepslist = new List<PendingSteps>();
+
+                foreach (DataRow row2 in dt2.Rows)
+                {
+                    PendingSteps pendingstep = new PendingSteps()
+                    {
+                        step1id = row2["step1Id"].ToString(),
+                        processed = row2["processed"].ToString(),
+                        loantype = row2["loantype"].ToString(),
+                        loanamount = row2["loanamount"].ToString(),
+                        loanterm = row2["loanterm"].ToString(),
+                        loanname = row2["loanname"].ToString(),
+                        date = row2["date"].ToString(),
+                        proceed = "Continue",
+                        cancel = "Cancel"
+                    };
+                    pendingstepslist.Add(pendingstep);
+                }
+                ViewData["PendingSteps"] = pendingstepslist;
+            }
+                return View();
+        }
+
+
         public ActionResult GetLoanEligibilityResult(FormCollection data) 
         {
             int loanAmount = Convert.ToInt32(data["loanAmount"]);

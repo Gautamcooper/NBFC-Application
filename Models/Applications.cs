@@ -19,5 +19,11 @@ namespace NBFC_App___dev.Models
         public string product { get; set; }
 
         public string productId { get; set; }
+
+        public string agreement { get; set; }
+
+        public string agreementId { get; set; }
+
+        
     }
 }

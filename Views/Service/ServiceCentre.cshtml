@@ -2,280 +2,193 @@
 @{
     ViewBag.Title = "ServiceCentre";
 }
-<div class="container">       
-    <div id="header-service-centre" class="header-service-centre">
-        <img class="service-img" src="~/contactus-banner.jpg" />
-        <br />
-        <div class="help-text">Need Help ?</div>
-        <br />
-        <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
-        <div class="div_button"><button id="button_general" type="button" class="btn btn-light button_service">General Queries</button></div>
-        <div class="div_button"><button id="button_application" type="button" class="btn btn-light button_service">Applications</button></div>
-        <div class="div_button"><button id="button_agreement" type="button" class="btn btn-light button_service">Agreements</button></div>
-        <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Loan Types</button></div>
-    </div>
-    <div id="header_button_general" style="display:none;">
-        <div class="back_button"><button id="check_button_general" type="button" class="btn btn-light back">Back</button></div>
-        <br />
-        <div class="header_text">General Queries</div>
-        <br />
-        <form method="post" action="~/Service/Submit_general">
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+    <div class="container">
+        <div id="header-service-centre" class="header-service-centre">
+            <img class="service-img" src="~/contactus-banner.jpg" />
+            <br />
+            <div class="help-text">Need Help ?</div>
+            <br />
+            <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
+            <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Write to Us!</button></div>
+        </div>
+        <div id="header_button_loantype" style="display:none;">
+            <div class="back_button"><button id="check_button_loantype" type="button" class="btn btn-light back">Back</button></div>
+            <div class="header_text">Please Write Here!</div>
+            <br />
+            <form method="post" action="~/Service/Submit_Query" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                        <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
-                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                        <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Email" id="label_Email">Email</label>
-                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Email" id="label_Email">Email</label>
+                        <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="relatedto" class="form-input" required>
+                            <option value="-1">Query Related to</option>
+                            <option value="a9a4ba04-7b52-4565-a64c-6c26c7a67330">General</option>
+                            <option value="83b0dd07-82e6-4026-8e5d-b43cb4025670">Product</option>
+                            <option value="975f084b-fbd0-4e7a-b2bb-f36841c849bd">Agreement</option>
+                            <option value="05d77726-b0ef-4433-8679-3826aefab78b">Application</option>
+                        </select>
+                    </div>
+                    <input hidden id="related_to" class="form-input" placeholder="type" name="related_to" />
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea cols="100" rows="7" name="general"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
-                </div>
-            </div>
-        </form>
-    </div>
-    <div id="header_button_application" style="display:none;">
-        <div class="back_button"><button id="check_button_application" type="button" class="btn btn-light back">Back</button></div>
-        <div class="header_text">Applications</div>
-        <br />
-        <form method="post" action="~/Service/Submit_application">
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
-                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Email" id="label_Email">Email</label>
-                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <select id="application_select" class="form-input" required>
-                        <option value="-1">Select Application </option>
-                        @if (ViewData["ApplicationData"] != null)
-                        {
-                            foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                <div class="row" id="Product">
+                    <div class="col-md-6">
+                        <select id="product_select" class="form-input" required>
+                            <option value="-1">Select Product </option>
+                            @if (ViewData["ProductsData"] != null)
                             {
-                                <option alt="@apln.productId" value="@apln.id">@apln.number</option>
+                                foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                                {
+                                    <option value="@prdct.id">@prdct.name</option>
+                                }
                             }
-                        }
-                    </select>
-                    <select id="aplntype" class="form-input" required>
-                        <option value="-1">Category</option>
-                        <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
-                        <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
-                    </select>
-                    <select id="apln_services" class="form-input" required>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="services" class="form-input" required>
 
-                        <option value="-1">Related Services</option>
-                        @if (ViewData["Product_Service"] != null)
-                        {
-                            foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                            <option value="-1">Related Services</option>
+                            @if (ViewData["Product_Service"] != null)
                             {
-                                <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                {
+                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                }
                             }
-                        }
-                    </select>
-
-                    <input hidden id="appl_ser" class="form-input" placeholder="Application" name="appl_ser" />
-                    <input hidden id="aplnser_type" class="form-input" placeholder="type" name="aplnser_type" />
-                    <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
+                        </select>
+                        <input hidden id="prd_service" class="form-input" placeholder="type" name="prd_service" />
+                        <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="" id="label">Your Query</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea cols="80" rows="7" name="application"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
-                </div>
-            </div>
-        </form>
-    </div>
-    <div id="header_button_agreement" style="display:none;">
-        <div class="back_button"><button id="check_button_agreement" type="button" class="btn btn-light back">Back</button></div>
-        <div class="header_text">Agreements</div>
-        <br />
-        <form method="post" action="~/Service/Submit_agreement">
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
-                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Email" id="label_Email">Email</label>
-                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <select id="agreement_select" class="form-input" required>
-                        <option value="-1">Select Agreement </option>
-                        @if (ViewData["AgreementData"] != null)
-                        {
-                            foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                <div class="row" id="Application">
+                    <div class="col-md-6">
+                        <select id="application_select" class="form-input" required>
+                            <option value="-1">Select Application </option>
+                            @if (ViewData["ApplicationData"] != null)
                             {
-                                <option alt="@agr.productId" value="@agr.id">@agr.number</option>
+                                foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                                {
+                                    <option alt="@apln.productId" value="@apln.id">@apln.number</option>
+                                }
                             }
-                        }
-                    </select>
-                    <select id="agrm_type" class="form-input" required>
-                        <option value="-1">Category</option>
-                        <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
-                        <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
-                    </select>
-                    <select id="agrm_services" class="form-input" required>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="apln_services" class="form-input" required>
 
-                        <option value="-1">Related Services</option>
-                        @if (ViewData["Product_Service"] != null)
-                        {
-                            foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                            <option value="-1">Related Services</option>
+                            @if (ViewData["Product_Service"] != null)
                             {
-                                <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                {
+                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                }
                             }
-                        }
-                    </select>
-                    <input hidden id="agrm_ser" class="form-input" placeholder="Aggreement" name="agrm_ser" />
-                    <input hidden id="agrmser_type" class="form-input" placeholder="type" name="agrmser_type" />
-                    <input hidden id="agreement_num" class="form-input" placeholder="Agreement" name="agr_id" />
+                        </select>
+                        <input hidden id="appl_ser" class="form-input" placeholder="Application" name="appl_ser" />
+                        <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea cols="80" rows="7" name="agreement"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
-                </div>
-            </div>
-        </form>
-    </div>
-    <div id="header_button_loantype" style="display:none;">
-        <div class="back_button"><button id="check_button_loantype" type="button" class="btn btn-light back">Back</button></div>
-        <div class="header_text">Loan Types</div>
-        <br />
-        <form method="post" action="~/Service/Submit_product">
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                    <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
-                    <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Email" id="label_Email">Email</label>
-                    <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
-                </div>
-            </div>
-           <div class="row">
-               <div class="col-md-6">
-                   <select id="product_select" class="form-input" required>
-                       <option value="-1">Select Product </option>
-                       @if (ViewData["ProductsData"] != null)
-                       {
-                           foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
-                           {
-                               <option value="@prdct.id">@prdct.name</option>
-                           }
-                       }
-                   </select>
-                   <select id="type" class="form-input" required>
-                       <option value="-1">Category</option>
-                       <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
-                       <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
-                   </select>
-                   <select id="services" class="form-input" required>
+                <div class="row" id="Agreement">
+                    <div class="col-md-6">
+                        <select id="agreement_select" class="form-input" required>
+                            <option value="-1">Select Agreement </option>
+                            @if (ViewData["AgreementData"] != null)
+                            {
+                                foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                                {
+                                    <option alt="@agr.productId" value="@agr.id">@agr.number</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select id="agrm_services" class="form-input" required>
 
-                       <option value="-1">Related Services</option>
-                       @if (ViewData["Product_Service"] != null)
-                       {
-                           foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
-                           {
-                               <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
-                           }
-                       }
-                   </select>
-
-                   <input hidden id="prd_service" class="form-input" placeholder="type" name="prd_service" />
-                   <input hidden id="ser_type" class="form-input" placeholder="type" name="type_id" />
-                   <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
-               </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                            <option value="-1">Related Services</option>
+                            @if (ViewData["Product_Service"] != null)
+                            {
+                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                {
+                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                }
+                            }
+                        </select>
+                        <input hidden id="agrm_ser" class="form-input" placeholder="Aggreement" name="agrm_ser" />
+                        <input hidden id="agreement_num" class="form-input" placeholder="Agreement" name="agr_id" />
+                    </div>
+                </div>
+                <div class="row" id="Service_Type">
+                    <div class="col-md-4">
+                        <select id="type" class="form-input" required>
+                            <option value="-1">Category</option>
+                            <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
+                            <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
+                        </select>
+                    </div>
+                    <input hidden id="ser_type" class="form-input" placeholder="type" name="type_id" />
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea cols="80" rows="7" name="query"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="file" id="attached_file" name="product_attachment" class="form-input">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="submit" class="btn btn-primary" data-toggle="modal" data-target="#product_wait_modal" type="submit" value="Submit" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal fade" id="product_wait_modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <div style="position: relative;">
+                                <h4 style="text-align: center;">Registering you query..</h4>
+                            </div>
+                            <br />
+                            <div class="container-fluid">
+                                <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea cols="80" rows="7" name="product"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 @Scripts.Render("~/Scripts/Service.js")
 

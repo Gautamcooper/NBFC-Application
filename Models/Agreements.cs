@@ -23,6 +23,12 @@ namespace NBFC_App___dev.Models
 
         public string productId { get; set; }
 
+        
+
+        public string application { get; set; }
+
+        public string applicationId { get; set; }
+
 
 
     }

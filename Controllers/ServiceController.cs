@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using NBFC_App___dev.Models;
 using RestSharp;
+using System.IO;
 
 namespace NBFC_App___dev.Controllers
 {
@@ -181,11 +182,13 @@ namespace NBFC_App___dev.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit_general(FormCollection data)
+        
+        public ActionResult Submit_Query(FormCollection data)
         {
-            string query = data["general"].ToString();
+            string query = data["query"].ToString();
+            string relatedto = data["related_to"].ToString();
             string source = "38a1b7ec-acdc-4d94-8c17-0601c8cee0bc";
-            string querycategory = "a9a4ba04-7b52-4565-a64c-6c26c7a67330";
+            string attachedfilepath = "";
             List<string> GetCookies = Authentication();
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -199,234 +202,73 @@ namespace NBFC_App___dev.Controllers
             {
                 DataRow row = dt.Rows[0];
                 string email = row["email"].ToString();
-                //string mobile = row["mobile"].ToString();
+                HttpFileCollectionBase file = Request.Files;
+                if (file.Count == 1)
+                {
+                    var fileName = Path.GetFileName(file[0].FileName);
+                    var extension = Path.GetExtension(file[0].FileName);
+                    attachedfilepath = "D:\\Uploads\\QueryAttachemntUpload" + email + extension;
+                    file[0].SaveAs(attachedfilepath);
+                }
+
                 string fullname = row["fullname"].ToString();
                 string pannumber = row["pannumber"].ToString();
-
+                var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
+                client.Timeout = -1;
+                var request = new RestRequest(Method.POST);
+                request.AddCookie("BPMCSRF", GetCookies[0]);
+                request.AddCookie(".ASPXAUTH", GetCookies[2]);
+                request.AddCookie("BPMLOADER", GetCookies[1]);
+                request.AddCookie("UserName", GetCookies[3]);
+                request.AddHeader("BPMCSRF", GetCookies[0]);
+                request.AddHeader("Content-Type", "application/json");
                 if (!string.IsNullOrEmpty(pannumber))
-                { //API for Repeat Customer
-                    
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-
+                {
+                    if (relatedto == "a9a4ba04-7b52-4565-a64c-6c26c7a67330")      // General
+                    {
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
+                    else if (relatedto == "83b0dd07-82e6-4026-8e5d-b43cb4025670")  // Product
+                    {
+                        string service = data["prd_service"].ToString();
+                        string ser_type = data["type_id"].ToString();
+                        string prdct_id = data["prdct_id"].ToString();
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
+                    else if (relatedto == "05d77726-b0ef-4433-8679-3826aefab78b")  // Application
+                    {
+                        string apln_id = data["apln_id"].ToString();
+                        string service = data["appl_ser"].ToString();
+                        string ser_type = data["type_id"].ToString();
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrApplicationId\" : \"" + apln_id + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
+                    else if (relatedto == "975f084b-fbd0-4e7a-b2bb-f36841c849bd") // Agreement
+                    {
+                        string agreement_id = data["agr_id"].ToString();
+                        string service = data["agrm_ser"].ToString();
+                        string ser_type = data["type_id"].ToString();
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrAgreementId\" : \"" + agreement_id + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
                 }
                 else if (string.IsNullOrEmpty(pannumber))
                 {
-
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-
-                }
-
-            }
-            return RedirectToAction("Queries");
-        }
-
-
-
-      
-
-        [HttpPost]
-        public ActionResult Submit_application(FormCollection data)
-        {
-            string query = data["application"].ToString();
-            string apln_id = data["apln_id"].ToString();
-            string ser_type = data["aplnser_type"].ToString();
-            string service = data["appl_ser"].ToString();
-            string source = "38a1b7ec-acdc-4d94-8c17-0601c8cee0bc";
-            string querycategory = "05d77726-b0ef-4433-8679-3826aefab78b";
-
-
-            List<string> GetCookies = Authentication();
-
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-                //string email = row["email"].ToString();
-                //string mobile = row["mobile"].ToString();
-                //string fullname = row["fullname"].ToString();
-                string pannumber = row["pannumber"].ToString();
-
-                if (!string.IsNullOrEmpty(pannumber))
-                { //API for Repeat Customer
-                    
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\",\r\n    \"UsrApplicationId\" : \"" + apln_id + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-                    //hello Dear
-
-                }
-                //else if (string.IsNullOrEmpty(pannumber))
-                //{
-                    
-                //    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                //    client.Timeout = -1;
-                //    var request = new RestRequest(Method.POST);
-                //    request.AddCookie("BPMCSRF", GetCookies[0]);
-                //    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                //    request.AddCookie("BPMLOADER", GetCookies[1]);
-                //    request.AddCookie("UserName", GetCookies[3]);
-                //    request.AddHeader("BPMCSRF", GetCookies[0]);
-                //    request.AddHeader("Content-Type", "application/json");
-                //    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                //    request.AddParameter("application/json", "{\r\n\r\n    \"UsrNotes\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrApplicationId\" : \"" + apln_id + "\"\r\n\r\n}", ParameterType.RequestBody);
-                //    IRestResponse response = client.Execute(request);
-
-                //}
-
-
-            }
-
-            return RedirectToAction("Queries");
-        }
-
-        [HttpPost]
-        public ActionResult Submit_agreement(FormCollection data)
-        {
-            string query = data["agreement"].ToString();
-            string agreement_id = data["agr_id"].ToString();
-            string ser_type = data["agrmser_type"].ToString();
-            string service = data["agrm_ser"].ToString();
-            string source = "38a1b7ec-acdc-4d94-8c17-0601c8cee0bc";
-            string querycategory = "975f084b-fbd0-4e7a-b2bb-f36841c849bd";
-
-
-            List<string> GetCookies = Authentication();
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-              
-                string pannumber = row["pannumber"].ToString();
-
-                if (!string.IsNullOrEmpty(pannumber))
-                { //API for Repeat Customer
-                    
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\",\r\n    \"UsrAgreementId\" : \"" + agreement_id + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-                    
-                }
-               
-
-            }
-           // System.Threading.Thread.Sleep(5000);
-            return RedirectToAction("Queries");
-        }
-
-        [HttpPost]
-        public ActionResult Submit_product(FormCollection data)
-        {
-            string query = data["product"].ToString();  
-            string prdct_id = data["prdct_id"].ToString();
-            string ser_type = data["type_id"].ToString();
-            string service  = data["prd_service"].ToString();
-            string source = "38a1b7ec-acdc-4d94-8c17-0601c8cee0bc";
-            string querycategory = "83b0dd07-82e6-4026-8e5d-b43cb4025670";
-
-            List<string> GetCookies = Authentication();
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
-                DataRow row = dt.Rows[0];
-                string email = row["email"].ToString();
-                //string mobile = row["mobile"].ToString();
-                string fullname = row["fullname"].ToString();
-                string pannumber = row["pannumber"].ToString();
-
-                if (!string.IsNullOrEmpty(pannumber))
-                { //API for Repeat Customer
-                    
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-
-                }
-                else if (string.IsNullOrEmpty(pannumber))
-                {
-
-                    var client = new RestClient("http://localhost:98/0/odata/UsrCustomerQueries");
-                    client.Timeout = -1;
-                    var request = new RestRequest(Method.POST);
-                    request.AddCookie("BPMCSRF", GetCookies[0]);
-                    request.AddCookie(".ASPXAUTH", GetCookies[2]);
-                    request.AddCookie("BPMLOADER", GetCookies[1]);
-                    request.AddCookie("UserName", GetCookies[3]);
-                    request.AddHeader("BPMCSRF", GetCookies[0]);
-                    request.AddHeader("Content-Type", "application/json");
-                    //request.AddHeader("Cookie", "BPMSESSIONID=y0c13r4uocmzvbq4dgwuretr; .ASPXAUTH=555114D3A7888B5FB7988150BF980B0A91763BD8AE6D73E3D023B2E0491C1A5336F54FB5BFE60809F44521186926085FF184AF8D448D030B9418A0A9D68179D8C0F3E416391223A52549728D8E646FCEC13E2CAE1AD66E71FD2EBFEE551651039D7A620E4CBEAE88EB523E0506F349A783EBAF959C3B73F16F967EBF094C8876732E4EF5C7BF3F05AB7C509434251AABD0BD23B0C15D9557E9C712EFC7AC092A80B7B49D38A181FA5DC411059F2BE34A57BF5C03D2D8E0F77710C2C861387C54A29ADB8E67A19D8DE698FF93C66F366FFDDFDC3F3493E53DB03B79257B7A32C2601C1BAD33689F421FB9AA5F64C870ACD8C4E7C648FADF0AA97A28A7E50240EE8326962557843DE3E0434CB7F038DAE040B45824FA5F86B56F8C5F5D1952A103F73687B13EAC01355B996499CCA99191F11D1091AAE9B8D0F43E4736208FC6E80EFCC6A77D6B009C70E0D22DBDDEAAFB9722DA8BE3A7AE280B1EB42CD0D1BD1281AD0C89; BPMCSRF=YD1erO56tQdxXidGsYNkgu; BPMLOADER=rcunk3fmvpbddlkoo05xmsnh; UserName=83|117|112|101|114|118|105|115|111|114");
-                    request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + querycategory + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
-                    IRestResponse response = client.Execute(request);
-
+                    if (relatedto == "a9a4ba04-7b52-4565-a64c-6c26c7a67330")      // General
+                    {
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
+                    else if (relatedto == "83b0dd07-82e6-4026-8e5d-b43cb4025670")  // Product
+                    {
+                        string service = data["prd_service"].ToString();
+                        string ser_type = data["type_id"].ToString();
+                        string prdct_id = data["prdct_id"].ToString();
+                        request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
+                        IRestResponse response = client.Execute(request);
+                    }
                 }
 
             }

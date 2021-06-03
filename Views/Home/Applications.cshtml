@@ -18,6 +18,7 @@
                     <th scope="col">Application Number</th>
                     <th scope="col">Loan</th>
                     <th scope="col">Application Status</th>
+                    <th scope="col">Agreement Number</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Tenure</th>
                     <th scope="col">Date Created</th>
@@ -29,8 +30,9 @@
                 {
                     <tr class="table_row">
                         <td>@Html.ActionLink(@application.number, "ApplicationInfo", new { Id = @application.id })</td>
-                        <td>@Html.ActionLink(@application.product, "ApplicationInfo", new { Id = @application.id })</td>
+                        <td>@Html.ActionLink(@application.product, "ProductsInfo", new { Id = @application.productId })</td>
                         <td>@application.status</td>
+                        <td>@Html.ActionLink(@application.agreement, "AgreementInfo", new { Id = @application.agreementId })</td>
                         <td>@application.requestedamount</td>
                         <td>@application.requestedterm</td>
                         <td>@application.createdOn</td>

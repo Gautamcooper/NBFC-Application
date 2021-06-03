@@ -146,6 +146,7 @@
     <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Payment_Records.cs" />
+    <Compile Include="Models\PendingSteps.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\ProductServices.cs" />
     <Compile Include="Models\ProductsInfo.cs" />
@@ -373,6 +374,7 @@
     <Content Include="Views\Home\Homepage.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\LoanEligibilityCheck.cshtml" />
+    <Content Include="Views\Home\PendingSteps.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
