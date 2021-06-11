@@ -84,39 +84,66 @@ namespace NBFC_App___dev.Controllers
         }
         public ActionResult Homepage()
         {
-            string apiurl = ConfigurationManager.AppSettings["apiurl"];
-            string temp_url = "0/odata/UsrProducts?$top=6&$select=Id,UsrProductInfo,Name&$orderby=UsrNoOfAgreements desc";                
-            string url = apiurl + temp_url;
-            JObject ParsedResponse = GET_Object(url);
-            List<HomePage> topProductlist = new List<HomePage>();
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                
+                string email = dt.Rows[0]["email"].ToString();
+                string mobile = dt.Rows[0]["mobile"].ToString();
 
-            ViewData["top1_prId"] = ParsedResponse["value"][0]["Id"].ToString();
-            ViewData["top1_prName"] = ParsedResponse["value"][0]["Name"].ToString() != "" ? ParsedResponse["value"][0]["Name"].ToString() : "Loan" ;
-            ViewData["top1_prInfo"] = ParsedResponse["value"][0]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][0]["UsrProductInfo"].ToString() : "1";
+                string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                string temp_url = "0/odata/UsrProducts?$top=6&$select=Id,UsrProductInfo,Name&$orderby=UsrNoOfAgreements desc";
+                string url = apiurl + temp_url;
+                JObject ParsedResponse = GET_Object(url);
+                List<HomePage> topProductlist = new List<HomePage>();
 
-            ViewData["top2_prId"] = ParsedResponse["value"][1]["Id"].ToString();
-            ViewData["top2_prName"] = ParsedResponse["value"][1]["Name"].ToString() != "" ? ParsedResponse["value"][1]["Name"].ToString() : "Loan";
-            ViewData["top2_prInfo"] = ParsedResponse["value"][1]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][1]["UsrProductInfo"].ToString() : "2";
+                ViewData["top1_prId"] = ParsedResponse["value"][0]["Id"].ToString();
+                ViewData["top1_prName"] = ParsedResponse["value"][0]["Name"].ToString() != "" ? ParsedResponse["value"][0]["Name"].ToString() : "Loan";
+                ViewData["top1_prInfo"] = ParsedResponse["value"][0]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][0]["UsrProductInfo"].ToString() : "1";
 
-            ViewData["top3_prId"] = ParsedResponse["value"][2]["Id"].ToString();
-            ViewData["top3_prName"] = ParsedResponse["value"][2]["Name"].ToString() != "" ? ParsedResponse["value"][2]["Name"].ToString() : "Loan";
-            ViewData["top3_prInfo"] = ParsedResponse["value"][2]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][2]["UsrProductInfo"].ToString() : "3";
+                ViewData["top2_prId"] = ParsedResponse["value"][1]["Id"].ToString();
+                ViewData["top2_prName"] = ParsedResponse["value"][1]["Name"].ToString() != "" ? ParsedResponse["value"][1]["Name"].ToString() : "Loan";
+                ViewData["top2_prInfo"] = ParsedResponse["value"][1]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][1]["UsrProductInfo"].ToString() : "2";
 
-            ViewData["top4_prId"] = ParsedResponse["value"][3]["Id"].ToString();
-            ViewData["top4_prName"] = ParsedResponse["value"][3]["Name"].ToString() != "" ? ParsedResponse["value"][3]["Name"].ToString() : "Loan";
-            ViewData["top4_prInfo"] = ParsedResponse["value"][3]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][3]["UsrProductInfo"].ToString() : "4";
+                ViewData["top3_prId"] = ParsedResponse["value"][2]["Id"].ToString();
+                ViewData["top3_prName"] = ParsedResponse["value"][2]["Name"].ToString() != "" ? ParsedResponse["value"][2]["Name"].ToString() : "Loan";
+                ViewData["top3_prInfo"] = ParsedResponse["value"][2]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][2]["UsrProductInfo"].ToString() : "3";
 
-            ViewData["top5_prId"] = ParsedResponse["value"][4]["Id"].ToString();
-            ViewData["top5_prName"] = ParsedResponse["value"][4]["Name"].ToString() != "" ? ParsedResponse["value"][4]["Name"].ToString() : "Loan";
-            ViewData["top5_prInfo"] = ParsedResponse["value"][4]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][4]["UsrProductInfo"].ToString() : "5";
+                ViewData["top4_prId"] = ParsedResponse["value"][3]["Id"].ToString();
+                ViewData["top4_prName"] = ParsedResponse["value"][3]["Name"].ToString() != "" ? ParsedResponse["value"][3]["Name"].ToString() : "Loan";
+                ViewData["top4_prInfo"] = ParsedResponse["value"][3]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][3]["UsrProductInfo"].ToString() : "4";
 
-            ViewData["top6_prId"] = ParsedResponse["value"][5]["Id"].ToString();
-            ViewData["top6_prName"] = ParsedResponse["value"][5]["Name"].ToString() != "" ? ParsedResponse["value"][5]["Name"].ToString() : "Loan";
-            ViewData["top6_prInfo"] = ParsedResponse["value"][5]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][5]["UsrProductInfo"].ToString() : "6";
+                ViewData["top5_prId"] = ParsedResponse["value"][4]["Id"].ToString();
+                ViewData["top5_prName"] = ParsedResponse["value"][4]["Name"].ToString() != "" ? ParsedResponse["value"][4]["Name"].ToString() : "Loan";
+                ViewData["top5_prInfo"] = ParsedResponse["value"][4]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][4]["UsrProductInfo"].ToString() : "5";
 
+                ViewData["top6_prId"] = ParsedResponse["value"][5]["Id"].ToString();
+                ViewData["top6_prName"] = ParsedResponse["value"][5]["Name"].ToString() != "" ? ParsedResponse["value"][5]["Name"].ToString() : "Loan";
+                ViewData["top6_prInfo"] = ParsedResponse["value"][5]["UsrProductInfo"].ToString() != "" ? ParsedResponse["value"][5]["UsrProductInfo"].ToString() : "6";
 
-            
-            return View();
+                string strQry2 = "Select * from UserSTEP1Info where email = '" + email + "' and mobile = '" + mobile + "'";
+                SqlDataAdapter sda2 = new SqlDataAdapter(strQry2, sqlCnctn);
+                DataTable dt2 = new DataTable();
+                sda2.Fill(dt2);
+                if (dt2.Rows.Count > 0)
+                {
+                    ViewBag.Step1Count = dt2.Rows.Count;
+                }
+
+                return View();
+            }
+            else 
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
         }
         public ActionResult Products()
         {
@@ -529,7 +556,8 @@ namespace NBFC_App___dev.Controllers
                     aadharlastname = row["aadharlastname"].ToString(),
                     aadharaddress = row["aadharaddress"].ToString(),
                     aadharbirthdate = row["aadharbirthdate"].ToString(),
-                    birthdate = row["birthdate"].ToString()
+                    birthdate = row["birthdate"].ToString(),
+                    appgateId = row["applicationgateId"].ToString()
 
 
                 };
@@ -1071,11 +1099,17 @@ namespace NBFC_App___dev.Controllers
                 sqlCnctn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand cmd;
+                SqlCommand cmd2;
                 string sql = "Update UserInfo set step1 = 'false' where session = '" + Session["Name"].ToString() + "'";
+                string sql2 = "Delete from UserSTEP1Info where step1Id = '" + applicationgateId + "'";
                 cmd = new SqlCommand(sql, sqlCnctn);
+                cmd2 = new SqlCommand(sql2, sqlCnctn);
                 adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                 adapter.UpdateCommand.ExecuteNonQuery();
+                adapter.DeleteCommand = new SqlCommand(sql2, sqlCnctn);
+                adapter.DeleteCommand.ExecuteNonQuery();
                 cmd.Dispose();
+                cmd2.Dispose();
                 System.Threading.Thread.Sleep(15000);
 
                 return RedirectToAction("Applications");
@@ -1407,12 +1441,8 @@ namespace NBFC_App___dev.Controllers
                 DataRow row = dt.Rows[0];
                 string mobile = row["mobile"].ToString();
                 string email = row["email"].ToString();
-                SqlConnection sqlCnctn2 = new SqlConnection(connectionString);
-                sqlCnctn2.Open();
-                SqlDataAdapter adapter2 = new SqlDataAdapter();
-                SqlCommand cmd2;
                 string strQry2 = "Select * from UserSTEP1Info where email = '" + email + "' and mobile = '"+ mobile +"'";
-                SqlDataAdapter sda2 = new SqlDataAdapter(strQry2, sqlCnctn2);
+                SqlDataAdapter sda2 = new SqlDataAdapter(strQry2, sqlCnctn);
                 DataTable dt2 = new DataTable();
                 sda2.Fill(dt2);
 
@@ -1436,10 +1466,65 @@ namespace NBFC_App___dev.Controllers
                 }
                 ViewData["PendingSteps"] = pendingstepslist;
             }
+
                 return View();
         }
 
+        public ActionResult CancelPendingStep(string Id)
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                SqlCommand cmd;
+                string strQry2 = "Delete from UserSTEP1Info where step1Id = '" + Id + "'";
+                SqlDataAdapter sda2 = new SqlDataAdapter();
+                cmd = new SqlCommand(strQry2, sqlCnctn);
+                sda2.DeleteCommand = new SqlCommand(strQry2, sqlCnctn);
+                sda2.DeleteCommand.ExecuteNonQuery();
+                cmd.Dispose();
+                return RedirectToAction("PendingSteps");
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+        }
 
+        public ActionResult UpdateAppGateIdOfPendingStep(string Id)
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                SqlCommand cmd;
+                string sql = "Update UserInfo set applicationgateId = '" + Id + "' where session = '" + Session["Name"].ToString() + "'";
+                SqlDataAdapter sda2 = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, sqlCnctn);
+                sda2.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                sda2.UpdateCommand.ExecuteNonQuery();
+                cmd.Dispose();
+                return RedirectToAction("About");
+            }
+            else
+            {
+                Response.Redirect("~/index.aspx");
+                return null;
+            }
+        }
         public ActionResult GetLoanEligibilityResult(FormCollection data) 
         {
             int loanAmount = Convert.ToInt32(data["loanAmount"]);

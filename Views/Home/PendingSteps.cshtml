@@ -32,8 +32,8 @@
                             <td>@ps.loanterm</td>
                             <td>@ps.loanamount</td>
                             <td>@ps.date</td>
-                            <td>@ps.proceed</td>
-                            <td>@ps.cancel</td>
+                            <td>@Html.ActionLink(@ps.proceed, "UpdateAppGateIdOfPendingStep", new { Id = @ps.step1id })</td>
+                            <td>@Html.ActionLink(@ps.cancel, "CancelPendingStep", new { Id = @ps.step1id })</td>
                         </tr>
                     }
                 </tbody>
