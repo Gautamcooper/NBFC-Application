@@ -248,7 +248,20 @@ $("#loanType").change(function () {
 var productId = $("#productId").val();
 $("#sel_prd").val(productId);
 
-
+var slider = $("#myRange");
+slider.on('input', function () {
+    $("#loanAmount").val($("#myRange").val());
+});
+$("#loanAmount").change(function () {
+    $("#myRange").val($("#loanAmount").val());
+});
+var slider_1 = $("#myRangeIncome");
+slider_1.on('input', function () {
+    $("#MonthlyIncome").val($("#myRangeIncome").val());
+});
+$("#MonthlyIncome").change(function () {
+    $("#myRangeIncome").val($("#MonthlyIncome").val());
+});
 
 
 

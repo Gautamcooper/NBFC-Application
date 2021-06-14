@@ -19,13 +19,41 @@
         <br />
         <form method="post" action="~/Home/GetLoanEligibilityResult">
             <div class="row">
-                <div class="col-md-6">
-                    <input id="LoanAmount" class="form-input inp" placeholder="Loan Amount" name="loanAmount">
+                <div class="col-sm-2">
+                    <h3 class="title fs-title" id="header">Loan Amount</h3>
                 </div>
-                <div class="col-md-6">
-                    <input id="MonthlyIncome" class="form-input inp" placeholder="Net Monthly Income" name="monthlyIncome">
+                <div class="col-sm-10" style="margin-left: -8%;margin-top: 1%;">
+                    <input id="loanAmount" name="loanAmount" class="form-input inp loanamount" />
                 </div>
             </div>
+            <div id="cont">
+                <div id="left"><label>2000</label></div>
+                <div id="right"><label>30000</label></div>
+            </div>
+            <div class="slidecontainer">
+                <input id="myRange" type="range" class="slider" min="2000" max="30000" runat="server" />
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-sm-2">
+                    <h3 class="title fs-title" id="header">Monthly Income</h3>
+                </div>
+                <div class="col-sm-10" style="margin-left: -8%;margin-top: 3%;">
+                    <input id="MonthlyIncome" name="monthlyIncome" class="form-input inp loanamount" />
+                </div>
+            </div>
+            <div id="cont">
+                <div id="left"><label>10000</label></div>
+                <div id="right"><label>100000</label></div>
+            </div>
+            <div class="slidecontainer">
+                <input id="myRangeIncome" type="range" class="slider" min="10000" max="100000" runat="server" />
+            </div>
+            @*<input id="LoanAmount" class="form-input inp" placeholder="Loan Amount" name="loanAmount">*@
+            @*<input id="MonthlyIncome" class="form-input inp" placeholder="Net Monthly Income" name="monthlyIncome">*@
+            <br />
+            <br />
             <div class="row">
                 <div class="col-md-6">
                     <select id="loanType" class="form-input" required>
