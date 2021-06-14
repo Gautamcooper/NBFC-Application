@@ -246,7 +246,9 @@ $("#loanType").change(function () {
     $("#typeofloan").val(value);
 });
 var productId = $("#productId").val();
-$("#sel_prd").val(productId);
+if (productId != "") {
+    $("#sel_prd").val(productId);
+}
 
 var slider = $("#myRange");
 slider.on('input', function () {

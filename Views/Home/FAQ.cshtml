@@ -17,11 +17,14 @@
     </div>
     <br />
     <br />
-    @foreach (var faq in (IEnumerable<FAQ>)ViewData["miscFAQ"])
-    {
-        <details>
-            <summary class="faqsummary">@faq.question</summary>
-            <p class="faqanswer">@faq.answer</p>
-        </details>
-    }
+    <div class="container" style="padding: 6%;padding-right: 10%;">
+        @foreach (var faq in (IEnumerable<FAQ>)ViewData["miscFAQ"])
+        {
+            <details>
+                <summary class="faqsummary">@faq.question</summary>
+                <p class="faqanswer">@faq.answer</p>
+            </details>
+        }
+    </div>
+    
 </div>

@@ -344,13 +344,12 @@ body {
 }
 
 .faqsummary {
-    cursor: pointer;
-    border-radius: 5px;
+    cursor: pointer;   
     border-bottom: 1px solid;
 }
-    .faqsummary:hover {
+    /*.faqsummary:hover {
         background-color:cornflowerblue;
-    }
+    }*/
 .faqanswer {
     background-color: #d1e1d5;
 }
