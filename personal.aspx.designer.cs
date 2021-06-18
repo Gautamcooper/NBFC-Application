@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NBFC_App___dev {
-    
-    
-    public partial class personal {
-        
+namespace NBFC_App___dev
+{
+
+
+    public partial class personal
+    {
+
         /// <summary>
         /// msform control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm msform;
-        
+
         /// <summary>
         /// TextBox3 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox3;
-        
+
         /// <summary>
         /// myRange control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl myRange;
-        
+
         /// <summary>
         /// TextBox1 control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
-        
+
         /// <summary>
         /// TextBox2 control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
-        
+
         /// <summary>
         /// FullName control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FullName;
-        
+
         /// <summary>
         /// Loan_type control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Loan_type;
-        
+
         /// <summary>
         /// shortterm control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList shortterm;
-        
+
         /// <summary>
         /// longterm control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList longterm;
-        
+
         /// <summary>
         /// PAN control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox PAN;
-        
+
         /// <summary>
         /// Monthly_income control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Monthly_income;
-        
+
         /// <summary>
         /// Product control.
         /// </summary>
@@ -119,16 +121,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Product;
-        
-        /// <summary>
-        /// Industry_type control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Industry_type;
-        
+
         /// <summary>
         /// Reason control.
         /// </summary>
@@ -137,7 +130,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Reason;
-        
+
         /// <summary>
         /// Button1 control.
         /// </summary>

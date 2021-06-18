@@ -407,13 +407,25 @@ namespace NBFC_App___dev.Controllers
             if (dt.Rows.Count > 0)
             {
                 DataRow row = dt.Rows[0];
-                string pannumber = row["pannumber"].ToString();
+                //string pannumber = row["pannumber"].ToString();
+                string email = row["email"].ToString();
+                string mobile = row["mobile"].ToString();
                 List<string> GetCookies = Authentication();
                 string apiurl = ConfigurationManager.AppSettings["apiurl"];                
-                string temp_url = string.Format("0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrAgreementId,UsrRequestedProductId,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/UsrPANNumber eq '{0}'&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrAgreement($select=UsrName)", pannumber);                
-                string url = apiurl + temp_url;
-                JObject ParsedResponse = GET_Object(url);
-               
+                
+                JObject ParsedResponse = null;
+
+                while (true)
+                {
+                    string temp_url = string.Format("0/odata/UsrApplications?$select=Id,UsrName,CreatedOn,UsrRequestedTermInDays,UsrAgreementId,UsrRequestedProductId,UsrRequestedAmount,UsrRequestedTermInMonths&$filter=UsrContact/Email eq '{0}' and UsrContact/MobilePhone eq '{1}'&$orderby=CreatedOn desc&$expand=UsrApplicationStatus($select=Name),UsrRequestedProduct($select=Name),UsrAgreement($select=UsrName)", email, mobile);
+                    string url = apiurl + temp_url;
+                    ParsedResponse = GET_Object(url);
+
+                    if (ParsedResponse["value"].Count() > 0 && ParsedResponse["value"][0]["UsrName"].ToString() != "")
+                    {
+                        break;
+                    }
+                }
 
                 List<Applications> list = new List<Applications> () ;
                 
@@ -429,7 +441,7 @@ namespace NBFC_App___dev.Controllers
                         requestedamount = v["UsrRequestedAmount"].ToString(),
                         product = v["UsrRequestedProduct"]["Name"].ToString(),
                         requestedterm = v["UsrRequestedTermInMonths"].ToString() == "0" ? v["UsrRequestedTermInDays"].ToString()+" Days": v["UsrRequestedTermInMonths"].ToString()+" Months",
-                        agreement = v["UsrAgreement"]["UsrName"].ToString(),
+                        agreement = v["UsrAgreement"]["UsrName"].ToString() != "" ? v["UsrAgreement"]["UsrName"].ToString() : "Not Created",
                         agreementId = v["UsrAgreementId"].ToString(),
                         productId = v["UsrRequestedProductId"].ToString()
                     };
@@ -1110,7 +1122,7 @@ namespace NBFC_App___dev.Controllers
                 adapter.DeleteCommand.ExecuteNonQuery();
                 cmd.Dispose();
                 cmd2.Dispose();
-                System.Threading.Thread.Sleep(15000);
+                //System.Threading.Thread.Sleep(15000);
 
                 return RedirectToAction("Applications");
             }

@@ -78,7 +78,7 @@ namespace NBFC_App___dev
             string monthly_income = Monthly_income.Text.ToString();
             string product_val = Product.SelectedValue.ToString();
             string productname = Product.SelectedItem.ToString();
-            string industry_type = Industry_type.SelectedValue.ToString();
+            //string industry_type = Industry_type.SelectedValue.ToString();
             string reason = Reason.SelectedValue.ToString();
             string bpmcsrf = "";
             string bpmloader = "";
@@ -128,7 +128,7 @@ namespace NBFC_App___dev
             request2.AddCookie("BPMLOADER", bpmloader);
             request2.AddCookie("UserName", username);
             //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrIsLostCustomer\": true,\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrFullName\":\"" + fullname + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\",\r\n    \"UsrIndustryTypeId\":\"" + industry_type + "\"  \r\n}", ParameterType.RequestBody);
+            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrIsLostCustomer\": true,\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrFullName\":\"" + fullname + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\"  \r\n}", ParameterType.RequestBody);
             IRestResponse response2 = client2.Execute(request2);
             var createdRecordId = JObject.Parse(response2.Content);
             string dbconn = ConfigurationManager.AppSettings["dbconn"];

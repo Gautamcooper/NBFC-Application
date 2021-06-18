@@ -35,10 +35,10 @@
                                                 <div><asp:TextBox ID="TextBox3" class="loanamount" runat="server"></asp:TextBox></div>                                    
                                                 <div id="cont">
                                                     <div id="left"><label>2000</label></div>                                        
-                                                    <div id="right"><label>30000</label></div>
+                                                    <div id="right"><label>100000</label></div>
                                                 </div>    
                                                 <div class="range">
-                                                    <input id="myRange" type="range" class="form-range slider-range" min="2000" max="30000" runat="server" />
+                                                    <input id="myRange" type="range" class="form-range slider-range" min="2000" max="100000" runat="server" />
                                                 </div>
                                                 <div class="row">
                                                     <label class="label_inp" for="TextBox1" id="label_TextBox1">Mobile</label>
@@ -63,62 +63,56 @@
                                                 <div class="row">
                                                     <label class="label_inp" for="shortterm" id="label_shortterm">Number of Days</label>
                                                     <asp:DropDownList ID="shortterm" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Text="Number of Days" Value="-1"></asp:ListItem>
-                                                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
-                                                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
-                                                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
-                                                        <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                                                        <asp:ListItem Text="6" Value="6"></asp:ListItem>
-                                                        <asp:ListItem Text="7" Value="7"></asp:ListItem>
-                                                        <asp:ListItem Text="8" Value="8"></asp:ListItem>
-                                                        <asp:ListItem Text="9" Value="9"></asp:ListItem>
-                                                        <asp:ListItem Text="10" Value="10"></asp:ListItem>
-                                                        <asp:ListItem Text="11" Value="11"></asp:ListItem>
-                                                        <asp:ListItem Text="12" Value="12"></asp:ListItem>
-                                                        <asp:ListItem Text="13" Value="13"></asp:ListItem>
-                                                        <asp:ListItem Text="14" Value="14"></asp:ListItem>
-                                                        <asp:ListItem Text="15" Value="15"></asp:ListItem>
-                                                        <asp:ListItem Text="16" Value="16"></asp:ListItem>
-                                                        <asp:ListItem Text="17" Value="17"></asp:ListItem>
-                                                        <asp:ListItem Text="18" Value="18"></asp:ListItem>
-                                                        <asp:ListItem Text="19" Value="19"></asp:ListItem>
-                                                        <asp:ListItem Text="20" Value="20"></asp:ListItem>
-                                                        <asp:ListItem Text="21" Value="21"></asp:ListItem>
-                                                        <asp:ListItem Text="22" Value="22"></asp:ListItem>
-                                                        <asp:ListItem Text="23" Value="23"></asp:ListItem>
-                                                        <asp:ListItem Text="24" Value="24"></asp:ListItem>
-                                                        <asp:ListItem Text="25" Value="25"></asp:ListItem>                                        
+                                                        <asp:ListItem Text="5 Days" Value="5"></asp:ListItem>
+                                                        <asp:ListItem Text="6 Days" Value="6"></asp:ListItem>
+                                                        <asp:ListItem Text="7 Days" Value="7"></asp:ListItem>
+                                                        <asp:ListItem Text="8 Days" Value="8"></asp:ListItem>
+                                                        <asp:ListItem Text="9 Days" Value="9"></asp:ListItem>
+                                                        <asp:ListItem Text="10 Days" Value="10"></asp:ListItem>
+                                                        <asp:ListItem Text="11 Days" Value="11"></asp:ListItem>
+                                                        <asp:ListItem Text="12 Days" Value="12"></asp:ListItem>
+                                                        <asp:ListItem Text="13 Days" Value="13"></asp:ListItem>
+                                                        <asp:ListItem Text="14 Days" Value="14"></asp:ListItem>
+                                                        <asp:ListItem Text="15 Days" Value="15"></asp:ListItem>
+                                                        <asp:ListItem Text="16 Days" Value="16"></asp:ListItem>
+                                                        <asp:ListItem Text="17 Days" Value="17"></asp:ListItem>
+                                                        <asp:ListItem Text="18 Days" Value="18"></asp:ListItem>
+                                                        <asp:ListItem Text="19 Days" Value="19"></asp:ListItem>
+                                                        <asp:ListItem Text="20 Days" Value="20"></asp:ListItem>
+                                                        <asp:ListItem Text="21 Days" Value="21"></asp:ListItem>
+                                                        <asp:ListItem Text="22 Days" Value="22"></asp:ListItem>
+                                                        <asp:ListItem Text="23 Days" Value="23"></asp:ListItem>
+                                                        <asp:ListItem Text="24 Days" Value="24"></asp:ListItem>
+                                                        <asp:ListItem Text="25 Days" Value="25"></asp:ListItem>                                        
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="row">
                                                     <label class="label_inp" for="longterm" id="label_longterm">Number of Months</label>
                                                     <asp:DropDownList ID="longterm" class="dropdowncls inp-dropdown" runat="server">
                                                         <asp:ListItem Text="Number of Months" Value="-1"></asp:ListItem>
-                                                        <asp:ListItem Text="1" Value="1"></asp:ListItem>
-                                                        <asp:ListItem Text="2" Value="2"></asp:ListItem>
-                                                        <asp:ListItem Text="3" Value="3"></asp:ListItem>
-                                                        <asp:ListItem Text="4" Value="4"></asp:ListItem>
-                                                        <asp:ListItem Text="5" Value="5"></asp:ListItem>
-                                                        <asp:ListItem Text="6" Value="6"></asp:ListItem>
-                                                        <asp:ListItem Text="7" Value="7"></asp:ListItem>
-                                                        <asp:ListItem Text="8" Value="8"></asp:ListItem>
-                                                        <asp:ListItem Text="9" Value="9"></asp:ListItem>
-                                                        <asp:ListItem Text="10" Value="10"></asp:ListItem>
-                                                        <asp:ListItem Text="11" Value="11"></asp:ListItem>
-                                                        <asp:ListItem Text="12" Value="12"></asp:ListItem>
-                                                        <asp:ListItem Text="13" Value="13"></asp:ListItem>
-                                                        <asp:ListItem Text="14" Value="14"></asp:ListItem>
-                                                        <asp:ListItem Text="15" Value="15"></asp:ListItem>
-                                                        <asp:ListItem Text="16" Value="16"></asp:ListItem>
-                                                        <asp:ListItem Text="17" Value="17"></asp:ListItem>
-                                                        <asp:ListItem Text="18" Value="18"></asp:ListItem>
-                                                        <asp:ListItem Text="19" Value="19"></asp:ListItem>
-                                                        <asp:ListItem Text="20" Value="20"></asp:ListItem>
-                                                        <asp:ListItem Text="21" Value="21"></asp:ListItem>
-                                                        <asp:ListItem Text="22" Value="22"></asp:ListItem>
-                                                        <asp:ListItem Text="23" Value="23"></asp:ListItem>
-                                                        <asp:ListItem Text="24" Value="24"></asp:ListItem>                                       
+                                                        <asp:ListItem Text="2 Months" Value="2"></asp:ListItem>
+                                                        <asp:ListItem Text="3 Months" Value="3"></asp:ListItem>
+                                                        <asp:ListItem Text="4 Months" Value="4"></asp:ListItem>
+                                                        <asp:ListItem Text="5 Months" Value="5"></asp:ListItem>
+                                                        <asp:ListItem Text="6 Months" Value="6"></asp:ListItem>
+                                                        <asp:ListItem Text="7 Months" Value="7"></asp:ListItem>
+                                                        <asp:ListItem Text="8 Months" Value="8"></asp:ListItem>
+                                                        <asp:ListItem Text="9 Months" Value="9"></asp:ListItem>
+                                                        <asp:ListItem Text="10 Months" Value="10"></asp:ListItem>
+                                                        <asp:ListItem Text="11 Months" Value="11"></asp:ListItem>
+                                                        <asp:ListItem Text="12 Months" Value="12"></asp:ListItem>
+                                                        <asp:ListItem Text="13 Months" Value="13"></asp:ListItem>
+                                                        <asp:ListItem Text="14 Months" Value="14"></asp:ListItem>
+                                                        <asp:ListItem Text="15 Months" Value="15"></asp:ListItem>
+                                                        <asp:ListItem Text="16 Months" Value="16"></asp:ListItem>
+                                                        <asp:ListItem Text="17 Months" Value="17"></asp:ListItem>
+                                                        <asp:ListItem Text="18 Months" Value="18"></asp:ListItem>
+                                                        <asp:ListItem Text="19 Months" Value="19"></asp:ListItem>
+                                                        <asp:ListItem Text="20 Months" Value="20"></asp:ListItem>
+                                                        <asp:ListItem Text="21 Months" Value="21"></asp:ListItem>
+                                                        <asp:ListItem Text="22 Months" Value="22"></asp:ListItem>
+                                                        <asp:ListItem Text="23 Months" Value="23"></asp:ListItem>
+                                                        <asp:ListItem Text="24 Months" Value="24"></asp:ListItem>                                       
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="row">
@@ -134,27 +128,18 @@
                                                     <asp:DropDownList ID="Product" class="dropdowncls inp-dropdown" runat="server">
                                                         <asp:ListItem Enabled="true" Text="Product" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="Auto Loan" Value="7ed09da4-16cd-4682-9256-06ec7de429ad"></asp:ListItem>
-                                                        <asp:ListItem Text="Fixed Rate Mortgage, 30 Year Term" Value="3e38e0a5-00ac-4870-922f-08c8662ad943"></asp:ListItem>
-                                                        <asp:ListItem Text="Simple Auto Coverage" Value="2e1e9729-54b6-4f43-819c-10ffbbf977de"></asp:ListItem>
-                                                        <asp:ListItem Text="Classic Auto Loan" Value="a23812d9-875a-4729-b42b-1cdf167bb446"></asp:ListItem>
+                                                        <asp:ListItem Text="Simple Auto Coverage" Value="61294f86-fe67-47b5-bac2-2745850bfeb1"></asp:ListItem>
                                                         <asp:ListItem Text="Business Visa Card" Value="0d19fb43-0ce9-4e50-be86-33196859f80a"></asp:ListItem>
-                                                        <asp:ListItem Text="Used Auto Loan" Value="bbc012e3-8971-4603-9a36-43d7503f6ac8"></asp:ListItem>
-                                                        <asp:ListItem Text="Adjustable Rate Mortgage, 30 Year Term" Value="a5ea0caa-56fc-461b-a3e4-518dc19a8231"></asp:ListItem>
-                                                        <asp:ListItem Text="Product bundle" Value="a2d8601f-f06e-4930-b842-537943407971"></asp:ListItem>
-                                                        <asp:ListItem Text="Personal insurance" Value="6454c024-6f36-4e8c-91d7-542a70d13d00"></asp:ListItem>
-                                                        <asp:ListItem Text="Fixed Rate Mortgage, 15 Year Term" Value="dd9e0f24-3e23-4734-b02f-5b0ee906c425"></asp:ListItem>
-                                                        <asp:ListItem Text="Personal Loan" Value="b69f5776-5740-4b14-9c31-78210bc45483"></asp:ListItem>
-                                                        <asp:ListItem Text="Point Awards Credit Card" Value="28eeff97-3650-49d9-a63c-89099c64e708"></asp:ListItem>
-                                                        <asp:ListItem Text="Business credit card (Master Card)" Value="beaf491c-9c6a-4a2e-80ca-8b2869e568a6"></asp:ListItem>
-                                                        <asp:ListItem Text="Savings accounts" Value="135b2dd3-8c8a-4c02-8efc-8b5be733a05b"></asp:ListItem>
-                                                        <asp:ListItem Text="Merchant Services" Value="b0dc21d9-f9bd-4499-8cec-b06335c83717"></asp:ListItem>
-                                                        <asp:ListItem Text="Travel MasterCard" Value="d90f65b3-5595-4961-a35c-bd1fed2fb7e8"></asp:ListItem>
-                                                        <asp:ListItem Text="Business credit card (Visa)" Value="a113029d-6296-47f5-a94e-bd5a176f0c0d"></asp:ListItem>
+                                                        <asp:ListItem Text="Personal Loan" Value="6454c024-6f36-4e8c-91d7-542a70d13d00"></asp:ListItem>
+                                                        <asp:ListItem Text="Savings accounts" Value="4999bc41-54e1-4768-b918-34d45dce68cc"></asp:ListItem>
+                                                        <asp:ListItem Text="Business credit card (Visa)" Value="292dc0a3-35d9-4908-85d7-72170aa0a1af"></asp:ListItem>
+                                                        <asp:ListItem Text="Home Loan" Value="b69f5776-5740-4b14-9c31-78210bc45483"></asp:ListItem>
                                                         <asp:ListItem Text="Travel Credit Cards" Value="a47e2f93-eaab-4adc-b468-dd9eb4335efa"></asp:ListItem>
-                                                        <asp:ListItem Text="Full Auto Coverage" Value="9d2614f8-047a-4d98-a389-e0def88906fa"></asp:ListItem>                             
+                                                        <asp:ListItem Text="Payroll Card Programs" Value="a23812d9-875a-4729-b42b-1cdf167bb446"></asp:ListItem>
+                                                        <asp:ListItem Text="Business Loan" Value="6638eaf0-2883-47b2-8d9d-01ab1fdd1d35"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="row">
+                                                <%--<div class="row">
                                                     <label class="label_inp" for="Industry_type" id="label_Industry_type">Occupation</label>
                                                     <asp:DropDownList ID="Industry_type" class="dropdowncls inp-dropdown" runat="server">
                                                         <asp:ListItem Enabled="true" Text="Occupation" Value="-1"></asp:ListItem>
@@ -204,7 +189,7 @@
                                                         <asp:ListItem Text="Trading / Retail/ Distributor" Value = "7ef788e1-c934-427e-9272-eb6152a24b2a"></asp:ListItem>
                                                         <asp:ListItem Text="Transport" Value = "06e63172-888d-471d-95df-292d728fd068"></asp:ListItem>
                                                     </asp:DropDownList>
-                                                </div>
+                                                </div>--%>
                                                 <div class="row">
                                                     <label class="label_inp" for="Reason" id="label_Reason">Reason</label>
                                                     <asp:DropDownList ID="Reason" class="dropdowncls inp-dropdown" runat="server">

@@ -185,6 +185,7 @@ $("#Loan_type").focus(function () {
 });
 $("#longterm").hide();
 $("#shortterm").hide();
+$("#label_shortterm").hide();
 $("#Loan_type").change(function () {
     var loantype = $("#Loan_type").val();
     if (loantype == "short") {
@@ -194,6 +195,7 @@ $("#Loan_type").change(function () {
     else if (loantype == "long") {
         $("#longterm").show();
         $("#shortterm").hide();
+        $("#label_shortterm").hide();
     }
 });
 $("#shortterm").focus(function () {
