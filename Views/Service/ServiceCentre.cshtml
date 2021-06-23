@@ -42,7 +42,8 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <select id="relatedto" class="form-input" required>
+                        <label class="label_inp" for="relatedto" id="label_relatedto">Query Related to</label>
+                        <select id="relatedto" class="form-input inp_dropdown" required>
                             <option value="-1">Query Related to</option>
                             <option value="a9a4ba04-7b52-4565-a64c-6c26c7a67330">General</option>
                             <option value="83b0dd07-82e6-4026-8e5d-b43cb4025670">Product</option>
@@ -54,7 +55,8 @@
                 </div>
                 <div class="row" id="Product">
                     <div class="col-md-6">
-                        <select id="product_select" class="form-input" required>
+                        <label class="label_inp" for="product_select" id="label_product_select">Select Product</label>
+                        <select id="product_select" class="form-input inp_dropdown" required>
                             <option value="-1">Select Product </option>
                             @if (ViewData["ProductsData"] != null)
                             {
@@ -66,7 +68,8 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select id="services" class="form-input" required>
+                        <label class="label_inp" for="services" id="label_services">Related Services</label>
+                        <select id="services" class="form-input inp_dropdown" required>
 
                             <option value="-1">Related Services</option>
                             @if (ViewData["Product_Service"] != null)
@@ -83,7 +86,8 @@
                 </div>
                 <div class="row" id="Application">
                     <div class="col-md-6">
-                        <select id="application_select" class="form-input" required>
+                        <label class="label_inp" for="application_select" id="label_application_select">Select Application</label>
+                        <select id="application_select" class="form-input inp_dropdown" required>
                             <option value="-1">Select Application </option>
                             @if (ViewData["ApplicationData"] != null)
                             {
@@ -95,7 +99,8 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select id="apln_services" class="form-input" required>
+                        <label class="label_inp" for="apln_services" id="label_apln_services">Related Services</label>
+                        <select id="apln_services" class="form-input inp_dropdown" required>
 
                             <option value="-1">Related Services</option>
                             @if (ViewData["Product_Service"] != null)
@@ -112,7 +117,8 @@
                 </div>
                 <div class="row" id="Agreement">
                     <div class="col-md-6">
-                        <select id="agreement_select" class="form-input" required>
+                        <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Agreement</label>
+                        <select id="agreement_select" class="form-input inp_dropdown" required>
                             <option value="-1">Select Agreement </option>
                             @if (ViewData["AgreementData"] != null)
                             {
@@ -124,7 +130,8 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select id="agrm_services" class="form-input" required>
+                        <label class="label_inp" for="agrm_services" id="label_agrm_services">Related Services</label>
+                        <select id="agrm_services" class="form-input inp_dropdown" required>
 
                             <option value="-1">Related Services</option>
                             @if (ViewData["Product_Service"] != null)
@@ -141,7 +148,8 @@
                 </div>
                 <div class="row" id="Service_Type">
                     <div class="col-md-4">
-                        <select id="type" class="form-input" required>
+                        <label class="label_inp" for="type" id="label_type">Category</label>
+                        <select id="type" class="form-input inp_dropdown" required>
                             <option value="-1">Category</option>
                             <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
                             <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>

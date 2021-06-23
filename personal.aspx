@@ -55,7 +55,7 @@
                                                 <div class="row">
                                                     <label class="label_inp" for="Loan_type" id="label_Loan_type">Loan Duration</label>
                                                     <asp:DropDownList ID="Loan_type" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Text="Loan Type" Value="-1"></asp:ListItem>
+                                                        <asp:ListItem Text="Loan Duration" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="Short Term Loan" Value="short"></asp:ListItem>
                                                         <asp:ListItem Text="Long Term Loan" Value="long"></asp:ListItem>
                                                     </asp:DropDownList>
@@ -126,17 +126,6 @@
                                                 <div class="row">
                                                     <label class="label_inp" for="Product" id="label_Product">Loan Type</label>
                                                     <asp:DropDownList ID="Product" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Enabled="true" Text="Product" Value="-1"></asp:ListItem>
-                                                        <asp:ListItem Text="Auto Loan" Value="7ed09da4-16cd-4682-9256-06ec7de429ad"></asp:ListItem>
-                                                        <asp:ListItem Text="Simple Auto Coverage" Value="61294f86-fe67-47b5-bac2-2745850bfeb1"></asp:ListItem>
-                                                        <asp:ListItem Text="Business Visa Card" Value="0d19fb43-0ce9-4e50-be86-33196859f80a"></asp:ListItem>
-                                                        <asp:ListItem Text="Personal Loan" Value="6454c024-6f36-4e8c-91d7-542a70d13d00"></asp:ListItem>
-                                                        <asp:ListItem Text="Savings accounts" Value="4999bc41-54e1-4768-b918-34d45dce68cc"></asp:ListItem>
-                                                        <asp:ListItem Text="Business credit card (Visa)" Value="292dc0a3-35d9-4908-85d7-72170aa0a1af"></asp:ListItem>
-                                                        <asp:ListItem Text="Home Loan" Value="b69f5776-5740-4b14-9c31-78210bc45483"></asp:ListItem>
-                                                        <asp:ListItem Text="Travel Credit Cards" Value="a47e2f93-eaab-4adc-b468-dd9eb4335efa"></asp:ListItem>
-                                                        <asp:ListItem Text="Payroll Card Programs" Value="a23812d9-875a-4729-b42b-1cdf167bb446"></asp:ListItem>
-                                                        <asp:ListItem Text="Business Loan" Value="6638eaf0-2883-47b2-8d9d-01ab1fdd1d35"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
                                                 <%--<div class="row">
@@ -193,7 +182,7 @@
                                                 <div class="row">
                                                     <label class="label_inp" for="Reason" id="label_Reason">Reason</label>
                                                     <asp:DropDownList ID="Reason" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Enabled="true" Text="Reason" Value="-1"></asp:ListItem>
+                                                        <%--<asp:ListItem Enabled="true" Text="Reason" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="Wedding" Value = "c49e7557-c49a-48a3-b409-7b1d6ff3d648"></asp:ListItem>
                                                         <asp:ListItem Text="Travel / Vacation" Value = "4cfd0d1a-4866-490a-926b-ffede0339f1d"></asp:ListItem>
                                                         <asp:ListItem Text="Stock Markets/ Mutual Funds/ Lottery" Value = "13a760ce-ae81-4895-8e37-2a852a30f1c0"></asp:ListItem>
@@ -215,7 +204,7 @@
                                                         <asp:ListItem Text="EMI/Loan Repayment" Value = "abf18093-fb25-49aa-b564-caa89089f797"></asp:ListItem>
                                                         <asp:ListItem Text="Buying jewellery" Value = "cc9e931e-35ad-45c0-906d-f1167d377bfa"></asp:ListItem>
                                                         <asp:ListItem Text="Appliance Purchase" Value = "6461a085-63aa-4168-a1e1-d095c455275f"></asp:ListItem>
-                                                        <asp:ListItem Text="2 Wheeler Purchase" Value = "8e7942d6-4909-48fe-8eb8-6e9ccfa7f48a"></asp:ListItem>
+                                                        <asp:ListItem Text="2 Wheeler Purchase" Value = "8e7942d6-4909-48fe-8eb8-6e9ccfa7f48a"></asp:ListItem>--%>
                                                     </asp:DropDownList>
                                                 </div>
                                                                         

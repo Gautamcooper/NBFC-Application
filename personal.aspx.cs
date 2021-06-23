@@ -14,6 +14,67 @@ namespace NBFC_App___dev
 {
     public partial class personal : System.Web.UI.Page
     {
+        public List<string> Authentication()
+        {
+            string bpmcsrf = "";
+            string bpmloader = "";
+            string aspxauth = "";
+            string username = "";
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string url = apiurl + "ServiceModel/AuthService.svc/Login";
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            //Console.WriteLine(response.Content);
+            foreach (var c in response.Cookies)
+            {
+                if (c.Name.ToString() == "BPMCSRF")
+                {
+                    bpmcsrf = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == "BPMLOADER")
+                {
+                    bpmloader = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == ".ASPXAUTH")
+                {
+                    aspxauth = c.Value.ToString();
+                }
+                else if (c.Name.ToString() == "UserName")
+                {
+                    username = c.Value.ToString();
+                }
+            }
+
+            List<string> Cookies = new List<string>();
+            Cookies.Add(bpmcsrf);
+            Cookies.Add(bpmloader);
+            Cookies.Add(aspxauth);
+            Cookies.Add(username);
+
+            return Cookies;
+        }
+
+        public JObject GET_Object(string url)
+        {
+            List<string> GetCookies = Authentication();
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("BPMCSRF", GetCookies[0]);
+            request.AddCookie(".ASPXAUTH", GetCookies[2]);
+            request.AddCookie("BPMCSRF", GetCookies[0]);
+            request.AddCookie("BPMLOADER", GetCookies[1]);
+            request.AddCookie("UserName", GetCookies[3]);
+
+            IRestResponse response = client.Execute(request);
+            JObject ParsedObject = JObject.Parse(response.Content);
+            return ParsedObject;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -54,6 +115,25 @@ namespace NBFC_App___dev
                         Product.SelectedValue = Request.Cookies["ProductId"].Value;
                     }                   
                     sqlCnctn.Close();
+
+                    string apiurl = ConfigurationManager.AppSettings["apiurl"];
+                    string url = apiurl + "0/odata/UsrProducts?$select=Id,Name";
+                    
+
+                    JObject ParsedResponse = GET_Object(url);
+                    Product.Items.Add(new ListItem("Select Loan Type", "-1" ));
+                    foreach (var v in ParsedResponse["value"])
+                    {
+                        Product.Items.Add(new ListItem(v["Name"].ToString(),v["Id"].ToString()));
+                    }
+                    
+                    url = apiurl + "0/odata/UsrReasonForLoan?$select=Id,Name";
+                    ParsedResponse = GET_Object(url);
+                    Reason.Items.Add(new ListItem("Select Reason", "-1"));
+                    foreach (var v in ParsedResponse["value"])
+                    {
+                        Reason.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
+                    }
                 }
             }                       
         }

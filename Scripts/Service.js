@@ -137,3 +137,24 @@ $("#relatedto").change(function () {
     
 })
 
+$(".inp_dropdown").each(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show();
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide();
+    }
+});
+$(".inp_dropdown").change(function () {
+    if (this.value != "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).show(500);
+    }
+    else if (this.value == "-1") {
+        var id = this.getAttribute("id");
+        $("#label_" + id).hide(500);
+    }
+})
+
