@@ -5,77 +5,98 @@
 @{
     var data = ViewBag.Message;
 }
-
-<div class="container">
-    <div style="position: relative;">
-        <h2 style="text-align: center;">My Applications</h2>
-    </div>
-    <br />
-    <div class="container-fluid table_view">
-        <table class="table">
-            <thead>
-                <tr style="background: powderblue;">
-                    <th scope="col">Application Number</th>
-                    <th scope="col">Loan</th>
-                    <th scope="col">Application Status</th>
-                    <th scope="col">Agreement Number</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Tenure</th>
-                    <th scope="col">Date Created</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
-                {
-                <tr class="table_row">
-                    <td>@Html.ActionLink(@application.number, "ApplicationInfo", new { Id = @application.id })</td>
-                    <td>@Html.ActionLink(@application.product, "ProductsInfo", new { Id = @application.productId })</td>
-                    <td>@application.status</td>
-                    @if(@application.agreement == "Not Created")
-                    {
-                    <td>Not Created</td>
-                    }
-                    else
-                    {
-                    <td>@Html.ActionLink(@application.agreement, "AgreementInfo", new { Id = @application.agreementId })</td>
-                    }
-                    <td>@application.requestedamount</td>
-                    <td>@application.requestedterm</td>
-                    <td>@application.createdOn</td>
-                </tr>
-
-                }
-            </tbody>
-        </table>
-        </div>
-    <div class="card_view container-fluid">
-        @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
-        {
-            <div class="card card_detail">
-                <div class="card-header"><h3>@application.number</h3></div><br />
-                <div class="card-body">
-                    <h4 class="card-title"><b>Status: </b>@application.status</h4>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p class="card-text"><b>Amount: </b>@application.requestedamount</p>
-                        </div>
-                        <div class="col-md-4">                            
-                            <p class="card-text"><b>Term: </b>@application.requestedterm</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="card-text"><b>Product: </b>@application.product</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="card-text"><b>CreatedOn: </b>@application.createdOn</p>
-                        </div>
-                    </div>  
-                    @Html.ActionLink("Select", "ApplicationInfo", new { Id = @application.id }, new { @class = "btn btn-primary" })
-                </div>
+@if (ViewData["ApplicationData"] == null)
+{
+    <div class="container">
+        <div style="position: relative;">
+            <h2 style="text-align: center;">My Agreements</h2>
+            <br />
+            <div style="text-align: center;">
+                <i class="fas fa-envelope fa-9x" style="color: #7da3d2;"></i>
             </div>
-        }
+            <br />
+            <div style="text-align: -webkit-center;">
+                <h4 style="color: #d04e8a; max-width: 600px;">
+                    There are no Agreements. Kindly apply for a loan, or if you have applied and you cannot see the agreement, kindly contact our customer service.
+                </h4>
+            </div>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="container">
+        <div style="position: relative;">
+            <h2 style="text-align: center;">My Applications</h2>
+        </div>
+        <br />
+        <div class="container-fluid table_view">
+            <table class="table">
+                <thead>
+                    <tr style="background: powderblue;">
+                        <th scope="col">Application Number</th>
+                        <th scope="col">Loan</th>
+                        <th scope="col">Application Status</th>
+                        <th scope="col">Agreement Number</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Tenure</th>
+                        <th scope="col">Date Created</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                    {
+                        <tr class="table_row">
+                            <td>@Html.ActionLink(@application.number, "ApplicationInfo", new { Id = @application.id })</td>
+                            <td>@Html.ActionLink(@application.product, "ProductsInfo", new { Id = @application.productId })</td>
+                            <td>@application.status</td>
+                            @if (@application.agreement == "Not Created")
+                            {
+                                <td>Not Created</td>
+                            }
+                            else
+                            {
+                                <td>@Html.ActionLink(@application.agreement, "AgreementInfo", new { Id = @application.agreementId })</td>
+                            }
+                            <td>@application.requestedamount</td>
+                            <td>@application.requestedterm</td>
+                            <td>@application.createdOn</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card_view container-fluid">
+            @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
+            {
+                <div class="card card_detail">
+                    <div class="card-header"><h3>@application.number</h3></div><br />
+                    <div class="card-body">
+                        <h4 class="card-title"><b>Status: </b>@application.status</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="card-text"><b>Amount: </b>@application.requestedamount</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="card-text"><b>Term: </b>@application.requestedterm</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text"><b>Product: </b>@application.product</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text"><b>CreatedOn: </b>@application.createdOn</p>
+                            </div>
+                        </div>
+                        @Html.ActionLink("Select", "ApplicationInfo", new { Id = @application.id }, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
 

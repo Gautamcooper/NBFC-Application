@@ -270,7 +270,7 @@ namespace NBFC_App___dev.Controllers
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                 List<Agreements> list = new List<Agreements>();
-                
+                list = null;
                 foreach (var v in ParsedResponse["value"])
                 {
                     Agreements agr = new Agreements()
