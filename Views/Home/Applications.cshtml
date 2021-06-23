@@ -28,15 +28,22 @@
             <tbody>
                 @foreach (var application in (IEnumerable<Applications>)ViewData["ApplicationData"])
                 {
-                    <tr class="table_row">
-                        <td>@Html.ActionLink(@application.number, "ApplicationInfo", new { Id = @application.id })</td>
-                        <td>@Html.ActionLink(@application.product, "ProductsInfo", new { Id = @application.productId })</td>
-                        <td>@application.status</td>
-                        <td>@Html.ActionLink(@application.agreement, "AgreementInfo", new { Id = @application.agreementId })</td>
-                        <td>@application.requestedamount</td>
-                        <td>@application.requestedterm</td>
-                        <td>@application.createdOn</td>
-                    </tr>
+                <tr class="table_row">
+                    <td>@Html.ActionLink(@application.number, "ApplicationInfo", new { Id = @application.id })</td>
+                    <td>@Html.ActionLink(@application.product, "ProductsInfo", new { Id = @application.productId })</td>
+                    <td>@application.status</td>
+                    @if(@application.agreement == "Not Created")
+                    {
+                    <td>Not Created</td>
+                    }
+                    else
+                    {
+                    <td>@Html.ActionLink(@application.agreement, "AgreementInfo", new { Id = @application.agreementId })</td>
+                    }
+                    <td>@application.requestedamount</td>
+                    <td>@application.requestedterm</td>
+                    <td>@application.createdOn</td>
+                </tr>
 
                 }
             </tbody>
