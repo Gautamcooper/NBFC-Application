@@ -428,8 +428,8 @@ namespace NBFC_App___dev.Controllers
                 }
 
                 List<Applications> list = new List<Applications> () ;
-                
-                
+
+                list = null;
                 foreach (var v in ParsedResponse["value"])
                 {
                     Applications app = new Applications()
