@@ -6,54 +6,74 @@
 @{
     var data = ViewBag.Message;
 }
-
+@if (ViewData["PaymentRecords"] == null)
+{
     <div class="container">
-        <div>
-            <div style="position: relative;">
-                <h2 style="text-align: center;">Payments</h2>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">My Agreements</h2>
+            <br />
+            <div style="text-align: center;">
+                <i class="fas fa-envelope fa-9x" style="color: #7da3d2;"></i>
             </div>
-
+            <br />
+            <div style="text-align: -webkit-center;">
+                <h4 style="color: #d04e8a; max-width: 600px;">
+                    There are no Payment Records. If you feel there is an error kindly contact us.
+                </h4>
+            </div>
         </div>
-        <br />
-        <div class="container-fluid table_view">
-            <table class="table">
-                <thead>
-                    <tr style="background: powderblue;">
-                        <th scope="col">Agreement</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Loan Type</th>
-                        <th scope="col">Payment Date</th>
-                    </tr>
-                </thead>
-                <tbody>
+    </div>
+}
+else
+{ 
+<div class="container">
+    <div>
+        <div style="position: relative;">
+            <h2 style="text-align: center;">Payments</h2>
+        </div>
 
-                    @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
-                    {
+    </div>
+    <br />
+    <div class="container-fluid table_view">
+        <table class="table">
+            <thead>
+                <tr style="background: powderblue;">
+                    <th scope="col">Agreement</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Loan Type</th>
+                    <th scope="col">Payment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
+                {
                     <tr class="table_row">
                         <td>@payrecords.agreement</td>
                         <td>@payrecords.amount</td>
                         <td>@payrecords.loantype</td>
                         <td>@payrecords.paymentdate</td>
                     </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="card_view container-fluid">
-            @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
-            {
-                <div class="card card_detail">
-                    <div class="card-header"><h3>@payrecords.agreement</h3></div><br />
-                    <div class="card-body">
-                        <h4 class="card-title"><b>Status: </b>@payrecords.amount</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="card-text"><b>Tenure: </b>@payrecords.loantype</p>
-                            </div>                           
-                        </div>                                                
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card_view container-fluid">
+        @foreach (var payrecords in (IEnumerable<Payment_Records>)ViewData["PaymentRecords"])
+        {
+            <div class="card card_detail">
+                <div class="card-header"><h3>@payrecords.agreement</h3></div><br />
+                <div class="card-body">
+                    <h4 class="card-title"><b>Status: </b>@payrecords.amount</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><b>Tenure: </b>@payrecords.loantype</p>
+                        </div>
                     </div>
                 </div>
-            }
-        </div>
-        @Html.ActionLink("Make Payment", "MakePayment", "Home", new { @class = "btn btn-primary" })
+            </div>
+        }
     </div>
+    @Html.ActionLink("Make Payment", "MakePayment", "Home", new { @class = "btn btn-primary" })
+</div>  
+}

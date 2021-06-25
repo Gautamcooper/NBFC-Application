@@ -39,7 +39,14 @@ namespace NBFC_App___dev
                     fullname.Visible = true;
                 }
                 next_clicked.Text = "false";
-            }            
+            }
+            else
+            {
+                System.Web.HttpCookie UserCookie = new System.Web.HttpCookie("User");
+                UserCookie.Value = "login";
+                UserCookie.Expires = DateTime.Now.AddMinutes(60);
+                Response.Cookies.Add(UserCookie);
+            }
         }
         protected void Button1_Click(object sender, EventArgs e)
         {

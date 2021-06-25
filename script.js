@@ -183,19 +183,19 @@ $("#Loan_type").focus(function () {
     //$("#Product option[value='-1']").removeAttr('disabled');
     $("#Loan_type option[value='-1']").attr('disabled', 'disabled');
 });
-$("#longterm").hide();
-$("#shortterm").hide();
-$("#label_shortterm").hide();
+$("#longtermrow").hide();
+$("#shorttermrow").hide();
+//$("#label_shortterm").hide();
 $("#Loan_type").change(function () {
     var loantype = $("#Loan_type").val();
     if (loantype == "short") {
-        $("#shortterm").show();
-        $("#longterm").hide();
+        $("#shorttermrow").show();
+        $("#longtermrow").hide();
     }
     else if (loantype == "long") {
-        $("#longterm").show();
-        $("#shortterm").hide();
-        $("#label_shortterm").hide();
+        $("#longtermrow").show();
+        $("#shorttermrow").hide();
+        //$("#label_shortterm").hide();
     }
 });
 $("#shortterm").focus(function () {

@@ -270,7 +270,7 @@ namespace NBFC_App___dev.Controllers
                 string url = apiurl + temp_url;
                 JObject ParsedResponse = GET_Object(url);
                 List<Agreements> list = new List<Agreements>();
-                list = null;
+                
                 foreach (var v in ParsedResponse["value"])
                 {
                     Agreements agr = new Agreements()
@@ -290,8 +290,15 @@ namespace NBFC_App___dev.Controllers
 
                     list.Add(agr);
                 }
-
-                ViewData["AgreementData"] = list;
+                if (list.Count == 0)
+                {
+                    ViewData["AgreementData"] = null;
+                }
+                else
+                {
+                    ViewData["AgreementData"] = list;
+                }
+                
                 return View();
             }
             else
@@ -429,7 +436,7 @@ namespace NBFC_App___dev.Controllers
 
                 List<Applications> list = new List<Applications> () ;
 
-                list = null;
+               
                 foreach (var v in ParsedResponse["value"])
                 {
                     Applications app = new Applications()
@@ -448,8 +455,15 @@ namespace NBFC_App___dev.Controllers
 
                     list.Add(app);
                 }
-
-                ViewData["ApplicationData"] = list;
+                if (list.Count == 0)
+                {
+                    ViewData["ApplicationData"] = null;
+                }
+                else
+                {
+                    ViewData["ApplicationData"] = list;
+                }
+                
                 return View();
             }
             else
@@ -1370,8 +1384,15 @@ namespace NBFC_App___dev.Controllers
                     };
                     payrecords_list.Add(payrecord);
                 }
-
-                ViewData["PaymentRecords"] = payrecords_list;
+                if (payrecords_list.Count == 0)
+                {
+                    ViewData["PaymentRecords"] = null;
+                }
+                else
+                {
+                    ViewData["PaymentRecords"] = payrecords_list;
+                }
+               
                 return View();
             }
             else

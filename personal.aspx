@@ -40,15 +40,15 @@
                                                 <div class="range">
                                                     <input id="myRange" type="range" class="form-range slider-range" min="2000" max="100000" runat="server" />
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" style="display:none;">
                                                     <label class="label_inp" for="TextBox1" id="label_TextBox1">Mobile</label>
                                                     <asp:TextBox ID="TextBox1" placeholder="Mobile No." runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" style="display:none;">
                                                     <label class="label_inp" for="TextBox2" id="label_TextBox2">Email</label> 
                                                     <asp:TextBox ID="TextBox2" placeholder="Email ID" runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" style="display:none;">
                                                     <label class="label_inp" for="FullName" id="label_FullName">Full Name</label> 
                                                     <asp:TextBox ID="FullName" placeholder="Full Name" runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div> 
@@ -60,9 +60,10 @@
                                                         <asp:ListItem Text="Long Term Loan" Value="long"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" id="shorttermrow">
                                                     <label class="label_inp" for="shortterm" id="label_shortterm">Number of Days</label>
                                                     <asp:DropDownList ID="shortterm" class="dropdowncls inp-dropdown" runat="server">
+                                                        <asp:ListItem Text="Number of Days" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="5 Days" Value="5"></asp:ListItem>
                                                         <asp:ListItem Text="6 Days" Value="6"></asp:ListItem>
                                                         <asp:ListItem Text="7 Days" Value="7"></asp:ListItem>
@@ -86,7 +87,7 @@
                                                         <asp:ListItem Text="25 Days" Value="25"></asp:ListItem>                                        
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" id="longtermrow">
                                                     <label class="label_inp" for="longterm" id="label_longterm">Number of Months</label>
                                                     <asp:DropDownList ID="longterm" class="dropdowncls inp-dropdown" runat="server">
                                                         <asp:ListItem Text="Number of Months" Value="-1"></asp:ListItem>
