@@ -7,6 +7,7 @@ namespace NBFC_App___dev.Models
 {
     public class User
     {
+        public string currentaddrsameasaadhar { get; set; }
         public string appgateId { get; set; }
         public string Email { get; set; }
 

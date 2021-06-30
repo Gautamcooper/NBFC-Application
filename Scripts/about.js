@@ -126,6 +126,10 @@ if (step1 == "true" && uploadedvalue == "true") {
     $("#continue").show();
 };
 
+if (uploadedvalue == "false") {
+    $("#panandaadhardetails").hide();
+}
+
 $("#save").click(function () {
     if ($('#gender_select').val() == '-1' || $('#marital_select').val() == '-1' || $('#employment_select').val() == '-1' || $('#currentcity_select').val() == '-1' || $('#currentstate_select').val() == '-1' || $('#currentcountry_select').val() == '-1') {
         alert("Please fill in all the Drop down columns!");
@@ -228,6 +232,17 @@ $(".remove").click(function () {
     var id_ = id.substring(7);
     $("#" + id_).val(null);
 });
+
+var currentaddrsameasaadhar = $("#currentaddrsameasaadhar").val();
+if (currentaddrsameasaadhar == "true") {
+    $("#checkaddr").prop("checked", true);
+    $("#address").hide();
+}
+else {
+    $("#checkaddr").prop("checked", false);
+    $("#address").show();
+}
+
 $("#checkaddr").change(function () {
     var checked = $("#checkaddr").prop("checked");
     if (checked == true) {

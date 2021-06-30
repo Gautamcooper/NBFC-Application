@@ -140,8 +140,11 @@
     <Compile Include="Models\ApplicationInfo.cs" />
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\EMI_Records.cs" />
+    <Compile Include="Models\EmploymentType.cs" />
     <Compile Include="Models\FAQ.cs" />
+    <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\HomePage.cs" />
+    <Compile Include="Models\MaritalStatus.cs" />
     <Compile Include="Models\Operations.cs" />
     <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\Payment.cs" />
