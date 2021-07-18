@@ -33,10 +33,12 @@ namespace NBFC_App___dev
                 if (way == "login")
                 {
                     fullname.Visible = false;
+                    Button1.Text = "Login";
                 }
                 else if (way == "signup")
                 {
                     fullname.Visible = true;
+                    Button1.Text = "Signup";
                 }
                 next_clicked.Text = "false";
             }
@@ -73,7 +75,7 @@ namespace NBFC_App___dev
                 string fulln = fullname.Text.ToString();
                 if (dt.Rows.Count > 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We already have a user with this Info. Please Login'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "Alert Message", "alert('We already have a user with this Info. Please Login'); window.location='" + Request.ApplicationPath + "index.aspx';", true);
                     //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", , true);                    
                 }
                 else

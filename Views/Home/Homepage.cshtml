@@ -4,28 +4,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <div class="dashboard">
-        <img class="dashboard-img" alt="homepage" src="~/homepage-banner.jpg" />
-        <div class="btn-img">
-            <h3 class="tag-text">Instant Loans at your Fingertips.</h3>
-            @*<p class="tag-text">No Repeat Applications. One time approval needed.</p>*@
-            @*<p class="tag-text">We provide instant loans. Click on Apply now, fill up the details and check for your eligibility.</p>*@
-            <div><a class="btn btn-light go-button" href="~/personal.aspx" style="padding-top: 13px;">Apply for Loan</a></div>
+@*<div>
+        <div class="dashboard">
+            <img class="dashboard-img" alt="homepage" src="~/HomepageBanner.jpg" />
+            <div class="btn-img">
+                <div class="text-center tag-text mx-auto d-block">Instant Loans at your Fingertips</div><br/>
+                <p class="tag-text">No Repeat Applications. One time approval needed.</p>
+                <p class="tag-text">We provide instant loans. Click on Apply now, fill up the details and check for your eligibility.</p>
+                <div class="text-center main_btn_div mx-auto d-block"><a class="btn btn-primary btn-md" href="~/personal.aspx">Apply for Loan</a></div>
+            </div>
+        </div>
+    </div>*@
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1" style="margin-left: 10px;"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2" style="margin-left: 10px;"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="~/Carousel_Pic1.jpg" alt="First slide">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Carousel_Pic2.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="~/Carousel_Pic3.jpg" alt="Third slide">
         </div>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
+
+@if (@ViewBag.Step1Count == null)
+{
+    <div class="pending">
+        <p>Instant Loans at your Fingertips, <a style="color:red;" href="~/personal.aspx">Apply for Loan! </a>to Proceed</p>
+    </div>
+}
 
 @if (@ViewBag.Step1Count > 0)
 {
     <div class="pending">
-        <p>You have Pending Steps for @ViewBag.Step1Count.ToString() Loans, <a style="color:red;" href="~/Home/PendingSteps">Click Here! </a>to Proceed</p>
+        <p>You have Pending Steps for @ViewBag.Step1Count.ToString() Loans, <a style="color:red;" href="~/Home/PendingSteps">Click Here! </a></p>
     </div>
 }
 
 <div class="row dashboard-page">
-    <div class="col-md-2 col-lg-2 q-links-body">
-        <h3>Quick Links</h3>
+    <div class="col-md-2 col-lg-2 q-links-body  text-center">
+        <h3 style="text-align: center; margin-left: -1em;">Quick Links</h3>
         <div class="quick-links">
             <ul>
                 <li class="link-text"><a href="~/Home/LoanEligibilityCheck">Loan Eligibility Calculator</a></li>
@@ -39,19 +75,19 @@
             </ul>
         </div>
     </div>
-    <div class="col-lg-9 col-md-9 col-sm-9 container home-body">
+    <div class="col-lg-10 col-md-9 col-sm-9 container home-body">
         <div class="card-row row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
-
+                        <br />
                         <h4><b>@ViewData["top1_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/businessVisaCardLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/AutoLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top1_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top1_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top1_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>
@@ -59,13 +95,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
+                        <br />
                         <h4><b>@ViewData["top2_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/classicarloan.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/PayrollCardProgram.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top2_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top2_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top2_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>
@@ -73,13 +110,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
+                        <br />
                         <h4><b>@ViewData["top3_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/personalLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/BusinessVisaCard.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top3_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top3_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top3_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -89,13 +127,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
+                        <br />
                         <h4><b>@ViewData["top4_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/homeloanimage.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/PersonalLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top4_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top4_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top4_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -103,13 +142,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
+                        <br />
                         <h4><b>@ViewData["top5_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/TravelCreditCardLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/HomeLoan.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top5_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top5_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top5_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -117,13 +157,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="container-fluid">
+                        <br />
                         <h4><b>@ViewData["top6_prName"]</b></h4>
                         <br />
-                        <img class="card-img" src="~/Card-images/payrollCardImage.jpg" alt="" @*style="width:317px; height:211px;"*@>
+                        <img class="card-img" src="~/Card-images/TravelCreditCard.jpg" alt="" @*style="width:317px; height:211px;"*@>
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top6_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top6_prId"]" style="padding-top: 13px;">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top6_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>

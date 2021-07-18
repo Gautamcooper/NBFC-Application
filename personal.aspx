@@ -272,7 +272,7 @@
                             <p><i class="fas fa-envelope"></i> Email: <a style="color: #337ab7;" href="mailto:hello@virtuos.com">hello@virtuos.com</a></p>
                             <p><i class="fab fa-skype"></i> Skype: virtuos_help</p>
                         </div>
-                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;position: relative;left: 8em;">
                             <h3 style="color: #aaa;">Follow us</h3>
                             <p>
                                 <a style="color: #337ab7;" href="#"><i class="fab fa-facebook fa-2x"></i></a>

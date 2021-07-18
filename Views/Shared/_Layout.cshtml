@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/aboutstyle.css" rel="stylesheet" />
@@ -54,34 +55,34 @@
             </div>
         </nav>
         @*<div class="navbar navbar-inverse navbar-fixed-top navbar-light bg-light">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">
-                        @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Profile", "About", "Home")</li>
-                            <li>@Html.ActionLink("Products", "Products", "Home")</li>
-                            <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
-                            <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>
-                            <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
-                            <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
-                            <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                        </ul>
-                    </div>
-
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <img src="~/assets/images/virtuos_flat.png" width="150" height="40" alt="" style="margin-top:5px; margin-left=5px;">
+                    @Html.ActionLink("NBFC MVP", "Products", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
-            </div>*@
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Profile", "About", "Home")</li>
+                        <li>@Html.ActionLink("Products", "Products", "Home")</li>
+                        <li>@Html.ActionLink("Applications", "Applications", "Home")</li>
+                        <li>@Html.ActionLink("Agreements", "Agreements", "Home")</li>
+                        <li>@Html.ActionLink("Payments", "Payment_Records", "Home")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Self-Service", "ServiceCentre", "Service")</li>
+                        <li>@Html.ActionLink("FAQ's", "About", "Home")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>*@
         <div id="content-wrap" class="container-fluid body-content">
             @RenderBody()
 
@@ -90,11 +91,11 @@
             <br />
         </div>
 
-        <footer id="footer">
+        @*<footer id="footer">
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                        <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated align-self-start" style="visibility: visible; animation-name: fadeInUp;">
                             <p>
                                 <img class="logo-footer" src="~/assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;">
                             </p>
@@ -105,7 +106,7 @@
                         </div>
                         <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
                             <h3>Contact</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> Emaar Digital Greens, Tower A, Sector-6, Gurugram</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Emaar Digital Greens, Tower A, Sector-62, Gurugram</p>
                             <p><i class="fas fa-phone"></i> Phone: (+91) 9988998899</p>
                             <p><i class="fas fa-envelope"></i> Email: <a href="mailto:hello@virtuos.com">hello@virtuos.com</a></p>
                             <p><i class="fab fa-skype"></i> Skype: virtuos_help</p>
@@ -121,6 +122,44 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+        </footer>*@
+        <footer class="footer">
+            <div class="container bottom_border">
+                <div class="row">
+                    <div class=" col-sm-4 col-md col-12 col">
+                        <h4 class="headin5_amrc col_white_amrc pt2">About us</h4>
+                        <p>
+                            <img class="logo-footer" src="~/assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;" />
+                        </p>
+                        <p>
+                            We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                        </p>
+                        <p><a href="#">Our Team</a></p>
+                    </div>
+
+
+                    <div class=" col-sm-8 col-md col-12 col">
+                        <h4 class="headin5_amrc col_white_amrc pt2">Find us</h4>
+                        <p class="mb10">We are born in native cloud redefining how Customer Experience (CX), Employee Experience (EX), and Everything Experience (XX) transformed across brand, digital, and commerce. We are a company with 12+ years of experience in Digital Strategy, Design, Transformation, and IT Consulting.</p>
+                        <p><i class="fa fa-location-arrow"></i> Emaar Digital Greens, Tower A, Sector-62, Gurugram </p>
+                        <p><i class="fa fa-phone"></i>  +91 124-498-5500  </p>
+                        <p><i class="fa fa fa-envelope"></i> info@virtuos.com  </p>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="container">
+                <p class="text-center">VIRTUOS. CUSTOMER HEART | 2020 <a href="https://www.virtuos.com/">Virtuos Digital Ltd.</a> All rights reserved.</p>
+
+                <ul class="social_footer_ul">
+                    <li><a href="#" class="btn btn-primary" style="background-color: #3b5998;"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #55acee;"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #0082ca;"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #ac2bac;"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #ed302f;"><i class="fab fa-youtube"></i></a></li>
+                </ul>
             </div>
 
         </footer>

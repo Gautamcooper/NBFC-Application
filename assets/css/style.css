@@ -11,347 +11,609 @@ Description: This Template is created for Youtubers
 @import url(https://fonts.googleapis.com/css?family=Arimo:300,400,400italic,700,700italic);
 /* ===================================== Basic CSS ==================================== */
 * {
-  margin: 0px;
-  padding: 0px;
-  list-style: none; }
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
 
 img {
-  max-width: 100%; }
+    max-width: 100%;
+}
 
 a {
-  text-decoration: none;
-  outline: none;
-  color: #444; }
+    text-decoration: none;
+    outline: none;
+    /*color: #444;*/
+}
 
-a:hover {
-  color: #444; }
+    a:hover {
+        color: #444;
+    }
 
 ul {
-  margin-bottom: 0;
-  padding-left: 0; }
+    margin-bottom: 0;
+    padding-left: 0;
+}
 
 a:hover,
 a:focus,
 input,
 textarea {
-  text-decoration: none;
-  outline: none; }
+    text-decoration: none;
+    outline: none;
+}
 
 .center {
-  text-align: center; }
+    text-align: center;
+}
 
 .left {
-  text-align: left; }
+    text-align: left;
+}
 
 .right {
-  text-align: right; }
+    text-align: right;
+}
 
 .cp {
-  cursor: pointer; }
+    cursor: pointer;
+}
 
 html, body {
-  height: 100%; }
+    height: 100%;
+}
 
 p {
-  margin-bottom: 0px;
-  width: 100%; }
+    margin-bottom: 0px;
+    width: 100%;
+}
 
 .no-padding {
-  padding: 0px; }
+    padding: 0px;
+}
 
 .no-margin {
-  margin: 0px; }
+    margin: 0px;
+}
 
 .hid {
-  display: none; }
+    display: none;
+}
 
 .top-mar {
-  margin-top: 15px; }
+    margin-top: 15px;
+}
 
 .h-100 {
-  height: 100%; }
-
-::placeholder {
-  color: #747f8a !important;
-  font-size: 13px;
-  opacity: .5 !important; }
+    height: 100%;
+}
 
 .container-fluid {
-  padding: 0px; }
+    padding: 0px;
+}
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", sans-serif;
-  color: #545454; }
+    font-family: "Open Sans", sans-serif;
+    color: #545454;
+}
 
 strong {
-  font-family: "Open Sans", sans-serif; }
+    font-family: "Open Sans", sans-serif;
+}
 
 body {
-  background-color: #f1f1f1ad !important;
-  font-family: "Open Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  color: #6A6A6A;
-  overflow-x: hidden; }
+    background-color: #f1f1f1ad !important;
+    font-family: "Open Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: #6A6A6A;
+    overflow-x: hidden;
+}
 
 .session-title {
-  padding: 30px;
-  margin: 0px;
-  margin-bottom: 20px; }
-  .session-title h2 {
-    width: 100%;
-    text-align: center;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 600; }
-  .session-title p {
-    max-width: 850px;
-    text-align: center;
-    float: none;
-    margin: auto;
-    font-size: .83rem;
-    margin-top: 15px; }
-  .session-title span {
-    float: right;
-    font-style: italic; }
+    padding: 30px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+    .session-title h2 {
+        width: 100%;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+    }
+
+    .session-title p {
+        max-width: 850px;
+        text-align: center;
+        float: none;
+        margin: auto;
+        font-size: .83rem;
+        margin-top: 15px;
+    }
+
+    .session-title span {
+        float: right;
+        font-style: italic;
+    }
 
 .inner-title {
-  padding: 20px;
-  padding-left: 0px;
-  margin: 0px;
-  margin-bottom: 10px;
-  padding-bottom: 0px;
-  border-bottom: 1px solid #ccccccc4;
-  display: block;
-  padding-right: 0px; }
-  .inner-title h2 {
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: left;
-    border-bottom: 1px solid #863dd9;
-    padding-bottom: 10px;
-    margin-bottom: 0px;
-    width: 300px; }
-  .inner-title p {
-    width: 100%;
-    text-align: center; }
-  .inner-title .btn {
-    float: right;
-    margin-top: -38px;
-    font-weight: 600;
-    font-size: .8rem; }
+    padding: 20px;
+    padding-left: 0px;
+    margin: 0px;
+    margin-bottom: 10px;
+    padding-bottom: 0px;
+    border-bottom: 1px solid #ccccccc4;
+    display: block;
+    padding-right: 0px;
+}
+
+    .inner-title h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: left;
+        border-bottom: 1px solid #863dd9;
+        padding-bottom: 10px;
+        margin-bottom: 0px;
+        width: 300px;
+    }
+
+    .inner-title p {
+        width: 100%;
+        text-align: center;
+    }
+
+    .inner-title .btn {
+        float: right;
+        margin-top: -38px;
+        font-weight: 600;
+        font-size: .8rem;
+    }
 
 .page-nav {
-  background-size: 100%;
-  padding: 68px;
-  text-align: center;
-  background-color: #eaeaea; }
-  .page-nav ul {
-    float: none;
-    margin: auto; }
-  @media screen and (max-width: 992px) {
+    background-size: 100%;
+    padding: 68px;
+    text-align: center;
+    background-color: #eaeaea;
+}
+
+    .page-nav ul {
+        float: none;
+        margin: auto;
+    }
+
+@media screen and (max-width: 992px) {
     .page-nav {
-      background-size: auto; } }
-  @media screen and (max-width: 767px) {
+        background-size: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
     .page-nav {
-      padding-top: 100px; } }
-  @media screen and (max-width: 356px) {
+        padding-top: 100px;
+    }
+}
+
+@media screen and (max-width: 356px) {
     .page-nav {
-      padding-top: 200px; } }
-  .page-nav h2 {
+        padding-top: 200px;
+    }
+}
+
+.page-nav h2 {
     font-size: 28px;
     width: 100%;
     font-weight: 700;
-    color: #444; }
-    @media screen and (max-width: 600px) {
-      .page-nav h2 {
-        font-size: 26px; } }
-  .page-nav ul li {
+    color: #444;
+}
+
+@media screen and (max-width: 600px) {
+    .page-nav h2 {
+        font-size: 26px;
+    }
+}
+
+.page-nav ul li {
     float: left;
     margin-right: 10px;
     margin-top: 10px;
     font-size: 16px;
     font-size: .93rem;
     font-weight: 600;
-    color: #444; }
-    .page-nav ul li i {
-      width: 30px;
-      text-align: center;
-      color: #444; }
-    .page-nav ul li a {
-      color: #444;
-      font-size: .93rem;
-      font-weight: 600; }
-
-.btn-success {
-  background-color: #51be78;
-  border-color: #51be78; }
-  .btn-success:hover {
-    background-color: #51be78 !important;
-    border-color: #51be78 !important; }
-  .btn-success:active {
-    background-color: #51be78 !important;
-    border-color: #51be78 !important; }
-  .btn-success:focus {
-    background-color: #51be78 !important;
-    border-color: #51be78 !important;
-    box-shadow: none !important; }
-
-.btn-primary {
-  background-color: #7d60d6;
-  border-color: #7d60d6; }
-  .btn-primary:hover {
-    background-color: #7d60d6 !important;
-    border-color: #7d60d6 !important; }
-  .btn-primary:active {
-    background-color: #7d60d6 !important;
-    border-color: #7d60d6 !important; }
-  .btn-primary:focus {
-    background-color: #7d60d6 !important;
-    border-color: #7d60d6 !important;
-    box-shadow: none !important; }
-
-.btn {
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 2px; }
-
-.form-control:focus {
-  box-shadow: none !important;
-  border: 0px; }
-
-.btn-light {
-  background-color: #FFF;
-  color: #3F3F3F; }
-
-.collapse.show {
-  display: block !important; }
-
-.form-control:focus {
-  box-shadow: none;
-  border: 0px; }
-
-.form-control {
-  background-color: #ffffff;
-  margin-bottom: 20px; }
-  .form-control:focus {
-    background-color: #FFF;
-    border-color: #CCC; }
-
-.container {
-  max-width: 1170px; }
-  @media screen and (max-width: 575px) {
-    .container {
-      padding: 10px 15px; } }
-
-/* ===================================== Login Page Design CSS ==================================== */
-.form-login-body .top-menu {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
-  background-color: #FFF; }
-  .form-login-body .top-menu .sup ul li {
-    float: right;
-    padding: 15px; }
-    .form-login-body .top-menu .sup ul li .btn {
-      box-shadow: none;
-      width: 115px;
-      font-weight: 600;
-      border-radius: 50px; }
-      .form-login-body .top-menu .sup ul li .btn i {
-        margin-right: 5px; }
-    .form-login-body .top-menu .sup ul li .btn-outline-primary {
-      color: #7d60d6;
-      border-color: #7d60d6;
-      padding-right: 20px;
-      padding-left: 20px;
-      font-weight: 600; }
-  .form-login-body .top-menu .logo img {
-    max-width: 210px;
-    margin-top: 3px; }
-.form-login-body .login-body .login-text {
-  padding-top: 25%;
-  max-width: 350px;
-  float: none;
-  margin: auto; }
-  @media screen and (max-width: 767px) {
-    .form-login-body .login-body .login-text {
-      padding-top: 13px; } }
-  .form-login-body .login-body .login-text h4 {
-    font-weight: 600;
-    font-size: 1.3rem;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 30px; }
-  .form-login-body .login-body .login-text .form-control {
-    border-radius: 6px; }
-  .form-login-body .login-body .login-text label {
-    float: right;
-    text-align: right;
-    margin-bottom: 15px;
-    font-size: .85rem;
-    font-weight: 600; }
-  .form-login-body .login-body .login-text .btn {
-    width: 100%;
-    border-radius: 6px;
-    font-weight: 600; }
-  .form-login-body .login-body .login-text p {
-    font-weight: 600;
-    font-size: .87rem;
-    margin-top: 15px;
-    text-align: center; }
-  .form-login-body .login-body .login-text a {
-    color: cornflowerblue; }
-.form-login-body .login-body .login-img {
-  text-align: center; }
-  .form-login-body .login-body .login-img img {
-    max-width: 70%;
-    padding-top: 7%; }
-.form-login-body .copy {
-  font-size: .83rem;
-  color: #a7a7a7; }
-  .form-login-body .copy a {
-    color: #a7a7a7; }
-.nav-heading {
-
+    color: #444;
 }
 
+    .page-nav ul li i {
+        width: 30px;
+        text-align: center;
+        color: #444;
+    }
 
-@media screen and (max-width: 767px) {
-  .detailsh {
-    padding-top: 0px; }
+    .page-nav ul li a {
+        color: #444;
+        font-size: .93rem;
+        font-weight: 600;
+    }
 
-  .form-login-body .login-desk .loginform .login-det {
-    padding-bottom: 45px; } }
+.btn-success {
+    background-color: #51be78;
+    border-color: #51be78;
+}
 
+    .btn-success:hover {
+        background-color: #51be78 !important;
+        border-color: #51be78 !important;
+    }
 
-@media (min-width: 992px) and (max-width: 1199px) {
-    .footer-top {
-        padding: 40px 0;
+    .btn-success:active {
+        background-color: #51be78 !important;
+        border-color: #51be78 !important;
+    }
+
+    .btn-success:focus {
+        background-color: #51be78 !important;
+        border-color: #51be78 !important;
+        box-shadow: none !important;
+    }
+
+.btn-primary {
+    background-color: #7d60d6;
+    border-color: #7d60d6;
+}
+
+    .btn-primary:hover {
+        background-color: #7d60d6 !important;
+        border-color: #7d60d6 !important;
+    }
+
+    .btn-primary:active {
+        background-color: #7d60d6 !important;
+        border-color: #7d60d6 !important;
+    }
+
+    .btn-primary:focus {
+        background-color: #7d60d6 !important;
+        border-color: #7d60d6 !important;
+        box-shadow: none !important;
+    }
+
+.btn {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+    border: 0px;
+}
+
+.btn-light {
+    background-color: #FFF;
+    color: #3F3F3F;
+}
+
+.collapse.show {
+    display: block !important;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border: 0px;
+}
+
+.form-control {
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+    .form-control:focus {
+        background-color: #FFF;
+        border-color: #CCC;
+    }
+
+.container {
+    max-width: 1170px;
+}
+
+.header-section
+{
+    transform: translateY(25%);
+}
+
+@media screen and (max-width: 575px) {
+    .container {
+        padding: 10px 15px;
     }
 }
 
-.footer-top {
-    padding: 60px 0;
-    background: #333;
-    text-align: left;
-    color: #aaa;
+/* ===================================== Login Page Design CSS ==================================== */
+.form-login-body .top-menu {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    background-color: #FFF;
+    height: 100px;
 }
+
+.form-login-body .top-menu .sup {
+    float: right;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+@media screen and (max-width: 575px)
+{
+    .header-section
+    {
+        transform: translateY(-15px);
+    }
+}
+
+.form-login-body .top-menu .sup .btn {
+    box-shadow: none;
+    width: 115px;
+    font-weight: 600;
+    border-radius: 15px;
+    background-color: transparent;
+    margin-left: 10px;
+}
+
+.form-login-body .top-menu .sup .btn i {
+    margin-right: 5px;
+}
+
+.form-login-body .top-menu .sup .btn-outline-primary {
+    color: #7d60d6;
+    border-color: #7d60d6;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-weight: 600;
+}
+
+.form-login-body .top-menu .logo img {
+    max-width: 210px;
+    margin-top: 13px;
+}
+
+.form-login-body .login-body .login-text {
+    max-width: 340px;
+    height: 439px;
+    top: 130px;
+    margin: auto;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 380px) {
+    .form-login-body .login-body .login-text {
+        max-width: 250px;
+    }
+}
+
+.form-login-body .login-body .login-text h4 {
+    font-weight: 600;
+    position: relative;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
+    top: 40px;
+}
+
+.form-login-body .login-body .login-text .form-control {
+    border-radius: 6px;
+    border: 1px solid #0000007d;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-login-body .login-body .login-text label {
+    float: left;
+    margin-bottom: 15px;
+    font-size: .85rem;
+    font-weight: 600;
+    position: relative;
+    top: 1em;
+}
+
+.form-login-body .login-body .login-text .btn {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 125%;
+    transform: translateX(-50%);
+    background-color: #17a2b8;
+    border: none;
+}
+
+.form-login-body .login-body .login-text .btn:focus {
+    background-color: #17a2b8;
+}
+
+.form-login-body .login-body .login-text p {
+    font-weight: 600;
+    font-size: .87rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.form-login-body .login-body .login-text a {
+    color: cornflowerblue;
+}
+
+.form-login-body .login-body .login-img {
+    text-align: center;
+}
+
+.form-login-body .login-body .login-img img {
+    max-width: 70%;
+    padding-top: 7%;
+}
+
+.form-login-body .copy {
+    font-size: .83rem;
+    color: #a7a7a7;
+}
+
+.form-login-body .copy a {
+    color: #a7a7a7;
+}
+
+.login-body {
+    background-image: url("LoginBGImage.jpg");
+    height: 800px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login-text {
+    background-color: #ffffffd9;
+}
+
+#main_page {
+    position: absolute;
+    bottom: 9em;
+    left: auto;
+    width: 16em;
+    transform: translateX(16%);
+}
+
+@media screen and (max-width: 380px)
+{
+    #main_page
+    {
+        width: 12em;
+    }
+}
+
+#otp_verify {
+    position: absolute;
+    bottom: 15em;
+    left: auto;
+    width: 16em;
+    transform: translateX(16%);
+}
+
+#otp_verify #OTP {
+    position: relative;
+    top: 100px;
+}
+
+#otp_verify #Button2 {
+    margin-top: 100px;
+}
+
+#main_page img {
+    position: relative;
+    width: 20%;
+    bottom: 40px;
+    margin-left: 40%;
+}
+
+#otp_verify #vlogo1 {
+    position: relative;
+    width: 20%;
+    margin-left: 40%;
+}
+
+@media screen and (max-width: 767px) {
+    .detailsh {
+        padding-top: 0px;
+    }
+
+    .form-login-body .login-desk .loginform .login-det {
+        padding-bottom: 45px;
+    }
+}
+
+
+/* ===================================== Footer Design CSS ==================================== */
+
+.col_white_amrc
+{
+    color: #FFF;
+}
+
+footer {
+    width: auto;
+    padding: 10px 0px 25px 0px;
+    height: auto;
+    min-height: 480px;
+    background-image: url("footer-bkg.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.pt2
+{
+    padding-top: 40px;
+    margin-bottom: 20px;
+}
+
+footer p
+{
+    font-size: 14px;
+    color: #CCC;
+    padding-bottom: 0px;
+    margin-bottom: 8px;
+}
+
+.mb10
+{
+    padding-bottom: 15px;
+}
+
+.social_footer_ul
+{
+    display: table;
+    margin: 15px auto 0 auto;
+    list-style-type: none;
+}
+
+.social_footer_ul li:not(:first-child)
+{
+    padding-left: 20px;
+}
+
+.social_footer_ul li
+{
+    padding-top: 10px;
+    float: left;
+}
+
+.social_footer_ul li a
+{
+    padding: 8px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+}
+
+.social_footer_ul li a:hover i, .triggeredHover
+{
+    transform: rotate(360deg);
+    transition: all 0.2s;
+}
+
+.social_footer_ul li i
+{ 
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: #fff;
+    transition: all 0.8s;
+}
+
+/* ===================================== Footer Design CSS ==================================== */
 
 #page-container {
     position: relative;
-    min-height: 100vh;
-}
-
-#content-wrap {
-    padding-bottom: 2.5rem; /* Footer height */
-}
-
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem; /* Footer height */
-    font-size: 14px;
+    min-width: 20em;
 }
 
 html, body {
@@ -361,6 +623,7 @@ html, body {
 body {
     height: 100vh;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

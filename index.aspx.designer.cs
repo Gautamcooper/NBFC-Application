@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NBFC_App___dev {
-    
-    
-    public partial class index {
-        
+namespace NBFC_App___dev
+{
+
+
+    public partial class index
+    {
+
         /// <summary>
         /// login_button control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton login_button;
-        
+
         /// <summary>
         /// signup_button control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton signup_button;
-        
+
         /// <summary>
         /// fullname control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox fullname;
-        
+
         /// <summary>
         /// mnumber control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox mnumber;
-        
+
         /// <summary>
         /// email control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox email;
-        
+
         /// <summary>
         /// next_clicked control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox next_clicked;
-        
+
         /// <summary>
         /// temp_data control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox temp_data;
-        
+
         /// <summary>
         /// Button1 control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
+
         /// <summary>
         /// OTP control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace NBFC_App___dev {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox OTP;
-        
+
         /// <summary>
         /// Button2 control.
         /// </summary>

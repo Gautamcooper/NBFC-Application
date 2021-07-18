@@ -9,6 +9,7 @@
         <title>Login / Signup</title>
         <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="shortcut icon" href="assets/images/fav.jpg">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/all.min.css">
@@ -21,86 +22,84 @@
         <div id="content-wrap" class="container-fluid">
             <form runat="server">
                 <div class="top-menu">
-                    <div class="container">
+                    <div class="container header-section">
                         <div class="row">
-                            <div class="col-sm-4 logo">
-                                <img src="assets/images/virtuos_flat.png" alt="">
-                            </div>                            
-                            <div class="col-sm-8 sup">
-                                <ul>
-                                    <li><button runat="server" id="login_button" onserverclick="login_button_click" class="btn btn-sm btn-outline-primary"><i class="fas fa-user-lock"></i>Login</button></li>
-                                    <li><button runat="server" id="signup_button" onserverclick="signup_button_click" class="btn btn-sm btn-outline-primary"><i class="fas fa-user-plus"></i>Signup</button></li>
-                             </ul>
-                            </div>
+                            <div class="col-lg-6 col-sm-6 logo">
+                                <img class="rounded mx-auto d-block" src="assets/images/virtuos_flat.png" alt="logo-header" />
+                            </div>           
+                            <div class="col-lg-6 col-sm-6 sup text-center">
+                                    <button runat="server" id="login_button" onserverclick="login_button_click" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-lock"></i>Login</button>
+                                    <button runat="server" id="signup_button" onserverclick="signup_button_click" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-plus"></i>Signup</button>
+                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="login-body container-fluid">
+                <div class="login-body">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-12">
+                                    <br /><br />
                                     <div class="login-text">
                                         <div id="main_page">
-                                        <h4 id="login_label">Log In</h4>
-                                        <h4 id="signup_label">Sign Up</h4>                                              
+                                            <img id="vlogo" src="assets/images/VirtuosLogo.png" alt="Virtuos Logo" />
                                             <asp:TextBox ID="fullname" placeholder="Full Name" runat="server" CssClass="form-control"></asp:TextBox>
+                                            <div class="invalid-feedback">Please provide a valid city.</div>
                                             <asp:TextBox ID="mnumber" type="number"  placeholder="Mobile No." runat="server" CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="email" placeholder="Email ID" runat="server" CssClass="form-control"></asp:TextBox>
                                             <asp:TextBox ID="next_clicked" runat="server" hidden="true"></asp:TextBox>
                                             <asp:TextBox ID="temp_data" runat="server" hidden="true"></asp:TextBox>                                     
-                                        <asp:Button ID="Button1" runat="server" Text="Next" CssClass="btn btn-primary" OnClick="Button1_Click" />
-                                            </div>
+                                            <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary mx-auto" OnClick="Button1_Click" />
+                                         </div>
                                         <div id="otp_verify">
+                                            <img id="vlogo1" src="assets/images/VirtuosLogo.png" alt="Virtuos Logo" />
                                             <h4 id="otp_label">Please Enter the OTP</h4>
                                             <asp:TextBox ID="OTP" placeholder="OTP" runat="server" CssClass="form-control"></asp:TextBox>
-                                            <asp:Button ID="Button2" runat="server" Text="Verify" CssClass="btn btn-primary" OnClick="Button2_Click" />
+                                            <asp:Button ID="Button2" runat="server" Text="Verify" CssClass="btn btn-primary mx-auto" OnClick="Button2_Click" />
                                         </div>                                    
-                                    </div>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="login-img">
-                                        <img src="assets/images/login.png" alt="">
                                     </div>
                                 </div>
                             </div>                            
                         </div>
-                </div>
-            </form>
-        </div>
-        <footer id="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-lg-4 footer-about wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                            <p>
-                                <img class="logo-footer" src="/assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;">
-                            </p>
-                            <p>
-                                We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
-                            </p>
-                            <br />
-                            <p><a style="color: #337ab7;" href="#">Our Team</a></p>
-                        </div>
-                        <div class="col-md-4 col-lg-4 offset-lg-1 footer-contact wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
-                            <h3 style="color: #aaa;">Contact</h3>
-                            <p><i class="fas fa-map-marker-alt"></i> Emaar Digital Greens, Tower A, Sector-6, Gurugram</p>
-                            <p><i class="fas fa-phone"></i> Phone: (+91) 9988998899</p>
-                            <p><i class="fas fa-envelope"></i> Email: <a style="color: #337ab7;" href="mailto:hello@virtuos.com">hello@virtuos.com</a></p>
-                            <p><i class="fab fa-skype"></i> Skype: virtuos_help</p>
-                        </div>
-                        <div class="col-md-4 col-lg-3 footer-social wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-                            <h3 style="color: #aaa;">Follow us</h3>
-                            <p>
-                                <a style="color: #337ab7;" href="#"><i class="fab fa-facebook fa-2x"></i></a>
-                                <a style="color: #337ab7;" href="#"><i class="fab fa-twitter fa-2x"></i></a>
-                                <a style="color: #337ab7;" href="#"><i class="fab fa-google-plus-g fa-2x"></i></a>
-                                <a style="color: #337ab7;" href="#"><i class="fab fa-pinterest fa-2x"></i></a>
-                            </p>
-                        </div>
+                    </div>
+                </form>
+            </div>
+            <footer class="footer">
+            <div class="container bottom_border">
+                <div class="row">
+                    <div class=" col-sm-4 col-md col-12 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">About us</h5>
+                         <p>
+                            <img class="logo-footer" src="assets/images/virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;" />
+                        </p>
+                        <p>
+                            We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                        </p>
+                    </div>
+
+
+                    <div class=" col-sm-8 col-md col-12 col">
+                        <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+                        <p class="mb10">We are born in native cloud redefining how Customer Experience (CX), Employee Experience (EX), and Everything Experience (XX) transformed across brand, digital, and commerce. We are a company with 12+ years of experience in Digital Strategy, Design, Transformation, and IT Consulting.</p>
+                        <p><i class="fa fa-location-arrow"></i> Emaar Digital Greens, Tower A, Sector-62, Gurugram </p>
+                        <p><i class="fa fa-phone"></i>  +91 124-498-5500  </p>
+                        <p><i class="fa fa fa-envelope"></i> info@virtuos.com  </p>
                     </div>
                 </div>
             </div>
-        </footer>
+    <br /><br />
+    <div class="container">
+        <p class="text-center">VIRTUOS. CUSTOMER @ HEART | 2020 Virtuos Digital Ltd. All rights reserved.</p>
+    
+        <ul class="social_footer_ul">
+        <li><a href="#" class="btn btn-primary" style="background-color: #3b5998;"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" class="btn btn-primary" style="background-color: #55acee;"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" class="btn btn-primary" style="background-color: #0082ca;"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="#" class="btn btn-primary" style="background-color: #ac2bac;"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#" class="btn btn-primary" style="background-color: #ed302f;"><i class="fab fa-youtube"></i></a></li>
+        </ul>
+    </div>
+
+</footer>
             </div>
     </body>
 
