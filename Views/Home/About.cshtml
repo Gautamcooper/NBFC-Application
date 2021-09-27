@@ -6,95 +6,102 @@
     var data = ViewBag.Message;
 }
 <div class="container">
-    <div style="position: relative;">
-        <h2 style="text-align: center;">Personal Information</h2>
-    </div>
-    <br />
     <div class="container-fluid">
         <form method="post" action="~/Home/On_Save">
             <div class="form-card">
-                <input id="appgateId" hidden class="form-input inp" placeholder="Full Name" name="appgateId" value="@data.appgateId">
+                <div style="position: relative;">
+                    <h2 style="text-align: center;">Personal Information</h2>
+                    <div class="d-flex flex-column align-items-center text-center px-3 py-5">
+                        <label class="user_img">
+                            <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <input id="file-input" type="file" accept="image/*" ;capture="camera" />
+                        </label>
+                        <span class="font-weight-bold">@data.Fullname</span>
+                        <span class="text-black-50">@data.Email</span>
+                    </div>
+                </div>
+                <input id="appgateId" hidden class="form-control form-input inp" placeholder="Full Name" name="appgateId" value="@data.appgateId">
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                        <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@data.Fullname">
+                        <input id="Fullname" class="form-control form-input inp" placeholder="Full Name" name="Fullname" value="@data.Fullname">
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="email" id="label_email">Email ID</label>
-                        <input id="email" class="form-input" placeholder="Email" value="@data.Email" readonly="readonly">
+                        <input id="email" class="form-control form-input" placeholder="Email" value="@data.Email" readonly="readonly">
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="mobile" id="label_mobile">Mobile</label>
-                        <input id="mobile" class="form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
+                        <input id="mobile" class="form-control form-input" placeholder="Mobile" value="@data.Mobile" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="firstname" id="label_firstname">First Name</label>
-                        <input id="firstname" class="form-input inp" placeholder="First Name" name="firstname" value="@data.firstname" required />
+                        <input id="firstname" class="form-control form-input inp" placeholder="First Name" name="firstname" value="@data.firstname" required />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="middlename" id="label_middlename">Middle Name</label>
-                        <input id="middlename" class="form-input inp" placeholder="Middle Name" name="middlename" value="@data.middlename" />
+                        <input id="middlename" class="form-control form-input inp" placeholder="Middle Name" name="middlename" value="@data.middlename" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="lastname" id="label_lastname">Last Name</label>
-                        <input id="lastname" class="form-input inp" placeholder="Last Name" name="lastname" value="@data.lastname" required />
+                        <input id="lastname" class="form-control form-input inp" placeholder="Last Name" name="lastname" value="@data.lastname" required />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="gender_select" id="label_gender_select">Gender</label>
-                        <select id="gender_select" class="form-input inp_dropdown" required>
+                        <select id="gender_select" class="form-control form-input inp_dropdown" required>
                             <option value="-1">Gender</option>
                             @foreach (var gender in (IEnumerable<Gender>)ViewData["GenderList"])
                             {
                                 <option value="@gender.id">@gender.name</option>
                             }
                         </select>
-                        <input hidden id="gender" class="form-input" placeholder="Gender" name="gender" value="@data.gender" />
+                        <input hidden id="gender" class="form-control form-input" placeholder="Gender" name="gender" value="@data.gender" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="marital_select" id="label_marital_select">Marital Status</label>
-                        <select id="marital_select" class="form-input inp_dropdown">
+                        <select id="marital_select" class="form-control form-input inp_dropdown">
                             <option value="-1">Marital Status</option>
                             @foreach (var maritalstatus in (IEnumerable<MaritalStatus>)ViewData["MaritalList"])
                             {
                                 <option value="@maritalstatus.id">@maritalstatus.name</option>
                             }
                         </select>
-                        <input hidden id="maritalstatus" class="form-input" placeholder="MaritalStatus" name="maritalstatus" value="@data.maritalstatus" />
+                        <input hidden id="maritalstatus" class="form-control form-input" placeholder="MaritalStatus" name="maritalstatus" value="@data.maritalstatus" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="employment_select" id="label_employment_select">Employment Type</label>
-                        <select id="employment_select" class="form-input inp_dropdown">
+                        <select id="employment_select" class="form-control form-input inp_dropdown">
                             <option value="-1">Employment Type</option>
                             @foreach (var emptype in (IEnumerable<EmploymentType>)ViewData["EmpTypeList"])
                             {
                                 <option value="@emptype.id">@emptype.name</option>
                             }
                         </select>
-                        <input hidden id="employmenttype" class="form-input" placeholder="Employment" name="employmenttype" value="@data.employmenttype" />
+                        <input hidden id="employmenttype" class="form-control form-input" placeholder="Employment" name="employmenttype" value="@data.employmenttype" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="fathername" id="label_fathername">Father's Name</label>
-                        <input id="fathername" class="form-input inp" placeholder="Father's Name" name="fathername" value="@data.fathername" />
+                        <input id="fathername" class="form-control form-input inp" placeholder="Father's Name" name="fathername" value="@data.fathername" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="birthdate" id="label_birthdate">Date of Birth</label>
-                        <input type="date" id="birthdate" class="form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
+                        <input type="date" id="birthdate" class="form-control form-input" placeholder="Date of Birth" name="birthdate" value="@data.birthdate" />
                     </div>
                     <div class="col-md-4">
-                        <label class="label_inp" for="pan" id="label_pan">Pan Number</label>
-                        <input id="pan" class="form-input inp" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
+                        <label class="label_inp" for="pan" id="label_pan">PAN Number</label>
+                        <input id="pan" class="form-control form-input inp" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
                     </div>
                 </div>
                 <br />
                 <div class="row">
                     <div class="col-md-9">
-                        <label class="checkboxclass" for="checkaddr">Current address same as Aaddhaar address</label> &nbsp; &nbsp; &nbsp;
+                        <label class="checkboxclass" for="checkaddr">Current Address same as Aadhaar Address</label> &nbsp; &nbsp; &nbsp;
                         <input type="checkbox" id="checkaddr" name="checkaddr">
                     </div>
                 </div>
@@ -102,33 +109,33 @@
                 <div id="address" class="row">
                     <div class="col-md-3">
                         <label class="label_inp" for="currentstreet" id="label_currentstreet">Current Street</label>
-                        <input id="currentstreet" class="form-input inp" placeholder="Current Street" name="currentstreet" value="@data.currentstreet" />
+                        <input id="currentstreet" class="form-control form-input inp" placeholder="Current Street" name="currentstreet" value="@data.currentstreet" />
                     </div>
                     <div class="col-md-3">
                         <label class="label_inp" for="currentlandmark" id="label_currentlandmark">Current Landmark</label>
-                        <input id="currentlandmark" class="form-input inp" placeholder="Current Landmark" name="currentlandmark" value="@data.currentlandmark" />
+                        <input id="currentlandmark" class="form-control form-input inp" placeholder="Current Landmark" name="currentlandmark" value="@data.currentlandmark" />
                     </div>
                     <div class="col-md-3">
                         <label class="label_inp" for="pan" id="label_currentbuilding">Current Building</label>
-                        <input id="currentbuilding" class="form-input inp" placeholder="Current Building" name="currentbuilding" value="@data.currentbuilding" />
+                        <input id="currentbuilding" class="form-control form-input inp" placeholder="Current Building" name="currentbuilding" value="@data.currentbuilding" />
                     </div>
                     <div class="col-md-3">
                         <label class="label_inp" for="pan" id="label_currentpin">Current PIN</label>
-                        <input id="currentpin" class="form-input inp" placeholder="Current PIN" name="currentpin" value="@data.currentpin" />
+                        <input id="currentpin" class="form-control form-input inp" placeholder="Current PIN" name="currentpin" value="@data.currentpin" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label class="label_inp" for="currentcountry_select" id="label_currentcountry_select">Current Country</label>
-                        <select id="currentcountry_select" class="form-input inp_dropdown">
+                        <select id="currentcountry_select" class="form-control form-input inp_dropdown">
                             <option value="-1">Current Country</option>
                             <option value="d427eb5d-ecd2-4049-9275-420038a42bea">India</option>
                         </select>
-                        <input hidden id="currentcountry" class="form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
+                        <input hidden id="currentcountry" class="form-control form-input" placeholder="Current Country" name="currentcountry" value="@data.currentcountry" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="currentstate_select" id="label_currentstate_select">Current State</label>
-                        <select id="currentstate_select" class="form-input inp_dropdown">
+                        <select id="currentstate_select" class="form-control form-input inp_dropdown">
                             <option value="-1">Current State</option>
                             <option value="054946a4-da5a-4f25-bfa2-ca7fa727c29b">ANDHRA PRADESH</option>
                             <option value="332852b8-5d63-4741-be0e-5091d8368467">ARUNACHAL PRADESH</option>
@@ -163,11 +170,11 @@
                             <option>UNION TERRITORY OF LAKSHADWEEP</option>
                             <option>DELHI</option>
                         </select>
-                        <input hidden id="currentstate" class="form-input" placeholder="Current State" name="currentstate" value="@data.currentstate" />
+                        <input hidden id="currentstate" class="form-control form-input" placeholder="Current State" name="currentstate" value="@data.currentstate" />
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="currentcity_select" id="label_currentcity_select">Current City</label>
-                        <select id="currentcity_select" class="form-input inp_dropdown">
+                        <select id="currentcity_select" class="form-control form-input inp_dropdown">
                             <option value="-1">Current City</option>
                             <option state="TRIPURA" value="d85ef7ff-f156-4f88-99ea-9ce933d33a98">AGARTALA</option>
                             <option state="UTTAR PRADESH" value="a9128493-5c93-4993-98cc-10d3830e7d25">AGRA</option>
@@ -508,75 +515,77 @@
                             <option state="TAMIL NADU" value="ad527191-8739-45f2-af92-f948d74f5b7f">YERCAUD</option>
                             <option state="SIKKIM" value="9a941ba9-caa1-4aa6-8655-0542621fd25a">YUKSOM</option>
                         </select>
-                        <input hidden id="currentcity" class="form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
+                        <input hidden id="currentcity" class="form-control form-input" placeholder="Current City" name="currentcity" value="@data.currentcity" />
                     </div>
                 </div>
                 <div id="panandaadhardetails">
                     <div class="row">
                         <div class="col-md-4">
                             <label class="label_inp" for="panfirstname" id="label_panfirstname">First Name on PAN</label>
-                            <input id="panfirstname" class="form-input inp" placeholder="Your First Name on PAN" name="panfirstname" value="@data.panfirstname">
+                            <input id="panfirstname" class="form-control form-input inp" placeholder="Your First Name on PAN" name="panfirstname" value="@data.panfirstname">
                         </div>
                         <div class="col-md-4">
                             <label class="label_inp" for="panmiddlename" id="label_panmiddlename">Middle Name on PAN</label>
-                            <input id="panmiddlename" class="form-input inp" placeholder="Your Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
+                            <input id="panmiddlename" class="form-control form-input inp" placeholder="Your Middle Name on PAN" name="panmiddlename" value="@data.panmiddlename">
                         </div>
                         <div class="col-md-4">
                             <label class="label_inp" for="panlastname" id="label_panlastname">Last Name on PAN</label>
-                            <input id="panlastname" class="form-input inp" placeholder="Your Last Name on PAN" name="panlastname" value="@data.panlastname">
+                            <input id="panlastname" class="form-control form-input inp" placeholder="Your Last Name on PAN" name="panlastname" value="@data.panlastname">
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label class="label_inp" for="panfathername" id="label_panfathername">Father's Name on PAN</label>
-                            <input id="panfathername" class="form-input inp" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
+                            <input id="panfathername" class="form-control form-input inp" placeholder="Your Father's Name on PAN" name="panfathername" value="@data.panfathername">
                         </div>
                         <div class="col-md-6">
                             <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on PAN</label>
-                            <input type="date" id="panbirthdate" class="form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
+                            <input type="date" id="panbirthdate" class="form-control form-input" placeholder="Your D.O.B on PAN" name="panbirthdate" value="@data.panbirthdate">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label class="label_inp" for="aadharfirstname" id="label_aadharfirstname">First Name on Aadhaar</label>
-                            <input id="aadharfirstname" class="form-input inp" placeholder="Your First Name on Aadhaar" name="aadharfirstname" value="@data.aadharfirstname">
+                            <input id="aadharfirstname" class="form-control form-input inp" placeholder="Your First Name on Aadhaar" name="aadharfirstname" value="@data.aadharfirstname">
                         </div>
                         <div class="col-md-4">
                             <label class="label_inp" for="aadharmiddlename" id="label_aadharmiddlename">Middle Name on Aadhaar</label>
-                            <input id="aadharmiddlename" class="form-input inp" placeholder="Your Middle Name on Aadhaar" name="aadharmiddlename" value="@data.aadharmiddlename">
+                            <input id="aadharmiddlename" class="form-control form-input inp" placeholder="Your Middle Name on Aadhaar" name="aadharmiddlename" value="@data.aadharmiddlename">
                         </div>
                         <div class="col-md-4">
                             <label class="label_inp" for="aadharlastname" id="label_aadharlastname">Last Name on Aadhaar</label>
-                            <input id="aadharlastname" class="form-input inp" placeholder="Your Last Name on Aadhaar" name="aadharlastname" value="@data.aadharlastname">
+                            <input id="aadharlastname" class="form-control form-input inp" placeholder="Your Last Name on Aadhaar" name="aadharlastname" value="@data.aadharlastname">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label class="label_inp" for="aadharnumber" id="label_aadharnumber">Aadhaar Number</label>
-                            <input id="aadharnumber" class="form-input inp" placeholder="Your Aadhaar Number" name="aadharnumber" value="@data.aadharnumber">
+                            <input id="aadharnumber" class="form-control form-input inp" placeholder="Your Aadhaar Number" name="aadharnumber" value="@data.aadharnumber">
                         </div>
                         <div class="col-md-6">
-                            <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on AAdhaar</label>
-                            <input type="date" id="aadharbirthdate" class="form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
+                            <label class="label_inp" for="panbirthdate" id="label_panbirthdate">Date of Birth on Aadhaar</label>
+                            <input type="date" id="aadharbirthdate" class="form-control form-input" placeholder="Your D.O.B on Aadhar" name="aadharbirthdate" value="@data.aadharbirthdate">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <label class="label_inp" for="aadharaddress" id="label_aadharaddress">Aadhaar Address</label>
-                            <input id="aadharaddress" class="form-input inp" placeholder="Your Aadhaar Address" name="aadharaddress" value="@data.aadharaddress">
+                            <input id="aadharaddress" class="form-control form-input inp" placeholder="Your Aadhaar Address" name="aadharaddress" value="@data.aadharaddress">
                         </div>
 
                     </div>
                 </div>
-                <input hidden id="step1" class="form-input" placeholder="Step1" name="step1" value="@data.step1" />
-                <input hidden id="currentaddrsameasaadhar" class="form-input"  name="currentaddrsameasaadhar" value="@data.currentaddrsameasaadhar" />
+                <input hidden id="step1" class="form-control form-input" placeholder="Step1" name="step1" value="@data.step1" />
+                <input hidden id="currentaddrsameasaadhar" class="form-control form-input" name="currentaddrsameasaadhar" value="@data.currentaddrsameasaadhar" />
                 <input disabled type="checkbox" id="uploaded" name="uploaded" value="uploaded">
                 <label for="uploaded">Documents Uploaded</label><br>
                 <input hidden id="uploadedvalue" name="uploadedvalue" value="@data.uploadedvalue" />
-                <button id="save" type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
-                <button style="display: none;" id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
+                <div class="button-grp d-flex flex-wrap justify-content-center align-items-center">
+                    <button id="save" type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
+                    <button id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
+                </div>
             </div>
         </form>
         <div class="modal fade" id="myModal" role="dialog">
@@ -691,26 +700,25 @@
                             </div>
                             <br />
                             <div class="container-fluid">
-                                <div class="row">
                                     @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                     {
                                         <div class="form-card">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="numberofdependants" id="label_numberofdependants">Number of Dependents</label>
-                                                    <input id="numberofdependants" class="form-input inp" name="numberofdependents" placeholder="Number Of Dependents" required />
+                                                    <input id="numberofdependants" class="form-control form-input inp" name="numberofdependents" placeholder="Number Of Dependents" required />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="coapplicantname" id="label_coapplicantname">Co Applicant Name</label>
-                                                    <input id="coapplicantname" class="form-input inp" name="coapplicantname" placeholder="Co Applicant Name" required />
+                                                    <input id="coapplicantname" class="form-control form-input inp" name="coapplicantname" placeholder="Co Applicant Name" required />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="coapplicantrelationship_select" id="label_coapplicantrelationship_select">Co Applicant Relationship</label>
-                                                    <select id="coapplicantrelationship_select" class="form-input inp_dropdown">
+                                                    <select id="coapplicantrelationship_select" class="form-control form-input inp_dropdown">
                                                         <option value="-1">Co Applicant Relationship</option>
                                                         <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
                                                         <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
@@ -720,38 +728,38 @@
                                                         <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
                                                         <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
                                                     </select>
-                                                    <input hidden id="coapplicantrelationship" class="form-input" placeholder="" name="coapplicantrelationship" />
+                                                    <input hidden id="coapplicantrelationship" class="form-control form-input" placeholder="" name="coapplicantrelationship" />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="coapplicantmobilephone" id="label_coapplicantmobilephone">Co Applicant Mobile Phone</label>
-                                                    <input id="coapplicantmobilephone" class="form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" required />
+                                                    <input id="coapplicantmobilephone" class="form-control form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" required />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="bankifsccode" id="label_bankifsccode">Bank IFSC Code</label>
-                                                    <input id="bankifsccode" class="form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" required />
+                                                    <input id="bankifsccode" class="form-control form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" required />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="bankaccountnumber" id="label_bankaccountnumber">Bank Account Number</label>
-                                                    <input id="bankaccountnumber" class="form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" required />
+                                                    <input id="bankaccountnumber" class="form-control form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" required />
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label class="label_inp" for="bankname_select" id="label_bankname_select">Bank Name</label>
-                                                    <select id="bankname_select" class="form-input inp_dropdown">
+                                                    <select id="bankname_select" class="form-control form-input inp_dropdown">
                                                         <option value="-1">Bank Name</option>
                                                         <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
                                                         <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
                                                         <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
                                                         <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
                                                     </select>
-                                                    <input hidden id="bankname" class="form-input" placeholder="" name="bankname" />
+                                                    <input hidden id="bankname" class="form-control form-input" placeholder="" name="bankname" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -761,7 +769,6 @@
                                             </div>
                                         </div>
                                     }
-                                </div>
                             </div>
                         </div>
                     </div>

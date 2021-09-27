@@ -837,7 +837,7 @@ namespace NBFC_App___dev.Controllers
             var client = new RestClient("https://accurascan.com/api/v4/ocr");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Api-Key", "1620638022FsDaqzUAh6l0jeOAVzxYSVuWYWiYMM8tO6SLNheA");
+            request.AddHeader("Api-Key", "1632286426PbIU5dyZbieiyyYLLLARq6Ec905QDqHZxeyHtEaw");
             //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddFile("scan_image", path);

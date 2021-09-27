@@ -228,3 +228,61 @@ E:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.dll
 E:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.pdb
 D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
 E:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
+E:\NBFC MVP\NBFC-Application\bin\NBFC App - dev.dll.config
+E:\NBFC MVP\NBFC-Application\bin\NBFC App - dev.dll
+E:\NBFC MVP\NBFC-Application\bin\NBFC App - dev.pdb
+E:\NBFC MVP\NBFC-Application\bin\roslyn\csc.exe
+E:\NBFC MVP\NBFC-Application\bin\roslyn\csc.exe.config
+E:\NBFC MVP\NBFC-Application\bin\roslyn\csc.rsp
+E:\NBFC MVP\NBFC-Application\bin\roslyn\csi.exe
+E:\NBFC MVP\NBFC-Application\bin\roslyn\csi.rsp
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.AppContext.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.Collections.Immutable.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.IO.FileSystem.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\System.Reflection.Metadata.dll
+E:\NBFC MVP\NBFC-Application\bin\roslyn\vbc.exe
+E:\NBFC MVP\NBFC-Application\bin\roslyn\vbc.exe.config
+E:\NBFC MVP\NBFC-Application\bin\roslyn\vbc.rsp
+E:\NBFC MVP\NBFC-Application\bin\roslyn\VBCSCompiler.exe
+E:\NBFC MVP\NBFC-Application\bin\roslyn\VBCSCompiler.exe.config
+E:\NBFC MVP\NBFC-Application\bin\Antlr3.Runtime.dll
+E:\NBFC MVP\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\NBFC MVP\NBFC-Application\bin\Microsoft.Web.Infrastructure.dll
+E:\NBFC MVP\NBFC-Application\bin\Newtonsoft.Json.dll
+E:\NBFC MVP\NBFC-Application\bin\RestSharp.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Helpers.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Mvc.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Optimization.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Razor.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.Deployment.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.dll
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.Razor.dll
+E:\NBFC MVP\NBFC-Application\bin\WebGrease.dll
+E:\NBFC MVP\NBFC-Application\bin\RestSharp.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Helpers.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Mvc.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Optimization.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.Razor.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.Deployment.xml
+E:\NBFC MVP\NBFC-Application\bin\System.Web.WebPages.Razor.xml
+E:\NBFC MVP\NBFC-Application\bin\Newtonsoft.Json.xml
+E:\NBFC MVP\NBFC-Application\bin\Antlr3.Runtime.pdb
+E:\NBFC MVP\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\NBFC MVP\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
+E:\NBFC MVP\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CoreCompileInputs.cache
+E:\NBFC MVP\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
+E:\NBFC MVP\NBFC-Application\obj\Debug\NBFC App - dev.dll
+E:\NBFC MVP\NBFC-Application\obj\Debug\NBFC App - dev.pdb
