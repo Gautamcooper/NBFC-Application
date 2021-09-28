@@ -8,7 +8,7 @@
         </div>
         <br />
         <div style="float: right;">
-            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Payment_Records", "Home")'" />
+            <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Payment_Records", "Home")'" />
         </div>
         <br />
         <br />
@@ -53,7 +53,7 @@
 
                             <table class="table">
                                 <thead>
-                                    <tr style="background: powderblue;">
+                                    <tr style="background: #98cad0;">
                                         <th scope="col">Select</th>
                                         <th scope="col">Type</th>
                                         <th scope="col">Amount</th>
@@ -95,7 +95,7 @@
                             </table>
 
                         </details>
-                        <button id="save" type="submit" class="btn btn-primary">Pay</button>
+                        <button id="save" type="submit" class="btn btn-primary btn-default">Pay</button>
                     </form>
                 }
                 if (ViewData["LoanType"].ToString() == "Short Term Loan")
@@ -127,7 +127,7 @@
                             <input id="amount" name="amount" class="form-input" placeholder="Fill amount to pay" />
                         </div>
                     </div>
-                    <button id="save" type="submit" class="btn btn-primary">Pay</button>
+                    <button id="save" type="submit" class="btn btn-primary btn-default">Pay</button>
 
                 </form>
 

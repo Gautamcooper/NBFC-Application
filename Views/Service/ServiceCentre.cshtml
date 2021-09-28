@@ -8,173 +8,178 @@
             <br />
             <div class="help-text">Need Help ?</div>
             <br />
-            <div class="div_button"><a class="btn btn-light button_service" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
-            <div class="div_button"><button id="button_loantype" type="button" class="btn btn-light button_service">Write to Us!</button></div>
+            <div class="div_button"><a class="btn btn-primary button_service btn-default" href="/Service/Queries?Length=7" style="padding-top: 13px;">My Queries</a></div>
+            <div class="div_button"><button id="button_loantype" type="button" class="btn btn-primary button_service btn-default">Write to Us!</button></div>
         </div>
         <div id="header_button_loantype" style="display:none;">
-            <div class="back_button"><button id="check_button_loantype" type="button" class="btn btn-light back">Back</button></div>
-            <div class="header_text">Please Write Here!</div>
+            <div class="back_button"><button id="check_button_loantype" type="button" class="btn btn-primary btn-default back">Back</button></div>
+            <div class="header_text text-center">Please Write Here!</div>
             <br />
             <form method="post" action="~/Service/Submit_Query" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
-                        <input id="Fullname" class="form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                <div class="form-card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="Fullname" id="label_Fullname">Full Name</label>
+                            <input id="Fullname" class="form-control form-input inp" placeholder="Full Name" name="Fullname" value="@ViewData["fullname"]" readonly="readonly">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
+                            <input id="Mobile" class="form-control form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="label_inp" for="Mobile" id="label_Mobile">Mobile</label>
-                        <input id="Mobile" class="form-input inp" placeholder="Mobile" name="Mobile" value="@ViewData["mobile"]" readonly="readonly">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="Email" id="label_Email">Email</label>
+                            <input id="Email" class="form-control form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label_inp" for="Subject" id="label_Email">Subject</label>
+                            <input id="Subject" class="form-control form-input inp" name="Subject">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="label_inp" for="Email" id="label_Email">Email</label>
-                        <input id="Email" class="form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="label_inp" for="relatedto" id="label_relatedto">Query Related to</label>
+                            <select id="relatedto" class="form-control form-input inp_dropdown" required>
+                                <option value="1">Query Related to</option>
+                                <option value="a9a4ba04-7b52-4565-a64c-6c26c7a67330">General</option>
+                                <option value="83b0dd07-82e6-4026-8e5d-b43cb4025670">Product</option>
+                                <option value="975f084b-fbd0-4e7a-b2bb-f36841c849bd">Agreement</option>
+                                <option value="05d77726-b0ef-4433-8679-3826aefab78b">Application</option>
+                            </select>
+                        </div>
+                        <input hidden id="related_to" class="form-control form-input" placeholder="type" name="related_to" />
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="label_inp" for="Subject" id="label_Email">Subject</label>
-                        <input id="Subject" class="form-input inp"  name="Subject" >
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="label_inp" for="relatedto" id="label_relatedto">Query Related to</label>
-                        <select id="relatedto" class="form-input inp_dropdown" required>
-                            <option value="-1">Query Related to</option>
-                            <option value="a9a4ba04-7b52-4565-a64c-6c26c7a67330">General</option>
-                            <option value="83b0dd07-82e6-4026-8e5d-b43cb4025670">Product</option>
-                            <option value="975f084b-fbd0-4e7a-b2bb-f36841c849bd">Agreement</option>
-                            <option value="05d77726-b0ef-4433-8679-3826aefab78b">Application</option>
-                        </select>
-                    </div>
-                    <input hidden id="related_to" class="form-input" placeholder="type" name="related_to" />
-                </div>
-                <div class="row" id="Product">
-                    <div class="col-md-6">
-                        <label class="label_inp" for="product_select" id="label_product_select">Select Product</label>
-                        <select id="product_select" class="form-input inp_dropdown" required>
-                            <option value="-1">Select Product </option>
-                            @if (ViewData["ProductsData"] != null)
-                            {
-                                foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                    <div class="row" id="Product">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="product_select" id="label_product_select">Select Product</label>
+                            <select id="product_select" class="form-control form-input inp_dropdown" required>
+                                <option value="1">Select Product </option>
+                                @if (ViewData["ProductsData"] != null)
                                 {
-                                    <option value="@prdct.id">@prdct.name</option>
+                                    foreach (var prdct in (IEnumerable<Products>)ViewData["ProductsData"])
+                                    {
+                                        <option value="@prdct.id">@prdct.name</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="label_inp" for="services" id="label_services">Related Services</label>
-                        <select id="services" class="form-input inp_dropdown" required>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label_inp" for="services" id="label_services">Related Services</label>
+                            <select id="services" class="form-control form-input inp_dropdown" required>
 
-                            <option value="-1">Related Services</option>
-                            @if (ViewData["Product_Service"] != null)
-                            {
-                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                <option value="1">Related Services</option>
+                                @if (ViewData["Product_Service"] != null)
                                 {
-                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                    {
+                                        <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    }
                                 }
-                            }
-                        </select>
-                        <input hidden id="prd_service" class="form-input" placeholder="type" name="prd_service" />
-                        <input hidden id="product_name" class="form-input" placeholder="Product" name="prdct_id" />
+                            </select>
+                            <input hidden id="prd_service" class="form-control form-input" placeholder="type" name="prd_service" />
+                            <input hidden id="product_name" class="form-control form-input" placeholder="Product" name="prdct_id" />
+                        </div>
                     </div>
-                </div>
-                <div class="row" id="Application">
-                    <div class="col-md-6">
-                        <label class="label_inp" for="application_select" id="label_application_select">Select Application</label>
-                        <select id="application_select" class="form-input inp_dropdown" required>
-                            <option value="-1">Select Application </option>
-                            @if (ViewData["ApplicationData"] != null)
-                            {
-                                foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                    <div class="row" id="Application">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="application_select" id="label_application_select">Select Application</label>
+                            <select id="application_select" class="form-control form-input inp_dropdown" required>
+                                <option value="1">Select Application </option>
+                                @if (ViewData["ApplicationData"] != null)
                                 {
-                                    <option alt="@apln.productId" value="@apln.id">@apln.number</option>
+                                    foreach (var apln in (IEnumerable<Applications>)ViewData["ApplicationData"])
+                                    {
+                                        <option alt="@apln.productId" value="@apln.id">@apln.number</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="label_inp" for="apln_services" id="label_apln_services">Related Services</label>
-                        <select id="apln_services" class="form-input inp_dropdown" required>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label_inp" for="apln_services" id="label_apln_services">Related Services</label>
+                            <select id="apln_services" class="form-control form-input inp_dropdown" required>
 
-                            <option value="-1">Related Services</option>
-                            @if (ViewData["Product_Service"] != null)
-                            {
-                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                <option value="1">Related Services</option>
+                                @if (ViewData["Product_Service"] != null)
                                 {
-                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                    {
+                                        <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    }
                                 }
-                            }
-                        </select>
-                        <input hidden id="appl_ser" class="form-input" placeholder="Application" name="appl_ser" />
-                        <input hidden id="application_num" class="form-input" placeholder="Application" name="apln_id" />
+                            </select>
+                            <input hidden id="appl_ser" class="form-control form-input" placeholder="Application" name="appl_ser" />
+                            <input hidden id="application_num" class="form-control form-input" placeholder="Application" name="apln_id" />
+                        </div>
                     </div>
-                </div>
-                <div class="row" id="Agreement">
-                    <div class="col-md-6">
-                        <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Agreement</label>
-                        <select id="agreement_select" class="form-input inp_dropdown" required>
-                            <option value="-1">Select Agreement </option>
-                            @if (ViewData["AgreementData"] != null)
-                            {
-                                foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                    <div class="row" id="Agreement">
+                        <div class="col-md-6">
+                            <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Agreement</label>
+                            <select id="agreement_select" class="form-control form-input inp_dropdown" required>
+                                <option value="1">Select Agreement </option>
+                                @if (ViewData["AgreementData"] != null)
                                 {
-                                    <option alt="@agr.productId" value="@agr.id">@agr.number</option>
+                                    foreach (var agr in (IEnumerable<Agreements>)ViewData["AgreementData"])
+                                    {
+                                        <option alt="@agr.productId" value="@agr.id">@agr.number</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="label_inp" for="agrm_services" id="label_agrm_services">Related Services</label>
-                        <select id="agrm_services" class="form-input inp_dropdown" required>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label_inp" for="agrm_services" id="label_agrm_services">Related Services</label>
+                            <select id="agrm_services" class="form-control form-input inp_dropdown" required>
 
-                            <option value="-1">Related Services</option>
-                            @if (ViewData["Product_Service"] != null)
-                            {
-                                foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                <option value="1">Related Services</option>
+                                @if (ViewData["Product_Service"] != null)
                                 {
-                                    <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    foreach (var prser in (IEnumerable<Product_Services>)ViewData["Product_Service"])
+                                    {
+                                        <option alt="@prser.productId" value="@prser.serviceId">@prser.servicename</option>
+                                    }
                                 }
-                            }
-                        </select>
-                        <input hidden id="agrm_ser" class="form-input" placeholder="Aggreement" name="agrm_ser" />
-                        <input hidden id="agreement_num" class="form-input" placeholder="Agreement" name="agr_id" />
+                            </select>
+                            <input hidden id="agrm_ser" class="form-control form-input" placeholder="Aggreement" name="agrm_ser" />
+                            <input hidden id="agreement_num" class="form-control form-input" placeholder="Agreement" name="agr_id" />
+                        </div>
                     </div>
-                </div>
-                <div class="row" id="Service_Type">
-                    <div class="col-md-4">
-                        <label class="label_inp" for="type" id="label_type">Category</label>
-                        <select id="type" class="form-input inp_dropdown" required>
-                            <option value="-1">Category</option>
-                            <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
-                            <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
-                        </select>
+                    <div class="row" id="Service_Type">
+                        <div class="col-md-4">
+                            <label class="label_inp" for="type" id="label_type">Category</label>
+                            <select id="type" class="form-control form-input inp_dropdown" required>
+                                <option value="1">Category</option>
+                                <option value="3144c850-ce51-4ecb-995b-53f24ae4dc8a">Issue</option>
+                                <option value="0800bc31-45ad-4750-aee9-117b01f7f578">Service Request</option>
+                            </select>
+                        </div>
+                        <input hidden id="ser_type" class="form-control form-input" placeholder="type" name="type_id" />
                     </div>
-                    <input hidden id="ser_type" class="form-input" placeholder="type" name="type_id" />
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="label_inp" for="Fullname" id="label_Fullname">Your Query</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <textarea cols="80" rows="7" name="query"></textarea>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea cols="80" rows="7" name="query"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="file" id="attached_file" name="product_attachment" class="form-input">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="label_inp" for="file-attachment" id="label_attachfile">Attach File</label>
+                            <div class="custom-file" id="file-attachment">
+                                <input type="file" name="file" id="file" class="input-file">
+                                <label for="file" class="btn btn-tertiary js-labelFile">
+                                    <i class="icon fa fa-check"></i>
+                                    <span class="js-fileName">Choose a file</span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <input id="submit" class="btn btn-primary" data-toggle="modal" data-target="#product_wait_modal" type="submit" value="Submit" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input id="submit" class="btn btn-primary btn-default" data-toggle="modal" data-target="#product_wait_modal" type="submit" value="Submit" />
+                        </div>
                     </div>
                 </div>
             </form>

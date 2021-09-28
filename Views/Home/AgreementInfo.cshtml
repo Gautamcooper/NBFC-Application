@@ -12,7 +12,7 @@
         </div>
         <br />
         <div style="float: right;">
-            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
+            <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
         </div>
         <br />
         <br />
@@ -25,7 +25,7 @@
                         <label>Applicant Name</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="contact" class="form-input" placeholder="Name" name="contact" value="@data.contact" readonly="readonly" />
+                        <input id="contact" class="form-control form-input" placeholder="Name" name="contact" value="@data.contact" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -33,7 +33,7 @@
                         <label>Associated Application</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="application" class="form-input" placeholder="Application" name="application" value="@data.application" readonly="readonly" />
+                        <input id="application" class="form-control form-input" placeholder="Application" name="application" value="@data.application" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -41,7 +41,7 @@
                         <label>Status</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="status" class="form-input" placeholder="Status" name="status" value="@data.status" readonly="readonly">
+                        <input id="status" class="form-control form-input" placeholder="Status" name="status" value="@data.status" readonly="readonly">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                         <label>Loan Type</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="loantype" class="form-input" placeholder="LoanType" name="loantype" value="@data.loantype" readonly="readonly" />
+                        <input id="loantype" class="form-control form-input" placeholder="LoanType" name="loantype" value="@data.loantype" readonly="readonly" />
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
                         <label>Started On</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="startedon" class="form-input" placeholder="Started On" value="@data.startedon" readonly="readonly">
+                        <input id="startedon" class="form-control form-input" placeholder="Started On" value="@data.startedon" readonly="readonly">
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                         <label>Closed On</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="expiredon" class="form-input" placeholder="Expired On" value="@data.expiredon" readonly="readonly">
+                        <input id="expiredon" class="form-control form-input" placeholder="Expired On" value="@data.expiredon" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
@@ -76,7 +76,7 @@
                         <label>Tenure</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="tenure" class="form-input" placeholder="Tenure" name="tenure" value="@data.tenure" readonly="readonly" />
+                        <input id="tenure" class="form-control form-input" placeholder="Tenure" name="tenure" value="@data.tenure" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -84,7 +84,7 @@
                         <label>Loan</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="product" class="form-input" placeholder="Loan"  value="@data.product" readonly="readonly" />
+                        <input id="product" class="form-control form-input" placeholder="Loan"  value="@data.product" readonly="readonly" />
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                             <label>Debt Amount</label>
                         </div>
                         <div class="col-md-6">
-                            <input id="debtamount" class="form-input" placeholder="Debt Amount" name="debtamount" value="@data.debtamount" readonly="readonly" />
+                            <input id="debtamount" class="form-control form-input" placeholder="Debt Amount" name="debtamount" value="@data.debtamount" readonly="readonly" />
                         </div>
                     </div>
                     <div class="row">
@@ -103,7 +103,7 @@
                             <label>Balance Debt Amount</label>
                         </div>
                         <div class="col-md-6">
-                            <input id="balanceddebtamount" class="form-input" placeholder="Balanced Debt Amount" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
+                            <input id="balanceddebtamount" class="form-control form-input" placeholder="Balanced Debt Amount" name="balanceddebtamount" value="@data.balanceddebtamount" readonly="readonly" />
                         </div>
                     </div>
                     if (@data.islatepaymentfeeapplied == "true")
@@ -113,7 +113,7 @@
                                 <label>Is Late Payment Fee Applied</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="islatepaymentfeeapplied" class="form-input" placeholder="Late Payment Fee Applied" name="islatepaymentfeeapplied" value="@data.islatepaymentfeeapplied" readonly="readonly" />
+                                <input id="islatepaymentfeeapplied" class="form-control form-input" placeholder="Late Payment Fee Applied" name="islatepaymentfeeapplied" value="@data.islatepaymentfeeapplied" readonly="readonly" />
                             </div>
                         </div>
                         <div class="row">
@@ -121,7 +121,7 @@
                                 <label>Old Debt Amount</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="olddebtamount" class="form-input" placeholder="Old Amount" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
+                                <input id="olddebtamount" class="form-control form-input" placeholder="Old Amount" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
                             </div>
                         </div>
                     }
@@ -132,7 +132,7 @@
                                 <label>Is Extension Fee Applied</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="isextensionapplied" class="form-input" placeholder="Extension Applied" name="isextensionapplied" value="@data.isextensionapplied" readonly="readonly" />
+                                <input id="isextensionapplied" class="form-control form-input" placeholder="Extension Applied" name="isextensionapplied" value="@data.isextensionapplied" readonly="readonly" />
                             </div>
                         </div>
                         <div class="row">
@@ -140,7 +140,7 @@
                                 <label>Old Debt Amount</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="olddebtamount" class="form-input" placeholder="Old Debt Amount" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
+                                <input id="olddebtamount" class="form-control form-input" placeholder="Old Debt Amount" name="olddebtamount" value="@data.olddebtamount" readonly="readonly" />
                             </div>
                         </div>
                     }
@@ -148,12 +148,12 @@
 
                 @if (@data.status != "Cancelled")
                 {
-                    <details open>
-                        <summary>Our Charging Fees</summary>
+                    <details open style="margin-top: 40px;">
+                        <summary class="text-center">Our Charging Fees</summary>
 
-                        <table class="table">
+                        <table class="table" style="background: #f5f5f5;">
                             <thead>
-                                <tr style="background: powderblue;">
+                                <tr style="background: #98cad0;">
                                     <th scope="col">Amount</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Category</th>
@@ -176,11 +176,11 @@
                 @if (@data.loantype == "Long Term Loan" && @data.status == "Active")
                 {
                     <details open>
-                        <summary>Repayment Schedule</summary>
+                        <summary class="text-center pb3">Repayment Schedule</summary>
 
-                        <table class="table">
+                        <table class="table" style="background: #f5f5f5;">
                             <thead>
-                                <tr style="background: powderblue;">
+                                <tr style="background: #98cad0;">
                                     <th scope="col">Type</th>
                                     <th scope="col">Amount</th>
                                     <th scope="col">Start Date</th>
@@ -211,11 +211,11 @@
                     </details>
                 }
                 <form method="post" action="~/Home/Fetch">
-                    <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" value="@data.id" />
-                    <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
+                    <input hidden id="agreement" class="form-control form-input" placeholder="Agreement" name="id" value="@data.id" />
+                    <input hidden id="loantype" class="form-control form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
                     @if (@data.status == "Active" || @data.status == "Partial Repayment")
                     {
-                        <button id="save" type="submit" class="btn btn-primary">Pay</button>
+                        <button id="save" type="submit" class="btn btn-primary btn-default">Pay</button>
                     }
 
                 </form>

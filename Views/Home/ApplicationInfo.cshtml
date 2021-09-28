@@ -13,7 +13,7 @@
         </div>
         <br />
         <div style="float: right;">
-            <input type="button" class="btn btn-primary" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
+            <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
         </div>
         <br />
         <br />
@@ -25,7 +25,7 @@
                         <label>Status</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="Status" class="form-input" placeholder="" name="Status" value="@data.status" readonly="readonly">
+                        <input id="Status" class="form-control form-input" placeholder="" name="Status" value="@data.status" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
@@ -33,7 +33,7 @@
                         <label>Created On</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="createdOn" class="form-input" placeholder="" value="@data.createdOn" readonly="readonly">
+                        <input id="createdOn" class="form-control form-input" placeholder="" value="@data.createdOn" readonly="readonly">
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
                         <label>Tenure</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="requestedterm" class="form-input" placeholder="" value="@data.requestedterm" readonly="readonly">
+                        <input id="requestedterm" class="form-control form-input" placeholder="" value="@data.requestedterm" readonly="readonly">
                     </div>
                 </div>
                 <div class="row">
@@ -50,7 +50,7 @@
                         <label>Requested Amount</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="requestedamount" class="form-input" placeholder="" name="CreatedOn" value="@data.requestedamount" readonly="readonly" />
+                        <input id="requestedamount" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.requestedamount" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -58,7 +58,7 @@
                         <label>Loan</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="product" class="form-input" placeholder="" name="CreatedOn" value="@data.product" readonly="readonly" />
+                        <input id="product" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.product" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -66,7 +66,7 @@
                         <label>Co-Applicant</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="coapplicantname" class="form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
+                        <input id="coapplicantname" class="form-control form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -74,7 +74,7 @@
                         <label>Approved Term</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="approvedterm" class="form-input" placeholder="" name="approvedterm" value="@data.approvedterm" readonly="readonly" />
+                        <input id="approvedterm" class="form-control form-input" placeholder="" name="approvedterm" value="@data.approvedterm" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -82,7 +82,7 @@
                         <label>Approved Amount</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="approvedamount" class="form-input" placeholder="" name="approvedamount" value="@data.approvedamount" readonly="readonly" />
+                        <input id="approvedamount" class="form-control form-input" placeholder="" name="approvedamount" value="@data.approvedamount" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -90,7 +90,7 @@
                         <label>Name</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="contact" class="form-input" placeholder="" name="contact" value="@data.contact" readonly="readonly" />
+                        <input id="contact" class="form-control form-input" placeholder="" name="contact" value="@data.contact" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -98,7 +98,7 @@
                         <label>Reason For Loan</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="reasonforloan" class="form-input" placeholder="" name="reasonforloan" value="@data.reasonforloan" readonly="readonly" />
+                        <input id="reasonforloan" class="form-control form-input" placeholder="" name="reasonforloan" value="@data.reasonforloan" readonly="readonly" />
                     </div>
                 </div>
                 <div class="row">
@@ -106,19 +106,19 @@
                         <label>Bank</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="bankname" class="form-input" placeholder="" name="bankname" value="@data.bankname" readonly="readonly" />
+                        <input id="bankname" class="form-control form-input" placeholder="" name="bankname" value="@data.bankname" readonly="readonly" />
                     </div>
                 </div>
 
 
                 @if (@data.status == "Rejected")
                 {
-                    <details open>
-                        <summary>Rejection Reasons</summary>
+                    <details open style="margin-top: 40px;">
+                        <summary class="text-center">Rejection Reasons</summary>
 
-                        <table class="table">
+                        <table class="table" style="background: #f5f5f5;">
                             <thead>
-                                <tr style="background: powderblue;">
+                                <tr style="background: #98cad0;">
                                     <th scope="col">Name</th>
                                 </tr>
                             </thead>
@@ -127,7 +127,6 @@
                                 {
                                     <tr class="table_row">
                                         <td>@rejrsn.name</td>
-
                                     </tr>
                                 }
                             </tbody>

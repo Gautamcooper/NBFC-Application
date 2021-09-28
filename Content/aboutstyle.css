@@ -32,6 +32,10 @@ select.form-control:not([size]):not([multiple]) {
     height: 33px;
 }
 
+.form-card .row {
+    margin-top: 20px;
+}
+
 .form-card button:focus {
     border: none;
     outline: none;
@@ -44,6 +48,12 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .btn-default:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-default:focus:active {
     border: none;
     outline: none;
     box-shadow: none;
@@ -80,11 +90,10 @@ select.form-control:not([size]):not([multiple]) {
 summary {
     display: block;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
     font-family: "Space Mono", monospace;
     font-size: 22px;
     transition: .3s;
-    border-bottom: 2px solid;
     user-select: none;
 }
 .label_inp{
@@ -105,6 +114,45 @@ summary {
     filter: blur(1.5px);
     -webkit-filter: blur(1.5px);
     width: 100%;
+}
+
+.btn-tertiary {
+    color: #555;
+    padding: 0;
+    line-height: 40px;
+    display: block;
+    border: 1px solid #555;
+}
+
+.btn-tertiary:hover, .btn-tertiary:focus {
+  color: #888888;
+  border-color: #888888;
+}
+
+.input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.input-file + .js-labelFile {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.input-file + .js-labelFile .icon::before {
+  content: "\f093";
+}
+
+.input-file + .js-labelFile.has-file .icon::before {
+  content: "\f00c";
+  color: #5aac7b;
 }
 
 @media screen and (min-width: 0px) and (max-width: 500px) {
@@ -205,8 +253,18 @@ textarea {
     background-color: #f1f1f1ad;
     padding-top:0px !important;
 }
+
+.table_row td a {
+    text-decoration: none;
+    color: #3737a9;
+}
+
+.table_row td a:hover {
+    color: #7373d8; 
+}
+
 .nav-item {
-    padding: 4px;    
+    padding: 4px;
     font-size: 16px;
 }
 @media screen and (min-width: 501px) {
@@ -328,6 +386,8 @@ footer h4 {
     width: auto;
 }
 #page-container {
+    background-color: #ffffff;
+    background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
     position: relative;
     min-height: 100vh;
 }
@@ -505,7 +565,7 @@ body {
     cursor: pointer;
     border-bottom: 1px dashed #CEE1F8;
     font-weight: 400;
-    font-size: 17px;
+    font-size: 15px;
     letter-spacing: 1px;
     color: #3B566E;
     line-height: 22px;
@@ -520,7 +580,7 @@ body {
 
 .faqanswer {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 16px;
     color: #6F8BA4;
     line-height: 28px;
     letter-spacing: 1px;

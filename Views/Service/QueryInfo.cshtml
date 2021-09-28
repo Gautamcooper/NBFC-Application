@@ -22,7 +22,7 @@
                     <label>Your Query</label>
                 </div>
                 <div class="col-md-6">
-                    <input id="Query" class="form-input" placeholder="Your Query" name="Subject" value="@ViewData["RelatedQuery"]" >
+                    <input id="Query" class="form-control form-input" placeholder="Your Query" name="Subject" value="@ViewData["RelatedQuery"]" >
                 </div>
             </div>
             <br />
@@ -66,7 +66,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <input type="file" id="attached_file" name="response_attachment" class="form-input">
+                    <input type="file" id="attached_file" name="response_attachment" class="form-control form-input">
                 </div>
             </div>
             <div class="row">
@@ -74,7 +74,7 @@
                     <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
                 </div>
             </div>
-            <input hidden id="QueryId" class="form-input inp" placeholder="QueryId" name="QueryId" value="@ViewData["QueryId"]" readonly="readonly">
+            <input hidden id="QueryId" class="form-control form-input inp" placeholder="QueryId" name="QueryId" value="@ViewData["QueryId"]" readonly="readonly">
 
 
         </form>

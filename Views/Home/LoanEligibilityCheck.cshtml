@@ -20,10 +20,10 @@
         <form method="post" action="~/Home/GetLoanEligibilityResult">
             <div class="row">
                 <div class="col-sm-2">
-                    <h3 class="title fs-title" id="header">Loan Amount</h3>
+                    <h4 class="title fs-title" id="header">Loan Amount</h4>
                 </div>
-                <div class="col-sm-10" style="margin-left: -8%;margin-top: 1%;">
-                    <input id="loanAmount" name="loanAmount" class="form-input inp loanamount" />
+                <div class="col-sm-10">
+                    <input id="loanAmount" name="loanAmount" class="form-control form-input inp loanamount" />
                 </div>
             </div>
             <div id="cont">
@@ -37,10 +37,10 @@
             <br />
             <div class="row">
                 <div class="col-sm-2">
-                    <h3 class="title fs-title" id="header">Monthly Income</h3>
+                    <h4 class="title fs-title" id="header">Monthly Income</h4>
                 </div>
-                <div class="col-sm-10" style="margin-left: -8%;margin-top: 3%;">
-                    <input id="MonthlyIncome" name="monthlyIncome" class="form-input inp loanamount" />
+                <div class="col-sm-10">
+                    <input id="MonthlyIncome" name="monthlyIncome" class="form-control form-input inp loanamount" />
                 </div>
             </div>
             <div id="cont">
@@ -50,28 +50,32 @@
             <div class="slidecontainer">
                 <input id="myRangeIncome" type="range" class="slider" min="10000" max="100000" runat="server" />
             </div>
-            @*<input id="LoanAmount" class="form-input inp" placeholder="Loan Amount" name="loanAmount">*@
-            @*<input id="MonthlyIncome" class="form-input inp" placeholder="Net Monthly Income" name="monthlyIncome">*@
+            @*<input id="LoanAmount" class="form-control form-input inp" placeholder="Loan Amount" name="loanAmount">*@
+            @*<input id="MonthlyIncome" class="form-control form-input inp" placeholder="Net Monthly Income" name="monthlyIncome">*@
             <br />
             <br />
             <div class="row">
                 <div class="col-md-6">
-                    <select id="loanType" class="form-input" required>
+                    <label class="label_inp" for="loanType" id="label_loanType_select">Loan Type</label>
+                    <select id="loanType" class="form-control form-input" required>
                         <option value="-1">Loan Type</option>
                         <option value="Short Term Loan">Short Term Loan</option>
                         <option value="Long Term Loan">Long Term Loan</option>
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <input id="LoanTenure" class="form-input inp" placeholder="Tenure" name="Tenure">
+                    <label class="label_inp" for="LoanTenure" id="label_LoanTenure_select">Loan Tenure</label>
+                    <input id="LoanTenure" class="form-control form-input inp" placeholder="Loan Tenure" name="Tenure">
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <input type="date" id="birthdate" class="form-input inp" placeholder="Date of Birth" name="birthdate" />
+                <div class="col-md-6" style="margin-top: 25px;">
+                    <label class="label_inp" for="birthdate" id="label_birthdate_select">Date of Birth</label>
+                    <input type="date" id="birthdate" class="form-control form-input inp" placeholder="Date of Birth" name="birthdate" />
                 </div>
-                <div class="col-md-6">
-                    <select id="sel_prd" class="form-input" required>
+                <div class="col-md-6" style="margin-top: 25px;">
+                    <label class="label_inp" for="sel_prd" id="label_sel_prd_select">Loan</label>
+                    <select id="sel_prd" class="form-control form-input" required>
                         <option value="-1" selected>Select Loan</option>
                         @if (ViewData["ProductsData"] != null)
                         {
@@ -86,12 +90,12 @@
             <br />
             <div class="row">
                 <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#waituploadModal" value="Submit" />
+                    <input id="submit" class="btn btn-primary btn-default" type="submit" data-toggle="modal" data-target="#waituploadModal" value="Submit" />
                 </div>
             </div>
-            <input hidden id="productId" class="form-input" placeholder="" value=@ViewData["ProductId"] name="auto_product_id" />
-            <input hidden id="product_name" class="form-input" placeholder="Loan" value="@ViewData["ProductId"]" name="prdct_id" />
-            <input hidden id="typeofloan" class="form-input" placeholder="Loan" name="loan" />
+            <input hidden id="productId" class="form-control form-input" placeholder="" value=@ViewData["ProductId"] name="auto_product_id" />
+            <input hidden id="product_name" class="form-control form-input" placeholder="Loan" value="@ViewData["ProductId"]" name="prdct_id" />
+            <input hidden id="typeofloan" class="form-control form-input" placeholder="Loan" name="loan" />
         </form>
         <div class="modal fade" id="waituploadModal" role="dialog">
             <div class="modal-dialog">

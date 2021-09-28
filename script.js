@@ -251,4 +251,4 @@ $(".inp-dropdown").change(function () {
         var id = this.getAttribute("id");
         $("#label_" + id).hide(500);
     }
-})
+});
