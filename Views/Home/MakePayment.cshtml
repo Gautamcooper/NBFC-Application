@@ -7,7 +7,7 @@
             <h2 style="text-align: center;">Payments</h2>
         </div>
         <br />
-        <div style="float: right;">
+        <div style="float: right; margin: 0 14px;">
             <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Payment_Records", "Home")'" />
         </div>
         <br />
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="label_inp" for="agreement_select" id="label_agreement_select">Select Your Agreement</label>
-                            <select id="agreement_select" class="form-input inp_dropdown" required>
+                            <select id="agreement_select" class="form-control form-input inp_dropdown" required>
                                 <option value="-1">Select Your Agreement </option>
                                 @if (ViewData["AgreementData"] != null)
                                 {
@@ -28,8 +28,8 @@
                                     }
                                 }
                             </select>
-                            <input hidden id="agreement" class="form-input" placeholder="Agreement" name="id" />
-                            <input hidden id="loantype" class="form-input" placeholder="Loan Type" name="agrloantype" />
+                            <input hidden id="agreement" class="form-control form-input" placeholder="Agreement" name="id" />
+                            <input hidden id="loantype" class="form-control form-input" placeholder="Loan Type" name="agrloantype" />
                         </div>
 
                     </div>
@@ -44,10 +44,10 @@
                 {
                     <form method="post" action="~/Home/On_Pay">
                         <div><h3>@ViewData["AgreementName"].ToString()</h3></div>
-                        <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
-                        <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
-                        <input hidden id="amount" name="amount" class="form-input" value="" />
-                        <input hidden id="count" name="count" class="form-input" value="" />
+                        <input hidden id="agrid" name="agrid" class="form-control form-input" value="@ViewData["AgreementId"].ToString()" />
+                        <input hidden id="agrloantype" name="agrloantype" class="form-control form-input" value="@ViewData["LoanType"].ToString()" />
+                        <input hidden id="amount" name="amount" class="form-control form-input" value="" />
+                        <input hidden id="count" name="count" class="form-control form-input" value="" />
                         <details open>
                             <summary>Active EMI's</summary>
 
@@ -106,16 +106,16 @@
                     <h3>
                         @ViewData["AgreementName"].ToString()
                     </h3>
-                    <input hidden id="agrid" name="agrid" class="form-input" value="@ViewData["AgreementId"].ToString()" />
-                    <input hidden id="agrloantype" name="agrloantype" class="form-input" value="@ViewData["LoanType"].ToString()" />
-                    <input hidden id="count" name="count" class="form-input" value="0" />
+                    <input hidden id="agrid" name="agrid" class="form-control form-input" value="@ViewData["AgreementId"].ToString()" />
+                    <input hidden id="agrloantype" name="agrloantype" class="form-control form-input" value="@ViewData["LoanType"].ToString()" />
+                    <input hidden id="count" name="count" class="form-control form-input" value="0" />
                     <br />
                     <div class="row">
                         <div class="col-md-4">
                             <label>Amount to pay</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="debtamount" class="form-input" name="debtamount" value="@ViewData["AmountToPay"]" readonly="readonly">
+                            <input id="debtamount" class="form-control form-input" name="debtamount" value="@ViewData["AmountToPay"]" readonly="readonly">
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                             <label>Enter amount</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="amount" name="amount" class="form-input" placeholder="Fill amount to pay" />
+                            <input id="amount" name="amount" class="form-control form-input" placeholder="Fill amount to pay" />
                         </div>
                     </div>
                     <button id="save" type="submit" class="btn btn-primary btn-default">Pay</button>

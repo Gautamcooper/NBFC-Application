@@ -12,70 +12,78 @@
                 <h2 style="text-align: center;">Responses</h2>
             </div>
         </div>
-        <div class="back_button"><a class="btn btn-light button_service_1" href="/Service/Queries" style="padding-top: 13px;">Back</a></div>
+        <div class="back_button"><a class="btn btn-primary button_service_1" href="/Service/Queries" style="margin-top: 30px;">Back</a></div>
         <br />
         <br />
         <br />
         <form method="post" action="~/Service/submitResponse" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-md-3">
-                    <label>Your Query</label>
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Your Query</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="Query" class="form-control form-input" placeholder="Your Query" name="Subject" value="@ViewData["RelatedQuery"]">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <input id="Query" class="form-control form-input" placeholder="Your Query" name="Subject" value="@ViewData["RelatedQuery"]" >
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <div class="container-fluid table_view">
-                <table class="table">
-                    <thead>
-                        <tr style="background: powderblue;">
-                            <th scope="col">Response</th>
-                            <th scope="col">Response Time</th>
-                            <th scope="col">Response by </th>
-                            <th scope="col">Assigned Agent</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var qryInfo in (IEnumerable<QueriesInfo>)ViewData["QueryInfoData"])
-                        {
-                            <tr class="table_row">
-                                <td>@qryInfo.response</td>
-                                <td>@qryInfo.createdon</td>
-                                <td>@qryInfo.responsebycustomer</td>
-                                <td>@qryInfo.agent</td>
+                <br />
+                <br />
+                <br />
+                <div class="container-fluid table_view">
+                    <table class="table">
+                        <thead>
+                            <tr style="background: #98cad0;">
+                                <th scope="col">Response</th>
+                                <th scope="col">Response Time</th>
+                                <th scope="col">Response by </th>
+                                <th scope="col">Assigned Agent</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var qryInfo in (IEnumerable<QueriesInfo>)ViewData["QueryInfoData"])
+                            {
+                                <tr class="table_row">
+                                    <td>@qryInfo.response</td>
+                                    <td>@qryInfo.createdon</td>
+                                    <td>@qryInfo.responsebycustomer</td>
+                                    <td>@qryInfo.agent</td>
+                                </tr>
 
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <br />
-            <br />
-            <div class="row">
-                <div class="col-md-12">
-                    <label class="label_inp" for="Fullname" id="label_Fullname">Response</label>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <textarea cols="80" rows="7" name="response"></textarea>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Fullname" id="label_Fullname">Response</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="file" id="attached_file" name="response_attachment" class="form-control form-input">
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea cols="80" rows="7" name="response"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="label_inp" for="file-attachment" id="label_attachfile">Attach File</label>
+                        <div class="custom-file" id="file-attachment">
+                            <input type="file" name="file" id="file" class="input-file">
+                            <label for="file" class="btn btn-tertiary js-labelFile">
+                                <i class="icon fa fa-check"></i>
+                                <span class="js-fileName">Choose a file</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <input hidden id="QueryId" class="form-control form-input inp" placeholder="QueryId" name="QueryId" value="@ViewData["QueryId"]" readonly="readonly">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input id="submit" class="btn btn-primary" type="submit" value="Submit" />
+                    </div>
+                </div>
+                <input hidden id="QueryId" class="form-control form-input inp" placeholder="QueryId" name="QueryId" value="@ViewData["QueryId"]" readonly="readonly">
 
-
+            </div>
         </form>
     </div>

@@ -11,7 +11,7 @@
             <h2 style="text-align: center;">@data.number</h2>
         </div>
         <br />
-        <div style="float: right;">
+        <div style="float: right; margin: 0 14px;">
             <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
         </div>
         <br />
@@ -149,9 +149,9 @@
                 @if (@data.status != "Cancelled")
                 {
                     <details open style="margin-top: 40px;">
-                        <summary class="text-center">Our Charging Fees</summary>
+                        <summary class="text-center" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 25px;">Our Charging Fees</summary>
 
-                        <table class="table" style="background: #f5f5f5;">
+                        <table class="table" style="background: #f5f5f5; margin-top: 30px;">
                             <thead>
                                 <tr style="background: #98cad0;">
                                     <th scope="col">Amount</th>

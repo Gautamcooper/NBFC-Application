@@ -8,10 +8,6 @@
 }
 
     <style>
-        h2 {
-            font-size: 22px;
-            font-family: cursive;
-        }
         p {
             font-size: 22px;
             font-family: cursive;
@@ -23,7 +19,7 @@
             <h2 style="text-align: center;">Loan Parameters</h2>
         </div>
         <br />
-        <div style="float: right;">
+        <div style="float: right; margin: 0 14px;">
             <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Products", "Home")'" />
         </div>
         <br />
@@ -50,9 +46,9 @@
                 </tbody>
             </table>
             <details open style="margin-top: 40px;">
-                <summary class="text-center">Related Services</summary>
+                <summary class="text-center" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 30px;">Related Services</summary>
 
-                <table class="table" style="background-color: #f5f5f5;">
+                <table class="table" style="background-color: #f5f5f5; margin-top: 30px;">
                     <thead>
                         <tr style="background: #98cad0;">
                             <th scope="col">Name</th>
@@ -79,18 +75,20 @@
                 </div>
             </div>
             <br />
-            <h2>FAQ's</h2>
+            <h2 class="text-center">FAQ's</h2>
             <br />
-            @if (ViewData["productfaq"] != null)
-            {
-                foreach (var faq in (IEnumerable<FAQ>)ViewData["productfaq"])
+            <div class="form-card">
+                @if (ViewData["productfaq"] != null)
                 {
-                    <details>
-                        <summary class="faqsummary">@faq.question</summary>
-                        <p class="faqanswer">@faq.answer</p>
-                    </details>
+                    foreach (var faq in (IEnumerable<FAQ>)ViewData["productfaq"])
+                    {
+                        <details>
+                            <summary class="faqsummary">@faq.question</summary>
+                            <p class="faqanswer">@faq.answer</p>
+                        </details>
+                    }
                 }
-            }
+            </div>
+            </div>
         </div>
-    </div>
 
