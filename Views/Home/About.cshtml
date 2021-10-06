@@ -12,10 +12,11 @@
             <div class="form-card">
                 <div style="position: relative;">
                     <div class="d-flex flex-column align-items-center text-center px-3 py-5">
-                        <label class="user_img">
+                        <div class="user_img">
                             <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            <div>Change Photo</div>
                             <input id="file-input" type="file" accept="image/*" ;capture="camera" />
-                        </label>
+                        </div>
                         <span class="font-weight-bold">@data.Fullname</span>
                         <span class="text-black-50">@data.Email</span>
                     </div>
@@ -582,7 +583,7 @@
                 <label for="uploaded">Documents Uploaded</label><br>
                 <input hidden id="uploadedvalue" name="uploadedvalue" value="@data.uploadedvalue" />
                 <div class="button-grp d-flex flex-wrap justify-content-center align-items-center">
-                    <button id="save" type="submit" class="btn btn-primary">Save</button>
+                    <button id="save" type="submit" class="btn btn-primary defaultButton">Save</button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Documents</button>
                     <button id="continue" type="button" class="btn btn-primary" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
                 </div>
@@ -654,7 +655,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn defaultButton" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
@@ -773,7 +774,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn defaultButton" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 

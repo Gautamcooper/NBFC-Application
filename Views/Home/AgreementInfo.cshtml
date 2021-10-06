@@ -12,7 +12,7 @@
         </div>
         <br />
         <div style="float: right; margin: 0 14px;">
-            <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
+            <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
         </div>
         <br />
         <br />
@@ -215,7 +215,7 @@
                     <input hidden id="loantype" class="form-control form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
                     @if (@data.status == "Active" || @data.status == "Partial Repayment")
                     {
-                        <button id="save" type="submit" class="btn btn-primary btn-default">Pay</button>
+                        <button id="save" type="submit" class="btn btn-primary defaultButton">Pay</button>
                     }
 
                 </form>

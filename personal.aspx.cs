@@ -77,6 +77,7 @@ namespace NBFC_App___dev
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page lastpage = (Page)Context.Handler;
             if (!IsPostBack)
             {
                 if (Session["Name"] == null)
@@ -86,6 +87,8 @@ namespace NBFC_App___dev
                 else
                 {
                     TextBox3.Text = "16000";
+                    string pan_num = "";
+                    //string appGate = "";
                     //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
                     //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
                     string dbconn = ConfigurationManager.AppSettings["dbconn"];
@@ -104,7 +107,9 @@ namespace NBFC_App___dev
                         TextBox1.Text = dt.Rows[0]["mobile"].ToString();
                         TextBox2.Text = dt.Rows[0]["email"].ToString();
                         FullName.Text = dt.Rows[0]["fullname"].ToString();
-                        PAN.Text = dt.Rows[0]["pannumber"].ToString();
+                        pan_num = dt.Rows[0]["pannumber"].ToString();
+                        PAN.Text = pan_num;
+                        //appGate = dt.Rows[0]["applicationgateId"].ToString();
                     }
                     else
                     {
@@ -134,6 +139,32 @@ namespace NBFC_App___dev
                     {
                         Reason.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
+
+                    //if (!String.IsNullOrEmpty(pan_num) && !String.IsNullOrEmpty(appGate))
+                    //{
+                    //    string sqlQuery = "Select loantype, loanterm, loanname, loanamount, monthlyIncome, reasonforloan from UserSTEP1Info where step1Id = '" + appGate + "'";
+                    //    SqlDataAdapter sdadtr = new SqlDataAdapter(sqlQuery, sqlCnctn);
+                    //    DataTable data_tbl = new DataTable();
+                    //    sdadtr.Fill(data_tbl);
+                    //    if (data_tbl.Rows.Count > 0)
+                    //    {
+                    //        Loan_type.SelectedItem.Text = data_tbl.Rows[0]["loantype"].ToString();
+
+                    //        if (data_tbl.Rows[0].ItemArray[0].ToString() == "Long Term")
+                    //        {
+                    //            longterm.SelectedValue = data_tbl.Rows[0]["loanterm"].ToString() + " Months";
+                    //        }
+                    //        else
+                    //        {
+                    //            shortterm.SelectedValue = data_tbl.Rows[0]["loanterm"].ToString() + " Days";
+                    //        }
+                    //        Product.SelectedItem.Text = data_tbl.Rows[0]["loanname"].ToString();
+                    //        TextBox3.Text = data_tbl.Rows[0]["loanamount"].ToString();
+                    //        Monthly_income.Text = data_tbl.Rows[0]["monthlyIncome"].ToString();
+                    //        Reason.SelectedItem.Text = data_tbl.Rows[0]["reasonforloan"].ToString();
+
+                    //    }
+                    //}
                 }
             }                       
         }
@@ -233,8 +264,7 @@ namespace NBFC_App___dev
             sqlCnctn2.Open();
             SqlDataAdapter adapter2 = new SqlDataAdapter();
             SqlCommand cmd2;
-            string sqlcmd2 = "Insert Into UserSTEP1Info (step1Id,processed,loantype,loanterm,date,loanname,email,mobile,loanamount) values('" + createdRecordId["Id"].ToString()+"','false','"+ Loan_type.SelectedItem.ToString()+ "','"+ longtermloan + "','"+ date + "','"+ productname + "','"+email+"','"+mobile+"','"+loanamount+"')";
-            cmd2 = new SqlCommand(sqlcmd2, sqlCnctn2);
+            string sqlcmd2 = "Insert Into UserSTEP1Info (step1Id,processed,loantype,loanterm,date,loanname,email,mobile,loanamount,monthlyIncome,reasonforloan) values('" + createdRecordId["Id"].ToString() + "','false','" + Loan_type.SelectedItem.ToString() + "','" + longtermloan + "','" + date + "','" + productname + "','" + email + "','" + mobile + "','" + loanamount + "','" + monthly_income + "','" + Reason.SelectedItem.ToString() + "')"; cmd2 = new SqlCommand(sqlcmd2, sqlCnctn2);
             adapter2.UpdateCommand = new SqlCommand(sqlcmd2, sqlCnctn2);
             adapter2.UpdateCommand.ExecuteNonQuery();
             cmd2.Dispose();

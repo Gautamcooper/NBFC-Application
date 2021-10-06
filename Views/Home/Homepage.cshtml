@@ -15,6 +15,14 @@
             </div>
         </div>
     </div>*@
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').modal('show');
+    });
+    $("#modal_close").click(function () {
+        $('#exampleModal').modal('hide');
+    });
+</script>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -43,7 +51,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div><br />
 
 @if (@ViewBag.Step1Count == null)
 {
@@ -55,8 +63,31 @@
 @if (@ViewBag.Step1Count > 0)
 {
     <div class="pending">
-        <p>You have Pending Steps for @ViewBag.Step1Count.ToString() Loans, <a style="color:red;" href="~/Home/PendingSteps">Click Here! </a></p>
+        <div>
+            <p>You have incomplete application for @ViewBag.Step1Count.ToString() Loan</p>
+            <div><a style="color:red;" href="~/Home/PendingSteps">Click Here! </a></div>
+        </div>  
     </div>
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow: hidden;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="close" id="modal_close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    You have incomplete application for @ViewBag.Step1Count.ToString() Loan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                    <input type="button" class="btn btn-primary defaultButton" onclick="location.href='../Home/PendingSteps'" value="Check" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
 
 <div class="row dashboard-page">
@@ -87,7 +118,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top1_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top1_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top1_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>
@@ -102,7 +133,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top2_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top2_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top2_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>
@@ -117,7 +148,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top3_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top3_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top3_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -134,7 +165,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top4_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top4_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top4_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -149,7 +180,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top5_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top5_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top5_prId"]">Apply</a></div>
                         <!-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
                     </div>
                 </div>
@@ -164,7 +195,7 @@
                         <br />
                         <br />
                         <p class="card-text">@ViewData["top6_prInfo"]</p>
-                        <div class="go-button-div"><a class="btn btn-light button_service_1 go-button" href="/Home/ProductsInfo/@ViewData["top6_prId"]">Apply</a></div>
+                        <div class="go-button-div"><a class="btn btn-light button_service_1 defaultButton" href="/Home/ProductsInfo/@ViewData["top6_prId"]">Apply</a></div>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
         </div>
         <br />
         <div style="float: right; margin: 0 14px;">
-            <input type="button" class="btn btn-primary btn-default" value="Back" onclick="location.href='@Url.Action("Products", "Home")'" />
+            <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Products", "Home")'" />
         </div>
         <br />
         <br />
@@ -68,10 +68,10 @@
             </details>
             <div class="row" style="text-align: center;">
                 <div class="col-md-6">
-                    <input type="button" class="btn btn-primary btn-default" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
+                    <input type="button" class="btn btn-primary defaultButton" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
                 </div>
                 <div class="col-md-6 sec_button">
-                    <input type="button" class="btn btn-primary btn-default" value="Check Eligiblity" onclick="location.href='@Url.Action("LoanEligibilityCheck", "Home",new { Id = ViewData["ProductId"].ToString()})'" />
+                    <input type="button" class="btn btn-primary defaultButton" value="Check Eligiblity" onclick="location.href='@Url.Action("LoanEligibilityCheck", "Home",new { Id = ViewData["ProductId"].ToString()})'" />
                 </div>
             </div>
             <br />

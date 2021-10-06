@@ -31,6 +31,17 @@ $(document).ready(function () {
         });
     });
 
+    if ($("#Loan_type").val() != -1) {
+        if ($("#Loan_type").val() == "short") {
+            $("#shorttermrow").show();
+            $("#longtermrow").hide();
+        }
+        else if ($("#Loan_type").val() == "long") {
+            $("#longtermrow").show();
+            $("#shorttermrow").hide();
+        }
+    }
+
 });
 var i = $("#idvar").val();
 if (i != "" && err == 0) {
@@ -167,18 +178,18 @@ else {
     $("#TextBox3").show();
     $("#header2").hide();
 }
-$("#Product").focus(function () {
+/*$("#Product").focus(function () {
     //$("#Product option[value='-1']").removeAttr('disabled');
     $("#Product option[value='-1']").attr('disabled','disabled');
-});
+});*/
 $("#Industry_type").focus(function () {
     //$("#Product option[value='-1']").removeAttr('disabled');
     $("#Industry_type option[value='-1']").attr('disabled', 'disabled');
 });
-$("#Reason").focus(function () {
-    //$("#Product option[value='-1']").removeAttr('disabled');
-    $("#Reason option[value='-1']").attr('disabled', 'disabled');
-});
+//$("#Reason").focus(function () {
+//    //$("#Product option[value='-1']").removeAttr('disabled');
+//    $("#Reason option[value='-1']").attr('disabled', 'disabled');
+//});
 $("#Loan_type").focus(function () {
     //$("#Product option[value='-1']").removeAttr('disabled');
     $("#Loan_type option[value='-1']").attr('disabled', 'disabled');

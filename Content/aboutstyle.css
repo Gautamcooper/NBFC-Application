@@ -12,6 +12,27 @@
     width: 160px;
 }
 
+.user_img div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: black;
+    color: white;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.user_img:hover div {
+    width: 150px;
+    padding: 8px 15px;
+    visibility: visible;
+    opacity: 0.7;
+}
+
 .user_img input {
     display: none;
 }
@@ -48,15 +69,17 @@ select.form-control:not([size]):not([multiple]) {
     margin: 10px 20px;
 }
 
-.btn-default:focus {
+.defaultButton:active, .defaultButton:focus, .defaultButton:active:focus {
     border: none;
     outline: none;
     box-shadow: none;
 }
 
-.btn-default:focus:active {
-    border: none;
-    outline: none;
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active:focus {
     box-shadow: none;
 }
 
@@ -471,18 +494,6 @@ body {
 .card-text{
     margin-top: 5%;
 }
-.go-button {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 0.2em solid #d3d3d3de;
-    background-color: #f5f5f52e;
-    font-family: 'Roboto',sans-serif;
-    font-weight: 500;
-    transition: all 0.2s;
-}
-.go-button-div {
-    margin: 5%;
-}
 
 .dashboard .btn-img {
     position: absolute;
@@ -627,7 +638,7 @@ body {
 
     .quick-links ul li a
     {
-        color: #0931457a;
+        color: #0c283796;
         text-decoration: none;
         list-style-type: none;
         display: block;
@@ -689,24 +700,26 @@ body {
 .pending {
     text-align: center;
     margin-top: 3%;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .pending a {
-    border-bottom: 1px solid #453886;
     color: #453886;
     padding-bottom: .25em;
     text-decoration: none;
 }
 
 .pending a:hover {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='%23453886' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
     background-position: bottom;
-    background-repeat: repeat-x;
     background-size: 20%;
-    border-bottom: 0;
     padding-bottom: .3em;
     text-decoration: none;
+    font-size: 22px;
+    transition: .3s;
+}
+
+.close:focus {
+    outline: none;
 }
 
 .slidecontainer {

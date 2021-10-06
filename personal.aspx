@@ -45,11 +45,11 @@
                                                     <asp:TextBox ID="TextBox1" placeholder="Mobile No." runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div>
                                                 <div class="row" style="display:none;">
-                                                    <label class="label_inp" for="TextBox2" id="label_TextBox2">Email</label> 
+                                                    <label class="label_inp" for="TextBox2" id="label_TextBox2">Email</label>
                                                     <asp:TextBox ID="TextBox2" placeholder="Email ID" runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div>
                                                 <div class="row" style="display:none;">
-                                                    <label class="label_inp" for="FullName" id="label_FullName">Full Name</label> 
+                                                    <label class="label_inp" for="FullName" id="label_FullName">Full Name</label>
                                                     <asp:TextBox ID="FullName" placeholder="Full Name" runat="server" ReadOnly="true" CssClass="inp"></asp:TextBox>
                                                 </div> 
                                                 <div class="row">

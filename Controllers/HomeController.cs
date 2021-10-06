@@ -1552,6 +1552,7 @@ namespace NBFC_App___dev.Controllers
                         loanname = row2["loanname"].ToString(),
                         date = row2["date"].ToString(),
                         proceed = "Continue",
+                        edit = "Edit",
                         cancel = "Cancel"
                     };
                     pendingstepslist.Add(pendingstep);
@@ -1617,6 +1618,28 @@ namespace NBFC_App___dev.Controllers
                 return null;
             }
         }
+
+        //public ActionResult EditPendingStep(string Id)
+        //{
+        //    string dbconn = ConfigurationManager.AppSettings["dbconn"];
+        //    string connectionString = dbconn;
+        //    SqlConnection sqlCnctn = new SqlConnection(connectionString);
+        //    sqlCnctn.Open();
+        //    string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+        //    SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+        //    DataTable dt = new DataTable();
+        //    sda.Fill(dt);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        return RedirectToAction("../personal.aspx");
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/index.aspx");
+        //        return null;
+        //    }
+        //}
+
         public ActionResult GetLoanEligibilityResult(FormCollection data) 
         {
             int loanAmount = Convert.ToInt32(data["loanAmount"]);

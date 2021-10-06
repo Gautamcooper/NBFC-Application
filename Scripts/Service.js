@@ -5,6 +5,9 @@ $("#Product").hide();
 $("#Application").hide();
 $("#Agreement").hide();
 $("#Service_Type").hide();
+jQuery(document).ready(function () {
+    jAlert('You have your pending steps');
+});
 $(".button_service").click(function () {
     var id = this.getAttribute("id");
     if (id == "button_general") {
