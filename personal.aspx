@@ -213,14 +213,14 @@
                                             <asp:Button ID="Button1" class="next action-button" runat="server" data-toggle="modal" data-target="#myModal" Text="Submit" OnClick="Button1_Click" />
                                         </fieldset>                           
                                     </form>
-                                    <div class="modal fade" id="myModal" role="dialog">
-                                        <div class="modal-dialog">               
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Loan Registration...</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                <div>
+                                <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: hidden;">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                               <div>
                                                     <div style="position: relative;">
                                                         <h4 style="text-align: center;">Hey! Please wait while we are Processing your request</h4>
                                                     </div>
@@ -233,11 +233,10 @@
                                                         </div>
                                                     </div>
                                                </div>
-                                               </div>                                
                                             </div>
-
-                                      </div>
-                                </div>
+                                        </div>
+                                    </div>
+                            </div>
                                 </div>
                             </div>
                         </div>

@@ -124,6 +124,10 @@ $("#coapplicantrelationship_select").change(function () {
     var coapplicantrelation = $("#coapplicantrelationship_select").val();
     $("#coapplicantrelationship").attr("value", coapplicantrelation);
 });
+$("#nomineerelationship_select").change(function () {
+    var nomineerelation = $("#nomineerelationship_select").val();
+    $("#nomineerelationship").attr("value", nomineerelation);
+});
 var step1 = $("#step1").val();
 var uploadedvalue = $("#uploadedvalue").val();
 if (step1 == "true" && uploadedvalue == "true") {

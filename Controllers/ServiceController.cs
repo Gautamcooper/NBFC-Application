@@ -377,7 +377,7 @@ namespace NBFC_App___dev.Controllers
 
             ViewData["QueryId"] = Id;
             if (ParsedResponse["value"].Count() == 0)
-            {
+            {       
                 return RedirectToAction("Queries");
             }
             ViewData["RelatedQuery"] = ParsedResponse["value"][0]["UsrCase"]["UsrSubject"].ToString();

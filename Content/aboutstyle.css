@@ -479,7 +479,7 @@ body {
     transition: 0.3s;
     border-radius: 10px;
     text-align: center;
-    height: auto;
+    height: 546px;
     max-width: 400px;
 }
 .card-img {
