@@ -30,6 +30,28 @@
     display: none;
 }
 
+
+.loader-dots
+{
+    letter-spacing: 1px;
+}
+
+.loader-dots::after
+{
+    content: "...";
+    width: 0;
+    position: absolute;
+    overflow: hidden;
+    animation: loader-dots-animation 1.5s infinite;
+}
+
+@keyframes loader-dots-animation
+{
+    0% { width: 0em; }
+    50% { width: 1.2em; }
+    100% { width: 0em; }
+}
+
 .form-input {
     padding: 0px 8px 4px 8px;
     margin-bottom: 25px;

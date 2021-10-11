@@ -177,3 +177,6 @@ $(".inp_dropdown").change(function () {
   });
 
 })();
+$('#queryInfoTable').change(function () {
+    alert('Hi Sarthak!');
+});

@@ -273,7 +273,6 @@ namespace NBFC_App___dev.Controllers
                         IRestResponse response = client.Execute(request);
                     }
                 }
-
             }
             return RedirectToAction("Queries");
         }
