@@ -26,13 +26,6 @@
     transition: visibility 0s, opacity 0.5s linear;
 }
 
-.user_img:hover div {
-    width: 150px;
-    padding: 8px 15px;
-    visibility: visible;
-    opacity: 0.7;
-}
-
 .user_img input {
     display: none;
 }

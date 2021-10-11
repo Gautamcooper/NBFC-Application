@@ -6,13 +6,13 @@
 <head runat="server">
      <title>Details</title>
      <meta charset='utf-8'>
-     <meta name='viewport' content='width=device-width, initial-scale=1'>     
+     <meta name='viewport' content='width=device-width, initial-scale=1'>
      <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
      <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
      <link href="style.css" rel="stylesheet" />
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin='anonymous'>
      <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-     <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>  
+     <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script> 
      <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"rel="stylesheet"/>
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
 </head>
@@ -213,30 +213,30 @@
                                             <asp:Button ID="Button1" class="next action-button" runat="server" data-toggle="modal" data-target="#myModal" Text="Submit" OnClick="Button1_Click" />
                                         </fieldset>                           
                                     </form>
-                                <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: hidden;">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myModalLabel">Notification</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                               <div>
-                                                    <div style="position: relative;">
-                                                        <h4 style="text-align: center;">Hey! Please wait while we are Processing your request</h4>
-                                                    </div>
-                                                    <br />
-                                                    <div class="container-fluid">
-                                                        <div class="d-flex justify-content-center">
-                                                            <div class="spinner-border" role="status">
-                                                                <span class="sr-only">Loading...</span>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: hidden;">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">Notification</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                   <div>
+                                                        <div style="position: relative;">
+                                                            <h4 style="text-align: center;">Hey! Please wait while we are Processing your request</h4>
+                                                        </div>
+                                                        <br />
+                                                        <div class="container-fluid">
+                                                            <div class="d-flex justify-content-center">
+                                                                <div class="spinner-border" role="status">
+                                                                    <span class="sr-only">Loading...</span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                               </div>
+                                                   </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                            </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

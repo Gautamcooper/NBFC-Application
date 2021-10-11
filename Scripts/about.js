@@ -111,10 +111,12 @@ $("#pan").change(function () {
 });
 var uploadedval = $("#uploadedvalue").val();
 if (uploadedval == "true") {
-    $('#uploaded').prop('checked',true);
+    $('#uploaded').prop('checked', true);
+    $('#upload_success').show();
 }
 else {
     $('#uploaded').prop('checked', false);
+    $('#upload_success').hide();
 }
 $("#bankname_select").change(function () {
     var bankname = $("#bankname_select").val();
@@ -135,7 +137,7 @@ if (step1 == "true" && uploadedvalue == "true") {
 };
 
 if (uploadedvalue == "false") {
-    $("#panandaadhardetails").hide();
+    $("#addresspanandaadhardetails").hide();
 }
 
 $("#save").click(function () {
@@ -201,15 +203,15 @@ $(".remove").click(function () {
     $("#" + id_).val(null);
 });
 
-var currentaddrsameasaadhar = $("#currentaddrsameasaadhar").val();
-if (currentaddrsameasaadhar == "true") {
-    $("#checkaddr").prop("checked", true);
-    $("#address").hide();
-}
-else {
-    $("#checkaddr").prop("checked", false);
-    $("#address").show();
-}
+//var currentaddrsameasaadhar = $("#currentaddrsameasaadhar").val();
+//if (currentaddrsameasaadhar == "true") {
+//    $("#checkaddr").prop("checked", true);
+//    $("#address").hide();
+//}
+//else {
+//    $("#checkaddr").prop("checked", false);
+//    $("#address").show();
+//}
 
 $("#checkaddr").change(function () {
     var checked = $("#checkaddr").prop("checked");
