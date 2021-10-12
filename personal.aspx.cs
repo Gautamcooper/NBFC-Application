@@ -88,7 +88,7 @@ namespace NBFC_App___dev
                 {
                     TextBox3.Text = "16000";
                     string pan_num = "";
-                    //string appGate = "";
+                    string appGate = "";
                     //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
                     //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
                     string dbconn = ConfigurationManager.AppSettings["dbconn"];
@@ -109,7 +109,7 @@ namespace NBFC_App___dev
                         FullName.Text = dt.Rows[0]["fullname"].ToString();
                         pan_num = dt.Rows[0]["pannumber"].ToString();
                         PAN.Text = pan_num;
-                        //appGate = dt.Rows[0]["applicationgateId"].ToString();
+                        appGate = dt.Rows[0]["applicationgateId"].ToString();
                     }
                     else
                     {
@@ -120,16 +120,33 @@ namespace NBFC_App___dev
                         Product.SelectedValue = Request.Cookies["ProductId"].Value;
                     }                   
                     sqlCnctn.Close();
-
-                    string apiurl = ConfigurationManager.AppSettings["apiurl"];
-                    string url = apiurl + "0/odata/UsrProducts?$select=Id,Name";
                     
 
+                    string apiurl = ConfigurationManager.AppSettings["apiurl"];
+
+
+                    string url = apiurl + "0/odata/UsrLongTermProductDuration?$select=Name, Id&$orderby=Name asc";
                     JObject ParsedResponse = GET_Object(url);
-                    Product.Items.Add(new ListItem("Select Loan Type", "-1" ));
+                    longterm.Items.Add(new ListItem("Number of Months", "-1"));
                     foreach (var v in ParsedResponse["value"])
                     {
-                        Product.Items.Add(new ListItem(v["Name"].ToString(),v["Id"].ToString()));
+                        longterm.Items.Add(new ListItem(v["Name"].ToString().TrimStart('0') + " Months", v["Name"].ToString().TrimStart('0')));
+                    }
+
+                    url = apiurl + "0/odata/UsrShortTermProductDuration?$select=Name, Id&$orderby=Name asc";
+                    ParsedResponse = GET_Object(url);
+                    shortterm.Items.Add(new ListItem("Number of Days", "-1"));
+                    foreach (var v in ParsedResponse["value"])
+                    {
+                        shortterm.Items.Add(new ListItem(v["Name"].ToString().TrimStart('0') + " Days", v["Name"].ToString().TrimStart('0')));
+                    }
+
+                    url = apiurl + "0/odata/UsrProducts?$select=Id,Name";
+                    ParsedResponse = GET_Object(url);
+                    Product.Items.Add(new ListItem("Select Loan Type", "-1"));
+                    foreach (var v in ParsedResponse["value"])
+                    {
+                        Product.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
                     
                     url = apiurl + "0/odata/UsrReasonForLoan?$select=Id,Name";
@@ -140,31 +157,31 @@ namespace NBFC_App___dev
                         Reason.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
 
-                    //if (!String.IsNullOrEmpty(pan_num) && !String.IsNullOrEmpty(appGate))
-                    //{
-                    //    string sqlQuery = "Select loantype, loanterm, loanname, loanamount, monthlyIncome, reasonforloan from UserSTEP1Info where step1Id = '" + appGate + "'";
-                    //    SqlDataAdapter sdadtr = new SqlDataAdapter(sqlQuery, sqlCnctn);
-                    //    DataTable data_tbl = new DataTable();
-                    //    sdadtr.Fill(data_tbl);
-                    //    if (data_tbl.Rows.Count > 0)
-                    //    {
-                    //        Loan_type.SelectedItem.Text = data_tbl.Rows[0]["loantype"].ToString();
+                    if (!String.IsNullOrEmpty(pan_num) && !String.IsNullOrEmpty(appGate))
+                    {
+                        string sqlQuery = "Select loantype, loanterm, loanname, loanamount, monthlyIncome, reasonforloan from UserSTEP1Info where step1Id = '" + appGate + "'";
+                        SqlDataAdapter sdadtr = new SqlDataAdapter(sqlQuery, sqlCnctn);
+                        DataTable data_tbl = new DataTable();
+                        sdadtr.Fill(data_tbl);
+                        if (data_tbl.Rows.Count > 0)
+                        {
+                            Loan_type.SelectedItem.Text = data_tbl.Rows[0]["loantype"].ToString();
 
-                    //        if (data_tbl.Rows[0].ItemArray[0].ToString() == "Long Term")
-                    //        {
-                    //            longterm.SelectedValue = data_tbl.Rows[0]["loanterm"].ToString() + " Months";
-                    //        }
-                    //        else
-                    //        {
-                    //            shortterm.SelectedValue = data_tbl.Rows[0]["loanterm"].ToString() + " Days";
-                    //        }
-                    //        Product.SelectedItem.Text = data_tbl.Rows[0]["loanname"].ToString();
-                    //        TextBox3.Text = data_tbl.Rows[0]["loanamount"].ToString();
-                    //        Monthly_income.Text = data_tbl.Rows[0]["monthlyIncome"].ToString();
-                    //        Reason.SelectedItem.Text = data_tbl.Rows[0]["reasonforloan"].ToString();
+                            if (data_tbl.Rows[0].ItemArray[0].ToString() == "Long Term")
+                            {
+                                longterm.SelectedItem.Text = data_tbl.Rows[0]["loanterm"].ToString() + " Months";
+                            }
+                            else
+                            {
+                                shortterm.SelectedItem.Text = data_tbl.Rows[0]["loanterm"].ToString() + " Days";
+                            }
+                            Product.SelectedItem.Text = data_tbl.Rows[0]["loanname"].ToString();
+                            TextBox3.Text = data_tbl.Rows[0]["loanamount"].ToString();
+                            Monthly_income.Text = data_tbl.Rows[0]["monthlyIncome"].ToString();
+                            Reason.SelectedItem.Text = data_tbl.Rows[0]["reasonforloan"].ToString();
 
-                    //    }
-                    //}
+                        }
+                    }
                 }
             }                       
         }

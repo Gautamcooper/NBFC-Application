@@ -21,7 +21,7 @@ namespace NBFC_App___dev.Models
 
         public string proceed { get; set; }
 
-        //public string edit { get; set; }
+        public string edit { get; set; }
 
         public string cancel { get; set; }
 

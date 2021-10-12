@@ -63,7 +63,7 @@
                                                 <div class="row" id="shorttermrow">
                                                     <label class="label_inp" for="shortterm" id="label_shortterm">Number of Days</label>
                                                     <asp:DropDownList ID="shortterm" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Text="Number of Days" Value="-1"></asp:ListItem>
+                                                        <%--<asp:ListItem Text="Number of Days" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="5 Days" Value="5"></asp:ListItem>
                                                         <asp:ListItem Text="6 Days" Value="6"></asp:ListItem>
                                                         <asp:ListItem Text="7 Days" Value="7"></asp:ListItem>
@@ -84,13 +84,13 @@
                                                         <asp:ListItem Text="22 Days" Value="22"></asp:ListItem>
                                                         <asp:ListItem Text="23 Days" Value="23"></asp:ListItem>
                                                         <asp:ListItem Text="24 Days" Value="24"></asp:ListItem>
-                                                        <asp:ListItem Text="25 Days" Value="25"></asp:ListItem>                                        
+                                                        <asp:ListItem Text="25 Days" Value="25"></asp:ListItem>     --%>                                   
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="row" id="longtermrow">
                                                     <label class="label_inp" for="longterm" id="label_longterm">Number of Months</label>
                                                     <asp:DropDownList ID="longterm" class="dropdowncls inp-dropdown" runat="server">
-                                                        <asp:ListItem Text="Number of Months" Value="-1"></asp:ListItem>
+                                                        <%--<asp:ListItem Text="Number of Months" Value="-1"></asp:ListItem>
                                                         <asp:ListItem Text="2 Months" Value="2"></asp:ListItem>
                                                         <asp:ListItem Text="3 Months" Value="3"></asp:ListItem>
                                                         <asp:ListItem Text="4 Months" Value="4"></asp:ListItem>
@@ -113,7 +113,7 @@
                                                         <asp:ListItem Text="21 Months" Value="21"></asp:ListItem>
                                                         <asp:ListItem Text="22 Months" Value="22"></asp:ListItem>
                                                         <asp:ListItem Text="23 Months" Value="23"></asp:ListItem>
-                                                        <asp:ListItem Text="24 Months" Value="24"></asp:ListItem>                                       
+                                                        <asp:ListItem Text="24 Months" Value="24"></asp:ListItem>                --%>                       
                                                     </asp:DropDownList>
                                                 </div>
                                                 <div class="row">
