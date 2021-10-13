@@ -32,7 +32,14 @@
                 @foreach (var qry in (IEnumerable<Queries>)ViewData["QueryData"])
                 {
                     <tr class="table_row">
-                        <td>@Html.ActionLink(@qry.ticketnumber, "QueryInfo", new { Id = @qry.id })</td>
+                        @if (@qry.status == "New")
+                        {
+                            <td>@qry.ticketnumber</td>
+                        }
+                        else
+                        {
+                            <td>@Html.ActionLink(@qry.ticketnumber, "QueryInfo", new { Id = @qry.id })</td>
+                        }                      
                         <td>@qry.category</td>
                         <td>@qry.status</td>
                         <td>@qry.createdon</td>

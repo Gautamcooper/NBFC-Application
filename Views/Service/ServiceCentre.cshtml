@@ -5,6 +5,10 @@
 <div class="container">
     <div id="header-service-centre" class="header-service-centre">
         <img class="service-img" src="~/contactus-banner.jpg" />
+        @if (ViewData["QryReg"].ToString() == "true")
+        {
+            <p>Your Query has been successfully submitted</p>
+        }
         <br />
         <div class="help-text">Need Help ?</div>
         <br />

@@ -78,6 +78,14 @@ namespace NBFC_App___dev.Controllers
         // GET: Service
         public ActionResult ServiceCentre()
         {
+            if (TempData["QueryRegistered"] != null)
+            {
+                ViewData["QryReg"] = TempData["QueryRegistered"].ToString();
+            }
+            else
+            {
+                ViewData["QryReg"] = "false";
+            }
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
@@ -231,6 +239,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                     else if (relatedto == "83b0dd07-82e6-4026-8e5d-b43cb4025670")  // Product
                     {
@@ -239,6 +248,7 @@ namespace NBFC_App___dev.Controllers
                         string prdct_id = data["prdct_id"].ToString();
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                     else if (relatedto == "05d77726-b0ef-4433-8679-3826aefab78b")  // Application
                     {
@@ -247,6 +257,7 @@ namespace NBFC_App___dev.Controllers
                         string ser_type = data["type_id"].ToString();
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrApplicationId\" : \"" + apln_id + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                     else if (relatedto == "975f084b-fbd0-4e7a-b2bb-f36841c849bd") // Agreement
                     {
@@ -255,6 +266,7 @@ namespace NBFC_App___dev.Controllers
                         string ser_type = data["type_id"].ToString();
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : false,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrPANNumber\" : \"" + pannumber + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrAgreementId\" : \"" + agreement_id + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                 }
                 else if (string.IsNullOrEmpty(pannumber))
@@ -263,6 +275,7 @@ namespace NBFC_App___dev.Controllers
                     {
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                     else if (relatedto == "83b0dd07-82e6-4026-8e5d-b43cb4025670")  // Product
                     {
@@ -271,6 +284,7 @@ namespace NBFC_App___dev.Controllers
                         string prdct_id = data["prdct_id"].ToString();
                         request.AddParameter("application/json", "{\r\n\r\n    \"UsrDescription\" :  \"" + query + "\",\r\n    \"UsrContactNotExists\" : true,\r\n    \"UsrAttachementFilePath\" : \"" + filepath + "\",\r\n    \"UsrSubject\" : \"" + subject + "\",\r\n    \"UsrEmail\" : \"" + email + "\",\r\n    \"UsrCustomerName\" : \"" + fullname + "\",\r\n    \"UsrServiceId\" : \"" + service + "\",\r\n    \"UsrQueryOriginId\" : \"" + source + "\",\r\n    \"UsrServiceCategoryId\" : \"" + ser_type + "\",\r\n    \"UsrCategoryId\" : \"" + relatedto + "\",\r\n    \"UsrProductId\" : \"" + prdct_id + "\"\r\n\r\n}", ParameterType.RequestBody);
                         IRestResponse response = client.Execute(request);
+                        TempData["QueryRegistered"] = "true";
                     }
                 }
             }
