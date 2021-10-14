@@ -47,7 +47,39 @@
     {
         padding-bottom: 20px;
     }
+
+    #exampleModalLongTitle
+    {
+        font-size: 20px;
+        color: #4a89dc;
+    }
 </style>
+
+<script>
+    $(document).ready(function () {
+        $('#reuploadAllDocsModal').modal('show');
+        $('#reuploadPanModal').modal('show');
+        $('#reuploadAadhaarFrontModal').modal('show');
+        $('#reuploadAadhaarBackModal').modal('show');
+    });
+
+    $("#reuploadAllDocsModalClose").click(function () {
+        $('#reuploadAllDocsModal').modal('hide');
+    });
+
+    $("#reuploadPanModalClose").click(function () {
+        $('#reuploadPanModal').modal('hide');
+    });
+
+    $("#reuploadAadhaarFrontModalClose").click(function () {
+        $('#reuploadAadhaarFrontModal').modal('hide');
+    });
+
+    $("#reuploadAadhaarBackModalClose").click(function () {
+        $('#reuploadAadhaarBackModal').modal('hide');
+    });
+</script>
+
 <div class="container">
     <div class="container-fluid">
         <form method="post" action="~/Home/On_Save">
@@ -652,8 +684,97 @@
                     <button id="continue" type="button" class="btn btn-primary defaultButton" data-toggle="modal" data-target="#step2-modal">Continue to Apply</button>
                 </div>
             </div>
+
+            @if (@data.uploadedvalue == "true" && @data.panfathername == "" && @data.aadharnumber == "" && @data.aadharaddress == "")
+            {
+                <div class="modal" id="reuploadAllDocsModal" tabindex="-1" role="dialog" aria-labelledby="reuploadAllDocsModalLabel" aria-hidden="true" style="overflow: hidden;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title text-center" id="exampleModalLongTitle">Notification</p>
+                                <button type="button" class="close" id="reuploadAllDocsModalClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="font-size: 15px;">
+                                Please Re-Upload all the documents
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            else if (@data.uploadedvalue == "true" && @data.panfathername == "")
+            {
+                <div class="modal" id="reuploadPanModal" tabindex="-1" role="dialog" aria-labelledby="reuploadPanModalLabel" aria-hidden="true" style="overflow: hidden;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title text-center" id="exampleModalLongTitle">Notification</p>
+                                <button type="button" class="close" id="reuploadPanModalClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="font-size: 15px;">
+                                Please Re-Upload PAN Card
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            else if (@data.uploadedvalue == "true" && @data.aadharnumber == "")
+            {
+                <div class="modal" id="reuploadAadhaarFrontModal" tabindex="-1" role="dialog" aria-labelledby="reuploadAadhaarFrontModalLabel" aria-hidden="true" style="overflow: hidden;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title text-center" id="exampleModalLongTitle">Notification</p>
+                                <button type="button" class="close" id="reuploadAadhaarFrontModalClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="font-size: 15px;">
+                                Please Re-Upload Aadhaar Card Front
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            else if (@data.uploadedvalue == "true" && @data.aadharaddress == "")
+            {
+                <div class="modal" id="reuploadAadhaarBackModal" tabindex="-1" role="dialog" aria-labelledby="reuploadAadhaarBackModalLabel" aria-hidden="true" style="overflow: hidden;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title text-center" id="exampleModalLongTitle">Notification</p>
+                                <button type="button" class="close" id="reuploadAadhaarBackModalClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="font-size: 15px;">
+                                Please Re-Upload Aadhaar Card Back
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
         </form>
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal" id="myModal" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
@@ -711,7 +832,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input class="btn btn-primary" type="submit" data-toggle="modal" data-target="#waituploadModal" value="Upload" />
+                                        <input id="uploadDocs" class="btn btn-primary defaultButton" type="submit" data-dismiss="modal" data-toggle="modal" data-target="#waituploadModal" value="Upload" />
                                     </div>
                                 </div>
                             }
@@ -725,29 +846,16 @@
 
             </div>
         </div>
-        <div class="modal fade" id="waituploadModal" role="dialog">
-            <div class="modal-dialog">
+        <div class="modal" id="waituploadModal" tabindex="-1" role="dialog" aria-labelledby="waituploadModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Uploading...</h4>
+                        <p class="modal-title text-center" id="exampleModalLongTitle" style="font-size: 23px; color: #4a89dc;">Notification</p>
                     </div>
-                    <div class="modal-body">
-                        <div>
-                            <div style="position: relative;">
-                                <h4 style="text-align: center;">Hey! Please wait, we are processing your documents</h4>
-                            </div>
-                            <br />
-                            <div class="container-fluid">
-                                <div class="d-flex justify-content-center">
-                                    <div class="spinner-border" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-body loader-dots" style="font-size: 18px;">
+                        Please wait, we are processing your documents
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="modal fade" id="step2-modal" role="dialog">
@@ -765,103 +873,103 @@
                             </div>
                             <br />
                             <div class="container-fluid">
-                                    @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                    {
-                                <div class="form-card">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="numberofdependants" id="label_numberofdependants">Number of Dependents</label>
-                                            <input id="numberofdependants" class="form-control form-input inp" name="numberofdependents" placeholder="Number Of Dependents" required />
+                                @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="numberofdependants" id="label_numberofdependants">Number of Dependents</label>
+                                                <input id="numberofdependants" class="form-control form-input inp" name="numberofdependents" placeholder="Number Of Dependents" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="coapplicantname" id="label_coapplicantname">Co Applicant Name</label>
+                                                <input id="coapplicantname" class="form-control form-input inp" name="coapplicantname" placeholder="Co Applicant Name" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="coapplicantrelationship_select" id="label_coapplicantrelationship_select">Co Applicant Relationship</label>
+                                                <select id="coapplicantrelationship_select" class="form-control form-input inp_dropdown">
+                                                    <option value="-1">Co Applicant Relationship</option>
+                                                    <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
+                                                    <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
+                                                    <option value="3b266768-345c-48c8-8feb-c267f4d90b80">Spouse</option>
+                                                    <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
+                                                    <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
+                                                    <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
+                                                    <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
+                                                </select>
+                                                <input hidden id="coapplicantrelationship" class="form-control form-input" placeholder="" name="coapplicantrelationship" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="coapplicantmobilephone" id="label_coapplicantmobilephone">Co Applicant Mobile Phone</label>
+                                                <input id="coapplicantmobilephone" class="form-control form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="nomineename" id="label_nomineename">Nominee Name</label>
+                                                <input id="nomineename" class="form-control form-input inp" name="nomineename" placeholder="Nominee Name" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="nomineerelationship_select" id="label_nomineerelationship_select">Nominee Relationship</label>
+                                                <select id="nomineerelationship_select" class="form-control form-input inp_dropdown">
+                                                    <option value="-1">Nominee Relationship</option>
+                                                    <option value="def22d3d-8a43-4515-b66a-95b405a05a54">Father</option>
+                                                    <option value="fe4d4c7e-4ce6-48a9-a32b-43c182ed5122">Family Friend</option>
+                                                    <option value="800eb514-3d29-4e84-9bd1-24082e1bd371">Spouse</option>
+                                                    <option value="e451cdaf-2022-4528-bef5-a21991bfef24">Office colleague</option>
+                                                    <option value="a4633cfa-40d2-4903-97e1-a18d78bcf914">Sister</option>
+                                                    <option value="bc52a129-46ad-4899-86f4-5b5c73b862b7">Brother</option>
+                                                    <option value="91375b28-8568-4936-ad92-45e140c1d208">Mother</option>
+                                                </select>
+                                                <input hidden id="nomineerelationship" class="form-control form-input" placeholder="" name="nomineerelationship" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="nomineemobilephone" id="label_nomineemobilephone">Nominee Mobile Phone</label>
+                                                <input id="nomineemobilephone" class="form-control form-input inp" name="nomineemobilephone" type="number" placeholder="Nominee Mobile Phone" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="bankifsccode" id="label_bankifsccode">Bank IFSC Code</label>
+                                                <input id="bankifsccode" class="form-control form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="bankaccountnumber" id="label_bankaccountnumber">Bank Account Number</label>
+                                                <input id="bankaccountnumber" class="form-control form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="label_inp" for="bankname_select" id="label_bankname_select">Bank Name</label>
+                                                <select id="bankname_select" class="form-control form-input inp_dropdown">
+                                                    <option value="-1">Bank Name</option>
+                                                    <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
+                                                    <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
+                                                    <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
+                                                    <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
+                                                </select>
+                                                <input hidden id="bankname" class="form-control form-input" placeholder="" name="bankname" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input id="apply" class="btn btn-primary" type="submit" data-dismiss="modal" data-toggle="modal" data-target="#waitModal" value="Apply" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="coapplicantname" id="label_coapplicantname">Co Applicant Name</label>
-                                            <input id="coapplicantname" class="form-control form-input inp" name="coapplicantname" placeholder="Co Applicant Name" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="coapplicantrelationship_select" id="label_coapplicantrelationship_select">Co Applicant Relationship</label>
-                                            <select id="coapplicantrelationship_select" class="form-control form-input inp_dropdown">
-                                                <option value="-1">Co Applicant Relationship</option>
-                                                <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
-                                                <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
-                                                <option value="3b266768-345c-48c8-8feb-c267f4d90b80">Spouse</option>
-                                                <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
-                                                <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
-                                                <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
-                                                <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
-                                            </select>
-                                            <input hidden id="coapplicantrelationship" class="form-control form-input" placeholder="" name="coapplicantrelationship" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="coapplicantmobilephone" id="label_coapplicantmobilephone">Co Applicant Mobile Phone</label>
-                                            <input id="coapplicantmobilephone" class="form-control form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="nomineename" id="label_nomineename">Nominee Name</label>
-                                            <input id="nomineename" class="form-control form-input inp" name="nomineename" placeholder="Nominee Name" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="nomineerelationship_select" id="label_nomineerelationship_select">Nominee Relationship</label>
-                                            <select id="nomineerelationship_select" class="form-control form-input inp_dropdown">
-                                                <option value="-1">Nominee Relationship</option>
-                                                <option value="def22d3d-8a43-4515-b66a-95b405a05a54">Father</option>
-                                                <option value="fe4d4c7e-4ce6-48a9-a32b-43c182ed5122">Family Friend</option>
-                                                <option value="800eb514-3d29-4e84-9bd1-24082e1bd371">Spouse</option>
-                                                <option value="e451cdaf-2022-4528-bef5-a21991bfef24">Office colleague</option>
-                                                <option value="a4633cfa-40d2-4903-97e1-a18d78bcf914">Sister</option>
-                                                <option value="bc52a129-46ad-4899-86f4-5b5c73b862b7">Brother</option>
-                                                <option value="91375b28-8568-4936-ad92-45e140c1d208">Mother</option>
-                                            </select>
-                                            <input hidden id="nomineerelationship" class="form-control form-input" placeholder="" name="nomineerelationship" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="nomineemobilephone" id="label_nomineemobilephone">Nominee Mobile Phone</label>
-                                            <input id="nomineemobilephone" class="form-control form-input inp" name="nomineemobilephone" type="number" placeholder="Nominee Mobile Phone" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="bankifsccode" id="label_bankifsccode">Bank IFSC Code</label>
-                                            <input id="bankifsccode" class="form-control form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="bankaccountnumber" id="label_bankaccountnumber">Bank Account Number</label>
-                                            <input id="bankaccountnumber" class="form-control form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" required />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label class="label_inp" for="bankname_select" id="label_bankname_select">Bank Name</label>
-                                            <select id="bankname_select" class="form-control form-input inp_dropdown">
-                                                <option value="-1">Bank Name</option>
-                                                <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
-                                                <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
-                                                <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
-                                                <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
-                                            </select>
-                                            <input hidden id="bankname" class="form-control form-input" placeholder="" name="bankname" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input id="apply" class="btn btn-primary" type="submit" data-toggle="modal" data-target="#waitModal" value="Apply" />
-                                        </div>
-                                    </div>
-                                </div>
-                                    }
+                                }
                             </div>
                         </div>
                     </div>
@@ -872,29 +980,16 @@
 
             </div>
         </div>
-        <div class="modal fade" id="waitModal" role="dialog">
-            <div class="modal-dialog">
+        <div class="modal" id="waitModal" tabindex="-1" role="dialog" aria-labelledby="waitModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Registering...</h4>
+                        <p class="modal-title text-center" id="exampleModalLongTitle" style="font-size: 23px; color: #4a89dc;">Notification</p>
                     </div>
-                    <div class="modal-body">
-                        <div>
-                            <div style="position: relative;">
-                                <h4 style="text-align: center;">Hey! Please wait, we are registering your final step</h4>
-                            </div>
-                            <br />
-                            <div class="container-fluid">
-                                <div class="d-flex justify-content-center">
-                                    <div class="spinner-border" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="modal-body loader-dots" style="font-size: 18px;">
+                        Please wait, we are registering your final step
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

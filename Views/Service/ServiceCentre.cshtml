@@ -2,12 +2,42 @@
 @{
     ViewBag.Title = "ServiceCentre";
 }
+<script>
+    $(document).ready(function () {
+        setTimeout(function () { $('#exampleModal').modal('show'); }, 1800)
+    });
+
+    $("#modal_close").click(function () {
+        $('#exampleModal').modal('hide');
+    });
+
+    $(function () {
+        setTimeout(function () { $('#exampleModal').modal('hide'); }, 10000)
+    })
+</script>
 <div class="container">
     <div id="header-service-centre" class="header-service-centre">
         <img class="service-img" src="~/contactus-banner.jpg" />
         @if (ViewData["QryReg"].ToString() == "true")
         {
-            <p>Your Query has been successfully submitted</p>
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <p class="modal-title text-center" id="exampleModalLabel" style="font-size: 20px; color: #4a89dc;">Notification</p>
+                            <button type="button" class="close" id="modal_close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="font-size: 15px;">
+                            Your query has been submitted
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
         <br />
         <div class="help-text">Need Help ?</div>
@@ -189,10 +219,10 @@
         </form>
     </div>
     <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title text-center" id="exampleModalLongTitle">Notification</h3>
+                    <p class="modal-title text-center" id="exampleModalLongTitle" style="font-size: 23px; color: #4a89dc;">Notification</p>
                 </div>
                 <div class="modal-body loader-dots" style="font-size: 18px;">
                     Registering your query

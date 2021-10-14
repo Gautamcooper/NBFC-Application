@@ -1556,7 +1556,7 @@ namespace NBFC_App___dev.Controllers
                         date = row2["date"].ToString(),
                         proceed = "Continue",
                         cancel = "Cancel",
-                        edit = "edit"
+                        edit = "Edit"
                     };
                     pendingstepslist.Add(pendingstep);
                 }

@@ -44,6 +44,34 @@ html {
     color: black !important;
 }
 
+.loader-dots
+{
+    letter-spacing: 1px;
+}
+
+.loader-dots::after
+{
+    content: "...";
+    width: 0;
+    position: absolute;
+    overflow: hidden;
+    animation: loader-dots-animation 1.5s infinite;
+}
+
+@keyframes loader-dots-animation {
+    0% {
+        width: 0em;
+    }
+
+    50% {
+        width: 1.2em;
+    }
+
+    100% {
+        width: 0em;
+    }
+}
+
 #msform {
     text-align: center;
     position: relative;

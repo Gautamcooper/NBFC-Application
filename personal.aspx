@@ -208,35 +208,15 @@
                                                         <asp:ListItem Text="2 Wheeler Purchase" Value = "8e7942d6-4909-48fe-8eb8-6e9ccfa7f48a"></asp:ListItem>--%>
                                                     </asp:DropDownList>
                                                 </div>
+                                                <div class="row">
+                                                    <asp:TextBox hidden ID="EditStep" runat="server" CssClass="inp"></asp:TextBox>
+                                                    <asp:TextBox hidden ID="AppGateId" runat="server" CssClass="inp"></asp:TextBox>
+                                                </div>
                                                                         
                                             </div>                                                                                                                        
-                                            <asp:Button ID="Button1" class="next action-button" runat="server" data-toggle="modal" data-target="#myModal" Text="Submit" OnClick="Button1_Click" />
+                                            <asp:Button ID="Button1" class="next action-button" runat="server" data-toggle="modal" data-target="#exampleModalLong" Text="Submit" OnClick="Button1_Click" />
                                         </fieldset>                           
                                     </form>
-                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow: hidden;">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel">Notification</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                   <div>
-                                                        <div style="position: relative;">
-                                                            <h4 style="text-align: center;">Hey! Please wait while we are Processing your request</h4>
-                                                        </div>
-                                                        <br />
-                                                        <div class="container-fluid">
-                                                            <div class="d-flex justify-content-center">
-                                                                <div class="spinner-border" role="status">
-                                                                    <span class="sr-only">Loading...</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                   </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -248,8 +228,20 @@
                       <img src="assets/images/login.png" alt="" width="85%" height="70%">
                  </div>
             </div>
-       </div>
-</div>
+        </div>  
+        <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="exampleModalLongTitle"  style="font-size: 23px; color: #4a89dc; margin: 0 auto;">Notification</p>
+                    </div>
+                    <div class="modal-body loader-dots" style="font-size: 18px;">
+                        Please wait while we are processing your request
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <footer id="footer">
             <div class="footer-top">
                 <div class="container">

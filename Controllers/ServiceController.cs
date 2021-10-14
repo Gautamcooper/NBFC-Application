@@ -288,7 +288,7 @@ namespace NBFC_App___dev.Controllers
                     }
                 }
             }
-            return RedirectToAction("Queries");
+            return RedirectToAction("ServiceCentre");
         }
 
         public ActionResult Queries()

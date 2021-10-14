@@ -21,6 +21,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">       </th>
                         <th scope="col">      </th>
+                        <th scope="col">      </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +36,6 @@
                         <td>@Html.ActionLink(@ps.proceed, "UpdateAppGateIdOfPendingStep", new { Id = @ps.step1id })</td>
                         <td>@Html.ActionLink(@ps.cancel, "CancelPendingStep", new { Id = @ps.step1id })</td>
                         <td>@Html.ActionLink(@ps.edit, "EditPendingStep", new { Id = @ps.step1id })</td>
-
                     </tr>
                     }
                 </tbody>

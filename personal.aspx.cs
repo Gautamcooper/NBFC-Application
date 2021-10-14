@@ -89,15 +89,14 @@ namespace NBFC_App___dev
                     TextBox3.Text = "16000";
                     string pan_num = "";
                     string appGate = "";
-                    //string connectionString = @"Data Source=DESKTOP-HLC3FB7\SQLEXPRESS;Initial Catalog=UserData;Integrated Security=false;User id=Admin;password=Admin@123";
-                    //string connectionString = @"Data Source=DESKTOP-CV6742D;Initial Catalog=UserData;Integrated Security=false;User id=Akshit;password=Akshit";
+                    Dictionary<string, string> product_dictionary = new Dictionary<string, string>();
+                    Dictionary<string, string> reason_dictionary = new Dictionary<string, string>();
+
                     string dbconn = ConfigurationManager.AppSettings["dbconn"];
                     string connectionString = dbconn;
                     SqlConnection sqlCnctn = new SqlConnection(connectionString);
                     sqlCnctn.Open();
 
-                    //Session["Name"] = Guid.NewGuid().ToString();
-                    //SqlDataAdapter adapter = new SqlDataAdapter();
                     string strQry = "Select * from Userinfo where session='" + Session["Name"] + "'";
                     SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
                     DataTable dt = new DataTable();
@@ -141,19 +140,21 @@ namespace NBFC_App___dev
                         shortterm.Items.Add(new ListItem(v["Name"].ToString().TrimStart('0') + " Days", v["Name"].ToString().TrimStart('0')));
                     }
 
-                    url = apiurl + "0/odata/UsrProducts?$select=Id,Name";
+                    url = apiurl + "0/odata/UsrProducts?$select=Id,Name&$orderby=CreatedOn desc";
                     ParsedResponse = GET_Object(url);
                     Product.Items.Add(new ListItem("Select Loan Type", "-1"));
                     foreach (var v in ParsedResponse["value"])
                     {
+                        product_dictionary.Add(v["Name"].ToString(), v["Id"].ToString());
                         Product.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
                     
-                    url = apiurl + "0/odata/UsrReasonForLoan?$select=Id,Name";
+                    url = apiurl + "0/odata/UsrReasonForLoan?$select=Id,Name&$orderby=CreatedOn desc";
                     ParsedResponse = GET_Object(url);
                     Reason.Items.Add(new ListItem("Select Reason", "-1"));
                     foreach (var v in ParsedResponse["value"])
                     {
+                        reason_dictionary.Add(v["Name"].ToString(), v["Id"].ToString());
                         Reason.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
 
@@ -165,21 +166,49 @@ namespace NBFC_App___dev
                         sdadtr.Fill(data_tbl);
                         if (data_tbl.Rows.Count > 0)
                         {
+                            var typeOfLoan = data_tbl.Rows[0]["loantype"].ToString();
+                            Loan_type.SelectedItem.Value = (typeOfLoan == "Long Term") ? "long" : "short";
+                            Loan_type.SelectedIndex = (typeOfLoan != "Long Term") ? 1 : 2;
                             Loan_type.SelectedItem.Text = data_tbl.Rows[0]["loantype"].ToString();
 
-                            if (data_tbl.Rows[0].ItemArray[0].ToString() == "Long Term")
+                            if (typeOfLoan == "Long Term")
                             {
+                                longterm.SelectedItem.Value = data_tbl.Rows[0]["loanterm"].ToString();
+                                longterm.SelectedIndex = int.Parse(data_tbl.Rows[0]["loanterm"].ToString()) - 1;
                                 longterm.SelectedItem.Text = data_tbl.Rows[0]["loanterm"].ToString() + " Months";
                             }
                             else
                             {
+                                shortterm.SelectedItem.Value = data_tbl.Rows[0]["loanterm"].ToString();
+                                shortterm.SelectedIndex = int.Parse(data_tbl.Rows[0]["loanterm"].ToString()) - 4;
                                 shortterm.SelectedItem.Text = data_tbl.Rows[0]["loanterm"].ToString() + " Days";
                             }
-                            Product.SelectedItem.Text = data_tbl.Rows[0]["loanname"].ToString();
+                            var product_name = data_tbl.Rows[0]["loanname"].ToString();
+                            foreach (KeyValuePair<string, string> item in product_dictionary)
+                            {
+                                if (item.Key == product_name)
+                                {
+                                    Product.SelectedIndex = product_dictionary.Keys.ToList().IndexOf(item.Key) + 1;
+                                    Product.SelectedItem.Value = item.Value;
+                                    break;
+                                }
+                            }
+                            Product.SelectedItem.Text = product_name;
                             TextBox3.Text = data_tbl.Rows[0]["loanamount"].ToString();
                             Monthly_income.Text = data_tbl.Rows[0]["monthlyIncome"].ToString();
+                            var reason_name = data_tbl.Rows[0]["reasonforloan"].ToString();
+                            foreach (KeyValuePair<string, string> item in reason_dictionary)
+                            {
+                                if (item.Key == reason_name)
+                                {
+                                    Reason.SelectedIndex = reason_dictionary.Keys.ToList().IndexOf(item.Key) + 1;
+                                    Reason.SelectedItem.Value = item.Value;
+                                    break;
+                                }
+                            }
                             Reason.SelectedItem.Text = data_tbl.Rows[0]["reasonforloan"].ToString();
-
+                            EditStep.Text = "Edit Step";
+                            AppGateId.Text = appGate;
                         }
                     }
                 }
@@ -190,14 +219,18 @@ namespace NBFC_App___dev
         {
             string shorttermloan = "0";
             string longtermloan = "0";
+            string loan_type = "";
             if (Loan_type.SelectedValue == "short")
             {
                 shorttermloan = shortterm.SelectedValue.ToString();
+                loan_type = "Short Term Loan";
             }
             else if (Loan_type.SelectedValue == "long")
             {
                 longtermloan = longterm.SelectedValue.ToString();
+                loan_type = "Long Term Loan";
             }
+            string loanterm = (shorttermloan != "0") ? shorttermloan : longtermloan;
             string mobile = TextBox1.Text.ToString();
             string email = TextBox2.Text.ToString();
             string fullname = FullName.Text.ToString();
@@ -206,13 +239,13 @@ namespace NBFC_App___dev
             string monthly_income = Monthly_income.Text.ToString();
             string product_val = Product.SelectedValue.ToString();
             string productname = Product.SelectedItem.ToString();
-            //string industry_type = Industry_type.SelectedValue.ToString();
+            string editstep = EditStep.Text.ToString();
+            string applicationgateid = AppGateId.Text.ToString();
             string reason = Reason.SelectedValue.ToString();
             string bpmcsrf = "";
             string bpmloader = "";
             string aspxauth = "";
             string username = "";
-
 
             string apiurl = ConfigurationManager.AppSettings["apiurl"];
             string temp = apiurl + "ServiceModel/AuthService.svc/Login";
@@ -223,7 +256,6 @@ namespace NBFC_App___dev
             request.AddHeader("Content-Type", "application/json");
             request.AddParameter("application/json", "{\r\n    \"UserName\": \"Supervisor\",\r\n    \"UserPassword\": \"Supervisor\"\r\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
-            //Console.WriteLine(response.Content);
             foreach (var c in response.Cookies)
             {
                 if (c.Name.ToString() == "BPMCSRF")
@@ -243,48 +275,69 @@ namespace NBFC_App___dev
                     username = c.Value.ToString();
                 }
             }
-            
-            string url = apiurl + "0/odata/UsrApplicationGate";
-            var client2 = new RestClient(url);
-            client2.Timeout = -1;
-            client2.MaxRedirects = 10;
-            var request2 = new RestRequest(Method.POST);
-            request2.AddHeader("BPMCSRF", bpmcsrf);
-            request2.AddHeader("Content-Type", "application/json");
-            request2.AddCookie(".ASPXAUTH", aspxauth);
-            request2.AddCookie("BPMCSRF", bpmcsrf);
-            request2.AddCookie("BPMLOADER", bpmloader);
-            request2.AddCookie("UserName", username);
-            //request2.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-            request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrIsLostCustomer\": true,\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrFullName\":\"" + fullname + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\"  \r\n}", ParameterType.RequestBody);
-            IRestResponse response2 = client2.Execute(request2);
-            var createdRecordId = JObject.Parse(response2.Content);
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string date = createdRecordId["CreatedOn"].ToString();
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            SqlCommand cmd;
-            string sql = "Update UserInfo set step1 = 'true', pannumber = '"+ pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
-            cmd = new SqlCommand(sql, sqlCnctn);
-            adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
-            adapter.UpdateCommand.ExecuteNonQuery();
-            cmd.Dispose();
-            string loanterm = "";
-            if (shorttermloan != "0")
+            string connectionString = ConfigurationManager.AppSettings["dbconn"];
+
+            if (String.IsNullOrEmpty(editstep) && String.IsNullOrEmpty(applicationgateid))
             {
-                loanterm = shorttermloan;
+                string url = apiurl + "0/odata/UsrApplicationGate";
+                var client2 = new RestClient(url);
+                client2.Timeout = -1;
+                client2.MaxRedirects = 10;
+                var request2 = new RestRequest(Method.POST);
+                request2.AddHeader("BPMCSRF", bpmcsrf);
+                request2.AddHeader("Content-Type", "application/json");
+                request2.AddCookie(".ASPXAUTH", aspxauth);
+                request2.AddCookie("BPMCSRF", bpmcsrf);
+                request2.AddCookie("BPMLOADER", bpmloader);
+                request2.AddCookie("UserName", username);
+                request2.AddParameter("application/json", "{\r\n    \"UsrAction\": \"1\", \r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrPANNumber\":\"" + pan_number + "\",\r\n    \"UsrIsLostCustomer\": true,\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n     \"UsrFullName\":\"" + fullname + "\",\r\n     \"UsrProductId\":\"" + product_val + "\",\r\n     \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n     \"UsrEmail\":\"" + email + "\",\r\n    \"UsrMobileNumber\": \"" + mobile + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\"  \r\n}", ParameterType.RequestBody);
+                IRestResponse response2 = client2.Execute(request2);
+                var createdRecordId = JObject.Parse(response2.Content);
+                applicationgateid = createdRecordId["Id"].ToString();
+                string date = createdRecordId["CreatedOn"].ToString();
+                SqlConnection sqlCnctn = new SqlConnection(connectionString);
+                sqlCnctn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand cmd;
+                string sql = "Update UserInfo set step1 = 'true', pannumber = '" + pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
+                cmd = new SqlCommand(sql, sqlCnctn);
+                adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                adapter.UpdateCommand.ExecuteNonQuery();
+                cmd.Dispose();
+                SqlConnection sqlCnctn2 = new SqlConnection(connectionString);
+                sqlCnctn2.Open();
+                SqlDataAdapter adapter2 = new SqlDataAdapter();
+                SqlCommand cmd2;
+                string sqlcmd2 = "Insert Into UserSTEP1Info (step1Id, processed, loantype, loanterm, date, loanname, email, mobile, loanamount, monthlyIncome, reasonforloan) values('" + createdRecordId["Id"].ToString() + "','false','" + loan_type + "','" + loanterm + "','" + date + "','" + productname + "','" + email + "','" + mobile + "','" + loanamount + "','" + monthly_income + "','" + Reason.SelectedItem.ToString() + "')";
+                cmd2 = new SqlCommand(sqlcmd2, sqlCnctn2);
+                adapter2.UpdateCommand = new SqlCommand(sqlcmd2, sqlCnctn2);
+                adapter2.UpdateCommand.ExecuteNonQuery();
+                cmd2.Dispose();
             }
-            else { loanterm = longtermloan; }
-            SqlConnection sqlCnctn2 = new SqlConnection(connectionString);
-            sqlCnctn2.Open();
-            SqlDataAdapter adapter2 = new SqlDataAdapter();
-            SqlCommand cmd2;
-            string sqlcmd2 = "Insert Into UserSTEP1Info (step1Id,processed,loantype,loanterm,date,loanname,email,mobile,loanamount,monthlyIncome,reasonforloan) values('" + createdRecordId["Id"].ToString() + "','false','" + Loan_type.SelectedItem.ToString() + "','" + longtermloan + "','" + date + "','" + productname + "','" + email + "','" + mobile + "','" + loanamount + "','" + monthly_income + "','" + Reason.SelectedItem.ToString() + "')"; cmd2 = new SqlCommand(sqlcmd2, sqlCnctn2);
-            adapter2.UpdateCommand = new SqlCommand(sqlcmd2, sqlCnctn2);
-            adapter2.UpdateCommand.ExecuteNonQuery();
-            cmd2.Dispose();
+            else
+            {
+                string url = apiurl + "0/odata/UsrApplicationGate(" + applicationgateid + ")";
+                var client3 = new RestClient(url);
+                client3.Timeout = -1;
+                var request3 = new RestRequest(Method.PATCH);
+                request3.AddHeader("BPMCSRF", bpmcsrf);
+                request3.AddHeader("Content-Type", "application/json");
+                request3.AddCookie(".ASPXAUTH", aspxauth);
+                request3.AddCookie("BPMCSRF", bpmcsrf);
+                request3.AddCookie("BPMLOADER", bpmloader);
+                request3.AddCookie("UserName", username);
+                request3.AddParameter("application/json", "{\r\n    \"UsrLoanAmountRequested\": \"" + loanamount + "\",\r\n    \"UsrShortTermLoanRequested\":\"" + shorttermloan + "\",\r\n    \"UsrLongTermLoanRequested\":\"" + longtermloan + "\",\r\n    \"UsrProductId\":\"" + product_val + "\",\r\n    \"UsrMonthlyIncome\":\"" + monthly_income + "\",\r\n    \"UsrReasonForLoanId\":\"" + reason + "\"  \r\n}", ParameterType.RequestBody);
+                var qryResponse = client3.Execute(request3);
+                SqlConnection sqlCnctn3 = new SqlConnection(connectionString);
+                sqlCnctn3.Open();
+                SqlDataAdapter adapter3 = new SqlDataAdapter();
+                SqlCommand cmd3;
+                string sqlcmd3 = "Update UserSTEP1Info set step1Id = '" + applicationgateid + "', processed = 'false', loantype = '" + loan_type + "', loanterm = '" + loanterm + "', date = '" + DateTime.Now + "', loanname = '" + productname + "', loanamount = '" + loanamount + "', monthlyIncome = '" + monthly_income + "', reasonforloan = '" + Reason.SelectedItem.ToString() + "' where step1Id = '" + applicationgateid + "'";
+                cmd3 = new SqlCommand(sqlcmd3, sqlCnctn3);
+                adapter3.UpdateCommand = new SqlCommand(sqlcmd3, sqlCnctn3);
+                adapter3.UpdateCommand.ExecuteNonQuery();
+                cmd3.Dispose();
+            }
 
             string way = Request.Cookies["User"].Value;
             if (way == "login")
@@ -292,21 +345,20 @@ namespace NBFC_App___dev
                 System.Threading.Thread.Sleep(5000);
                 
                
-                string temp_FetchProcessingResult = String.Format("0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", createdRecordId["Id"]);
+                string temp_FetchProcessingResult = String.Format("0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", applicationgateid);
                 string FetchProcessingResult = apiurl + temp_FetchProcessingResult;
-                var client3 = new RestClient(FetchProcessingResult);
-                client3.Timeout = -1;
-                var request3 = new RestRequest(Method.GET);
-                request3.AddHeader("Content-Type", "application/json");
-                request3.AddHeader("BPMCSRF", bpmcsrf);
-                request3.AddCookie(".ASPXAUTH", aspxauth);
-                request3.AddCookie("BPMCSRF", bpmcsrf);
-                request3.AddCookie("BPMLOADER", bpmloader);
-                request3.AddCookie("UserName", username);
-                //request3.AddHeader("Cookie", ".ASPXAUTH=" + aspxauth + "; BPMCSRF=" + bpmcsrf + "; BPMLOADER=" + bpmloader + "; UserName=" + username + "");
-                IRestResponse response3 = client3.Execute(request3);
+                var client4 = new RestClient(FetchProcessingResult);
+                client4.Timeout = -1;
+                var request4 = new RestRequest(Method.GET);
+                request4.AddHeader("Content-Type", "application/json");
+                request4.AddHeader("BPMCSRF", bpmcsrf);
+                request4.AddCookie(".ASPXAUTH", aspxauth);
+                request4.AddCookie("BPMCSRF", bpmcsrf);
+                request4.AddCookie("BPMLOADER", bpmloader);
+                request4.AddCookie("UserName", username);
+                IRestResponse query_response = client4.Execute(request4);
 
-                var ParsedResponse = JObject.Parse(response3.Content);
+                var ParsedResponse = JObject.Parse(query_response.Content);
 
                 if (ParsedResponse["UsrProcessingResultId"].ToString() == "00000000-0000-0000-0000-000000000000")
                 {
@@ -317,14 +369,10 @@ namespace NBFC_App___dev
                 {
                     if (ParsedResponse["UsrActiveApplicationId"].ToString() != "00000000-0000-0000-0000-000000000000")
                     {
-                        //Console.WriteLine(ParsedResponse["UsrProcessingResult"]["Name"]);
-                        //Console.WriteLine(ParsedResponse["UsrActiveApplication"]["UsrName"]);
                         Response.Redirect("~/Home/Applications");
                     }
                     else
                     {
-                        //Console.WriteLine(ParsedResponse["UsrProcessingResult"]["Name"]);
-                        //Console.WriteLine(ParsedResponse["UsrActiveAgreement"]["UsrName"]);
                         Response.Redirect("~/Home/Agreements");
                     }
                 }

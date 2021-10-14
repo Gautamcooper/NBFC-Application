@@ -4,17 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<div>
-        <div class="dashboard">
-            <img class="dashboard-img" alt="homepage" src="~/HomepageBanner.jpg" />
-            <div class="btn-img">
-                <div class="text-center tag-text mx-auto d-block">Instant Loans at your Fingertips</div><br/>
-                <p class="tag-text">No Repeat Applications. One time approval needed.</p>
-                <p class="tag-text">We provide instant loans. Click on Apply now, fill up the details and check for your eligibility.</p>
-                <div class="text-center main_btn_div mx-auto d-block"><a class="btn btn-primary btn-md" href="~/personal.aspx">Apply for Loan</a></div>
-            </div>
-        </div>
-    </div>*@
 <script>
     $(document).ready(function () {
         $('#exampleModal').modal('show');
@@ -75,13 +64,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <p class="modal-title" id="exampleModalLabel" style="font-size: 20px; color: #4a89dc;">Notification</p>
                     <button type="button" class="close" id="modal_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    You have incomplete application for @ViewBag.Step1Count.ToString() Loan.
+                <div class="modal-body" style="font-size: 15px;">
+                    You have incomplete application for @ViewBag.Step1Count.ToString() Loan
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>

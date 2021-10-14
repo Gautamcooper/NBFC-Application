@@ -339,8 +339,8 @@ E:\NBFC-Application\bin\System.Web.WebPages.Razor.xml
 E:\NBFC-Application\bin\Newtonsoft.Json.xml
 E:\NBFC-Application\bin\Antlr3.Runtime.pdb
 E:\NBFC-Application\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
 E:\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CoreCompileInputs.cache
 E:\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
 E:\NBFC-Application\obj\Debug\NBFC App - dev.dll
 E:\NBFC-Application\obj\Debug\NBFC App - dev.pdb
+E:\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache

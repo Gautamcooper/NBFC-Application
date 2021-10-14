@@ -132,6 +132,24 @@ namespace NBFC_App___dev
         protected global::System.Web.UI.WebControls.DropDownList Reason;
 
         /// <summary>
+        /// EditStep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EditStep;
+
+        /// <summary>
+        /// AppGateId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AppGateId;
+
+        /// <summary>
         /// Button1 control.
         /// </summary>
         /// <remarks>
