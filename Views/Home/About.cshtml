@@ -53,6 +53,32 @@
         font-size: 20px;
         color: #4a89dc;
     }
+
+    #bankDetailsAlert
+    {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        transition: 10s;
+        transition-timing-function: ease-in-out;
+    }
+
+    .closebtn
+    {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover
+    {
+        color: black;
+    }
 </style>
 
 <script>
@@ -61,6 +87,8 @@
         $('#reuploadPanModal').modal('show');
         $('#reuploadAadhaarFrontModal').modal('show');
         $('#reuploadAadhaarBackModal').modal('show');
+        $('#bankDetailsAlert').hide();
+        $("#validationPan").hide();
     });
 
     $("#reuploadAllDocsModalClose").click(function () {
@@ -87,7 +115,7 @@
             <div class="form-card">
                 <div style="position: relative;">
                     <div class="d-flex flex-column align-items-center text-center px-3 py-5">
-                        <div class="user_img">
+                        <div class="user_img" id="click">
                             <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                             <input id="file-input" type="file" accept="image/*" ;capture="camera" />
                         </div>
@@ -172,7 +200,10 @@
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="pan" id="label_pan">PAN Number</label>
-                        <input id="pan" class="form-control form-input inp" placeholder="Pan Number" name="pannumber" value="@data.pannumber" />
+                        <input id="pan" class="form-control form-input inp" placeholder="Pan Number" name="pannumber" aria-describedby="validationPan" value="@data.pannumber" required />
+                        <div id="validationPan" class="invalid-feedback" style="font-size: 14px;">
+                            Please provide a valid PAN Number
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -774,7 +805,7 @@
             }
 
         </form>
-        <div class="modal" id="myModal" role="dialog">
+        <div class="modal" id="myModal" role="dialog" style="overflow: hidden;">
             <div class="modal-dialog">
 
                 <div class="modal-content">
@@ -832,7 +863,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input id="uploadDocs" class="btn btn-primary defaultButton" type="submit" data-dismiss="modal" data-toggle="modal" data-target="#waituploadModal" value="Upload" />
+                                        <input id="uploadDocs" class="btn btn-primary defaultButton" type="submit" data-toggle="modal" data-target="#waituploadModal" value="Upload" />
                                     </div>
                                 </div>
                             }
@@ -840,13 +871,13 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn defaultButton" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="modal" id="waituploadModal" tabindex="-1" role="dialog" aria-labelledby="waituploadModalTitle" aria-hidden="true">
+        <div class="modal" id="waituploadModal" tabindex="-1" role="dialog" aria-labelledby="waituploadModalTitle" aria-hidden="true" style="overflow: hidden;">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -858,7 +889,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="step2-modal" role="dialog">
+        <div class="modal" id="step2-modal" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
@@ -871,116 +902,129 @@
                             <div style="position: relative;">
                                 <h4 style="text-align: center;">Please fill in the details for final step</h4>
                             </div>
-                            <br />
                             <div class="container-fluid">
                                 @using (Html.BeginForm("Apply", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
-                                    <div class="form-card">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="numberofdependants" id="label_numberofdependants">Number of Dependents</label>
-                                                <input id="numberofdependants" class="form-control form-input inp" name="numberofdependents" placeholder="Number Of Dependents" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="coapplicantname" id="label_coapplicantname">Co Applicant Name</label>
-                                                <input id="coapplicantname" class="form-control form-input inp" name="coapplicantname" placeholder="Co Applicant Name" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="coapplicantrelationship_select" id="label_coapplicantrelationship_select">Co Applicant Relationship</label>
-                                                <select id="coapplicantrelationship_select" class="form-control form-input inp_dropdown">
-                                                    <option value="-1">Co Applicant Relationship</option>
-                                                    <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
-                                                    <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
-                                                    <option value="3b266768-345c-48c8-8feb-c267f4d90b80">Spouse</option>
-                                                    <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
-                                                    <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
-                                                    <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
-                                                    <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
-                                                </select>
-                                                <input hidden id="coapplicantrelationship" class="form-control form-input" placeholder="" name="coapplicantrelationship" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="coapplicantmobilephone" id="label_coapplicantmobilephone">Co Applicant Mobile Phone</label>
-                                                <input id="coapplicantmobilephone" class="form-control form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="nomineename" id="label_nomineename">Nominee Name</label>
-                                                <input id="nomineename" class="form-control form-input inp" name="nomineename" placeholder="Nominee Name" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="nomineerelationship_select" id="label_nomineerelationship_select">Nominee Relationship</label>
-                                                <select id="nomineerelationship_select" class="form-control form-input inp_dropdown">
-                                                    <option value="-1">Nominee Relationship</option>
-                                                    <option value="def22d3d-8a43-4515-b66a-95b405a05a54">Father</option>
-                                                    <option value="fe4d4c7e-4ce6-48a9-a32b-43c182ed5122">Family Friend</option>
-                                                    <option value="800eb514-3d29-4e84-9bd1-24082e1bd371">Spouse</option>
-                                                    <option value="e451cdaf-2022-4528-bef5-a21991bfef24">Office colleague</option>
-                                                    <option value="a4633cfa-40d2-4903-97e1-a18d78bcf914">Sister</option>
-                                                    <option value="bc52a129-46ad-4899-86f4-5b5c73b862b7">Brother</option>
-                                                    <option value="91375b28-8568-4936-ad92-45e140c1d208">Mother</option>
-                                                </select>
-                                                <input hidden id="nomineerelationship" class="form-control form-input" placeholder="" name="nomineerelationship" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="nomineemobilephone" id="label_nomineemobilephone">Nominee Mobile Phone</label>
-                                                <input id="nomineemobilephone" class="form-control form-input inp" name="nomineemobilephone" type="number" placeholder="Nominee Mobile Phone" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="bankifsccode" id="label_bankifsccode">Bank IFSC Code</label>
-                                                <input id="bankifsccode" class="form-control form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="bankaccountnumber" id="label_bankaccountnumber">Bank Account Number</label>
-                                                <input id="bankaccountnumber" class="form-control form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label class="label_inp" for="bankname_select" id="label_bankname_select">Bank Name</label>
-                                                <select id="bankname_select" class="form-control form-input inp_dropdown">
-                                                    <option value="-1">Bank Name</option>
-                                                    <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
-                                                    <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
-                                                    <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
-                                                    <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
-                                                </select>
-                                                <input hidden id="bankname" class="form-control form-input" placeholder="" name="bankname" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input id="apply" class="btn btn-primary" type="submit" data-dismiss="modal" data-toggle="modal" data-target="#waitModal" value="Apply" />
-                                            </div>
+                                <div class="form-card">
+                                    <h3 class="text-center">Family Dependency Detail</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="numberofdependants" id="label_numberofdependants">Number of Dependents</label>
+                                            <input id="numberofdependants" class="form-control form-input inp" name="numberofdependents" placeholder="Number Of Dependents" />
                                         </div>
                                     </div>
+                                    <br />
+                                    <br />
+                                    <h3 class="text-center">Co-Applicant Details</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="coapplicantname" id="label_coapplicantname">Co Applicant Name</label>
+                                            <input id="coapplicantname" class="form-control form-input inp" name="coapplicantname" placeholder="Co Applicant Name" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="coapplicantrelationship_select" id="label_coapplicantrelationship_select">Co Applicant Relationship</label>
+                                            <select id="coapplicantrelationship_select" class="form-control form-input inp_dropdown">
+                                                <option value="-1">Co Applicant Relationship</option>
+                                                <option value="be612a8a-c729-4d47-a45c-0909a6a31644">Father</option>
+                                                <option value="4270d552-0a81-4bab-bfad-b04067fbebc4">Family Friend</option>
+                                                <option value="3b266768-345c-48c8-8feb-c267f4d90b80">Spouse</option>
+                                                <option value="5e9adba7-dafa-47ad-820f-c2963d09cf63">Office colleague</option>
+                                                <option value="fdb7fa17-e75d-4af1-b76f-c897b0d92658">Sister</option>
+                                                <option value="7a9cb487-2739-4468-a93b-d04d44ec355a">Brother</option>
+                                                <option value="a4eb3b12-fb45-463c-83fd-f1b28f80925f">Mother</option>
+                                            </select>
+                                            <input hidden id="coapplicantrelationship" class="form-control form-input" placeholder="" name="coapplicantrelationship" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="coapplicantmobilephone" id="label_coapplicantmobilephone">Co Applicant Mobile Phone</label>
+                                            <input id="coapplicantmobilephone" class="form-control form-input inp" name="coapplicantmobilephone" type="number" placeholder="Co Applicant Mobile Phone" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <h3 class="text-center">Nominee Details</h3>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="nomineename" id="label_nomineename">Nominee Name</label>
+                                            <input id="nomineename" class="form-control form-input inp" name="nomineename" placeholder="Nominee Name" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="nomineerelationship_select" id="label_nomineerelationship_select">Nominee Relationship</label>
+                                            <select id="nomineerelationship_select" class="form-control form-input inp_dropdown">
+                                                <option value="-1">Nominee Relationship</option>
+                                                <option value="def22d3d-8a43-4515-b66a-95b405a05a54">Father</option>
+                                                <option value="fe4d4c7e-4ce6-48a9-a32b-43c182ed5122">Family Friend</option>
+                                                <option value="800eb514-3d29-4e84-9bd1-24082e1bd371">Spouse</option>
+                                                <option value="e451cdaf-2022-4528-bef5-a21991bfef24">Office colleague</option>
+                                                <option value="a4633cfa-40d2-4903-97e1-a18d78bcf914">Sister</option>
+                                                <option value="bc52a129-46ad-4899-86f4-5b5c73b862b7">Brother</option>
+                                                <option value="91375b28-8568-4936-ad92-45e140c1d208">Mother</option>
+                                            </select>
+                                            <input hidden id="nomineerelationship" class="form-control form-input" placeholder="" name="nomineerelationship" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="nomineemobilephone" id="label_nomineemobilephone">Nominee Mobile Phone</label>
+                                            <input id="nomineemobilephone" class="form-control form-input inp" name="nomineemobilephone" type="number" placeholder="Nominee Mobile Phone" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <h3 class="text-center">Bank Details</h3>
+                                    <div class="alert" id="bankDetailsAlert">
+                                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                        <strong>ALERT!</strong> Please fill in all the Bank Information.
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="bankifsccode" id="label_bankifsccode">Bank IFSC Code</label>
+                                            <input id="bankifsccode" class="form-control form-input inp" name="bankifsccode" placeholder="Bank IFSC Code" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="bankaccountnumber" id="label_bankaccountnumber">Bank Account Number</label>
+                                            <input id="bankaccountnumber" class="form-control form-input inp" name="bankaccountnumber" type="number" placeholder="Bank Account Number" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="label_inp" for="bankname_select" id="label_bankname_select">Bank Name</label>
+                                            <select id="bankname_select" class="form-control form-input inp_dropdown">
+                                                <option value="-1">Bank Name</option>
+                                                <option value="cda0a722-f5fd-4cdf-95f5-b360d96ec7a2">Axis Bank Ltd.</option>
+                                                <option value="5f6ab138-780e-4535-89eb-6db8d76778a6">Bank of Baroda</option>
+                                                <option value="5981a578-ad0e-4061-8f6f-e3fc5d4948da">Canara Bank</option>
+                                                <option value="8d95777c-d314-4bca-a4e6-94f1311a3e0d">Central Bank of India</option>
+                                            </select>
+                                            <input hidden id="bankname" class="form-control form-input" placeholder="" name="bankname" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input id="apply" class="btn btn-primary defaultButton" type="submit" data-toggle="modal" data-target="#waitModal" value="Apply" />
+                                        </div>
+                                    </div>
+                                </div>
                                 }
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn defaultButton" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary defaultButton" data-dismiss="modal">Close</button>
                     </div>
                 </div>
 
             </div>
         </div>
-        <div class="modal" id="waitModal" tabindex="-1" role="dialog" aria-labelledby="waitModalTitle" aria-hidden="true">
+        <div class="modal" id="waitModal" tabindex="-1" role="dialog" aria-labelledby="waitModalTitle" aria-hidden="true" style="overflow: hidden;">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

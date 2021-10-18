@@ -683,7 +683,6 @@ namespace NBFC_App___dev.Controllers
             SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
             DataTable dt = new DataTable();
             sda.Fill(dt);
-           // string currentaddrsameasaadhar = p.checkaddr;
             string firstname = p.firstname;
             string middlename = p.middlename;
             string lastname = p.lastname;
@@ -692,15 +691,14 @@ namespace NBFC_App___dev.Controllers
             string pannumber = p.pannumber;
             string maritalstatus = p.maritalstatus;
             string employmenttype = p.employmenttype;
-            //string spousename = p.spousename;
             string fathername = p.fathername;
-            string currentstreet = p.currentstreet;
-            string currentlandmark = p.currentlandmark;
-            string currentbuilding = p.currentbuilding;
-            string currentcity = p.currentcity;
-            string currentstate = p.currentstate;
-            string currentpin = p.currentpin;
-            string currentcountry = p.currentcountry;
+            string currentstreet = !String.IsNullOrEmpty(p.currentstreet) ? "ward no, 02, shivraji post tyodhari, Umari Alias Shivraji, gram umari" : "";
+            string currentlandmark = !String.IsNullOrEmpty(p.currentlandmark) ? "shivraji post tyodhari, Umari Alias Shivraji, gram umari" : "";
+            string currentbuilding = !String.IsNullOrEmpty(p.currentbuilding) ? "ward no, 02, shivraji post tyodhari" : "";
+            string currentcity = !String.IsNullOrEmpty(p.currentcity) ? "833858c0-8232-4a61-a291-3ef814afc041" : "";
+            string currentstate = !String.IsNullOrEmpty(p.currentstate) ? "5cd2b6fb-1aac-4406-8cd2-b8f6346db5fd" : "";
+            string currentpin = !String.IsNullOrEmpty(p.currentpin) ? "485775" : "";
+            string currentcountry = !String.IsNullOrEmpty(p.currentcountry) ? "d427eb5d-ecd2-4049-9275-420038a42bea" : "";
             string panfirstname = p.panfirstname;
             string panmiddlename = p.panmiddlename;
             string panlastname = p.panlastname;
@@ -837,7 +835,7 @@ namespace NBFC_App___dev.Controllers
             var client = new RestClient("https://accurascan.com/api/v4/ocr");
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Api-Key", "1632286426PbIU5dyZbieiyyYLLLARq6Ec905QDqHZxeyHtEaw");
+            request.AddHeader("Api-Key", "1634211844z3Rg8F4pE31pVuNEpYpZ01O0iqwjkxylx9i9m9DR");
             //request.AddHeader("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddCookie("Cookie", "laravel_session=eyJpdiI6IjJqUkllcHA3ZFhuaEdZR1krN3pUVFE9PSIsInZhbHVlIjoiSVNMbDRNTDZYT1JRWW5UbjlSWnlTUTF0bXhQOStMOTVjM1lESTNDZEFTdlpocCtGSFVxeXNTall5ckFpOUY2WSIsIm1hYyI6ImExODEzNzZmNmY0MmQxNGVhMDdjMzcwNmYzZDQ1ZmM0NTZmYjRiOTVlM2Q2YmQzMDZlYmY0Y2Q3YjJmZmMzMzcifQ%3D%3D");
             request.AddFile("scan_image", path);
@@ -859,19 +857,19 @@ namespace NBFC_App___dev.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase files,HttpPostedFileBase files2 , HttpPostedFileBase files3)
         {
-            var  pannumber = " ";
-            var  panfirstname = " ";
-            var  panmiddlename = " ";
-            var  panlastname = " ";
-            var  panfathername = " ";
-            var  panbirthdate = " ";
+            var  pannumber = "";
+            var  panfirstname = "";
+            var  panmiddlename = "";
+            var  panlastname = "";
+            var  panfathername = "";
+            var  panbirthdate = "";
              
-            var  aadharfirstname = " ";
-            var  aadharlastname = " ";
-            var  aadharmiddlename = " ";
-            var aadharaddress = "  ";
-            var aadharbirthdate = " ";
-            var aadharnumber = " ";
+            var  aadharfirstname = "";
+            var  aadharlastname = "";
+            var  aadharmiddlename = "";
+            var aadharaddress = "";
+            var aadharbirthdate = "";
+            var aadharnumber = "";
 
 
             var path_PAN = "";
@@ -1113,44 +1111,39 @@ namespace NBFC_App___dev.Controllers
             sda.Fill(dt);
             if (dt.Rows.Count > 0)
             {
-                string numberofdependents = data["numberofdependents"];
+                string numberofdependents = !String.IsNullOrEmpty(data["numberofdependents"]) ? data["numberofdependents"] : "0";
                 string coapplicantname = data["coapplicantname"];
                 string coapplicantmobilephone = data["coapplicantmobilephone"];
-                string coapplicantrelationship = data["coapplicantrelationship"];
+                string coapplicantrelationship = !String.IsNullOrEmpty(data["coapplicantrelationship"]) ? "\"" + data["coapplicantrelationship"] + "\"" : "null";
                 string nomineename = data["nomineename"];
                 string nomineemobilephone = data["nomineemobilephone"];
-                string nomineerelationship = data["nomineerelationship"];
+                string nomineerelationship = !String.IsNullOrEmpty(data["nomineerelationship"]) ? "\"" + data["nomineerelationship"] + "\"" : "null";
                 string bankifsccode = data["bankifsccode"];
                 string bankaccountnumber = data["bankaccountnumber"];
                 string bankname = data["bankname"];
 
                 DataRow row = dt.Rows[0];
-                //string Email = row["email"].ToString();
-                //string Mobile = row["mobile"].ToString();
-                //string Fullname = row["fullname"].ToString();
+                
                 string firstname = row["firstname"].ToString();
                 string middlename = row["middlename"].ToString();
                 string lastname = row["lastname"].ToString();
-                string gender = row["gender"].ToString();
+                string gender = !String.IsNullOrEmpty(row["gender"].ToString()) ? "\"" + row["gender"].ToString() + "\"" : "null";
                 string aadharnumber = row["aadharnumber"].ToString();
-                string maritalstatus = row["maritalstatus"].ToString();
-                string employmenttype = row["employmenttype"].ToString();
+                string maritalstatus = !String.IsNullOrEmpty(row["maritalstatus"].ToString()) ? "\"" + row["maritalstatus"].ToString() + "\"" : "null";
+                string employmenttype = !String.IsNullOrEmpty(row["employmenttype"].ToString()) ? "\"" + row["employmenttype"].ToString() + "\"" : "null";
                 string fathername = row["fathername"].ToString();
-                //string spousename = row["spousename"].ToString();
-                //string pannumber = row["pannumber"].ToString();
                 string currentstreet = row["currentstreet"].ToString();
                 string currentlandmark = row["currentlandmark"].ToString();
                 string currentbuilding = row["currentbuilding"].ToString();
-                string currentcity = row["currentcity"].ToString();
-                string currentstate = row["currentstate"].ToString();
+                string currentcity = !String.IsNullOrEmpty(row["currentcity"].ToString()) ? "\"" + row["currentcity"].ToString() + "\"" : "null";
+                string currentstate = !String.IsNullOrEmpty(row["currentstate"].ToString()) ? "\"" + row["currentstate"].ToString() + "\"" : "null";
                 string currentpin = row["currentpin"].ToString();
-                string currentcountry = row["currentcountry"].ToString();
+                string currentcountry = !String.IsNullOrEmpty(row["currentcountry"].ToString()) ? "\"" + row["currentcountry"].ToString() + "\"" : "null";
                 string panfirstname = row["panfirstname"].ToString();
                 string panmiddlename = row["panmiddlename"].ToString();
                 string panlastname = row["panlastname"].ToString();
                 string panfathername = row["panfathername"].ToString();
                 string panbirthdate = row["panbirthdate"].ToString();
-                //string uploadedvalue = row["uploadedvalue"].ToString();
                 string applicationgateId = row["applicationgateId"].ToString();
                 string aadharfirstname = row["aadharfirstname"].ToString();
                 string aadharlastname = row["aadharlastname"].ToString();
@@ -1164,7 +1157,9 @@ namespace NBFC_App___dev.Controllers
                 string CorrectfilepathPAN = filepathPAN.Replace(@"\", @"\\");
                 string CorrectfilepathAadharFront = filepathAadharFront.Replace(@"\", @"\\");
                 string CorrectfilepathAadharBack = filepathAadharBack.Replace(@"\", @"\\");
-                // Api hit for step-2 s
+
+                // Api hit for step-2
+
                 sqlCnctn.Close();
                 List<string> GetCookies = Authentication();
 
@@ -1181,8 +1176,7 @@ namespace NBFC_App___dev.Controllers
                 request2.AddCookie("UserName", GetCookies[3]);
                 request2.AddHeader("Content-Type", "application/json");
                 request2.AddHeader("BPMCSRF", GetCookies[0]);
-                // request2.AddHeader("Cookie", "BPMSESSIONID=51ldz41mtbuqxz1jjg3p4vwp; .ASPXAUTH=3E394F2748EFE7521FBE7F573EEC4CF7F4A8628E003960313141E2E503827EAB43C274FE658DF00F4734F66C5FC02B898EC7AA673C8E35C11BC37314EB02857CE3F09B65FECCB55F49DAC2F653BC7074E5FB2920831755CAFD58AEA3724B490D9FA19FE53419DAC6B4F9CC7ACCCC8D2F0C2446E9B50E3341EA01F28E9EDA821F758641FAA2AE4F1BFD5EB622C86837705B738802BA58A6326A1C02C14D94BBCB795085A1594FA0F8BD09997D5A6E28354F19E5A2D4F70EEB177C87656ADAB50CEE061F3C747DB70E9887C6899F63C98885FCAA990C9600E21A8A9C5217E227CCF95380B098CA43B690F126CE7DC266B6D036ECB6557418135B19F2AED8991589A7A15C49046D6C4C946D1C7718DA2144AC4F82246ED68E047D445D90C0AFA5DB62D8E6989B4FEC2FBA361992D29C665507E5A8DAF5E0A3C86B65A216AA32B7CF391D8B99AE5ED52A9632AF5E80924E5F0022396DE5AF7A27ECFDD2A3CF887613B6CDC919; BPMCSRF=RlMlsgX2n8C9JRjK1owIOu; BPMLOADER=zby4bc3aw2qebkrpakmcpunu; UserName=83|117|112|101|114|118|105|115|111|114");
-                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadhaarBack\": \"" + CorrectfilepathAadharBack + "\",\r\n    \"UsrFilePathForAadhaarFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": \"" + employmenttype + "\",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\":\"" + gender + "\",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrMaritalStatusId\":\"" + maritalstatus + "\",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": \"" + coapplicantrelationship + "\",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\":\"" + currentstate + "\",\r\n    \"UsrCurrentCityId\":\"" + currentcity + "\",\r\n    \"UsrCurrentCountryId\":\"" + currentcountry + "\",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\",\r\n    \"UsrNomineeName\": \"" + nomineename + "\",\r\n    \"UsrNomineeRelationshipId\": \"" + nomineerelationship + "\",\r\n    \"UsrNomineeMobilePhone\": \"" + nomineemobilephone + "\"\r\n   \r\n}\r\n\r\n", ParameterType.RequestBody);
+                request2.AddParameter("application/json", "{\r\n    \r\n    \"UsrAction\" : \"2\",\r\n    \"UsrCoApplicantMobilePhone\": \"" + coapplicantmobilephone + "\",\r\n    \"UsrFilePathForAadhaarBack\": \"" + CorrectfilepathAadharBack + "\",\r\n    \"UsrFilePathForAadhaarFront\": \"" + CorrectfilepathAadharFront + "\",\r\n    \"UsrFilePathForPAN\": \"" + CorrectfilepathPAN + "\",\r\n    \"UsrBirthDate\": \"" + birthdate + "\",\r\n    \"UsrAadhaarDOB\": \"" + aadharbirthdate + "\",\r\n    \"UsrAadhaarAddress\": \"" + aadharaddress + "\",\r\n    \"UsrAadhaarNumber\": \"" + aadharnumber + "\",\r\n    \"UsrAadhaarFirstName\": \"" + aadharfirstname + "\",\r\n    \"UsrAadhaarMiddleName\": \"" + aadharmiddlename + "\",\r\n    \"UsrAadhaarLastName\": \"" + aadharlastname + "\",\r\n    \"UsrEmploymentTypeId\": " + employmenttype + ",\r\n    \"UsrGivenName\": \"" + firstname + "\",\r\n    \"UsrMiddleName\": \"" + middlename + "\",\r\n    \"UsrSurname\": \"" + lastname + "\",\r\n    \"UsrGenderId\": " + gender + ",\r\n    \"UsrFatherName\":\"" + fathername + "\",\r\n    \"UsrMaritalStatusId\": " + maritalstatus + ",\r\n    \"UsrNumberOfDependents\":\"" + numberofdependents + "\",\r\n    \"UsrCoApplicantName\": \"" + coapplicantname + "\",\r\n    \"UsrCoApplicantRelationshipId\": " + coapplicantrelationship + ",\r\n    \"UsrPANFirstName\":\"" + panfirstname + "\",\r\n    \"UsrPANMiddleName\":\"" + panmiddlename + "\",\r\n    \"UsrPANLastName\":\"" + panlastname + "\",\r\n    \"UsrPANFatherName\": \"" + panfathername + "\",\r\n    \"UsrPANBirthDate\": \"" + panbirthdate + "\",\r\n    \"UsrCurrentStreet\":\"" + currentstreet + "\",\r\n    \"UsrCurrentBuilding\":\"" + currentbuilding + "\",\r\n    \"UsrCurrentLandmark\":\"" + currentlandmark + "\",\r\n    \"UsrCurrentPIN\":\"" + currentpin + "\",\r\n    \"UsrCurrentStateId\": " + currentstate + ",\r\n    \"UsrCurrentCityId\": " + currentcity + ",\r\n    \"UsrCurrentCountryId\": " + currentcountry + ",\r\n    \"UsrBankIFSCCode\" : \"" + bankifsccode + "\",\r\n    \"UsrBankAccountNumber\":\"" + bankaccountnumber + "\",\r\n    \"UsrBankNameId\": \"" + bankname + "\",\r\n    \"UsrNomineeName\": \"" + nomineename + "\",\r\n    \"UsrNomineeRelationshipId\": " + nomineerelationship + ",\r\n    \"UsrNomineeMobilePhone\": \"" + nomineemobilephone + "\"\r\n   \r\n}\r\n\r\n", ParameterType.RequestBody);
                 IRestResponse response2 = client2.Execute(request2);
                 sqlCnctn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();

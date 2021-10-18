@@ -1,4 +1,7 @@
-﻿$("#file-input").change(function () {
+﻿$('#click').click(function (e) {
+    return $('input:file')[0].click();
+});
+$("#file-input").change(function () {
     var image = document.getElementById('user_pic');
     image.src = URL.createObjectURL(event.target.files[0]);
 });
@@ -104,9 +107,13 @@ $("#pan").change(function () {
     var inputvalues = $(this).val();
     var regex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
     if (!regex.test(inputvalues)) {
-        $("#pan").val("");
-        alert("invalid PAN no");
+        $("#pan").addClass(" is-invalid");
+        $("#validationPan").show();
         $("#pan").focus();
+    }
+    else {
+        $("#pan").removeClass(" is-invalid");
+        $("#validationPan").hide();
     }
 });
 var uploadedval = $("#uploadedvalue").val();
@@ -141,7 +148,7 @@ if (uploadedvalue == "false") {
 }
 
 $("#save").click(function () {
-    if ($('#gender_select').val() == '-1' || $('#marital_select').val() == '-1' || $('#employment_select').val() == '-1' || $('#currentcity_select').val() == '-1' || $('#currentstate_select').val() == '-1' || $('#currentcountry_select').val() == '-1') {
+    if ($('#gender_select').val() == '-1' || $('#marital_select').val() == '-1' || $('#employment_select').val() == '-1') {
         alert("Please fill in all the Drop down columns!");
         return false;
     }
@@ -149,12 +156,45 @@ $("#save").click(function () {
 });
 
 $("#apply").click(function () {
-    if ($('#coapplicantrelationship_select').val() == '-1' || $('#bankname_select').val() == '-1') {
-        alert("Please fill in all the Drop down columns!");
+    if ($('#bankifsccode').val() == '' || $('#bankaccountnumber').val() == '' || $('#bankname_select').val() == '-1') {
+        $('#bankDetailsAlert').show();
         return false;
     }
-
+    if ($('#bankifsccode').val() != '' && $('#bankaccountnumber').val() != '' && $('#bankname_select').val() != '-1') {
+        $('#step2-modal').modal('hide');
+        $('.modal-backdrop').remove();
+        $('.bodyclass').css("padding-right", "0px");
+        return true;
+    }
 });
+
+$('#bankifsccode').change(function () {
+    if ($('#bankifsccode').val() != '' && $('#bankaccountnumber').val() != '' && $('#bankname_select').val() != '-1') {
+        $('#bankDetailsAlert').hide();
+    }
+    else {
+        $('#bankDetailsAlert').show();
+    }
+});
+
+$('#bankaccountnumber').change(function () {
+    if ($('#bankifsccode').val() != '' && $('#bankaccountnumber').val() != '' && $('#bankname_select').val() != '-1') {
+        $('#bankDetailsAlert').hide();
+    }
+    else {
+        $('#bankDetailsAlert').show();
+    }
+});
+
+$('#bankname_select').change(function () {
+    if ($('#bankifsccode').val() != '' && $('#bankaccountnumber').val() != '' && $('#bankname_select').val() != '-1') {
+        $('#bankDetailsAlert').hide();
+    }
+    else {
+        $('#bankDetailsAlert').show();
+    }
+});
+
 // Agreement Number dropdown
 var agrm = $("#agreement").attr("value");
 $("#agreement_select").val(agrm);
@@ -249,6 +289,8 @@ slider_1.on('input', function () {
 $("#MonthlyIncome").change(function () {
     $("#myRangeIncome").val($("#MonthlyIncome").val());
 });
-
-
-
+$("#uploadDocs").click(function () {
+    $('#myModal').modal('hide');
+    $('.modal-backdrop').remove();
+    $('.bodyclass').css("padding-right", "0px");
+});
