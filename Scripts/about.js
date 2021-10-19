@@ -1,6 +1,19 @@
 ﻿$('#click').click(function (e) {
     return $('input:file')[0].click();
 });
+
+$('#file-attachment-pan').click(function (e) {
+    return $('#pan_upload').click();
+});
+
+$('#file-attachment-aadhaarfront').click(function (e) {
+    return $('#aadhaar_front').click();
+});
+
+$('#file-attachment-aadhaarback').click(function (e) {
+    return $('#aadhaar_back').click();
+});
+
 $("#file-input").change(function () {
     var image = document.getElementById('user_pic');
     image.src = URL.createObjectURL(event.target.files[0]);
@@ -294,3 +307,39 @@ $("#uploadDocs").click(function () {
     $('.modal-backdrop').remove();
     $('.bodyclass').css("padding-right", "0px");
 });
+
+(function () {
+
+    'use strict';
+
+    $('.input-file').each(function () {
+        var $input = $(this),
+            $label = $input.next('.js-labelFile'),
+            labelVal = $label.html();
+
+        $input.on('change', function (element) {
+            var fileName = '';
+            if (element.target.value) fileName = element.target.value.split('\\').pop();
+            fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+        });
+    });
+
+    $('#remove_pan_upload').click(function () {
+        var labelVal = $('#pan_upload').next('.js-labelFile').html();
+        $('#pan_upload').next('.js-labelFile').removeClass('has-file');
+        $('#pan_label')[0].children[1].innerHTML = "Choose a file";
+    });
+
+    $('#remove_aadhaar_front').click(function () {
+        var labelVal = $('#aadhaar_front').next('.js-labelFile').html();
+        $('#aadhaar_front').next('.js-labelFile').removeClass('has-file');
+        $('#aadhaar_front_label')[0].children[1].innerHTML = "Choose a file";
+    });
+
+    $('#remove_aadhaar_back').click(function () {
+        var labelVal = $('#aadhaar_back').next('.js-labelFile').html();
+        $('#aadhaar_back').next('.js-labelFile').removeClass('has-file');
+        $('#aadhaar_back_label')[0].children[1].innerHTML = "Choose a file";
+    });
+
+})();

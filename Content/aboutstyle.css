@@ -157,8 +157,6 @@ summary {
 }
 
 .input-file {
-  width: 0.1px;
-  height: 0.1px;
   opacity: 0;
   overflow: hidden;
   position: absolute;
@@ -645,7 +643,7 @@ body {
 
     .quick-links ul li a
     {
-        color: #0c283796;
+        color: #0e4a6aa8;
         text-decoration: none;
         list-style-type: none;
         display: block;
@@ -711,17 +709,17 @@ body {
 }
 
 .pending a {
-    color: #453886;
+    color: #ff0000;
     padding-bottom: .25em;
     text-decoration: none;
 }
 
 .pending a:hover {
+    color: #017401;
     background-position: bottom;
     background-size: 20%;
     padding-bottom: .3em;
     text-decoration: none;
-    font-size: 22px;
     transition: .3s;
 }
 

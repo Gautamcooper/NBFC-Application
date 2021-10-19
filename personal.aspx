@@ -242,7 +242,7 @@
             </div>
         </div>
     </div>
-        <footer id="footer">
+        <%--<footer id="footer">
             <div class="footer-top">
                 <div class="container">
                     <div class="row">
@@ -275,6 +275,44 @@
                     </div>
                 </div>
             </div>
+        </footer>--%>
+        <footer class="footer">
+            <div class="container bottom_border">
+                <div class="row">
+                    <div class=" col-sm-4 col-md col-12 col">
+                        <h4 class="headin5_amrc col_white_amrc pt2">About us</h4>
+                        <p>
+                            <img class="logo-footer" src="virtuos_logo.png" alt="logo-footer" data-at2x="assets/img/logo.png" style="width: 120px;height: 109px;" />
+                        </p>
+                        <p>
+                            We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                        </p>
+                        <p><a href="#">Our Team</a></p>
+                    </div>
+
+
+                    <div class=" col-sm-8 col-md col-12 col">
+                        <h4 class="headin5_amrc col_white_amrc pt2">Find us</h4>
+                        <p class="mb10">We are born in native cloud redefining how Customer Experience (CX), Employee Experience (EX), and Everything Experience (XX) transformed across brand, digital, and commerce. We are a company with 12+ years of experience in Digital Strategy, Design, Transformation, and IT Consulting.</p>
+                        <p><i class="fa fa-location-arrow"></i> Emaar Digital Greens, Tower A, Sector-62, Gurugram </p>
+                        <p><i class="fa fa-phone"></i>  +91 124-498-5500  </p>
+                        <p><i class="fa fa fa-envelope"></i> info@virtuos.com  </p>
+                    </div>
+                </div>
+            </div>
+            <br /><br />
+            <div class="container">
+                <p class="text-center">VIRTUOS. CUSTOMER HEART | 2020 <a href="https://www.virtuos.com/">Virtuos Digital Ltd.</a> All rights reserved.</p>
+
+                <ul class="social_footer_ul">
+                    <li><a href="#" class="btn btn-primary" style="background-color: #3b5998;"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #55acee;"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #0082ca;"><i class="fab fa-linkedin"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #ac2bac;"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#" class="btn btn-primary" style="background-color: #ed302f;"><i class="fab fa-youtube"></i></a></li>
+                </ul>
+            </div>
+
         </footer>
 </div>
 </body>

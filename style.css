@@ -365,7 +365,7 @@ select.list-dt {
 #progressbar{
     padding-left: 0rem !important;
 }
-@media (min-width: 992px) and (max-width: 1199px) {
+/*@media (min-width: 992px) and (max-width: 1199px) {
     .footer-top {
         padding: 40px 0;
     }
@@ -376,24 +376,24 @@ select.list-dt {
     background: #333;
     text-align: left;
     color: #aaa;
-}
+}*/
 
 #page-container {
     position: relative;
     min-height: 100vh;
 }
 
-#content-wrap {
-    padding-bottom: 2.5rem; /* Footer height */
-}
+/*#content-wrap {
+    padding-bottom: 2.5rem;*/ /* Footer height */
+/*}
 
 #footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem; /* Footer height */
-    font-size: 15px;
-}
+    height: 2.5rem;*/ /* Footer height */
+    /*font-size: 15px;
+}*/
 
 html, body {
     min-height: 100%;
@@ -402,3 +402,89 @@ html, body {
 body {
     height: 100vh;
 }
+
+/* ===================================== Footer Design CSS ==================================== */
+
+.col_white_amrc
+{
+    color: #FFF;
+}
+
+footer {
+    width: auto;
+    padding: 0px 0px 25px 0px;
+    height: auto;
+    min-height: 480px;
+    background-image: url("footer-bkg.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.pt2 {
+    padding-top: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+footer p {
+    font-size: 15px;
+    color: #CCC;
+    padding-bottom: 0px;
+    margin-bottom: 8px;
+    font-family: "Open Sans", sans-serif;
+}
+
+footer h4 {
+    font-family: "Open Sans", sans-serif;
+}
+
+.mb10
+{
+    padding-bottom: 15px;
+}
+
+.social_footer_ul
+{
+    display: table;
+    margin: 15px auto 0 auto;
+    list-style-type: none;
+}
+
+.social_footer_ul li:not(:first-child)
+{
+    padding-left: 20px;
+}
+
+.social_footer_ul li
+{
+    padding-top: 10px;
+    float: left;
+}
+
+.social_footer_ul li a
+{
+    padding: 8px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+}
+
+.social_footer_ul li a:hover i, .triggeredHover
+{
+    transform: rotate(360deg);
+    transition: all 0.2s;
+}
+
+    .social_footer_ul li i {
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        color: #fff;
+        transition: all 0.8s;
+        font-size: 17px;
+        margin-top: 3px;
+    }
+
+/* ===================================== Footer Design CSS ==================================== */
