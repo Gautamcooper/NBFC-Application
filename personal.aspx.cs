@@ -167,11 +167,11 @@ namespace NBFC_App___dev
                         if (data_tbl.Rows.Count > 0)
                         {
                             var typeOfLoan = data_tbl.Rows[0]["loantype"].ToString();
-                            Loan_type.SelectedItem.Value = (typeOfLoan == "Long Term") ? "long" : "short";
-                            Loan_type.SelectedIndex = (typeOfLoan != "Long Term") ? 1 : 2;
+                            Loan_type.SelectedItem.Value = (typeOfLoan == "Long Term Loan") ? "long" : "short";
+                            Loan_type.SelectedIndex = (typeOfLoan != "Long Term Loan") ? 1 : 2;
                             Loan_type.SelectedItem.Text = data_tbl.Rows[0]["loantype"].ToString();
 
-                            if (typeOfLoan == "Long Term")
+                            if (typeOfLoan == "Long Term Loan")
                             {
                                 longterm.SelectedItem.Value = data_tbl.Rows[0]["loanterm"].ToString();
                                 longterm.SelectedIndex = int.Parse(data_tbl.Rows[0]["loanterm"].ToString()) - 1;
