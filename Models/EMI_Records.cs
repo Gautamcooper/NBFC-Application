@@ -8,6 +8,8 @@ namespace NBFC_App___dev.Models
     public class EMI_Records
     {
         public string repaid { get; set; }
+
+        public string agreementid { get; set; }
         public string duedate { get; set; }
         public string startdate { get; set; }
 
@@ -22,5 +24,7 @@ namespace NBFC_App___dev.Models
         public string emitype { get; set; }
 
         public string paymentrecord { get; set; }
+
+        public string paymentstatus { get; set; }
     }
 }

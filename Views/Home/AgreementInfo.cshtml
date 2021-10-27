@@ -189,21 +189,30 @@
                                     <th scope="col">Late Payment Charges</th>
                                     <th scope="col">Extension Charge</th>
                                     <th scope="col">Old Amount</th>
+                                    <th scope="col">Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var emr in (IEnumerable<EMI_Records>)ViewData["EMIRecordsMessage"])
                                 {
-                                    <tr class="table_row">
-                                        <td>@emr.emitype</td>
-                                        <td>@emr.amount</td>
-                                        <td>@emr.startdate</td>
-                                        <td>@emr.duedate</td>
-                                        <td>@emr.repaid</td>
-                                        <td>@emr.islatepaymentfeeapplied</td>
-                                        <td>@emr.isextensionfeeapplied</td>
-                                        <td>@emr.oldamount</td>
-                                    </tr>
+                                <tr class="table_row">
+                                    <td>@emr.emitype</td>
+                                    <td>@emr.amount</td>
+                                    <td>@emr.startdate</td>
+                                    <td>@emr.duedate</td>
+                                    <td>@emr.repaid</td>
+                                    <td>@emr.islatepaymentfeeapplied</td>
+                                    <td>@emr.isextensionfeeapplied</td>
+                                    <td>@emr.oldamount</td>
+                                    @if (@emr.repaid == "Yes")
+                                    {
+                                        <td>@emr.paymentstatus</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.ActionLink(@emr.paymentstatus, "DirectPay", new { AgrId = @emr.agreementid, Amnt = @emr.amount })</td>
+                                    }
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -215,7 +224,7 @@
                     <input hidden id="loantype" class="form-control form-input" placeholder="Loan Type" name="agrloantype" value="@data.loantype" />
                     @if (@data.status == "Active" || @data.status == "Partial Repayment")
                     {
-                        <button id="save" type="submit" class="btn btn-primary defaultButton">Pay</button>
+                        <button id="save" type="submit" class="btn btn-primary defaultButton">Pre-Pay</button>
                     }
 
                 </form>

@@ -363,7 +363,7 @@ namespace NBFC_App___dev.Controllers
 
             if (ParsedResponse["UsrLoanType"]["Name"].ToString() == "Long Term Loan")
             {                                
-                string temp_emiurl = string.Format("0/odata/UsrEMIRecords?$select=UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
+                string temp_emiurl = string.Format("0/odata/UsrEMIRecords?$select=UsrAgreementId,UsrIsRepaid,UsrDueDate,UsrStartDate,UsrAmount,UsrIsLatePaymentFeeApplied,UsrOldAmount,UsrIsExtensionFeeApplied,UsrExtensionDueDate&$filter=UsrAgreement/Id eq {0}&$expand=UsrEMIType($select = Name), UsrPaymentGate($select = UsrName)", Id);
                 string emiurl = apiurl + temp_emiurl;
                 JObject emiResponse = GET_Object(emiurl);
 
@@ -374,7 +374,7 @@ namespace NBFC_App___dev.Controllers
                 {
                     EMI_Records emir = new EMI_Records()
                     {
-
+                        agreementid = Id,
                         repaid = v["UsrIsRepaid"].ToString() == "False" ? "No" : "Yes",
                         amount = v["UsrAmount"].ToString(),
                         duedate= (v["UsrDueDate"].ToString()).Split(' ')[0],
@@ -382,7 +382,8 @@ namespace NBFC_App___dev.Controllers
                         islatepaymentfeeapplied = v["UsrIsLatePaymentFeeApplied"].ToString() == "False" ? "No" : "Yes",
                         isextensionfeeapplied = v["UsrIsExtensionFeeApplied"].ToString() == "False" ? "No": "Yes",
                         emitype = v["UsrEMIType"]["Name"].ToString(),
-                        oldamount = v["UsrOldAmount"].ToString()
+                        oldamount = v["UsrOldAmount"].ToString(),
+                        paymentstatus = v["UsrIsRepaid"].ToString() == "False" ? "Pay" : "Paid",
 
                     };
 
@@ -1395,6 +1396,35 @@ namespace NBFC_App___dev.Controllers
             request.AddCookie("BPMLOADER", GetCookies[1]);
             request.AddCookie("UserName", GetCookies[3]);
             request.AddParameter("application/json", "{\r\n\r\n    \"UsrAgreementId\": \"" + agrid + "\",\r\n    \"UsrNumberOfMonthsCustomerWantsToPay\": \"" + count + "\",\r\n    \"UsrAmountPaid\":" + amountindecimal + " \r\n \r\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+
+            System.Threading.Thread.Sleep(10000);
+
+            Response.Redirect("~/Home/Payment_Records");
+            return View();
+        }
+
+        public ActionResult DirectPay(string AgrId, string Amnt)
+        {
+            
+            List<string> GetCookies = Authentication();
+
+
+            string apiurl = ConfigurationManager.AppSettings["apiurl"];
+            string url = apiurl + "0/odata/UsrPaymentGate";
+            var client = new RestClient(url);
+
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("BPMCSRF", GetCookies[0]);
+            request.AddCookie(".ASPXAUTH", GetCookies[2]);
+            request.AddCookie("BPMCSRF", GetCookies[0]);
+            request.AddCookie("BPMLOADER", GetCookies[1]);
+            request.AddCookie("UserName", GetCookies[3]);
+            request.AddParameter("application/json", "{\r\n\r\n    \"UsrAgreementId\": \"" + AgrId + "\",\r\n    \"UsrNumberOfMonthsCustomerWantsToPay\": \"" + "1" + "\",\r\n    \"UsrAmountPaid\":" + Amnt + " \r\n \r\n}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
 
 

@@ -133,7 +133,7 @@ namespace NBFC_App___dev
                     request2.AddCookie("BPMCSRF", bpmcsrf);
                     request2.AddCookie("BPMLOADER", bpmloader);
                     request2.AddCookie("UserName", username);
-                    request2.AddParameter("application/json", "{\r\n    \"Contact\": \"" + fulln + "\",\r\n    \"Email\": \"" + emailid + "\",\r\n    \"MobilePhone\":\"" + mobile + "\"\r\n\r\n}", ParameterType.RequestBody);
+                    request2.AddParameter("application/json", "{\r\n    \"Contact\": \"" + fulln + "\",\r\n    \"UsrOTP\": \"" + otp_num + "\",\r\n    \"Email\": \"" + emailid + "\",\r\n    \"MobilePhone\":\"" + mobile + "\"\r\n\r\n}", ParameterType.RequestBody);
                     client2.Execute(request2);
                 }               
             }
