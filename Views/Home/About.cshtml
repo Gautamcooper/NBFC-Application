@@ -110,7 +110,7 @@
 
 <div class="container">
     <div class="container-fluid">
-        <form method="post" action="~/Home/On_Save">
+        <form method="post" action="~/Home/On_Save" enctype="multipart/form-data">
             <h2 style="text-align: center;">Personal Information</h2>
             <div class="form-card">
                 <div style="position: relative;">
@@ -133,7 +133,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="email" id="label_email">Email ID</label>
-                        <input id="email" class="form-control form-input" placeholder="Email" value="@data.Email" readonly="readonly">
+                        <input id="email" class="form-control form-input" placeholder="Email" name="Email" value="@data.Email" readonly="readonly">
                     </div>
                     <div class="col-md-4">
                         <label class="label_inp" for="mobile" id="label_mobile">Mobile</label>
