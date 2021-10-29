@@ -263,3 +263,25 @@ $(".inp-dropdown").change(function () {
         $("#label_" + id).hide(500);
     }
 });
+
+$("#Button1").click(function () {
+    let k = 0;
+    const progress = document.querySelector(".loadprogress");
+    const loading = document.querySelector(".loading");
+    let uploadPercentage = [];
+    if ($("#AppGateId")[0].defaultValue === '') {
+        uploadPercentage = [0, 10, 54, 83, 99];
+    }
+    else {
+        uploadPercentage = [0, 10, 54, 83, 99];
+    }
+    const interval = setInterval(() => {
+        progress.style.width = (uploadPercentage[k] < 97) ? (uploadPercentage[k] + 3) + "%" : (uploadPercentage[k] - 1) + "%";
+        loading.innerHTML = uploadPercentage[k] + "%";
+        k++;
+        if (k == uploadPercentage.length) {
+            clearInterval(interval);
+            loading.innerHTML = "99%";
+        }
+    }, 1000);
+});

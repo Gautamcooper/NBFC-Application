@@ -20,16 +20,16 @@
         <img class="service-img" src="~/contactus-banner.jpg" />
         @if (ViewData["QryReg"].ToString() == "true")
         {
-            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="overflow: hidden;">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <p class="modal-title text-center" id="exampleModalLabel" style="font-size: 20px; color: #4a89dc;">Notification</p>
+                            <p class="modal-title" id="exampleModalLabel" style="font-size: 20px; color: #4a89dc;margin: 0 170px;">Notification</p>
                             <button type="button" class="close" id="modal_close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body" style="font-size: 15px;">
+                        <div class="modal-body text-center" style="font-size: 18px;">
                             Your query has been submitted
                         </div>
                         <div class="modal-footer">
@@ -212,7 +212,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input id="submit" class="btn btn-primary defaultButton" data-toggle="modal" data-target="#exampleModalLong" type="submit" value="Submit" />
+                        <input id="submit" class="btn btn-primary defaultButton" data-toggle="modal" data-target="#exampleModalLong" type="submit" onclick="servicecentreLoader()" value="Submit" />
                     </div>
                 </div>
             </div>
@@ -224,8 +224,15 @@
                 <div class="modal-header">
                     <p class="modal-title text-center" id="exampleModalLongTitle" style="font-size: 23px; color: #4a89dc;">Notification</p>
                 </div>
-                <div class="modal-body loader-dots" style="font-size: 18px;">
+                <div class="modal-body text-center" style="font-size: 20px;">
                     Registering your query
+                </div>
+                <div class="modal-footer d-flex justify-content-center" style="height: 80px;">
+                    <div class="servicecentreloadingbar">
+                        <div class="servicecentreloadprogress">
+                            <span class="servicecentreloading">Loading</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -161,11 +161,49 @@ if (uploadedvalue == "false") {
 }
 
 $("#save").click(function () {
-    if ($('#gender_select').val() == '-1' || $('#marital_select').val() == '-1' || $('#employment_select').val() == '-1') {
-        alert("Please fill in all the Drop down columns!");
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    var panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    var aadhaarRegexWithSpace = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+    var aadhaarRegexWithoutSpace = /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/;
+    var currentPinRegex = /^[1-9]{1}[0-9]{5}$/;
+
+    let fullname = ($("#Fullname").val() !== '') ? !regex.test($("#Fullname").val()) : false;
+    let firstname = ($("#firstname").val() !== '') ? !regex.test($("#firstname").val()) : false;
+    let middlename = ($("#middlename").val() !== '') ? !regex.test($("#middlename").val()) : false;
+    let lastname = ($("#lastname").val() !== '') ? !regex.test($("#lastname").val()) : false;
+    let fathername = ($("#fathername").val() !== '') ? !regex.test($("#fathername").val()) : false;
+    let pin = ($("#currentpin").val() !== '') ? !currentPinRegex.test($("#currentpin").val()) : false;
+    let panfirstname = ($("#panfirstname").val() !== '') ? !regex.test($("#panfirstname").val()) : false;
+    let panmiddlename = ($("#panmiddlename").val() !== '') ? !regex.test($("#panmiddlename").val()) : false;
+    let panlastname = ($("#panlastname").val() !== '') ? !regex.test($("#panlastname").val()) : false;
+    let panfathername = ($("#panfathername").val() !== '') ? !regex.test($("#panfathername").val()) : false;
+    let pannumber = ($("#pan").val() !== '') ? !panRegex.test($("#pan").val()) : false;
+    let aadharfirstname = ($("#aadharfirstname").val() !== '') ? !regex.test($("#aadharfirstname").val()) : false;
+    let aadharmiddlename = ($("#aadharmiddlename").val() !== '') ? !regex.test($("#aadharmiddlename").val()) : false;
+    let aadharlastname = ($("#aadharlastname").val() !== '') ? !regex.test($("#aadharlastname").val()) : false;
+    let aadharnumber = ($("#aadharnumber").val() !== '') ? (!aadhaarRegexWithSpace.test($("#aadharnumber").val()) && !aadhaarRegexWithoutSpace.test($("#aadharnumber").val())) : false;
+
+    if (fullname || firstname || middlename || lastname || fathername || pin || panfirstname || panmiddlename || panlastname
+        || panfathername || pannumber || aadharfirstname || aadharmiddlename || aadharlastname || aadharnumber) {
+        $("#validationText")[0].innerText = "Please fill the correct data, highlighted in red!";
+        $("#validationModal").modal("show");
         return false;
     }
-
+    else if ($('#gender_select').val() === '-1') {
+        $("#validationText")[0].innerText = "Please fill in Gender Drop down column!";
+        $("#validationModal").modal("show");
+        return false;
+    }
+    else if ($('#marital_select').val() === '-1') {
+        $("#validationText")[0].innerText = "Please fill in Marital Status Drop down column!";
+        $("#validationModal").modal("show");
+        return false;
+    }
+    else if ($('#employment_select').val() === '-1') {
+        $("#validationText")[0].innerText = "Please fill in Employment Type Drop down column!";
+        $("#validationModal").modal("show");
+        return false;
+    }
 });
 
 $("#apply").click(function () {
@@ -343,3 +381,357 @@ $("#uploadDocs").click(function () {
     });
 
 })();
+
+function uploadDocumentsLoader () {
+    let k = 0;
+    const progress = document.querySelector(".loadprogress");
+    const loading = document.querySelector(".loading");
+    const uploadPercentage = [0, 0, 1, 1, 2, 3, 10, 22, 25, 28, 37, 40, 42, 45, 54, 58, 58, 58, 58, 64, 71, 75, 83, 87, 90, 90, 94, 95, 95, 95, 99];
+    const interval = setInterval(() => {
+        progress.style.width = (uploadPercentage[k] < 97) ? (uploadPercentage[k] + 3) + "%" : (uploadPercentage[k] - 1) + "%";
+        loading.innerHTML = uploadPercentage[k] + "%";
+        k++;
+        if (k == uploadPercentage.length) {
+            clearInterval(interval);
+            loading.innerHTML = "99%";
+        }
+    }, 1000);
+    loading.innerHTML = "0%";
+    progress.style.width = "3%";
+}
+
+function continueToApplyLoader() {
+    let k = 0;
+    const progress = document.querySelector(".continuetoapplyloadprogress");
+    const loading = document.querySelector(".continuetoapplyloading");
+    const uploadPercentage = [0, 10, 48, 83, 99];
+    const interval = setInterval(() => {
+        progress.style.width = uploadPercentage[k] + "%";
+        loading.innerHTML = uploadPercentage[k] + "%";
+        k++;
+        if (k == uploadPercentage.length) {
+            clearInterval(interval);
+            loading.innerHTML = "99%";
+        }
+    }, 1000);
+    loading.innerHTML = "0%";
+    progress.style.width = "3%";
+}
+
+$("#selectAllCheckbox").change(function () {
+    let sumamount = 0.00;
+    for (var i = 0; i < $(".table_checkbox").length; i++) {
+        $(".table_checkbox")[i].checked = $("#selectAllCheckbox")[0].checked;
+    }
+    if ($("#selectAllCheckbox")[0].checked == true) {
+        for (let i = 0; i < $(".table_row").length - 1; i++) {
+            sumamount += parseFloat($("#" + i + "_amount")[0].outerText);
+        }
+    }
+    else if ($("#selectAllCheckbox")[0].checked == false) {
+        sumamount = 0;
+    }
+    total_amnt = sumamount.toString().substr(0, 8);
+    $("#total_amount").text(total_amnt);
+    $("#count").attr("value", count);
+    $("#amount").attr("value", total_amnt);
+});
+
+(function () {
+    $("#paymentStatus")
+})();
+
+// Father's Name Validation
+$("#fathername").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#fathername").addClass(" is-invalid");
+            $("#validationFatherName").show();
+            $("#fathername").focus();
+        }
+        else {
+            $("#fathername").removeClass(" is-invalid");
+            $("#validationFatherName").hide();
+        }
+    }
+    else {
+        $("#fathername").removeClass(" is-invalid");
+        $("#validationFatherName").hide();
+    }
+});
+
+// Full Name Validation
+$("#Fullname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#Fullname").addClass(" is-invalid");
+            $("#validationFullName").show();
+            $("#Fullname").focus();
+        }
+        else {
+            $("#Fullname").removeClass(" is-invalid");
+            $("#validationFullName").hide();
+        }
+    }
+    else {
+        $("#Fullname").removeClass(" is-invalid");
+        $("#validationFullName").hide();
+    }
+});
+
+// First Name Validation
+$("#firstname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#firstname").addClass(" is-invalid");
+            $("#validationFirstName").show();
+            $("#firstname").focus();
+        }
+        else {
+            $("#firstname").removeClass(" is-invalid");
+            $("#validationFirstName").hide();
+        }
+    }
+    else {
+        $("#firstname").removeClass(" is-invalid");
+        $("#validationFirstName").hide();
+    }
+});
+
+// Middle Name Validation
+$("#middlename").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#middlename").addClass(" is-invalid");
+            $("#validationMiddleName").show();
+            $("#middlename").focus();
+        }
+        else {
+            $("#middlename").removeClass(" is-invalid");
+            $("#validationMiddleName").hide();
+        }
+    }
+    else {
+        $("#middlename").removeClass(" is-invalid");
+        $("#validationMiddleName").hide();
+    }
+});
+
+// Last Name Validation
+$("#lastname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#lastname").addClass(" is-invalid");
+            $("#validationLastName").show();
+            $("#lastname").focus();
+        }
+        else {
+            $("#lastname").removeClass(" is-invalid");
+            $("#validationLastName").hide();
+        }
+    }
+    else {
+        $("#lastname").removeClass(" is-invalid");
+        $("#validationLastName").hide();
+    }
+});
+
+// Current PIN Validation
+$("#currentpin").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[1-9]{1}[0-9]{5}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#currentpin").addClass(" is-invalid");
+            $("#validationCurrentPin").show();
+            $("#currentpin").focus();
+        }
+        else {
+            $("#currentpin").removeClass(" is-invalid");
+            $("#validationCurrentPin").hide();
+        }
+    }
+    else {
+        $("#currentpin").removeClass(" is-invalid");
+        $("#validationCurrentPin").hide();
+    }
+});
+
+// PAN First Name Validation
+$("#panfirstname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#panfirstname").addClass(" is-invalid");
+            $("#validationPanFirstName").show();
+            $("#panfirstname").focus();
+        }
+        else {
+            $("#panfirstname").removeClass(" is-invalid");
+            $("#validationPanFirstName").hide();
+        }
+    }
+    else {
+        $("#panfirstname").removeClass(" is-invalid");
+        $("#validationPanFirstName").hide();
+    }
+});
+
+// PAN Middle Name Validation
+$("#panmiddlename").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#panmiddlename").addClass(" is-invalid");
+            $("#validationPanMiddleName").show();
+            $("#panmiddlename").focus();
+        }
+        else {
+            $("#panmiddlename").removeClass(" is-invalid");
+            $("#validationPanMiddleName").hide();
+        }
+    }
+    else {
+        $("#panmiddlename").removeClass(" is-invalid");
+        $("#validationPanMiddleName").hide();
+    }
+});
+
+// PAN Last Name Validation
+$("#panlastname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#panlastname").addClass(" is-invalid");
+            $("#validationPanLastName").show();
+            $("#panlastname").focus();
+        }
+        else {
+            $("#panlastname").removeClass(" is-invalid");
+            $("#validationPanLastName").hide();
+        }
+    }
+    else {
+        $("#panlastname").removeClass(" is-invalid");
+        $("#validationPanLastName").hide();
+    }
+});
+
+// PAN Father's Name Validation
+$("#panfathername").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#panfathername").addClass(" is-invalid");
+            $("#validationPanFatherName").show();
+            $("#panfathername").focus();
+        }
+        else {
+            $("#panfathername").removeClass(" is-invalid");
+            $("#validationPanFatherName").hide();
+        }
+    }
+    else {
+        $("#panfathername").removeClass(" is-invalid");
+        $("#validationPanFatherName").hide();
+    }
+});
+
+// Aadhaar First Name Validation
+$("#aadharfirstname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#aadharfirstname").addClass(" is-invalid");
+            $("#validationAadhaarFirstName").show();
+            $("#aadharfirstname").focus();
+        }
+        else {
+            $("#aadharfirstname").removeClass(" is-invalid");
+            $("#validationAadhaarFirstName").hide();
+        }
+    }
+    else {
+        $("#aadharfirstname").removeClass(" is-invalid");
+        $("#validationAadhaarFirstName").hide();
+    }
+});
+
+// Aadhaar Middle Name Validation
+$("#aadharmiddlename").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#aadharmiddlename").addClass(" is-invalid");
+            $("#validationAadhaarMiddleName").show();
+            $("#aadharmiddlename").focus();
+        }
+        else {
+            $("#aadharmiddlename").removeClass(" is-invalid");
+            $("#validationAadhaarMiddleName").hide();
+        }
+    }
+    else {
+        $("#aadharmiddlename").removeClass(" is-invalid");
+        $("#validationAadhaarMiddleName").hide();
+    }
+});
+
+// Aadhaar Last Name Validation
+$("#aadharlastname").change(function () {
+    var inputvalues = $(this).val();
+    var regex = /^[a-zA-Z ]{2,30}$/;
+    if (inputvalues !== '') {
+        if (!regex.test(inputvalues)) {
+            $("#aadharlastname").addClass(" is-invalid");
+            $("#validationAadhaarLastName").show();
+            $("#aadharlastname").focus();
+        }
+        else {
+            $("#aadharlastname").removeClass(" is-invalid");
+            $("#validationAadhaarLastName").hide();
+        }
+    }
+    else {
+        $("#aadharlastname").removeClass(" is-invalid");
+        $("#validationAadhaarLastName").hide();
+    }
+});
+
+// Aadhaar Number Validation
+$("#aadharnumber").change(function () {
+    var inputvalues = $(this).val();
+    var regexWithSpace = /^[2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4}$/;
+    var regexWithoutSpace = /^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$/;
+    if (inputvalues !== '') {
+        if (!regexWithSpace.test(inputvalues) && !regexWithoutSpace.test(inputvalues)) {
+            $("#aadharnumber").addClass(" is-invalid");
+            $("#validationAadhaarNumber").show();
+            $("#aadharnumber").focus();
+        }
+        else {
+            $("#aadharnumber").removeClass(" is-invalid");
+            $("#validationAadhaarNumber").hide();
+        }
+    }
+    else {
+        $("#aadharnumber").removeClass(" is-invalid");
+        $("#validationAadhaarNumber").hide();
+    }
+});

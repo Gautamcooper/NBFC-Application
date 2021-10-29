@@ -235,12 +235,19 @@
                     <div class="modal-header">
                         <p class="modal-title" id="exampleModalLongTitle"  style="font-size: 23px; color: #4a89dc; margin: 0 auto;">Notification</p>
                     </div>
-                    <div class="modal-body loader-dots" style="font-size: 18px;">
+                    <div class="modal-body text-center" style="font-size: 18px;">
                         Please wait while we are processing your request
                     </div>
+                    <div class="modal-footer d-flex justify-content-center" style="height: 80px;">
+                        <div class="loadingbar">
+                            <div class="loadprogress">
+                                <span class="loading">Loading</span>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
             </div>
-        </div>
     </div>
         <%--<footer id="footer">
             <div class="footer-top">

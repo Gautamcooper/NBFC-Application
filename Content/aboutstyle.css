@@ -20,25 +20,35 @@
     display: none;
 }
 
-.loader-dots
-{
-    letter-spacing: 1px;
-}
-
-.loader-dots::after
-{
-    content: "...";
-    width: 0;
+.loadingbar, .continuetoapplyloadingbar, .servicecentreloadingbar {
+    width: 300px;
+    height: 10px;
+    background-color: rgb(228, 228, 228);
     position: absolute;
-    overflow: hidden;
-    animation: loader-dots-animation 1.5s infinite;
+    top: 150px;
+    border-radius: 30px;
 }
 
-@keyframes loader-dots-animation
-{
-    0% { width: 0em; }
-    50% { width: 1.2em; }
-    100% { width: 0em; }
+.loadprogress, .continuetoapplyloadprogress, .servicecentreloadprogress {
+    width: 3%;
+    height: 100%;
+    background-color: limegreen;
+    border-radius: 30px;
+    transition-delay: 2s;
+    transition: all 2s ease;
+}
+
+.loading, .continuetoapplyloading, .servicecentreloading {
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    font-size: 25px;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .form-input {
@@ -576,10 +586,10 @@ body {
 }
 
 .faqsummary {
-    cursor: pointer;
     border-bottom: 1px dashed #CEE1F8;
-    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
+    font-weight: 400;
     letter-spacing: 1px;
     color: #3B566E;
     line-height: 22px;
@@ -593,12 +603,12 @@ body {
 }
 
 .faqanswer {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
     font-weight: 400;
-    font-size: 16px;
-    color: #6F8BA4;
+    color: #044d8f;
     line-height: 28px;
     letter-spacing: 1px;
-    font-family: serif;
     padding: 0 12px;
 }
 

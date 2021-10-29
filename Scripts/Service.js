@@ -177,3 +177,21 @@ $(".inp_dropdown").change(function () {
   });
 
 })();
+
+function servicecentreLoader() {
+    let k = 0;
+    const progress = document.querySelector(".servicecentreloadprogress");
+    const loading = document.querySelector(".servicecentreloading");
+    const uploadPercentage = [0, 1, 2, 3, 10, 13, 39, 49, 56, 69, 72, 90, 91, 95, 99];
+    const interval = setInterval(() => {
+        progress.style.width = (uploadPercentage[k] < 97) ? (uploadPercentage[k] + 3) + "%" : (uploadPercentage[k] - 1) + "%";
+        loading.innerHTML = uploadPercentage[k] + "%";
+        k++;
+        if (k == uploadPercentage.length) {
+            clearInterval(interval);
+            loading.innerHTML = "99%";
+        }
+    }, 1000);
+    loading.innerHTML = "0%";
+    progress.style.width = "3%";
+}

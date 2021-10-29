@@ -215,7 +215,7 @@ namespace NBFC_App___dev
             }                       
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        public void Button1_Click(object sender, EventArgs e)
         {
             string shorttermloan = "0";
             string longtermloan = "0";
@@ -343,8 +343,8 @@ namespace NBFC_App___dev
             if (way == "login")
             {
                 System.Threading.Thread.Sleep(5000);
-                
-               
+
+
                 string temp_FetchProcessingResult = String.Format("0/odata/UsrApplicationGate({0})?$select=UsrProcessingResultId,UsrActiveApplicationId,UsrActiveAgreementId&$expand=UsrProcessingResult($select=Name),UsrActiveAgreement($select=UsrName),UsrActiveApplication($select=UsrName),UsrContact($select=Name)", applicationgateid);
                 string FetchProcessingResult = apiurl + temp_FetchProcessingResult;
                 var client4 = new RestClient(FetchProcessingResult);
@@ -360,9 +360,10 @@ namespace NBFC_App___dev
 
                 var ParsedResponse = JObject.Parse(query_response.Content);
 
+
                 if (ParsedResponse["UsrProcessingResultId"].ToString() == "00000000-0000-0000-0000-000000000000")
                 {
-                    
+
                     Response.Redirect("~/Home/About");
                 }
                 else
@@ -377,7 +378,8 @@ namespace NBFC_App___dev
                     }
                 }
             }
-            else {
+            else
+            {
                 Response.Redirect("~/Home/About");
             }
         }
