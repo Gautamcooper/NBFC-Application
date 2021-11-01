@@ -645,6 +645,20 @@ namespace NBFC_App___dev.Controllers
                     appgateId = row["applicationgateId"].ToString(),
                     currentaddrsameasaadhar = row["currentaddrsameasaadhar"].ToString()
                 };
+
+                ViewData["profilePhotoExist"] = "false";
+                string[] files = Directory.GetFiles("D:\\NBFC\\NBFC-Application\\ProfilePhoto\\");
+                foreach (string filepath in files)
+                {
+                    string filename = Path.GetFileName(filepath);
+                    if (row["email"].ToString() == filename.Substring(0, filename.LastIndexOf('.')))
+                    {
+                        ViewData["filename"] = filename;
+                        ViewData["profilePhotoExist"] = "true";
+                        break;
+                    }
+                }
+
                 ViewData["Message"] = p;
                 return View();
             }
@@ -674,8 +688,19 @@ namespace NBFC_App___dev.Controllers
             return null;
         }
         [HttpPost]         
-        public ActionResult On_Save(User p)
+        public ActionResult On_Save(User p, HttpPostedFileBase profilePhoto)
         {
+            // Logic of Saving Profile photo
+            if (profilePhoto != null && profilePhoto.ContentLength > 0)
+            {
+                //var fileName = Path.GetFileName(profilePhoto.FileName);
+                var extension = Path.GetExtension(profilePhoto.FileName);
+                string profilePhotopath = "D:\\NBFC\\NBFC-Application\\ProfilePhoto\\" + p.Email + extension;
+                profilePhoto.SaveAs(profilePhotopath);
+
+            }
+
+            //Logic of saving the Personal Info data
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
             SqlConnection sqlCnctn = new SqlConnection(connectionString);
@@ -1516,6 +1541,25 @@ namespace NBFC_App___dev.Controllers
         }
         public ActionResult Apply_for_loan()
         {
+            Response.Redirect("~/personal.aspx");
+            return null;
+        }
+
+        public ActionResult Apply_for_loan_From_ProductInfo(string LoanId)
+        {
+            string dbconn = ConfigurationManager.AppSettings["dbconn"];
+            string connectionString = dbconn;
+            SqlConnection sqlCnctn = new SqlConnection(connectionString);
+            sqlCnctn.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            SqlCommand cmd;
+            string sql = "Update UserInfo set loanId = '" + LoanId + "' where session = '" + Session["Name"].ToString() + "'";
+            cmd = new SqlCommand(sql, sqlCnctn);
+            adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+            adapter.UpdateCommand.ExecuteNonQuery();
+            cmd.Dispose();
+
             Response.Redirect("~/personal.aspx");
             return null;
         }

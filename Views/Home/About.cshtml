@@ -116,9 +116,16 @@
                 <div style="position: relative;">
                     <div class="d-flex flex-column align-items-center text-center px-3 py-5">
                         <div class="user_img" id="click">
-                            <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                            <input id="file-input" type="file" accept="image/*" ;capture="camera" />
-                        </div>
+                            @if (ViewData["profilePhotoExist"].ToString() == "true")
+                            {
+                                <img class="rounded-circle" id="user_pic" width="150px" src="/ProfilePhoto/@ViewData["filename"]">
+                            }
+                            else
+                            {
+                                <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                            }
+                            <input id="file-input" type="file" name="profilePhoto" accept="image/*" ;capture="camera" />
+                                            </div>
                         <span class="font-weight-bold">@data.Fullname</span>
                         <span class="text-black-50">@data.Email</span>
                     </div>

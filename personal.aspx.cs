@@ -89,6 +89,7 @@ namespace NBFC_App___dev
                     TextBox3.Text = "16000";
                     string pan_num = "";
                     string appGate = "";
+                    string loanId = "";
                     Dictionary<string, string> product_dictionary = new Dictionary<string, string>();
                     Dictionary<string, string> reason_dictionary = new Dictionary<string, string>();
 
@@ -109,6 +110,7 @@ namespace NBFC_App___dev
                         pan_num = dt.Rows[0]["pannumber"].ToString();
                         PAN.Text = pan_num;
                         appGate = dt.Rows[0]["applicationgateId"].ToString();
+                        loanId = dt.Rows[0]["loanId"].ToString();
                     }
                     else
                     {
@@ -158,6 +160,33 @@ namespace NBFC_App___dev
                         Reason.Items.Add(new ListItem(v["Name"].ToString(), v["Id"].ToString()));
                     }
 
+                    // Logic of Implementing Autopopulating loan from Loan Detail
+                    if (!String.IsNullOrEmpty(loanId))
+                    {
+                        foreach (KeyValuePair<string, string> item in product_dictionary)
+                        {
+                            if (item.Value == loanId)
+                            {
+                                Product.SelectedItem.Text = item.Key;
+                                Product.SelectedIndex = product_dictionary.Keys.ToList().IndexOf(item.Key) + 1;
+                                Product.SelectedItem.Value = item.Value;
+
+                                sqlCnctn.Open();
+
+                                SqlDataAdapter adapter = new SqlDataAdapter();
+                                SqlCommand cmd;
+                                string sql = "Update UserInfo set loanId = '" + "" + "' where session = '" + Session["Name"].ToString() + "'";
+                                cmd = new SqlCommand(sql, sqlCnctn);
+                                adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+                                adapter.UpdateCommand.ExecuteNonQuery();
+                                cmd.Dispose();
+
+                                break;
+                            }
+                        }
+                    }
+
+                    // Logic of Implementing Edit Functionality  from Pending steps
                     if (!String.IsNullOrEmpty(pan_num) && !String.IsNullOrEmpty(appGate))
                     {
                         string sqlQuery = "Select loantype, loanterm, loanname, loanamount, monthlyIncome, reasonforloan from UserSTEP1Info where step1Id = '" + appGate + "'";

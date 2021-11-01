@@ -68,7 +68,7 @@
             </details>
             <div class="row" style="text-align: center;">
                 <div class="col-md-6">
-                    <input type="button" class="btn btn-primary defaultButton" value="Apply For Loan" onclick="location.href='@Url.Content("~/personal.aspx")'" />
+                    <input type="button" class="btn btn-primary defaultButton" value="Apply For Loan" onclick="location.href='@Url.Action("Apply_for_loan_From_ProductInfo", "Home",new { LoanId = ViewData["ProductId"].ToString()})'" />
                 </div>
                 <div class="col-md-6 sec_button">
                     <input type="button" class="btn btn-primary defaultButton" value="Check Eligiblity" onclick="location.href='@Url.Action("LoanEligibilityCheck", "Home",new { Id = ViewData["ProductId"].ToString()})'" />
