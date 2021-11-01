@@ -4,141 +4,170 @@
 }
 @{
     var data = ViewBag.Message;
-    
+
 }
 
-    <div class="container">
-        <div style="position: relative;">
-            <h2 style="text-align: center;">@data.number</h2>
+<div class="container">
+    <div class="statuscontainer">
+        <div class="statusrow">
+            <div class="col">
+                <ul id="progress-bar" class="progressbar">
+                    <li>During registration process</li>
+                    <li>Verification</li>
+                    <li>e-KYC verification</li>
+                    <li id="approvedStatus">Approved</li>
+                    <li id="rejectedStatus">Rejected</li>
+                </ul>
+            </div>
         </div>
-        <br />
-        <div style="float: right; margin: 0 14px;">
-            <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
-        </div>
-        <br />
-        <br />
-        <br />
-        <div class="container-fluid">
-            <div class="form-card">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Status</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="Status" class="form-control form-input" placeholder="" name="Status" value="@data.status" readonly="readonly">
-                    </div>
+        <script>
+            switch ("@data.status") {
+                case "During registration process": $("#progress-bar li:not(.active):first").addClass("active");
+                    break;
+                case "Verification": $("#progress-bar li:not(.active):nth-child(-n + 2)").addClass("active");
+                    break;
+                case "e-KYC verification": $("#progress-bar li:not(.active):nth-child(-n + 3)").addClass("active");
+                    break;
+                case "Approved": $("#progress-bar li:not(.active)").addClass("active");
+                                 $("#rejectedStatus").css("display", "none");
+                    break;
+                case "Rejected": $("#progress-bar li:not(.active)").addClass("active");
+                                 $("#approvedStatus").css("display", "none");
+                    break;
+            }
+        </script>
+    </div>
+    <div style="position: relative;top: 65px;text-align: center;">
+        <h2>@data.number</h2>
+    </div>
+    <br />
+    <div style="float: right; margin: 0 14px;">
+        <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="form-card">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Status</label>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Created On</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="createdOn" class="form-control form-input" placeholder="" value="@data.createdOn" readonly="readonly">
-                    </div>
+                <div class="col-md-6">
+                    <input id="Status" class="form-control form-input" placeholder="" name="Status" value="@data.status" readonly="readonly">
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Created On</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="createdOn" class="form-control form-input" placeholder="" value="@data.createdOn" readonly="readonly">
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Tenure</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="requestedterm" class="form-control form-input" placeholder="" value="@data.requestedterm" readonly="readonly">
-                    </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Tenure</label>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Requested Amount</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="requestedamount" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.requestedamount" readonly="readonly" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="requestedterm" class="form-control form-input" placeholder="" value="@data.requestedterm" readonly="readonly">
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Loan</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="product" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.product" readonly="readonly" />
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Requested Amount</label>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Co-Applicant</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="coapplicantname" class="form-control form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="requestedamount" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.requestedamount" readonly="readonly" />
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Approved Term</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="approvedterm" class="form-control form-input" placeholder="" name="approvedterm" value="@data.approvedterm" readonly="readonly" />
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Loan</label>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Approved Amount</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="approvedamount" class="form-control form-input" placeholder="" name="approvedamount" value="@data.approvedamount" readonly="readonly" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="product" class="form-control form-input" placeholder="" name="CreatedOn" value="@data.product" readonly="readonly" />
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Name</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="contact" class="form-control form-input" placeholder="" name="contact" value="@data.contact" readonly="readonly" />
-                    </div>
+            </div>
+            @*<div class="row">
+                <div class="col-md-3">
+                    <label>Co-Applicant</label>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Reason For Loan</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="reasonforloan" class="form-control form-input" placeholder="" name="reasonforloan" value="@data.reasonforloan" readonly="readonly" />
-                    </div>
+                <div class="col-md-6">
+                    <input id="coapplicantname" class="form-control form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>Bank</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input id="bankname" class="form-control form-input" placeholder="" name="bankname" value="@data.bankname" readonly="readonly" />
-                    </div>
+            </div>*@
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Approved Term</label>
                 </div>
-
-
-                @if (@data.status == "Rejected")
-                {
-                    <details open style="margin-top: 40px;">
-                        <summary class="text-center">Rejection Reasons</summary>
-
-                        <table class="table" style="background: #f5f5f5;">
-                            <thead>
-                                <tr style="background: #98cad0;">
-                                    <th scope="col">Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var rejrsn in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
-                                {
-                                    <tr class="table_row">
-                                        <td>@rejrsn.name</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-
-                    </details>
-                }
+                <div class="col-md-6">
+                    <input id="approvedterm" class="form-control form-input" placeholder="" name="approvedterm" value="@data.approvedterm" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Approved Amount</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="approvedamount" class="form-control form-input" placeholder="" name="approvedamount" value="@data.approvedamount" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Name</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="contact" class="form-control form-input" placeholder="" name="contact" value="@data.contact" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Reason For Loan</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="reasonforloan" class="form-control form-input" placeholder="" name="reasonforloan" value="@data.reasonforloan" readonly="readonly" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Bank</label>
+                </div>
+                <div class="col-md-6">
+                    <input id="bankname" class="form-control form-input" placeholder="" name="bankname" value="@data.bankname" readonly="readonly" />
+                </div>
             </div>
 
 
+            @if (@data.status == "Rejected")
+            {
+                <details open style="margin-top: 40px;">
+                    <summary class="text-center">Rejection Reasons</summary>
 
+                    <table class="table" style="background: #f5f5f5;">
+                        <thead>
+                            <tr style="background: #98cad0;">
+                                <th scope="col">Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rejrsn in (IEnumerable<RejectionReasonsDetail>)ViewData["RejectionMessage"])
+                            {
+                                <tr class="table_row">
+                                    <td>@rejrsn.name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
+                </details>
+            }
         </div>
+
+
+
+
     </div>
+</div>
 

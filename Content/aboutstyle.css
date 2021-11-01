@@ -394,26 +394,94 @@ footer h4 {
 
 /* ===================================== Footer Design CSS ==================================== */
 
-/*.footer-top {
-    padding: 20px 0px;
-    background: #333;
-    text-align: left;
-    color: #aaa;
-}
+/* Progress Bar CSS */
 
-.footer-top .footer-social {
-    left: 8em;
-}
+   .progressbar {
+     margin: 50px 0 50px 0;
+   }
 
-    .footer-top .footer-social {
-        left: 7em;
+   .progressbar li {
+       list-style-type: none;
+       width: 25%;
+       float: left;
+       font-size: 15px;
+       position: relative;
+       text-align: center;
+       color: #444141;
+   }
+
+    .progressbar li:nth-child(-n + 4):before {
+        width: 50px;
+        height: 50px;
+        content: '✓';
+        padding: 5px 0 0;
+        font-size: 25px;
+        line-height: 30px;
+        border: 0.25rem solid #7d7d7d;
+        display: block;
+        text-align: center;
+        margin: 0px auto 10px auto;
+        border-radius: 50%;
+        transition: all 2s ease;
     }
-}
 
-.footer-last {
-    position: relative;
-    left: 8em;
-}*/
+   .progressbar li:after {
+       width: 81%;
+       height: 3px;
+       content: '';
+       position: absolute;
+       background-color: #7d7d7d;
+       top: 20px;
+       left: -40.5%;
+       z-index: 0;
+       transition: all 2s ease;
+   }
+
+   .progressbar li:first-child:after {
+   content: none;
+   }
+
+    .progressbar li.active:nth-child(-n + 4):before {
+        border-color: #328b4f;
+        background-color: #328b4f;
+        color: #fff;
+        transition: all 2s ease;
+    }
+
+    .progressbar li.active:nth-child(-n + 4):after {
+        background-color: #328b4f;
+        transition: all 2s ease;
+        transition-delay: 0.5s;
+    }
+
+    .progressbar li:last-child:before {
+        width: 50px;
+        height: 50px;
+        content: '✕';
+        padding: 5px 0 0;
+        font-size: 25px;
+        line-height: 30px;
+        border: 0.25rem solid #7d7d7d;
+        display: block;
+        text-align: center;
+        margin: 0px auto 10px auto;
+        border-radius: 50%;
+        transition: all 2s ease;
+    }
+
+    .progressbar li.active:last-child:before {
+        border-color: #995140;
+        background-color: #995140;
+        color: #fff;
+        transition: all 2s ease;
+    }
+
+    .progressbar li.active:last-child:after {
+        background-color: #995140;
+        transition: all 2s ease;
+        transition-delay: 0.5s;
+    }
+/* Progress Bar CSS */
 
 .img_nav {
     cursor: pointer;
