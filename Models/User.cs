@@ -51,6 +51,8 @@ namespace NBFC_App___dev.Models
         public string uploadedvalue { get; set; }
         public string step1 { get; set; }
 
+        public string step2 { get; set; }
+
         public string aadharfirstname { get; set; }
 
         public string aadharlastname { get; set; }

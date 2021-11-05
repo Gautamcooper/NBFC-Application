@@ -343,3 +343,4 @@ E:\NBFC-Application\obj\Debug\NBFC App - dev.csproj.CopyComplete
 E:\NBFC-Application\obj\Debug\NBFC App - dev.dll
 E:\NBFC-Application\obj\Debug\NBFC App - dev.pdb
 E:\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache
+D:\NBFC\NBFC-Application\obj\Debug\NBFC App - dev.csprojAssemblyReference.cache

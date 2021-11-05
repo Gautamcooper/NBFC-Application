@@ -110,6 +110,33 @@
 
 <div class="container">
     <div class="container-fluid">
+        <div class="progressBarContainer">
+            @if (@data.step1 == "true")
+            {
+                <div id="step1" style="background: #7eb357;">
+                    <span>Loan Details</span>
+                </div>
+            }
+            else
+            {
+                <div id="step1">
+                    <span>Loan Details</span>
+                </div>
+            }
+            <div>&#8250;</div>
+            @if (@data.step2 == "true")
+            {
+                <div id="step2" style="background: #7eb357;">
+                    <span>Personal Details</span>
+                </div>
+            }
+            else
+            {
+                <div id="step2">
+                    <span>Personal Details</span>
+                </div>
+            }
+        </div>
         <form method="post" action="~/Home/On_Save" enctype="multipart/form-data">
             <h2 style="text-align: center;">Personal Information</h2>
             <div class="form-card">
@@ -125,7 +152,7 @@
                                 <img class="rounded-circle" id="user_pic" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
                             }
                             <input id="file-input" type="file" name="profilePhoto" accept="image/*" ;capture="camera" />
-                                            </div>
+                        </div>
                         <span class="font-weight-bold">@data.Fullname</span>
                         <span class="text-black-50">@data.Email</span>
                     </div>
@@ -1121,7 +1148,7 @@
                         <p class="modal-title text-center" id="exampleModalLongTitle" style="font-size: 23px; color: #4a89dc;">Notification</p>
                     </div>
                     <div class="modal-body text-center" style="font-size: 18px;">
-                        Please wait, we are registering your final step
+                        Please wait, we are registering your final step, You will receive an email notification!
                     </div>
                     <div class="modal-footer d-flex justify-content-center" style="height: 80px;">
                         <div class="continuetoapplyloadingbar">

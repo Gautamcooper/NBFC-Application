@@ -19,6 +19,15 @@
 <body runat='server' oncontextmenu='return false' class='snippet-body bodycls'>
     <div id="page-container">
     <div class="container-fluid" id="content-wrap">
+        <div class="progressBarContainer">
+            <div id="step1">
+                <span>Loan Details</span>
+            </div>
+            <div>&#8250;</div>
+            <div id="step2">
+                <span>Personal Details</span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-7">                                    
                 <div class="row justify-content-center mt-0">

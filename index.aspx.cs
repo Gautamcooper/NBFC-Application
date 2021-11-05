@@ -146,7 +146,7 @@ namespace NBFC_App___dev
                 }
                 else
                 {
-                    string query = "Update UserInfo set session='" + Session["Name"] + "',otp='" + otp_num + "' where mobile='" + mobile + "'and email = '" + emailid + "'";
+                    string query = "Update UserInfo set session='" + Session["Name"] + "',otp='" + otp_num + "',step1= 'false', step2= 'false' where mobile='" + mobile + "'and email = '" + emailid + "'";
                     adapter.InsertCommand = new SqlCommand(query, sqlCnctn);
                     adapter.InsertCommand.ExecuteNonQuery();
                     adapter.Dispose();

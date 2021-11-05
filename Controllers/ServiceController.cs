@@ -141,6 +141,24 @@ namespace NBFC_App___dev.Controllers
                 }
                 ViewData["ApplicationData"] = apln_list;
 
+                // Fetching Default Subjects
+                string temp_url_defSub = string.Format("0/odata/UsrDefaultSubjects?$select=Name,Id", pannumber);
+                string url_for_defSub = apiurl + temp_url_defSub;
+                JObject Response_for_defSub = GET_Object(url_for_defSub);
+                List<DefaultSubject> defSub_List = new List<DefaultSubject>();
+
+                foreach (var v in Response_for_defSub["value"])
+                {
+                    DefaultSubject defSub = new DefaultSubject()
+                    {
+                        id = v["Id"].ToString(),
+                        name = v["Name"].ToString()
+                        
+                    };
+                    defSub_List.Add(defSub);
+                }
+                ViewData["DefaultSubject"] = defSub_List;
+
                 // Fetching Products
                 string temp_url_products = "0/odata/UsrProducts?$select=Id,Name";
                 string url_for_prdct = apiurl + temp_url_products;

@@ -1,6 +1,6 @@
 ﻿.form-card {
     width: 100%;
-    margin: 20px 0;
+    margin: 100px 0;
     padding: 30px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -394,7 +394,51 @@ footer h4 {
 
 /* ===================================== Footer Design CSS ==================================== */
 
-/* Progress Bar CSS */
+/* Loan Steps Bar*/
+.progressBarContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #bdbbbb;
+    border-radius: 5px;
+    top: 15px;
+    height: 30px;
+    width: 70%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 826px) {
+    .progressBarContainer {
+        width: 100%;
+    }
+}
+
+.progressBarContainer div:nth-child(2n - 1) {
+    color: #fff;
+    background: #897f7f;
+    border-radius: 5px;
+    height: 100%;
+    width: 40%;
+    font-size: 15px;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+    .progressBarContainer div:nth-child(2n - 1) span {
+        display: inline-block;
+        margin: 0 5px 0;
+        padding: 3px 13px;
+    }
+
+.progressBarContainer div:nth-child(2n) {
+    color: #fff;
+    font-size: 50px;
+    margin: 0 123px 9px;
+}
+
+/* Loan Steps Bar*/
+
+/* Application Progress Bar CSS */
 
    .progressbar {
      margin: 50px 0 50px 0;
@@ -410,14 +454,17 @@ footer h4 {
        color: #444141;
    }
 
-    .progressbar li:nth-child(-n + 4):before {
+    .progressbar li:before {
         width: 50px;
         height: 50px;
         content: '✓';
+        position: relative;
+        z-index: 2;
         padding: 5px 0 0;
         font-size: 25px;
         line-height: 30px;
         border: 0.25rem solid #7d7d7d;
+        background: #d7e1ec;
         display: block;
         text-align: center;
         margin: 0px auto 10px auto;
@@ -426,19 +473,19 @@ footer h4 {
     }
 
    .progressbar li:after {
-       width: 81%;
+       width: 82.5%;
        height: 3px;
        content: '';
        position: absolute;
        background-color: #7d7d7d;
        top: 20px;
-       left: -40.5%;
-       z-index: 0;
+       left: -41.5%;
+       z-index: 1;
        transition: all 2s ease;
    }
 
    .progressbar li:first-child:after {
-   content: none;
+       content: none;
    }
 
     .progressbar li.active:nth-child(-n + 4):before {
@@ -458,6 +505,8 @@ footer h4 {
         width: 50px;
         height: 50px;
         content: '✕';
+        position: relative;
+        z-index: 2;
         padding: 5px 0 0;
         font-size: 25px;
         line-height: 30px;
@@ -481,7 +530,74 @@ footer h4 {
         transition: all 2s ease;
         transition-delay: 0.5s;
     }
-/* Progress Bar CSS */
+
+/* Application Progress Bar CSS */
+
+/* Agreement Progress Bar CSS */
+
+   .agrprogressbar {
+     margin: 50px 0 50px 0;
+   }
+
+   .agrprogressbar li {
+       list-style-type: none;
+       width: 19%;
+       float: left;
+       font-size: 15px;
+       position: relative;
+       text-align: center;
+       color: #444141;
+   }
+
+    .agrprogressbar li:before {
+        width: 50px;
+        height: 50px;
+        content: '✓';
+        position: relative;
+        z-index: 2;
+        padding: 5px 0 0;
+        font-size: 25px;
+        line-height: 30px;
+        border: 0.25rem solid #7d7d7d;
+        background: #d7e1ec;
+        display: block;
+        text-align: center;
+        margin: 0px auto 10px auto;
+        border-radius: 50%;
+        transition: all 2s ease;
+    }
+
+    .agrprogressbar li:after {
+        width: 75.5%;
+        height: 3px;
+        content: '';
+        position: absolute;
+        background-color: #7d7d7d;
+        top: 20px;
+        left: -37.5%;
+        z-index: 1;
+        transition: all 2s ease;
+    }
+
+   .agrprogressbar li:first-child:after {
+       content: none;
+   }
+
+    .agrprogressbar li.active:nth-child(-n + 6):before {
+        border-color: #328b4f;
+        background-color: #328b4f;
+        color: #fff;
+        transition: all 2s ease;
+    }
+
+    .agrprogressbar li.active:nth-child(-n + 6):after {
+        background-color: #328b4f;
+        transition: all 2s ease;
+        transition-delay: 0.5s;
+    }
+
+/* Agreement Progress Bar CSS *
+
 
 .img_nav {
     cursor: pointer;

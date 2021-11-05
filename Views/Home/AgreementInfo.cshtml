@@ -7,11 +7,56 @@
     var data = ViewBag.Message;
 }
     <div class="container">
-        <div style="position: relative;">
-            <h2 style="text-align: center;">@data.number</h2>
+        <div class="statuscontainer">
+            <div class="statusrow">
+                <div class="col">
+                    <ul id="agrprogress-bar" class="agrprogressbar">
+                        <li>Waiting for E-sign</li>
+                        <li>Planned</li>
+                        <li>Active</li>
+                        <li id="overdueStatus">Overdue</li>
+                        <li id="prolongedStatus">Prolonged</li>
+                        <li>Closed</li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+            switch ("@data.status") {
+                case "Waiting for E-sign": $("#progress-bar li:not(.active):first").addClass("active");
+                                           break;
+                case "Planned": $("#agrprogress-bar li:not(.active):nth-child(-n + 2)").addClass("active");
+                                break;
+                case "Active": $("#agrprogress-bar li:not(.active):nth-child(-n + 3)").addClass("active");
+                               break;
+                case "Overdue": $("#agrprogress-bar li:not(.active):nth-child(-n + 4)").addClass("active");
+                                break;
+                case "Prolonged": $("#agrprogress-bar li:not(.active):nth-child(-n + 5)").addClass("active");
+                                  break;
+                case "Closed": $("#agrprogress-bar li:not(.active)").addClass("active");
+                               break;
+            }
+
+            if ("@data.islatepaymentfeeapplied" == "True")
+            {
+                $("#overdueStatus").css("display", "inline");
+            }
+            else
+            {
+                $("#overdueStatus").css("display", "none");
+            }
+
+            if ("@data.isextensionapplied" == "True")
+            {
+                $("#prolongedStatus").css("display", "inline");
+            }
+            else
+            {
+                $("#prolongedStatus").css("display", "none");
+            }
+            </script>
         </div>
         <br />
-        <div style="float: right; margin: 0 14px;">
+        <div style="float: right; margin: 80px 14px;">
             <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Agreements", "Home")'" />
         </div>
         <br />
@@ -20,6 +65,7 @@
         <div class="container-fluid">
 
             <div class="form-card">
+                <h2 class="text-center" style="position: relative; margin-bottom: 70px;">@data.number</h2>
                 <div class="row">
                     <div class="col-md-3">
                         <label>Applicant Name</label>
@@ -84,7 +130,7 @@
                         <label>Loan</label>
                     </div>
                     <div class="col-md-6">
-                        <input id="product" class="form-control form-input" placeholder="Loan"  value="@data.product" readonly="readonly" />
+                        <input id="product" class="form-control form-input" placeholder="Loan" value="@data.product" readonly="readonly" />
                     </div>
                 </div>
 

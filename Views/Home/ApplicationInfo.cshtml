@@ -37,11 +37,8 @@
             }
         </script>
     </div>
-    <div style="position: relative;top: 65px;text-align: center;">
-        <h2>@data.number</h2>
-    </div>
     <br />
-    <div style="float: right; margin: 0 14px;">
+    <div style="float: right; margin: 30px 14px;">
         <input type="button" class="btn btn-primary defaultButton" value="Back" onclick="location.href='@Url.Action("Applications", "Home")'" />
     </div>
     <br />
@@ -49,6 +46,7 @@
     <br />
     <div class="container-fluid">
         <div class="form-card">
+            <h2 class="text-center" style="position: relative; margin-bottom: 60px;">@data.number</h2>
             <div class="row">
                 <div class="col-md-3">
                     <label>Status</label>
@@ -91,13 +89,13 @@
                 </div>
             </div>
             @*<div class="row">
-                <div class="col-md-3">
-                    <label>Co-Applicant</label>
-                </div>
-                <div class="col-md-6">
-                    <input id="coapplicantname" class="form-control form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
-                </div>
-            </div>*@
+            <div class="col-md-3">
+                <label>Co-Applicant</label>
+            </div>
+            <div class="col-md-6">
+                <input id="coapplicantname" class="form-control form-input" placeholder="" name="coapplicantname" value="@data.coapplicantname" readonly="readonly" />
+            </div>
+        </div>*@
             <div class="row">
                 <div class="col-md-3">
                     <label>Approved Term</label>

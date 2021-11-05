@@ -328,7 +328,7 @@ namespace NBFC_App___dev
                 sqlCnctn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand cmd;
-                string sql = "Update UserInfo set step1 = 'true', pannumber = '" + pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
+                string sql = "Update UserInfo set step1 = 'true',step2 = 'false', pannumber = '" + pan_number + "',applicationgateId = '" + createdRecordId["Id"] + "' where session = '" + Session["Name"].ToString() + "'";
                 cmd = new SqlCommand(sql, sqlCnctn);
                 adapter.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                 adapter.UpdateCommand.ExecuteNonQuery();

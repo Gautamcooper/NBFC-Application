@@ -67,9 +67,32 @@
                         <input id="Email" class="form-control form-input inp" placeholder="Email" name="Email" value="@ViewData["email"]" readonly="readonly">
                     </div>
                     <div class="col-md-6">
-                        <label class="label_inp" for="Subject" id="label_Email">Subject</label>
+                        <label class="label_inp" for="Subject" id="label_def_sub">Subject</label>
+                        <select id="def_sub" class="form-control form-input inp_dropdown" required>
+                            <option value="1">Select Subject </option>
+                            @if (ViewData["DefaultSubject"] != null)
+                            {
+                                foreach (var def_sub in (IEnumerable<DefaultSubject>)ViewData["DefaultSubject"])
+                                {
+                                    <option value="@def_sub.id">@def_sub.name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="otherSubject">
+                    <div class="col-md-12">
+                        <label class="label_inp" for="Subject" id="label_subject">Subject</label>
                         <input id="Subject" class="form-control form-input inp" name="Subject">
                     </div>
+                </div>
+                <div class="row" id="otherParams">
+                    <div class="col-md-4">
+                        <label class="label_inp" for="Tenure" id="label_Tenure">Tenure</label>
+                        <input id="Tenure" class="form-control form-input inp" name="Tenure">
+                    </div>
+
+
                 </div>
                 <div class="row">
                     <div class="col-md-4">

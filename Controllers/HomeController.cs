@@ -643,7 +643,8 @@ namespace NBFC_App___dev.Controllers
                     aadharbirthdate = row["aadharbirthdate"].ToString(),
                     birthdate = row["birthdate"].ToString(),
                     appgateId = row["applicationgateId"].ToString(),
-                    currentaddrsameasaadhar = row["currentaddrsameasaadhar"].ToString()
+                    currentaddrsameasaadhar = row["currentaddrsameasaadhar"].ToString(),
+                    step2 = row["step2"].ToString()
                 };
 
                 ViewData["profilePhotoExist"] = "false";
@@ -1208,7 +1209,7 @@ namespace NBFC_App___dev.Controllers
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand cmd;
                 SqlCommand cmd2;
-                string sql = "Update UserInfo set step1 = 'false' where session = '" + Session["Name"].ToString() + "'";
+                string sql = "Update UserInfo set step2 = 'true' where session = '" + Session["Name"].ToString() + "'";
                 string sql2 = "Delete from UserSTEP1Info where step1Id = '" + applicationgateId + "'";
                 cmd = new SqlCommand(sql, sqlCnctn);
                 cmd2 = new SqlCommand(sql2, sqlCnctn);
@@ -1628,13 +1629,24 @@ namespace NBFC_App___dev.Controllers
                     };
                     pendingstepslist.Add(pendingstep);
                 }
-                ViewData["PendingSteps"] = pendingstepslist;
+                
+                if (dt2.Rows.Count > 0)
+                {
+                    ViewData["PendingSteps"] = pendingstepslist;
+                    ViewData["Step1Id"] = dt2.Rows[0]["step1Id"].ToString();
+                }
+                else
+                {
+                    ViewData["PendingSteps"] = null;
+                    ViewData["Step1Id"] = null;
+                }
+                
             }
 
                 return View();
         }
 
-        public ActionResult CancelPendingStep(string Id)
+        public ActionResult CancelPendingStep(string LoanId)
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -1647,7 +1659,7 @@ namespace NBFC_App___dev.Controllers
             if (dt.Rows.Count > 0)
             {
                 SqlCommand cmd;
-                string strQry2 = "Delete from UserSTEP1Info where step1Id = '" + Id + "'";
+                string strQry2 = "Delete from UserSTEP1Info where step1Id = '" + LoanId + "'";
                 SqlDataAdapter sda2 = new SqlDataAdapter();
                 cmd = new SqlCommand(strQry2, sqlCnctn);
                 sda2.DeleteCommand = new SqlCommand(strQry2, sqlCnctn);
@@ -1662,7 +1674,35 @@ namespace NBFC_App___dev.Controllers
             }
         }
 
-        public ActionResult UpdateAppGateIdOfPendingStep(string Id)
+        //public ActionResult UpdateAppGateIdOfPendingStep(string Id)
+        //{
+        //    string dbconn = ConfigurationManager.AppSettings["dbconn"];
+        //    string connectionString = dbconn;
+        //    SqlConnection sqlCnctn = new SqlConnection(connectionString);
+        //    sqlCnctn.Open();
+        //    string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
+        //    SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
+        //    DataTable dt = new DataTable();
+        //    sda.Fill(dt);
+        //    if (dt.Rows.Count > 0)
+        //    {
+        //        SqlCommand cmd;
+        //        string sql = "Update UserInfo set applicationgateId = '" + Id + "' where session = '" + Session["Name"].ToString() + "'";
+        //        SqlDataAdapter sda2 = new SqlDataAdapter();
+        //        cmd = new SqlCommand(sql, sqlCnctn);
+        //        sda2.UpdateCommand = new SqlCommand(sql, sqlCnctn);
+        //        sda2.UpdateCommand.ExecuteNonQuery();
+        //        cmd.Dispose();
+        //        return RedirectToAction("About");
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/index.aspx");
+        //        return null;
+        //    }
+        //}
+
+        public ActionResult ContinuePendingStep(string LoanId)
         {
             string dbconn = ConfigurationManager.AppSettings["dbconn"];
             string connectionString = dbconn;
@@ -1675,33 +1715,12 @@ namespace NBFC_App___dev.Controllers
             if (dt.Rows.Count > 0)
             {
                 SqlCommand cmd;
-                string sql = "Update UserInfo set applicationgateId = '" + Id + "' where session = '" + Session["Name"].ToString() + "'";
+                string sql = "Update UserInfo set applicationgateId = '" + LoanId + "' where session = '" + Session["Name"].ToString() + "'";
                 SqlDataAdapter sda2 = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, sqlCnctn);
                 sda2.UpdateCommand = new SqlCommand(sql, sqlCnctn);
                 sda2.UpdateCommand.ExecuteNonQuery();
                 cmd.Dispose();
-                return RedirectToAction("About");
-            }
-            else
-            {
-                Response.Redirect("~/index.aspx");
-                return null;
-            }
-        }
-
-        public ActionResult EditPendingStep(string Id)
-        {
-            string dbconn = ConfigurationManager.AppSettings["dbconn"];
-            string connectionString = dbconn;
-            SqlConnection sqlCnctn = new SqlConnection(connectionString);
-            sqlCnctn.Open();
-            string strQry = "Select * from UserInfo where session = '" + Session["Name"] + "'";
-            SqlDataAdapter sda = new SqlDataAdapter(strQry, sqlCnctn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            if (dt.Rows.Count > 0)
-            {
                 return RedirectToAction("../personal.aspx");
             }
             else
